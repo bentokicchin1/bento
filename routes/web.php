@@ -49,6 +49,16 @@ Route::post('contact-us', 'Contact\ContactController@conatctUs');
 
 
 /**
+ * Order route
+ *
+ */
+/*route to show the order form*/ 
+Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('name', '[a-z]+');
+/*route to show the order form*/ 
+Route::post('order', 'Order\OrderController@processOrder')->name('processOrder');
+
+
+/**
  * Customer route
  *
  */

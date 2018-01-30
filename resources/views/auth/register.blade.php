@@ -15,7 +15,6 @@
                 <div class="web-form">
                     <div class="form-group">
                         {{ Form::open(['route' => 'register', 'method' => 'post']) }} 
-                        {{ csrf_field() }}
                         {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                         {{ Form::number('mobile_number',old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number (required)']) }}
                         {{ Form::email('email',old('email'), ['class' => 'form-control', 'placeholder' => 'Email Address (required)']) }}

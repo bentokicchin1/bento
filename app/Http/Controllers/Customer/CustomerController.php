@@ -17,8 +17,6 @@ class CustomerController extends Controller
      * @return Response
      */
    
-
-
     public function dashboard(){
         return view('customer.dashboard');
     }

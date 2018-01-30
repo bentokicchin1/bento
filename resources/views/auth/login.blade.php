@@ -14,7 +14,6 @@
                 <div class="web-form">
                     <div class="form-group">
                         {{ Form::open(['route' => 'login', 'method' => 'post']) }} 
-                        {{ csrf_field() }}
                         {{ Form::text('email',null, ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
                         {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
                         <div class="web-submit">

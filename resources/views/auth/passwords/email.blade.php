@@ -14,7 +14,6 @@
                 <div class="web-form">
                     <div class="form-group">
                         {{ Form::open(['route' => 'password.email', 'method' => 'post']) }} 
-                        {{ csrf_field() }}
                         {{ Form::text('email','', ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
                         <div class="web-submit">
                             {{ Form::submit('Send Password Reset Link', ['class' => 'form-control submit']) }}

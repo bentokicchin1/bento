@@ -41,14 +41,14 @@
                                         <img src="{{ asset('images/breakfast.jpg') }}" class="img-responsive" alt="Breakfast">
                                         <div class="portfolio-overlay">
                                             <div class="portfolio-item">
-                                                <a">
+                                                <a href="{{ route('order', ['type'=>'breakfast']) }}">
                                                 <h2>Order Now</h2>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="custom-btn">
-                                    <a class="btn btn-default">BREAKFAST</a>
+                                    <a  href="{{ route('order', ['type'=>'breakfast']) }}" class="btn btn-default">BREAKFAST</a>
                                 </div>
                             </div>
 
@@ -57,14 +57,14 @@
                                     <img src="{{ asset('images/lunch1.jpg') }}" class="img-responsive" alt="Lunch">
                                     <div class="portfolio-overlay">
                                         <div class="portfolio-item">
-                                            <a>
+                                            <a href="{{ route('order', ['type'=>'lunch']) }}">
                                                 <h2>Order Now</h2>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="custom-btn">
-                                    <a class="btn btn-default">LUNCH</a>
+                                    <a  href="{{ route('order', ['type'=>'Lunch']) }}" class="btn btn-default">LUNCH</a>
                                 </div>
                             </div>
 
@@ -73,14 +73,14 @@
                                     <img src="{{ asset('images/dinner.jpg') }}" class="img-responsive" alt="Dinner">
                                     <div class="portfolio-overlay">
                                         <div class="portfolio-item">
-                                            <a>
+                                            <a href="{{ route('order', ['type'=>'dinner']) }}">
                                                 <h2>Order Now</h2>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="custom-btn">
-                                    <a class="btn btn-default">DINNER</a>
+                                    <a href="{{ route('order', ['type'=>'dinner']) }}" class="btn btn-default">DINNER</a>
                                 </div>
                             </div>
 
