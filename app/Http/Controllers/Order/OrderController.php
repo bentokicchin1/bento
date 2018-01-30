@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Order;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\Http\Model\OrderType;
+use App\Http\Model\Dish;
 
 class OrderController extends Controller
 {
@@ -23,6 +23,18 @@ class OrderController extends Controller
         if(empty($orderTypeData)){
             return redirect()->back();
         }
+
+        $orderTypeId = $orderTypeData->id;
+
+        $dishData = DIsh::where('order_type_id', $orderTypeId)->orderBy('dish_type_id', 'asc')->get()->toArray();
+
+        $sortedData = [];
+        foreach($dishData as $key => $dishValue){
+            $sortedData[$dishValue['dish_type_id']][$key] = $dishValue;
+
+        }
+
+        echo '<pre>'; print_r($sortedData);exit;
 
         return view('order', ['typeId'=>$orderTypeData->id]);
     }

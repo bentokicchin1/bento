@@ -22,7 +22,7 @@ class OrderTypesTableSeeder extends Seeder
         //     'name' => 'dinner',
         // ]);
 
-        $data = [['name' => 'Sabji'], ['name' => 'Chapati'], ['name' => 'Milk']];
+        $data = [['name' => 'breakfast'], ['name' => 'lunch'], ['name' => 'dinner']];
         foreach($data as $val){
             OrderType::create($val);
         }

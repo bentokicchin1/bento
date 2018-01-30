@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div id="custom-btn">
-                                    <a  href="{{ route('order', ['type'=>'Lunch']) }}" class="btn btn-default">LUNCH</a>
+                                    <a  href="{{ route('order', ['type'=>'lunch']) }}" class="btn btn-default">LUNCH</a>
                                 </div>
                             </div>
 
