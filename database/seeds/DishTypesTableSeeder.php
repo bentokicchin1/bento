@@ -12,7 +12,13 @@ class DishTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = [['name' => 'Sabji'], ['name' => 'Chapati'], ['name' => 'Milk'], ['name' => 'Rice'], ['name' => 'Dal']];
+        $data = [
+            ['name' => 'Sabji'],
+            ['name' => 'Chapati'],
+            ['name' => 'Rice'],
+            ['name' => 'Dal'],
+            ['name' => 'Others'],
+        ];
         foreach($data as $val){
             DishType::create($val);
         }

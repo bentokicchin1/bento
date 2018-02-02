@@ -15,6 +15,7 @@
                     <div class="form-group">
                         {{ Form::open(['route' => 'password.email', 'method' => 'post']) }} 
                         {{ Form::text('email','', ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
+                        <div class="clearfix"></div>
                         <div class="web-submit">
                             {{ Form::submit('Send Password Reset Link', ['class' => 'form-control submit']) }}
                         </div>

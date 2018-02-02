@@ -30,8 +30,9 @@
             {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
                 {{ Form::hidden('orderTypeId', $typeId) }}
                 {{ Form::select('sabji', ['1' => 'Aloo (30)', '2' => 'Bhendi (40)', '3' => 'Tomato (30)', '4' => 'Palak Paneer (50)'], 123, ['class' => 'form-control','placeholder' => 'Pick a Sabji...'])}}
+                {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                 {{ Form::select('chapati', ['1' => 1, '2' => 2, '3' => 3, '4' => 4], 123, ['class' => 'form-control','placeholder' => 'Pick Chapati Count...'])}}
-
+                
                 <div class="checkbox">
                   <label style="font-size: 1.5em">
                     {{ Form::checkbox('milk', 'milk', true) }}

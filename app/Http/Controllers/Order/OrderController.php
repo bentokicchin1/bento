@@ -26,15 +26,16 @@ class OrderController extends Controller
 
         $orderTypeId = $orderTypeData->id;
 
-        $dishData = DIsh::where('order_type_id', $orderTypeId)->orderBy('dish_type_id', 'asc')->get()->toArray();
-
+        $dishData = Dish::where('order_type_id', $orderTypeId)->orderBy('dish_type_id', 'asc')->get()->toArray();
+        
         $sortedData = [];
         foreach($dishData as $key => $dishValue){
-            $sortedData[$dishValue['dish_type_id']][$key] = $dishValue;
+
+            $sortedData[$dishValue['dish_type_id']][] = $dishValue;
 
         }
 
-        echo '<pre>'; print_r($sortedData);exit;
+        // echo '<pre>'; print_r($sortedData);exit;
 
         return view('order', ['typeId'=>$orderTypeData->id]);
     }
