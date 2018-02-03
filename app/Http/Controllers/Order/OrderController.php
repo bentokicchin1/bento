@@ -2,45 +2,61 @@
 
 namespace App\Http\Controllers\Order;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Model\OrderType;
-use App\Http\Model\Dish;
+use App\Model\OrderType;
+use App\Services\Order\OrderService;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-     /**
+
+    private $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+
+        $this->orderService = $orderService;
+
+    }
+
+    /**
      * Show the application order form.
      *
      * @return \Illuminate\Http\Response
      */
-    public function showOrderForm($orderType){
+    public function showOrderForm($orderType)
+    {
 
-        // fetch order type data based on order type
-        $orderTypeData = OrderType::where('name', $orderType)->first();        
+        /* fetch order type data based on order type */
+        $orderTypeData = OrderType::where('name', $orderType)->first();
 
-        // if in valide order type passed the redirect to previous page
-        if(empty($orderTypeData)){
+        /* If invalid order type passed in url then redirect to previous page */
+        if (empty($orderTypeData)) {
             return redirect()->back();
         }
 
         $orderTypeId = $orderTypeData->id;
 
-        $dishData = Dish::where('order_type_id', $orderTypeId)->orderBy('dish_type_id', 'asc')->get()->toArray();
-        
-        $sortedData = [];
-        foreach($dishData as $key => $dishValue){
+        /* Fetch Dish list from service */
+        $dishData = $this->orderService->getDishList();
+        $dishList['orderTypeId'] = $orderTypeId;
+        $dishList['dishData'] = $dishData;
 
-            $sortedData[$dishValue['dish_type_id']][] = $dishValue;
+        // echo '<pre>'; print_r($dishList);exit;
 
-        }
-
-        // echo '<pre>'; print_r($sortedData);exit;
-
-        return view('order', ['typeId'=>$orderTypeData->id]);
+        return view('order', ['dishes' => $dishList]);
     }
 
-    public function processOrder(Request $request){
-        dd($request->all());
+    /**
+     * Process the application order form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processOrder(Request $request)
+    {
+        $input = $request->all();
+        $this->orderService->processData($input);
+
     }
+
 }

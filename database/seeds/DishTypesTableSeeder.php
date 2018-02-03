@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Http\Model\DishType;
+use App\Model\DishType;
 
 class DishTypesTableSeeder extends Seeder
 {

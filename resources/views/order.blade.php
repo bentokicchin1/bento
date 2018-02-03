@@ -20,64 +20,48 @@
 
 
 <!-- Book Now section
-    ================================================== -->
-    <section id="order">
-      <div class="container">
+================================================== -->
+<section id="order">
+    <div class="container">
         <div class="row">
-          <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 order wow fadeIn" data-wow-delay="0s">
-            <div class="order-form">
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 order wow fadeIn" data-wow-delay="0s">
+                <div class="order-form">
 
-            {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
-                {{ Form::hidden('orderTypeId', $typeId) }}
-                {{ Form::select('sabji', ['1' => 'Aloo (30)', '2' => 'Bhendi (40)', '3' => 'Tomato (30)', '4' => 'Palak Paneer (50)'], 123, ['class' => 'form-control','placeholder' => 'Pick a Sabji...'])}}
-                {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
-                {{ Form::select('chapati', ['1' => 1, '2' => 2, '3' => 3, '4' => 4], 123, ['class' => 'form-control','placeholder' => 'Pick Chapati Count...'])}}
-                
-                <div class="checkbox">
-                  <label style="font-size: 1.5em">
-                    {{ Form::checkbox('milk', 'milk', true) }}
-                    <span class="cr">
-                      <i class="cr-icon fa fa-check"></i>
-                  </span>
-                  <span>
-                      Butter Milk (
-                      <i class="fa fa-inr"></i>10)
-                  </span>
-              </label>
+                    {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
+                    {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
 
-              <label style="font-size: 1.5em">
-                {{ Form::checkbox('rice', 'rice', true) }}
-                <span class="cr">
-                  <i class="cr-icon fa fa-check"></i>
-              </span>
-              <span>
-                  Rice (
-                  <i class="fa fa-inr"></i>20)
-              </span>
-          </label>
-
-          <label style="font-size: 1.5em">
-            {{ Form::checkbox('dal', 'dal', true) }}
-            <span class="cr">
-              <i class="cr-icon fa fa-check"></i>
-          </span>
-          <span>
-              Dal (
-              <i class="fa fa-rupee"></i>20)
-          </span>
-      </label>
-  </div>
-
-  <div class="order-submit">
-      {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
-  </div>
-  {{ Form::close() }}
-</div>
-
-</div>
-
-</div>
-</div>
+                    @foreach ($dishes['dishData'] as $dish)
+                    @if ($dish['dishTypeName'] != 'others')
+                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                        {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control', 'placeholder' => 'Quantity (required)']) }}
+                    @else
+                        <div class="checkbox">
+                            @php
+                                foreach($dish['dishList'] as $dishId => $dishName){
+                            @endphp
+                                <label style="font-size: 1.5em">
+                                    {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, true) }}
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check"></i>
+                                    </span>
+                                    <span>
+                                        {{ $dishName }} ( <i class="fa fa-inr"></i>{{ round($dish['dishPrice'][$dishId]) }} )
+                                    </span>
+                                </label>
+                            @php
+                                }
+                            @endphp
+                        </div>
+                    @endif
+                    @endforeach
+                    <div class="order-submit">
+                        {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
+                    </div>
+                    {{ Form::close() }}
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 @endsection
