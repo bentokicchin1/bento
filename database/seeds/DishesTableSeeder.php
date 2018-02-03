@@ -23,12 +23,12 @@ class DishesTableSeeder extends Seeder
             ['dish_type_id' => 3, 'order_type_id' => 1, 'name' => 'Plain Rice', 'code' => 'PLAINRICE', 'price' => 20],
             ['dish_type_id' => 3, 'order_type_id' => 1, 'name' => 'Jira Rice', 'code' => 'JIRARICE', 'price' => 25],
             ['dish_type_id' => 3, 'order_type_id' => 1, 'name' => 'Pulav', 'code' => 'PULAV', 'price' => 30],
-            ['dish_type_id' => 4, 'order_type_id' => 1, 'name' => 'Plain Tadka', 'code' => 'P_DAL', 'price' => 20],
+            ['dish_type_id' => 4, 'order_type_id' => 1, 'name' => 'Plain Dal', 'code' => 'P_DAL', 'price' => 20],
             ['dish_type_id' => 4, 'order_type_id' => 1, 'name' => 'Dal Tadka', 'code' => 'T_DAL', 'price' => 25],
             ['dish_type_id' => 4, 'order_type_id' => 1, 'name' => 'Dal Fry', 'code' => 'F_DAL', 'price' => 40],
             ['dish_type_id' => 5, 'order_type_id' => 1, 'name' => 'Salad', 'code' => 'SALAD', 'price' => 10],
             ['dish_type_id' => 5, 'order_type_id' => 1, 'name' => 'Butter Milk', 'code' => 'B_MILK', 'price' => 10],
-            ['dish_type_id' => 5, 'order_type_id' => 1, 'name' => 'Tomato Chatni', 'code' => 'SALAD', 'price' => 10]
+            // ['dish_type_id' => 5, 'order_type_id' => 1, 'name' => 'Tomato Chatni', 'code' => 'SALAD', 'price' => 10]
         ];
         
         foreach($data as $val){

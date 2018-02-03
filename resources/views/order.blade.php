@@ -32,8 +32,8 @@
 
                     @foreach ($dishes['dishData'] as $dish)
                     @if ($dish['dishTypeName'] != 'others')
-                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                        {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control', 'placeholder' => 'Quantity (required)']) }}
+                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control drpdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                        {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
                     @else
                         <div class="checkbox">
                             @php

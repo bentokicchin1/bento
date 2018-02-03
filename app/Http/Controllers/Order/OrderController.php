@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\OrderType;
 use App\Services\Order\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -54,6 +55,8 @@ class OrderController extends Controller
      */
     public function processOrder(Request $request)
     {
+        // $user = Auth::id();
+        // dd($user);
         $input = $request->all();
         $this->orderService->processData($input);
 

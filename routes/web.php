@@ -53,9 +53,9 @@ Route::post('contact-us', 'Contact\ContactController@conatctUs');
  *
  */
 /*route to show the order form*/ 
-Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('name', '[a-z]+');
+Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('name', '[a-z]+')->middleware('auth');
 /*route to show the order form*/ 
-Route::post('order', 'Order\OrderController@processOrder')->name('processOrder');
+Route::post('order', 'Order\OrderController@processOrder')->name('processOrder')->middleware('auth');;
 
 
 /**
@@ -63,7 +63,7 @@ Route::post('order', 'Order\OrderController@processOrder')->name('processOrder')
  *
  */
 
-Route::group(['prefix' => 'customer'], function() {
+Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function() {
 
     /*route to show the customer dashboard*/ 
     Route::get('dashboard', 'Customer\CustomerController@dashboard')->name('dashboard');
