@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
 use App\Model\OrderType;
+use App\Model\Order;
 use App\Services\Order\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,6 @@ class OrderController extends Controller
         $dishList['dishData'] = $dishData;
 
         // echo '<pre>'; print_r($dishList);exit;
-
         return view('order', ['dishes' => $dishList]);
     }
 

@@ -37,8 +37,8 @@ h1,h2,h3,h4 {
 
 h1 {
   color: #000;
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 h2 {
@@ -402,8 +402,8 @@ a.icon {
   background-size: cover;
   background-position: center center;
   text-align: center;
-  padding-top: 130px;
-  padding-bottom: 100px;
+  /* padding-top: 130px;
+  padding-bottom: 100px; */
 }
 
 #header-custom {
@@ -417,8 +417,8 @@ a.icon {
 
 #header .header-thumb {
   background: #ffffff;
-  border: 10px solid #f9f9f9;
-  padding: 62px 20px 62px 20px;
+  /* border: 10px solid #f9f9f9;
+  padding: 62px 20px 62px 20px; */
 }
 
 .header-one .header-thumb,
@@ -910,7 +910,7 @@ footer {
 /* order section styles
 /* ========================================== */
 #order {
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 9rem;
   }
   

@@ -4,14 +4,14 @@
 
 <!-- Header section
     ================================================== -->
-    <section id="header" class="header-one">
+    <section id="header" >
         <div class="container">
             <div class="row">
 
                 <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <div class="header-thumb">
-                        <h1 class="wow fadeIn" data-wow-delay="0.3s">Bento</h1>
-                        <h3 class="wow fadeInUp" data-wow-delay="0.7s">Food With Difference</h3>
+                        <h1 class="wow fadeIn">Food With Difference</h1>
+                        <h3 class="wow fadeInUp" data-wow-delay="0.7s">Make Your Choice</h3>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
 
                     <!-- iso section -->
                     <div class="iso-section wow fadeInUp" data-wow-delay="0s">
-                        <h1>Choose Your Food</h1>
+                        <!-- <h1>Choose Your Food</h1> -->
 
                         <!-- iso box section -->
                         <div class="iso-box-section wow fadeInUp" data-wow-delay="0.2s">
