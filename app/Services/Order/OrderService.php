@@ -10,11 +10,13 @@ namespace App\Services\Order;
 
 use App\Model\Dish;
 use App\Model\DishType;
+use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
 
     private $dishes;
+    private $userId;
 
     /**
      * Create a new controller instance.
@@ -56,13 +58,17 @@ class OrderService
      */
     public function processData($postData)
     {
+        
+        $orderParams['orderTypeId'] = $postData['orderTypeId'];
+        $orderParams['quantity'] = 1;
+        
 
-        $orderTypeId = $postData['orderTypeId'];
         unset($postData['orderTypeId'], $postData['_token']);
 
-        $inputArray = $this->rearrangeOrderPostData($postData);
-
-        dd($inputArray);
+        $sortedPostData = $this->rearrangeOrderPostData($postData);
+        $orderParams['shippingAddress'] = 1;
+        $orderParams['orderTotalAmount'] = $sortedPostData['orderTotalAmount'];
+        dd($orderParams);
 
     }
 
@@ -77,26 +83,60 @@ class OrderService
         });
         $dishTypes = $filtered->all();
 
+        /* Fetched dishes id-price array */
+        // $dishesPriceArray = Dish::all('id', 'price', 'name')->pluck('price', 'id', 'name')->all();
+        
+        $orderTotalAmount = 0;
         /* Looping through each dish type and checking which are sent over post data  */
         foreach ($dishTypes as $dishTypeName) {
             /* If post data contains dish type then create new array with 'dish_id' and 'quantity' */
             if (array_key_exists($dishTypeName, $postData) && $dishTypeName != 'others') {
                 /* If value is not selected from drop down or quantity is empty then do not add those in response node */
                 if (!empty($postData[$dishTypeName]) && !empty($postData['qty_' . $dishTypeName])) {
-                    $response[$dishTypeName]['dish_id'] = $postData[$dishTypeName];
+
+                    $dishId = $postData[$dishTypeName];
+                    $dishDetail = $this->getDishDetailById($dishId);
+                    $response[$dishTypeName]['dish_id'] = $dishId;
                     $response[$dishTypeName]['qty'] = $postData['qty_' . $dishTypeName];
+                    $response[$dishTypeName]['name'] = $dishDetail->name;
+                    $response[$dishTypeName]['base_price'] = $dishDetail->price;
+                    $response[$dishTypeName]['total_price'] = $dishDetail->price * $postData['qty_' . $dishTypeName];
+
+                    $orderTotalAmount += $dishDetail->price * $postData['qty_' . $dishTypeName];
                 }
                 /* Unsetting items so that at the end of loop we will have only "others" type of dishes in "postdata" node */
-                unset($postData[$dishTypeName], $postData['qty_' . $dishTypeName]);
+                unset($postData[$dishTypeName], $postData['qty_' . $dishTypeName], $dishDetail);
             }
-
         }
 
         /* If post data contains other type of dishes then push them to response node */
         if (!empty($postData)) {
-            $response['others']['dish_id'] = array_values($postData);
+            $i = 0;
+            foreach ($postData as $key => $dishId) {
+
+                $dishDetail = $this->getDishDetailById($dishId);
+                $response['others'][$i]['dish_id'] = $dishId;
+                $response['others'][$i]['qty'] = 1;
+                $response['others'][$i]['name'] = $dishDetail->name;
+                $response['others'][$i]['base_price'] = $dishDetail->price;
+                $response['others'][$i]['total_price'] = $dishDetail->price;
+
+                $orderTotalAmount +=$dishDetail->price;
+                $i++;
+            }
+            $response['orderTotalAmount'] = $orderTotalAmount;
+            // $response['others']['dish_id'] = array_values($postData);
         }
         return $response;
     }
 
+    /**
+     * Return dish detail by id.
+     * @param (int)dish id
+     * @return (object) dish details
+     */
+    public function getDishDetailById($dishId){
+        return Dish::select('price', 'name')->where('id',$dishId)->first();
+    }
+    
 }

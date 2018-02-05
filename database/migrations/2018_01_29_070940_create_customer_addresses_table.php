@@ -26,6 +26,7 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
+            $table->tinyInteger('default');
             $table->timestamps();
         });
     }

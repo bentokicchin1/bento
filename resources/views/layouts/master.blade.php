@@ -27,8 +27,8 @@
           ================================================== -->
           {!! Html::style('css/style.css') !!}
 
-          {!! Html::style('css/pf.min.css') !!}
-          {!! Html::style('css/myaccount.min.css') !!}
+          <!-- {!! Html::style('css/pf.min.css') !!}
+          {!! Html::style('css/myaccount.min.css') !!} -->
 
           <!-- Google web font 
           ================================================== -->
