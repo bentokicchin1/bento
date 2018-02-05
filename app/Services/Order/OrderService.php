@@ -10,7 +10,10 @@ namespace App\Services\Order;
 
 use App\Model\Dish;
 use App\Model\DishType;
+use App\Model\Order;
+use DB;
 use Illuminate\Support\Facades\Auth;
+use Psy\Exception\Exception;
 
 class OrderService
 {
@@ -23,11 +26,9 @@ class OrderService
      *
      * @return void
      */
-    public function __construct(Dish $dishes)
+    public function __construct(Dish $dishes, Order $order)
     {
-
         $this->dishes = $dishes;
-
     }
 
     public function getDishList()
@@ -58,18 +59,21 @@ class OrderService
      */
     public function processData($postData)
     {
-        
+
         $orderParams['orderTypeId'] = $postData['orderTypeId'];
         $orderParams['quantity'] = 1;
-        
+        $orderParams['shippingAddress'] = 1;
+        $orderParams['status'] = 'ordered';
 
         unset($postData['orderTypeId'], $postData['_token']);
-
         $sortedPostData = $this->rearrangeOrderPostData($postData);
-        $orderParams['shippingAddress'] = 1;
-        $orderParams['orderTotalAmount'] = $sortedPostData['orderTotalAmount'];
-        dd($orderParams);
 
+        $orderParams['orderTotalAmount'] = $sortedPostData['orderTotalAmount'];
+        $orderParams['items'] = $sortedPostData['items'];
+
+        $this->insertOrder($orderParams);
+
+        // dd($orderParams);
     }
 
     public function rearrangeOrderPostData($postData)
@@ -85,7 +89,7 @@ class OrderService
 
         /* Fetched dishes id-price array */
         // $dishesPriceArray = Dish::all('id', 'price', 'name')->pluck('price', 'id', 'name')->all();
-        
+
         $orderTotalAmount = 0;
         /* Looping through each dish type and checking which are sent over post data  */
         foreach ($dishTypes as $dishTypeName) {
@@ -96,11 +100,11 @@ class OrderService
 
                     $dishId = $postData[$dishTypeName];
                     $dishDetail = $this->getDishDetailById($dishId);
-                    $response[$dishTypeName]['dish_id'] = $dishId;
-                    $response[$dishTypeName]['qty'] = $postData['qty_' . $dishTypeName];
-                    $response[$dishTypeName]['name'] = $dishDetail->name;
-                    $response[$dishTypeName]['base_price'] = $dishDetail->price;
-                    $response[$dishTypeName]['total_price'] = $dishDetail->price * $postData['qty_' . $dishTypeName];
+                    $item[$dishTypeName]['dish_id'] = $dishId;
+                    $item[$dishTypeName]['qty'] = $postData['qty_' . $dishTypeName];
+                    $item[$dishTypeName]['name'] = $dishDetail->name;
+                    $item[$dishTypeName]['base_price'] = $dishDetail->price;
+                    $item[$dishTypeName]['total_price'] = $dishDetail->price * $postData['qty_' . $dishTypeName];
 
                     $orderTotalAmount += $dishDetail->price * $postData['qty_' . $dishTypeName];
                 }
@@ -109,22 +113,23 @@ class OrderService
             }
         }
 
-        /* If post data contains other type of dishes then push them to response node */
+        /* If post data contains other type of dishes then push them to item node */
         if (!empty($postData)) {
             $i = 0;
             foreach ($postData as $key => $dishId) {
 
                 $dishDetail = $this->getDishDetailById($dishId);
-                $response['others'][$i]['dish_id'] = $dishId;
-                $response['others'][$i]['qty'] = 1;
-                $response['others'][$i]['name'] = $dishDetail->name;
-                $response['others'][$i]['base_price'] = $dishDetail->price;
-                $response['others'][$i]['total_price'] = $dishDetail->price;
+                $item['others'][$i]['dish_id'] = $dishId;
+                $item['others'][$i]['qty'] = 1;
+                $item['others'][$i]['name'] = $dishDetail->name;
+                $item['others'][$i]['base_price'] = $dishDetail->price;
+                $item['others'][$i]['total_price'] = $dishDetail->price;
 
-                $orderTotalAmount +=$dishDetail->price;
+                $orderTotalAmount += $dishDetail->price;
                 $i++;
             }
             $response['orderTotalAmount'] = $orderTotalAmount;
+            $response['items'] = $item;
             // $response['others']['dish_id'] = array_values($postData);
         }
         return $response;
@@ -135,8 +140,50 @@ class OrderService
      * @param (int)dish id
      * @return (object) dish details
      */
-    public function getDishDetailById($dishId){
-        return Dish::select('price', 'name')->where('id',$dishId)->first();
+    public function getDishDetailById($dishId)
+    {
+        return Dish::select('price', 'name')->where('id', $dishId)->first();
     }
-    
+
+    /**
+     * Insert Order in table
+     */
+    private function insertOrder($orderParams)
+    {
+        dd($orderParams['items']);
+        DB::beginTransaction();
+        try {
+            $order = new Order;
+            $order->user_id = Auth::id();
+            $order->order_type_id = $orderParams['orderTypeId'];
+            $order->quantity = $orderParams['quantity'];
+            $order->total_amount = $orderParams['orderTotalAmount'];
+            $order->shipping_address = $orderParams['shippingAddress'];
+            $order->status = $orderParams['status'];
+            $order->save();
+
+            $orderId = $order->id;
+            $this->insertOrderItems($orderId);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $e->getRawMessage();
+        }
+
+        // $orderParams['user_id'] = Auth::id();
+        // $orderParams['order_type_id'] = $orderData['orderTypeId'];
+        // $orderParams['quantity'] = $orderData['quantity'];
+        // $orderParams['total_amount'] = $orderData['orderTotalAmount'];
+        // $orderParams['shipping_address'] = $orderData['shippingAddress'];
+        // $orderParams['status'] = $orderData['status'];
+        // $result = Order::create($orderParams);
+        // print_r($result->id);
+        // dd($result);
+    }
+
+    private function insertOrderItems($orderId)
+    {
+
+    }
 }

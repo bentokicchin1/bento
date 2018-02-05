@@ -13,7 +13,7 @@ class CustomerAddressesTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['user_id' => 1, 'order_type_id' => 1, 'address_type' => 'Office', 'name' => 'Anil Gupta', 'location' => 'Charms City Complex', 'area' => 'Koperkhairne', 'city' => 'Navi Mumbai', 'state' => 'Maharashtra', 'pincode' => 400078],
+            ['user_id' => 1, 'order_type_id' => 1, 'address_type' => 'Office', 'name' => 'Anil Gupta', 'location' => 'Charms City Complex', 'area' => 'Koperkhairne', 'city' => 'Navi Mumbai', 'state' => 'Maharashtra', 'pincode' => 400078, 'default' => 1],
         ];
         foreach($data as $val){
             CustomerAddresse::create($val);
