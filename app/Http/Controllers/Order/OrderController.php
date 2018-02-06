@@ -16,9 +16,7 @@ class OrderController extends Controller
 
     public function __construct(OrderService $orderService)
     {
-
         $this->orderService = $orderService;
-
     }
 
     /**
@@ -58,7 +56,12 @@ class OrderController extends Controller
         // $user = Auth::id();
         // dd($user);
         $input = $request->all();
-        $this->orderService->processData($input);
+        $response = $this->orderService->processData($input);
+
+        if($response == 'success'){
+            // return redirect()->route('home');
+            return redirect('home');
+        }
 
     }
 

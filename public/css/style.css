@@ -727,7 +727,7 @@ a.icon {
 }
 
 #contact .fa {
-  font-size: 32px;
+  font-size: 17px;
   padding-right: 10px;
 }
 
@@ -803,7 +803,7 @@ a.icon {
 }
 
 #web .fa{
-  font-size: 32px;
+  font-size: 17px;
   padding-right: 10px;
 }
 
@@ -829,6 +829,8 @@ a.icon {
 #web textarea {min-height: 100px;}
 
 #web input {height: 50px;}
+
+#web select {height: 50px;}
 
 #web input[type='submit'] {
   background: #111112;
@@ -915,7 +917,7 @@ footer {
   }
   
   #order .fa {
-    font-size: 32px;
+    font-size: 17px;
     padding-right: 10px;
   }
   

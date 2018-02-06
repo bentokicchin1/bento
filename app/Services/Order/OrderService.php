@@ -11,6 +11,7 @@ namespace App\Services\Order;
 use App\Model\Dish;
 use App\Model\DishType;
 use App\Model\Order;
+use App\Model\OrderItem;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Psy\Exception\Exception;
@@ -19,7 +20,6 @@ class OrderService
 {
 
     private $dishes;
-    private $userId;
 
     /**
      * Create a new controller instance.
@@ -71,9 +71,7 @@ class OrderService
         $orderParams['orderTotalAmount'] = $sortedPostData['orderTotalAmount'];
         $orderParams['items'] = $sortedPostData['items'];
 
-        $this->insertOrder($orderParams);
-
-        // dd($orderParams);
+        return $this->insertOrder($orderParams);
     }
 
     public function rearrangeOrderPostData($postData)
@@ -81,11 +79,10 @@ class OrderService
 
         $response = [];
         /* Created array of all dish type we have in db and formatting them in lowercase and replacing space with underscore */
-        $dishTypes = DishType::all('name')->pluck('name');
-        $filtered = $dishTypes->map(function ($value, $key) {
-            return strtolower(str_replace(' ', '_', $value));
-        });
-        $dishTypes = $filtered->all();
+        $dishTypes = DishType::all('name')->pluck('name')
+            ->map(function ($value, $key) {
+                return strtolower(str_replace(' ', '_', $value));
+            })->all();
 
         /* Fetched dishes id-price array */
         // $dishesPriceArray = Dish::all('id', 'price', 'name')->pluck('price', 'id', 'name')->all();
@@ -150,7 +147,6 @@ class OrderService
      */
     private function insertOrder($orderParams)
     {
-        dd($orderParams['items']);
         DB::beginTransaction();
         try {
             $order = new Order;
@@ -163,27 +159,35 @@ class OrderService
             $order->save();
 
             $orderId = $order->id;
-            $this->insertOrderItems($orderId);
-
+            $this->insertOrderItems($orderId, $orderParams['items']);
             DB::commit();
+            return 'success';
         } catch (Exception $e) {
             DB::rollBack();
             return $e->getRawMessage();
         }
-
-        // $orderParams['user_id'] = Auth::id();
-        // $orderParams['order_type_id'] = $orderData['orderTypeId'];
-        // $orderParams['quantity'] = $orderData['quantity'];
-        // $orderParams['total_amount'] = $orderData['orderTotalAmount'];
-        // $orderParams['shipping_address'] = $orderData['shippingAddress'];
-        // $orderParams['status'] = $orderData['status'];
-        // $result = Order::create($orderParams);
-        // print_r($result->id);
-        // dd($result);
     }
 
-    private function insertOrderItems($orderId)
+    /**
+     * Insert Order item in table
+     */
+    private function insertOrderItems($orderId, $items)
     {
-
+        try {
+            if (!empty($items)) {
+                foreach ($items as $key => $item) {
+                    if ($key != 'others') {
+                        $itemParams[] = ['order_id' => $orderId, 'name' => $item['name'], 'quantity' => $item['qty'], 'base_price' => $item['base_price'], 'total_price' => $item['total_price']];
+                    } else {
+                        foreach ($item as $otherItem) {
+                            $itemParams[] = ['order_id' => $orderId, 'name' => $otherItem['name'], 'quantity' => $otherItem['qty'], 'base_price' => $otherItem['base_price'], 'total_price' => $otherItem['total_price']];
+                        }
+                    }
+                }
+                OrderItem::insert($itemParams);
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }

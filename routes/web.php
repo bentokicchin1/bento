@@ -68,4 +68,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function() {
     /*route to show the customer dashboard*/ 
     Route::get('dashboard', 'Customer\CustomerController@dashboard')->name('dashboard');
 
+    Route::get('address/add', 'Customer\AddressController@showAddressForm')->name('address-add');
+    Route::post('address/add', 'Customer\AddressController@saveAddress')->name('address-add');
+
 });
