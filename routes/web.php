@@ -71,4 +71,6 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function() {
     Route::get('address/add', 'Customer\AddressController@showAddressForm')->name('address-add');
     Route::post('address/add', 'Customer\AddressController@saveAddress')->name('address-add');
 
+    Route::get('address/list', 'Customer\AddressController@listAddress')->name('address-list');
+
 });
