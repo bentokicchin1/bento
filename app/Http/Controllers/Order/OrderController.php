@@ -55,22 +55,24 @@ class OrderController extends Controller
      */
     public function addressSelect(Request $request)
     {
-        /* Get post data and remove token and order type id from it so that we can rearrange data properly. */
         $postData = $request->all();
-        unset($postData['orderTypeId'], $postData['_token']);
-        $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
+        if (!empty($postData)) {
+            /* Rearrange post data */
+            $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
 
-        /* Validate sorted input data and redirect if error occurs. */
-        $validationMessage = $this->orderService->validateOrderFormData($sortedPostData);
-        if ($validationMessage != 'success') {
-            return redirect()->back()->withErrors($validationMessage);
-        }
+            /* Validate sorted input data and redirect if error occurs. */
+            $validationMessage = $this->orderService->validateOrderFormData($sortedPostData);
+            if ($validationMessage != 'success') {
+                return redirect()->back()->withErrors($validationMessage);
+            }
 
-        /* Remove existing order data from session and add new one. */
-        if ($request->session()->has('orderData')) {
-            $request->session()->forget('orderData');
+            /* Remove existing order data from session and add new one. */
+            if ($request->session()->has('orderData')) {
+                $request->session()->forget('orderData');
+            }
+            $request->session()->put('orderData', $sortedPostData);
         }
-        $request->session()->put('orderData', $sortedPostData);
+        $sortedPostData = $request->session()->get('orderData');
 
         /* Fetch customer address list and create array that need to be sent to checkout view page */
         $viewData['addressList'] = $this->addressService->getAddressList();
@@ -80,12 +82,17 @@ class OrderController extends Controller
         return view('order.checkout', $viewData);
     }
 
-    public function processOrder(Request $request){
+    public function processOrder(Request $request)
+    {
         $postData = $request->all();
-        if(empty($postData['addressId'])){
-            // return redirect()->back()->withInput($request::all());
+        if (empty($postData['addressId'])) {
+            return redirect()->back()->withErrors('Please select address.');
         }
-        dd($postData);
+        $addressId = $postData['addressId'];
+        $response = $this->orderService->processData($addressId);
+        if ($response == 'success') {
+            return redirect()->route('home');
+        }
     }
 
 }
