@@ -63,4 +63,9 @@ class AddressService
             return $e->getRawMessage();
         }
     }
+
+    public function getAddressList(){
+        $userId = Auth::id();
+        return Address::all()->where('user_id', $userId)->toArray();
+    }
 }

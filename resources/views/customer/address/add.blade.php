@@ -41,39 +41,6 @@
                 </div>
             </div>
 
-            <div class="clearfix"></div>
-            <div class="col-md-4 col-sm-4">
-                {{-- <div class="wow fadeInUp media" > --}}
-                <div class="media-object pull-left">
-                    <i class="fa fa-tablet"></i>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading">Phone</h3>
-                    <p>{{ config('constants.number') }}</p>
-                </div>
-                {{-- </div> --}}
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="media-object pull-left">
-                    <i class="fa fa-envelope"></i>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading">Email</h3>
-                    <p>{{ config('constants.email','') }}</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4">
-                <div class="media-object pull-left">
-                    <i class="fa fa-globe"></i>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading">Address</h3>
-                    <p>{{ config('constants.address') }}</p>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
