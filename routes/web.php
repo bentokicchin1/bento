@@ -54,8 +54,11 @@ Route::post('contact-us', 'Contact\ContactController@conatctUs');
  */
 /*route to show the order form*/ 
 Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('name', '[a-z]+')->middleware('auth');
-/*route to show the order form*/ 
-Route::post('order', 'Order\OrderController@processOrder')->name('processOrder')->middleware('auth');;
+/*route to show address select and order summary page*/ 
+Route::post('checkout', 'Order\OrderController@addressSelect')->name('addressSelect')->middleware('auth');
+Route::get('checkout', 'Order\OrderController@addressSelect')->name('addressSelect')->middleware('auth');
+/* route for order processing */
+Route::post('summary', 'Order\OrderController@processOrder')->name('processOrder')->middleware('auth');
 
 
 /**

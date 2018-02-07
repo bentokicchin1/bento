@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
-use App\Model\OrderType;
 use App\Model\Order;
+use App\Model\OrderType;
+use App\Services\Customer\AddressService;
 use App\Services\Order\OrderService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
 
     private $orderService;
+    private $addressService;
 
-    public function __construct(OrderService $orderService)
+    public function __construct(OrderService $orderService, AddressService $addressService)
     {
         $this->orderService = $orderService;
+        $this->addressService = $addressService;
     }
 
     /**
@@ -43,26 +45,47 @@ class OrderController extends Controller
         $dishList['dishData'] = $dishData;
 
         // echo '<pre>'; print_r($dishList);exit;
-        return view('order', ['dishes' => $dishList]);
+        return view('order.menu', ['dishes' => $dishList]);
     }
 
     /**
-     * Process the application order form.
+     * Show address select and order summary page.
      *
      * @return \Illuminate\Http\Response
      */
-    public function processOrder(Request $request)
+    public function addressSelect(Request $request)
     {
-        // $user = Auth::id();
-        // dd($user);
-        $input = $request->all();
-        $response = $this->orderService->processData($input);
+        /* Get post data and remove token and order type id from it so that we can rearrange data properly. */
+        $postData = $request->all();
+        unset($postData['orderTypeId'], $postData['_token']);
+        $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
 
-        if($response == 'success'){
-            // return redirect()->route('home');
-            return redirect('home');
+        /* Validate sorted input data and redirect if error occurs. */
+        $validationMessage = $this->orderService->validateOrderFormData($sortedPostData);
+        if ($validationMessage != 'success') {
+            return redirect()->back()->withErrors($validationMessage);
         }
 
+        /* Remove existing order data from session and add new one. */
+        if ($request->session()->has('orderData')) {
+            $request->session()->forget('orderData');
+        }
+        $request->session()->put('orderData', $sortedPostData);
+
+        /* Fetch customer address list and create array that need to be sent to checkout view page */
+        $viewData['addressList'] = $this->addressService->getAddressList();
+        $viewData['orderData'] = $sortedPostData;
+
+        /* Pass customer address list and order data to checkout page */
+        return view('order.checkout', $viewData);
+    }
+
+    public function processOrder(Request $request){
+        $postData = $request->all();
+        if(empty($postData['addressId'])){
+            // return redirect()->back()->withInput($request::all());
+        }
+        dd($postData);
     }
 
 }

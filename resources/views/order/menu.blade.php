@@ -3,19 +3,17 @@
 @section('content')
 <!-- Header section
     ================================================== -->
-    <section id="header-custom">
-      <div class="container bottom-line">
+<section id="header-custom">
+    <div class="container bottom-line">
         <div class="row">
-
-          <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-            <div class="header-thumb">
-                <h1 class="wow" data-wow-delay="0s">Order Now</h1>
-                <h3 class="wow" data-wow-delay="0s">Feeling hungry, let's place the order</h3>
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                <div class="header-thumb">
+                    <h1 class="wow" data-wow-delay="0s">Order Now</h1>
+                    <h3 class="wow" data-wow-delay="0s">Feeling hungry, let's place the order</h3>
+                </div>
             </div>
         </div>
-
     </div>
-</div>
 </section>
 
 
@@ -25,9 +23,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 order wow fadeIn" data-wow-delay="0s">
+                    @include('layouts.success')
+                    @include('layouts.errors')
                 <div class="order-form">
 
-                    {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
+                    {{ Form::open(['route' => 'addressSelect', 'method' => 'post']) }} 
                     {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
 
                     @foreach ($dishes['dishData'] as $dish)

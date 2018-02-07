@@ -830,6 +830,8 @@ a.icon {
 
 #web input {height: 50px;}
 
+#web input {height: 30px;}
+
 #web select {height: 50px;}
 
 #web input[type='submit'] {
@@ -850,14 +852,14 @@ a.icon {
 	width: 50%;
 }
 
-#web .col-md-4 {
+/* #web .col-md-4 {
   background: #fff;
   padding: 0px 0px 32px 42px;
   position: relative;
   bottom: -55px;
-}
+} */
 
-
+input[type='radio'] { transform: scale(2); }
 /* footer section styles
 /* ========================================== */
 footer {

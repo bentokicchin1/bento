@@ -190,4 +190,14 @@ class OrderService
             throw $e;
         }
     }
+
+    public function validateOrderFormData($postData){
+        $message = 'success';
+        if(!empty($postData)){
+            if( (int) $postData['orderTotalAmount'] < 45){
+                $message = 'Total amount should be greater than Rs. 45';
+            }
+        }
+        return $message;
+    }
 }
