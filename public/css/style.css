@@ -852,6 +852,86 @@ a.icon {
 	width: 50%;
 }
 
+#web .pf-margin-0{
+  margin: 0!important;
+}
+#web .pf-padding-0{
+  padding: 0!important;
+}
+
+.ma-nav{
+  margin-left: -60px!important;
+}
+.ma-nav li a {
+  display: block;
+  padding: 1.6rem 2rem;
+  box-sizing: border-box;
+  background: #fff;
+  border: solid 2px transparent;
+}
+
+.ma-nav li a strong {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -.5px;
+  color: #1d3b48;
+  margin-bottom: 5px;
+}
+
+.ma-nav li a span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #1d3b48;
+  letter-spacing: -.4px;
+  display: block;
+}
+
+.ma-nav li a.active {
+  border-radius: 2px;
+  background-color: rgba(72,198,150,.17);
+}
+
+li {
+  list-style-type: none;
+}
+.pf-link {
+  color: #14a9cc;
+  font-weight: 600;
+}
+
+.tab-inner-content {
+  background: #f7f7f7;
+  padding: 1rem;
+  border-radius: 2px;
+  position: relative;
+  letter-spacing: -.5px;
+}
+
+.ma-page-ttl {
+  display: inline-block;
+  letter-spacing: -.5px;
+  font-size: 1.1rem;
+  /* line-height: 22px; */
+  font-weight: 500;
+}
+
+.ma-order-placed {
+  display: inline-block;
+  float: right;
+  letter-spacing: -.3px;
+  font-size: 1.1rem;
+  /* line-height: 18px; */
+}
+
+.pf-col {
+  box-sizing: border-box;
+  -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 /* #web .col-md-4 {
   background: #fff;
   padding: 0px 0px 32px 42px;
@@ -859,7 +939,7 @@ a.icon {
   bottom: -55px;
 } */
 
-input[type='radio'] { transform: scale(2); }
+input[type='radio'] { transform: scale(1.6); }
 /* footer section styles
 /* ========================================== */
 footer {
@@ -1057,6 +1137,39 @@ footer {
   .checkbox label input[type="checkbox"]:disabled + .cr,
   .radio label input[type="radio"]:disabled + .cr {
       opacity: .5;
+  }
+/* address section styles
+/* ========================================== */
+  .address-type{
+    border: 1px solid #d4cdcd;
+    border-radius: 6px;
+    box-shadow: none;
+    font-size: 15px;
+    width: 80px;
+    height: 25px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .address-name{
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: large;
+  }
+
+  .address-new{
+    background: url(../images/add-new-address.png) 0px center no-repeat;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3.2em 1rem 3.2rem 4rem;
+    text-align: center;
+  }
+
+  .address-location{
+    font-weight: 400;
+    height: 65px;
+    font-size: 15px;
   }
 
 

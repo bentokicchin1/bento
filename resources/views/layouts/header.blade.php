@@ -35,8 +35,8 @@
                        <li><a href="{{ route('register') }}">Register</a></li>
                        <li><a href="{{ route('contact-us') }}">Contact-Us</a></li>
                        @else
-                       <li><a href="{{ route('login') }}">My Order</a></li>
-                       <li ><a href="{{ route('dashboard') }}">Profile</a></li>
+                       <li><a href="{{ route('dashboard') }}">My Account</a></li>
+                       <li ><a href="{{ route('dashboard') }}">Orders</a></li>
                        <li><a href="{{ route('login') }}">Subscription</a></li>
                        <li>
                           <a href="{{ route('logout') }}"

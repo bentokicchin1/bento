@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Customer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Model\Customer;
+use App\Model\Customer;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use Exception;
 
@@ -17,8 +19,15 @@ class CustomerController extends Controller
      * @return Response
      */
    
-    public function dashboard(){
-        return view('customer.dashboard');
+    public function dashboard(Request $request){
+
+        $userId = Auth::id();
+
+        $userInfo = User::select('name', 'email', 'mobile_number')->where('id',$userId)->first()->toArray();
+        
+        $dashData['userInfo'] = $userInfo;
+
+        return view('customer.dashboard', $dashData);
     }
 
 }

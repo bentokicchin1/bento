@@ -15,7 +15,7 @@
                     <div class="form-group">
                         {{ Form::open(['route' => 'address-add', 'method' => 'post']) }} 
                         {{ Form::select('orderTypeId', $orderTypes, '', ['class' => 'form-control drpdown','placeholder' => 'Please Select Order Type' ])}}
-                        {{ Form::select('addressTypes', ['Home' => 'Home', 'office' => 'Office'], '', ['class' => 'form-control drpdown','placeholder' => 'Please Select Address Type' ])}}
+                        {{ Form::select('addressTypes', ['Home' => 'Home', 'Office' => 'Office'], '', ['class' => 'form-control drpdown','placeholder' => 'Please Select Address Type' ])}}
                         {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Full Name (required)']) }}
                         {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Location (required)']) }}
                         {{ Form::select('area', ['Koperkhairne' => 'Koperkhairne'], 'Koperkhairne', ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}

@@ -91,6 +91,7 @@ class OrderController extends Controller
         $addressId = $postData['addressId'];
         $response = $this->orderService->processData($addressId);
         if ($response == 'success') {
+            $request->session()->forget('orderData');
             return redirect()->route('home');
         }
     }

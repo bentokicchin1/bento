@@ -11,15 +11,27 @@
                     <div class="web-form">
                         <div class="form-group">
                             {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
+                            
                             @foreach($addressList as $address)
-                            <div class="col-md-4 col-sm-4">
+                            <?php
+                            if($address['default'] == 1){
+                                $status = 'checked';
+                            }else{
+                                $status = '';
+                            }
+                            ?>
+                            <div class="col-md-6 col-sm-6" style="margin-bottom:20px">
                                 <div class="radio">
-                                    {{ Form::radio('addressId', $address['id']) }}
+                                    <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;" {{ $status }}>
                                 </div>
-                                <h3> {{ $address['name'] }}</h3>
-                                <p>{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </p>
+                                <div class='address-name'> {{ $address['name'] }}</div>
+                                <div class="address-location">{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
+                                <div class="address-type">{{ $address['address_type'] }}</div>
                             </div>
                             @endforeach
+                            <div class="col-md-4 col-sm-4" style="margin-bottom:20px">                               
+                                <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
+                            </div>
                             <div class="web-submit">
                                 {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
                             </div>

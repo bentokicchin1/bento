@@ -17,7 +17,7 @@ class AddressController extends Controller
         $this->addressService = $addressService;
     }
 
-    public function showAddressForm()
+    public function showAddressForm(Request $request)
     {
 
         /* fetch order type data based on order type */
@@ -25,6 +25,12 @@ class AddressController extends Controller
             ->map(function ($value, $key) {
                 return ucfirst($value);
             })->all();
+
+        /* If user coming from checkout page then store referer url to redirect adter address save  */
+        $refereUrl = $request->server('HTTP_REFERER');
+        if (!empty($refereUrl)) {
+            $request->session()->put('refererUrl', $refereUrl);
+        }
 
         return view('customer.address.add', ['orderTypes' => $orderTypes]);
     }
@@ -46,7 +52,15 @@ class AddressController extends Controller
 
         $response = $this->addressService->saveAddress($input);
         if ($response == 'success') {
-            return redirect()->route('address-add')->with('status', 'Address added successfully!');
+            if ($request->session()->has('refererUrl')) {
+                $refereUrl = $request->session()->get('refererUrl');
+                $request->session()->forget('refererUrl');
+                return redirect($refereUrl)->with('status', 'Address added successfully!');
+            } else {
+                return redirect()->back()->with('status', 'Address added successfully!');
+            }
+        } else {
+            return redirect()->back()->withErrors('Something went wrong. Please try again.');
         }
     }
 
