@@ -6,6 +6,8 @@
         <div class="row" style="margin-bottom:15px">
                 <div class="col-md-8 col-sm-8">
                     <h1>Select address</h1>
+                    @include('layouts.success')
+                    @include('layouts.errors')
                     <div class="web-form">
                         <div class="form-group">
                             {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 

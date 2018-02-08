@@ -57,19 +57,16 @@ class OrderService
      * @param (array)postData
      * @return void
      */
-    public function processData($postData)
+    public function processData($addressId)
     {
-
-        $orderParams['orderTypeId'] = $postData['orderTypeId'];
+        $orderData = session('orderData');
+        
+        $orderParams['orderTypeId'] = $orderData['orderTypeId'];
         $orderParams['quantity'] = 1;
-        $orderParams['shippingAddress'] = 1;
+        $orderParams['shippingAddress'] = $addressId;
         $orderParams['status'] = 'ordered';
-
-        unset($postData['orderTypeId'], $postData['_token']);
-        $sortedPostData = $this->rearrangeOrderPostData($postData);
-
-        $orderParams['orderTotalAmount'] = $sortedPostData['orderTotalAmount'];
-        $orderParams['items'] = $sortedPostData['items'];
+        $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
+        $orderParams['items'] = $orderData['items'];
 
         return $this->insertOrder($orderParams);
     }
@@ -84,9 +81,9 @@ class OrderService
                 return strtolower(str_replace(' ', '_', $value));
             })->all();
 
-        /* Fetched dishes id-price array */
-        // $dishesPriceArray = Dish::all('id', 'price', 'name')->pluck('price', 'id', 'name')->all();
 
+        $orderTypeId = $postData['orderTypeId'];
+        unset($postData['orderTypeId'], $postData['_token']);
         $orderTotalAmount = 0;
         /* Looping through each dish type and checking which are sent over post data  */
         foreach ($dishTypes as $dishTypeName) {
@@ -125,10 +122,11 @@ class OrderService
                 $orderTotalAmount += $dishDetail->price;
                 $i++;
             }
-            $response['orderTotalAmount'] = $orderTotalAmount;
-            $response['items'] = $item;
-            // $response['others']['dish_id'] = array_values($postData);
         }
+        $response['orderTypeId'] = $orderTypeId;
+        $response['orderTotalAmount'] = $orderTotalAmount;
+        $response['items'] = $item;
+
         return $response;
     }
 
