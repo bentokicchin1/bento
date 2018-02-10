@@ -9,26 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-/**
- * Registration route
- *
  */
-/*route to show the registration form*/ 
-// Route::get('register', function() { return view('customer.register'); });
-/*route to process the registration form*/ 
-// Route::post('register', ['uses' => 'Customer\CustomerController@register', 'as' => 'register']);
-
-/**
- * Login route
- *
- */
-/*route to show the login form*/ 
-// Route::get('login', function() { return view('customer.login'); });
-/*route to process the login form*/
-// Route::post('login', ['uses' => 'Customer\CustomerController@login', 'as' => 'login']);
-
 
 Route::get('/', function () {
     return view('home');
@@ -42,33 +23,48 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Contact-Us route
  *
  */
-/*route to show the contact us form*/ 
+/*route to show the contact us form*/
 Route::get('contact-us', 'Contact\ContactController@showContactUsForm')->name('contact-us');
-/*route to process the contact us form*/ 
+/*route to process the contact us form*/
 Route::post('contact-us', 'Contact\ContactController@conatctUs');
-
 
 /**
  * Order route
  *
  */
-/*route to show the order form*/ 
-Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('name', '[a-z]+')->middleware('auth');
-/*route to show address select and order summary page*/ 
+/* Route to show the order form*/
+Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('type', '[a-z]+')->middleware('auth');
+/* Route to show address select and order summary page*/
 Route::post('checkout', 'Order\OrderController@addressSelect')->name('addressSelect')->middleware('auth');
+/* get method used when user redirect to checkout page after adding new address */
 Route::get('checkout', 'Order\OrderController@addressSelect')->name('addressSelect')->middleware('auth');
-/* route for order processing */
+/* Route for order processing */
 Route::post('summary', 'Order\OrderController@processOrder')->name('processOrder')->middleware('auth');
 
+/**
+ * Subscription Order route
+ *
+ */
+
+/* Route to show subscription order type form [Breakfast, Lunch, Dinner]*/
+Route::get('subscription', 'Order\SubscriptionController@showSubscriptionOrderTypeForm')->name('subscriptionType')->middleware('auth');
+/* Route to show subscription form */
+Route::get('subscription/{type}', 'Order\SubscriptionController@showSubscriptionForm')->name('subscription')->where('type', '[a-z]+')->middleware('auth');
+/* Route to show address select and order summary page */
+Route::post('subscribe/checkout', 'Order\SubscriptionController@addressSelect')->name('subscriptionAddressSelect')->middleware('auth');
+/* get method used when user redirect to checkout page after adding new address */
+Route::get('subscribe/checkout', 'Order\SubscriptionController@addressSelect')->name('subscriptionAddressSelect')->middleware('auth');
+/* Route for order processing */
+Route::post('subscribe/summary', 'Order\SubscriptionController@processOrder')->name('subscriptionProcessOrder')->middleware('auth');
 
 /**
  * Customer route
  *
  */
 
-Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 
-    /*route to show the customer dashboard*/ 
+    /*route to show the customer dashboard*/
     Route::get('dashboard', 'Customer\CustomerController@dashboard')->name('dashboard');
 
     Route::get('address/add', 'Customer\AddressController@showAddressForm')->name('address-add');

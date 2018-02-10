@@ -1,11 +1,3 @@
-<!-- Preloader section
-  ================================================== -->
-<!--   <div class="preloader">
-
-    <div class="sk-spinner sk-spinner-pulse"></div>
-
-</div> -->
-
 <!-- Navigation section
   ================================================== -->
   <div class="nav-container">
@@ -37,7 +29,7 @@
                        @else
                        <li><a href="{{ route('dashboard') }}">My Account</a></li>
                        <li ><a href="{{ route('dashboard') }}">Orders</a></li>
-                       <li><a href="{{ route('login') }}">Subscription</a></li>
+                       <li><a href="{{ route('subscriptionType') }}">Subscription</a></li>
                        <li>
                           <a href="{{ route('logout') }}"
                           onclick="event.preventDefault();

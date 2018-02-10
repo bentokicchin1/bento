@@ -31,9 +31,9 @@ class OrderService
         $this->dishes = $dishes;
     }
 
-    public function getDishList()
+    public function getDishList($orderTypeId)
     {
-        $rawDishList = $this->dishes->getDishListfromDb();
+        $rawDishList = $this->dishes->getDishListfromDb($orderTypeId, 'Monday');
         return $this->formatDishList($rawDishList);
     }
 
@@ -60,10 +60,10 @@ class OrderService
     public function processData($addressId)
     {
         $orderData = session('orderData');
-        
+
         $orderParams['orderTypeId'] = $orderData['orderTypeId'];
         $orderParams['quantity'] = 1;
-        $orderParams['shippingAddress'] = $addressId;
+        $orderParams['shippingAddressId'] = $addressId;
         $orderParams['status'] = 'ordered';
         $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
         $orderParams['items'] = $orderData['items'];
@@ -81,9 +81,21 @@ class OrderService
                 return strtolower(str_replace(' ', '_', $value));
             })->all();
 
-
         $orderTypeId = $postData['orderTypeId'];
         unset($postData['orderTypeId'], $postData['_token']);
+
+        $finalItemList = $this->createFinalDetailedItemList($dishTypes, $postData);
+        $response['orderTypeId'] = $orderTypeId;
+        $response['orderTotalAmount'] = $finalItemList['orderTotalAmount'];
+        $response['items'] = $finalItemList['items'];
+
+        return $response;
+    }
+
+    public function createFinalDetailedItemList($dishTypes, $postData)
+    {
+        $response = [];
+        $item = [];
         $orderTotalAmount = 0;
         /* Looping through each dish type and checking which are sent over post data  */
         foreach ($dishTypes as $dishTypeName) {
@@ -93,7 +105,7 @@ class OrderService
                 if (!empty($postData[$dishTypeName]) && !empty($postData['qty_' . $dishTypeName])) {
 
                     $dishId = $postData[$dishTypeName];
-                    $dishDetail = $this->getDishDetailById($dishId);
+                    $dishDetail = $this->dishes->getDishDetailById($dishId);
                     $item[$dishTypeName]['dish_id'] = $dishId;
                     $item[$dishTypeName]['qty'] = $postData['qty_' . $dishTypeName];
                     $item[$dishTypeName]['name'] = $dishDetail->name;
@@ -112,7 +124,7 @@ class OrderService
             $i = 0;
             foreach ($postData as $key => $dishId) {
 
-                $dishDetail = $this->getDishDetailById($dishId);
+                $dishDetail = $this->dishes->getDishDetailById($dishId);
                 $item['others'][$i]['dish_id'] = $dishId;
                 $item['others'][$i]['qty'] = 1;
                 $item['others'][$i]['name'] = $dishDetail->name;
@@ -123,21 +135,10 @@ class OrderService
                 $i++;
             }
         }
-        $response['orderTypeId'] = $orderTypeId;
         $response['orderTotalAmount'] = $orderTotalAmount;
         $response['items'] = $item;
 
         return $response;
-    }
-
-    /**
-     * Return dish detail by id.
-     * @param (int)dish id
-     * @return (object) dish details
-     */
-    public function getDishDetailById($dishId)
-    {
-        return Dish::select('price', 'name')->where('id', $dishId)->first();
     }
 
     /**
@@ -152,7 +153,7 @@ class OrderService
             $order->order_type_id = $orderParams['orderTypeId'];
             $order->quantity = $orderParams['quantity'];
             $order->total_amount = $orderParams['orderTotalAmount'];
-            $order->shipping_address = $orderParams['shippingAddress'];
+            $order->shipping_address_id = $orderParams['shippingAddressId'];
             $order->status = $orderParams['status'];
             $order->save();
 
@@ -189,10 +190,11 @@ class OrderService
         }
     }
 
-    public function validateOrderFormData($postData){
+    public function validateOrderFormData($postData)
+    {
         $message = 'success';
-        if(!empty($postData)){
-            if( (int) $postData['orderTotalAmount'] < 45){
+        if (!empty($postData)) {
+            if ((int) $postData['orderTotalAmount'] < 45) {
                 $message = 'Total amount should be greater than Rs. 45';
             }
         }

@@ -40,7 +40,7 @@ class OrderController extends Controller
         $orderTypeId = $orderTypeData->id;
 
         /* Fetch Dish list from service */
-        $dishData = $this->orderService->getDishList();
+        $dishData = $this->orderService->getDishList($orderTypeId);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
 
@@ -71,8 +71,13 @@ class OrderController extends Controller
                 $request->session()->forget('orderData');
             }
             $request->session()->put('orderData', $sortedPostData);
+        } elseif ($request->session()->get('orderData')) {
+            /* Check if order data present in session */
+            $sortedPostData = $request->session()->get('orderData');
+        } else {
+            /* if no order data found then redirect to home page */
+            return redirect()->route('home');
         }
-        $sortedPostData = $request->session()->get('orderData');
 
         /* Fetch customer address list and create array that need to be sent to checkout view page */
         $viewData['addressList'] = $this->addressService->getAddressList();
@@ -82,6 +87,11 @@ class OrderController extends Controller
         return view('order.checkout', $viewData);
     }
 
+    /**
+     * Process Order.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function processOrder(Request $request)
     {
         $postData = $request->all();

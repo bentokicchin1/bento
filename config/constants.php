@@ -13,4 +13,5 @@ return [
     'email' =>  env('DEFAULT_EMAIL', ''),
     'number' =>  env('DEFAULT_MOBILE_NUMBER', ''),
     'address' =>  env('DEFAULT_LOCATION', ''),
+    'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
 ];
