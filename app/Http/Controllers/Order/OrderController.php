@@ -102,8 +102,12 @@ class OrderController extends Controller
         $response = $this->orderService->processData($addressId);
         if ($response == 'success') {
             $request->session()->forget('orderData');
-            return redirect()->route('home');
+            return redirect()->route('confirmation');
         }
+    }
+
+    public function confirmOrder(){
+        return view('order.confirmation');
     }
 
 }
