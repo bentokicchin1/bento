@@ -20,11 +20,12 @@
 <!-- Book Now section
 ================================================== -->
 <section id="order">
-    <div class="container">
+    <div class="container body-content">
         <div class="row">
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 order wow fadeIn" data-wow-delay="0s">
-                    @include('layouts.success')
-                    @include('layouts.errors')
+                @if(!empty($dishes['dishData']))
+                @include('layouts.success')
+                @include('layouts.errors')
                 <div class="order-form">
 
                     {{ Form::open(['route' => 'addressSelect', 'method' => 'post']) }} 
@@ -59,6 +60,9 @@
                     </div>
                     {{ Form::close() }}
                 </div>
+                @else
+                <h4 style="text-align:center;">No data found</h4>
+                @endif
             </div>
         </div>
     </div>

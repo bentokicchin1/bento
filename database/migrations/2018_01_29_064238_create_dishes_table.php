@@ -17,8 +17,8 @@ class CreateDishesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('dish_type_id');
             $table->foreign('dish_type_id')->references('id')->on('dish_types');
-            $table->unsignedInteger('order_type_id');
-            $table->foreign('order_type_id')->references('id')->on('order_types');
+            // $table->unsignedInteger('order_type_id');
+            // $table->foreign('order_type_id')->references('id')->on('order_types');
             $table->string('name');
             $table->string('code');
             $table->decimal('price',8,2);

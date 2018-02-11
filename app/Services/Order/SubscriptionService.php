@@ -39,18 +39,22 @@ class SubscriptionService
         return $this->formatDishList($rawDishList);
     }
 
+    /* Re-arrange dish raw data based on day and dish type  */
     public function formatDishList($rawDishList)
     {
         $sortedData = [];
-        foreach ($rawDishList as $key => $dishItem) {
-            $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
-            $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-            $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
-            $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
-        }
+        $finalData = [];
+        if(!empty($rawDishList)){
+            foreach ($rawDishList as $key => $dishItem) {
+                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
+                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
+                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
+                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
+            }
 
-        foreach ($sortedData as $day => $value) {
-            $finalData[$day] = array_values($value);
+            foreach ($sortedData as $day => $value) {
+                $finalData[$day] = array_values($value);
+            }
         }
         return $finalData;
     }
@@ -84,7 +88,8 @@ class SubscriptionService
     {
         $newPostData = [];
 
-        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        // $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        $weekdays = $postData['days'];
 
         $monday = array_filter($postData, function ($key) {
             return strpos($key, 'monday') === 0;
@@ -105,7 +110,7 @@ class SubscriptionService
             return strpos($key, 'saturday') === 0;
         }, ARRAY_FILTER_USE_KEY);
 
-        foreach ($days as $day) {
+        foreach ($weekdays as $day) {
             foreach ($$day as $key => $value) {
                 $newKey = str_replace($day . '_', '', $key);
                 $newPostData[$day][$newKey] = $value;

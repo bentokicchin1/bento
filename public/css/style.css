@@ -43,7 +43,7 @@ h1 {
 
 h2 {
   color: #ffffff;
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 
 h3 {
@@ -1261,6 +1261,9 @@ footer {
     font-size: 15px;
   }
 
+  .body-content{
+    min-height: 200px;
+  }
 
 /* Responsive Mobile styles
 /* ========================================== */

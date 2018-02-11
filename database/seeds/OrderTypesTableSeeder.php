@@ -12,16 +12,6 @@ class OrderTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('order_types')->insert([
-        //     'name' => 'breakfast',
-        // ]);
-        // DB::table('order_types')->insert([
-        //     'name' => 'lunch',
-        // ]);
-        // DB::table('order_types')->insert([
-        //     'name' => 'dinner',
-        // ]);
-
         $data = [['name' => 'breakfast'], ['name' => 'lunch'], ['name' => 'dinner']];
         foreach($data as $val){
             OrderType::create($val);

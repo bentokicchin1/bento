@@ -2,8 +2,8 @@
 @section('content')
 
 <section id="web">
-    <div class="container">
-        <div class="row" style="margin-bottom:15px">
+    <div class="container body-content">
+        <div class="row">
                 <div class="col-md-8 col-sm-8">
                     <h1>Select address</h1>
                     @include('layouts.success')
