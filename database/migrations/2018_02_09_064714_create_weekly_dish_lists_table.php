@@ -16,6 +16,8 @@ class CreateWeeklyDishListsTable extends Migration
         Schema::create('weekly_dish_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('day');
+            $table->unsignedInteger('order_type_id');
+            $table->foreign('order_type_id')->references('id')->on('order_types');
             $table->unsignedInteger('dish_id');
             $table->foreign('dish_id')->references('id')->on('dishes');
             $table->timestamps();

@@ -58,6 +58,8 @@ Route::get('subscribe/checkout', 'Order\SubscriptionController@addressSelect')->
 /* Route for order processing */
 Route::post('subscribe/summary', 'Order\SubscriptionController@processOrder')->name('subscriptionProcessOrder')->middleware('auth');
 
+Route::get('subscribe/confirmation', 'Order\SubscriptionController@confirmSubscription')->name('subscriptionConfirmation')->middleware('auth') ;
+
 /**
  * Customer route
  *

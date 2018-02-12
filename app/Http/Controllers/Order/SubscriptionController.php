@@ -59,7 +59,7 @@ class SubscriptionController extends Controller
 
         /* Fetch Dish list from service */
         $dishData = $this->subscriptionService->getDishList($orderTypeId);
-
+        
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
 
@@ -74,11 +74,10 @@ class SubscriptionController extends Controller
     public function addressSelect(Request $request)
     {
         $postData = $request->all();
-
+        
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
-            // dd($sortedPostData);
 
             /* Validate sorted input data and redirect if error occurs. */
             foreach ($sortedPostData as $day => $eachDayItems) {
@@ -126,7 +125,11 @@ class SubscriptionController extends Controller
         
         if ($response == 'success') {
             $request->session()->forget('subscriptionOrderData');
-            return redirect()->route('home');
+            return redirect()->route('subscriptionConfirmation');
         }
+    }
+
+    public function confirmSubscription(){
+        return view('subscription.subscriptionConfirmation');
     }
 }
