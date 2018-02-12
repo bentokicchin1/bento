@@ -6,14 +6,14 @@
  * @author Anil G.
  */
 
-namespace App\Services\Order;
+namespace App\Services\Checkout;
 
 use DB;
 use App\Model\Dish;
 use App\Model\DishType;
 use App\Model\Order;
 use App\Model\Subscription;
-use App\Services\Order\OrderService;
+use App\Services\Checkout\OrderService;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionService

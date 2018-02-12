@@ -30,7 +30,7 @@
                     <div class="iso-box col-md-6 col-sm-6">
                         <div class="portfolio-thumb">
                             <a href="{{ route('order', ['type'=>'lunch']) }}">
-                            <img src="{{ asset('images/lunch1.jpg') }}" class="img-responsive" alt="Lunch">
+                            <img src="{{ asset('images/lunch-new-1.jpg') }}" class="img-responsive" alt="Lunch">
                             <div class="portfolio-overlay">
                                 <div class="portfolio-item">
                                     <h2>Order Now</h2>
@@ -46,7 +46,7 @@
                     <div class="iso-box col-md-6 col-sm-6">
                         <div class="portfolio-thumb">
                             <a href="{{ route('order', ['type'=>'dinner']) }}">
-                            <img src="{{ asset('images/dinner.jpg') }}" class="img-responsive" alt="Dinner">
+                            <img src="{{ asset('images/dinner-new-1.jpg') }}" class="img-responsive" alt="Dinner">
                             <div class="portfolio-overlay">
                                 <div class="portfolio-item">        
                                     <h2>Order Now</h2>

@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li id="myorders" class="md-12 sm-2 ">
-                        <a href="https://www.pepperfry.com/customer/myorders">
+                        <a href="{{ route('orders')}}">
                             <strong>View My Orders</strong>
                             <span>Check Past Order Items</span>
                         </a>
@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li id="address" class="md-12 sm-2 ">
-                        <a href="https://www.pepperfry.com/customer/address_book">
+                        <a href="{{route('address')}}">
                             <strong>My Address Book</strong>
                             <span>Add, Edit Addresses</span>
                         </a>
@@ -37,7 +37,6 @@
 
 
             <div class="col-md-9 col-sm-12">
-                
                 <div class="tab-inner-content">
                     <p class="para">
                         Anil Gupta <br>
@@ -51,10 +50,7 @@
                     <div class="ma-order-placed font-13">
                         You have placed <strong>102 orders </strong>        </div>
                 </div>
-
-                
                 <div >
-                    
                     <div class="col-md-2 col-sm-2 pf-col"><p>Order No.</p> <span class="pf-semi-bold-text">200010339</span></div>
                     <div class="col-md-2 col-sm-2 pf-col"><p>Date</p> <span class="pf-semi-bold-text">1st October 2017</span></div>
                     <div class="col-md-4 col-sm-4 pf-col"><p>Order Items</p> 
@@ -68,10 +64,7 @@
                     </div>
                     <div class="col-md-2 col-sm-2 pf-col"><p>Order Type.</p> <span class="pf-semi-bold-text">Dinner</span></div>
                     <div class="col-md-2 col-sm-2 pf-col"><p>Total Amount</p> <span class="pf-semi-bold-text">250</span></div>
-                   
-                    
                 </div>
-
             </div>
             <div class="clearfix"></div>
         </div>

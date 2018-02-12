@@ -888,7 +888,7 @@ a.icon {
 
 .ma-nav li a.active {
   border-radius: 2px;
-  background-color: rgba(72,198,150,.17);
+  background-color: rgba(137, 144, 141, 0.17);
 }
 
 li {
@@ -932,6 +932,11 @@ li {
   padding-left: 1rem;
 }
 
+.order-header{
+  padding-bottom: 25px;
+  text-align:center;
+}
+
 /* #web .col-md-4 {
   background: #fff;
   padding: 0px 0px 32px 42px;
@@ -941,12 +946,6 @@ li {
 
 input[type='radio'] { transform: scale(1.6); }
 
-
-/* Tabs panel */
-.tabbable-panel {
-    /* border:1px solid #eee;
-    padding: 10px; */
-  }
   
   /* Default mode */
   .tabbable-line > .nav-tabs {
@@ -1238,6 +1237,20 @@ footer {
     height: 25px;
     font-weight: 500;
     text-align: center;
+    float: left;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .default-address{
+    border: 1px solid #d4cdcd;
+    border-radius: 6px;
+    box-shadow: none;
+    font-size: 15px;
+    width: 80px;
+    height: 25px;
+    float: right;
+    font-weight: 500;
+    text-align: center;
     transition: all 0.4s ease-in-out;
   }
 
@@ -1251,7 +1264,8 @@ footer {
     background: url(../images/add-new-address.png) 0px center no-repeat;
     display: table-cell;
     vertical-align: middle;
-    padding: 3.2em 1rem 3.2rem 4rem;
+    /* padding: 3.2em 1rem 3.2rem 4rem; */
+    padding: 1.2em 1rem 1.2rem 4rem;
     text-align: center;
   }
 

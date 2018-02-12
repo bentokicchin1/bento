@@ -6,7 +6,7 @@
  * @author Anil G.
  */
 
-namespace App\Services\Order;
+namespace App\Services\Checkout;
 
 use App\Model\Dish;
 use App\Model\DishType;

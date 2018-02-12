@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Order;
 use App\Model\OrderType;
 use App\Services\Customer\AddressService;
-use App\Services\Order\OrderService;
-use App\Services\Order\SubscriptionService;
+use App\Services\Checkout\OrderService;
+use App\Services\Checkout\SubscriptionService;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller

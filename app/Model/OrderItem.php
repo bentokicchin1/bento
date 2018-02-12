@@ -11,5 +11,5 @@ class OrderItem extends Model
      *
      * @var array
      */
-    protected $fillable = ['order_id', 'name', 'quantity', 'basr_price', 'total_amount'];
+    protected $fillable = ['order_id', 'name', 'quantity', 'base_price', 'total_amount'];
 }

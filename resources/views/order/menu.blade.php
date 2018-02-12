@@ -9,7 +9,7 @@
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                 <div class="header-thumb">
                     <h1 class="wow" data-wow-delay="0s">Order Now</h1>
-                    <h3 class="wow" data-wow-delay="0s">Feeling hungry, let's place the order</h3>
+                    <h3 class="wow" data-wow-delay="0s">Feeling hungry, lets place the order</h3>
                 </div>
             </div>
         </div>
