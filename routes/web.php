@@ -74,6 +74,10 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
     Route::get('address/add', 'Customer\AddressController@showAddressForm')->name('address-add');
     Route::post('address/add', 'Customer\AddressController@saveAddress')->name('address-add');
 
+    Route::get('address/edit/{id}', 'Customer\AddressController@showAddressForm')->where('id', '[0-9]+')->name('address-edit');
+
     Route::get('address', 'Customer\AddressController@listAddress')->name('address');
+
+    Route::get('profile', 'Customer\CustomerController@profile')->name('profile');
 
 });

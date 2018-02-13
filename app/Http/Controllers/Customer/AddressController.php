@@ -17,11 +17,15 @@ class AddressController extends Controller
         $this->addressService = $addressService;
     }
 
-    public function showAddressForm(Request $request)
+    public function showAddressForm($id='', Request $request)
     {
-
+        $data = [];
+        if(!empty($id)){
+            $data['addressData'] = $this->addressService->getAddressById($id);
+            
+        }
         /* fetch order type data based on order type */
-        $orderTypes = OrderType::all('id', 'name')->pluck('name', 'id')
+        $data['orderTypes'] = OrderType::all('id', 'name')->pluck('name', 'id')
             ->map(function ($value, $key) {
                 return ucfirst($value);
             })->all();
@@ -32,7 +36,7 @@ class AddressController extends Controller
             $request->session()->put('refererUrl', $refereUrl);
         }
 
-        return view('customer.address.add', ['orderTypes' => $orderTypes]);
+        return view('customer.address.add', $data);
     }
 
     public function saveAddress(Request $request)

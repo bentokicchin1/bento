@@ -55,4 +55,21 @@ class CustomerController extends Controller
         return view('customer.orders', ['orders' => $orders]);
     }
 
+    /**
+     * Return customer profile
+     *
+     * @return Response
+     */
+
+    public function profile()
+    {
+        $userId = Auth::id();
+
+        $userInfo = User::select('name', 'email', 'mobile_number')->where('id', $userId)->first()->toArray();
+
+        $profileData['userInfo'] = $userInfo;
+
+        return view('customer.profile', $profileData);
+    }
+
 }

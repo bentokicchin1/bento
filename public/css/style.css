@@ -1255,6 +1255,7 @@ footer {
   }
 
   .address-name{
+    float: left;
     font-weight: 600;
     letter-spacing: 1px;
     font-size: large;
@@ -1270,6 +1271,7 @@ footer {
   }
 
   .address-location{
+    float: left;
     font-weight: 400;
     height: 65px;
     font-size: 15px;
@@ -1277,6 +1279,13 @@ footer {
 
   .body-content{
     min-height: 200px;
+  }
+
+  .edit-delete{
+    float: right;
+    color: #cc1414;
+    font-weight: 400;
+
   }
 
 /* Responsive Mobile styles

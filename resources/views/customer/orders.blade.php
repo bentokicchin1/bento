@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li id="profile" class="md-12 sm-2 ">
-                        <a href="">
+                        <a href="{{route('profile')}}">
                             <strong>My Profile</strong>
                             <span>Your Name, Phone No., Password</span>
                         </a>

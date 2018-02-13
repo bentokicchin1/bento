@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li id="profile" class="md-12 sm-2 ">
-                        <a href="https://www.pepperfry.com/customer/account">
+                        <a href="{{route('profile')}}">
                             <strong>My Profile</strong>
                             <span>Your Name, Phone No., Password</span>
                         </a>
@@ -51,15 +51,13 @@
                     }
                     ?>
                     <div class="col-md-6 col-sm-6" style="margin-bottom:20px">
-    
                         <div class='address-name'> {{ $address['name'] }} </div>
+                        <div class='edit-delete'><a href="{{ route('address-edit',['id' => $address['id']]) }}">Edit</a>/<a href="#">Delete</a></div>
                         <div class="address-location">{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
-                        {{--  <div class="types">  --}}
                         <div class="address-type">{{ $address['address_type'] }}</div>
                         @if ($status)
                         <div class="default-address" style="float:right">{{ $status }}</div>
                         @endif
-                    {{--  </div>                        --}}
                     </div>
                     @endforeach
                     <div class="col-md-4 col-sm-4" style="margin-bottom:20px">                               

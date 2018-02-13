@@ -68,4 +68,8 @@ class AddressService
         $userId = Auth::id();
         return Address::all()->where('user_id', $userId)->toArray();
     }
+
+    public function getAddressById($addressId){
+        return Address::all()->where('id', $addressId)->first()->toArray();
+    }
 }
