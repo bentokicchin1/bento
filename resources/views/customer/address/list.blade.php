@@ -37,8 +37,9 @@
             <div class="col-md-9 col-sm-12"> 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="heading">Manage Your Address</b></div>
+                        
                         <div class="order-content col-md-12 col-sm-12">
+                            <div class="heading">Manage Your Address</div>
                             @include('layouts.success')
                             @include('layouts.errors')
                             @foreach($addressList as $address)

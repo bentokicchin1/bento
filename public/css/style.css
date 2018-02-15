@@ -850,7 +850,8 @@ a.icon {
 }
 
 .web-submit{
-	width: 50%;
+  width: 50%;
+  /* float: right; */
 }
 
 #web .pf-margin-0{
@@ -1310,6 +1311,14 @@ footer {
     line-height: 22px;
     margin-bottom: 10px;
     font-weight: 600;
+  }
+
+  .block-content{
+    margin-bottom: 15px;
+  }
+
+  .alert>p, .alert>ul{
+    padding-left: 0px;
   }
 
 /* Responsive Mobile styles

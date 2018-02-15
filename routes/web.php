@@ -80,6 +80,11 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 
     Route::get('address', 'Customer\AddressController@index')->name('address');
 
+    /* Ferch profile page */
     Route::get('profile', 'Customer\CustomerController@profile')->name('profile');
+
+    Route::post('profile/update-info', 'Customer\CustomerController@updateUserInfo')->name('update-info');
+
+    Route::post('profile/change-password', 'Customer\CustomerController@changePassword')->name('change-password');
 
 });
