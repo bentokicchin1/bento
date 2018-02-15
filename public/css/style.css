@@ -815,6 +815,7 @@ a.icon {
 #web .form-control{
   /*background: transparent;*/
   border: 1px solid #eee;
+  font-weight: 400;
   border-radius: 0px;
   box-shadow: none;
   font-size: 16px;
@@ -1097,11 +1098,11 @@ footer {
   
   #order .form-control {
     background: transparent;
-    height: 60px;
+    height: 50px;
     border: 1px solid #eee;
     border-radius: 0px;
     box-shadow: none;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     margin-bottom: 20px;
     transition: all 0.4s ease-in-out;
@@ -1243,6 +1244,8 @@ footer {
   
   .default-address{
     border: 1px solid #d4cdcd;
+    color: white;
+    background: black;
     border-radius: 6px;
     box-shadow: none;
     font-size: 15px;
@@ -1256,9 +1259,9 @@ footer {
 
   .address-name{
     float: left;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 1px;
-    font-size: large;
+    font-size: 17px;
   }
 
   .address-new{
@@ -1288,6 +1291,27 @@ footer {
 
   }
 
+  .address-box{
+    margin-bottom:20px
+  }
+
+  .content{
+    margin-bottom: 50px;
+  }
+
+  .big-message{
+    font-size: 35px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .heading{
+    font-size: 17px;
+    line-height: 22px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
 /* Responsive Mobile styles
 /* ========================================== */
 @media (max-width: 980px) {
@@ -1304,6 +1328,11 @@ footer {
 
   #contact #map-canvas {
     margin-bottom: 60px;
+  }
+
+  .address-box{
+    min-height:100px;
+    margin-bottom:20px
   }
 }
 
@@ -1324,6 +1353,11 @@ footer {
   #about .col-md-4,
   #single-project .col-md-3 {
     padding-bottom: 32px;
+  }
+
+  .address-box{
+    min-height:150px;
+    margin-bottom:20px
   }
 
 }
@@ -1358,9 +1392,30 @@ footer {
     padding-right: 20px;
     width: 100%;
 }
+.address-location {
+  float: left;
+  font-weight: 400;
+  height: 100px;
+  font-size: 15px;
+}
+
+.address-box{
+  min-height:150px;
+  margin-bottom:20px
+}
+
+.big-message{
+  font-size: 25px;
+  text-align: center;
+  padding-top: 10px;
+}
 
 }
 
 @media (max-width: 450px) {
   .intro-inner {top: 50%;}
+  .address-box{
+    min-height:150px;
+    margin-bottom:20px
+  }
 }

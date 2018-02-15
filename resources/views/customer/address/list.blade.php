@@ -3,10 +3,8 @@
 
 <section id="web">
     <div class="container">
-        <div class="row">
-
-
-            <div class="col-md-3 col-sm-12 ">                        
+        <div class="row content">
+            <div class="col-md-3 col-sm-12 side-bar">                        
                 <ul class="ma-nav ">
                     <li id="account" class="md-12 sm-2 pf-padding-0 pf-margin-0">
                         <a href="{{ route('dashboard')}}">
@@ -36,37 +34,40 @@
             </div>
 
 
-            <div class="col-md-9 col-sm-12">                
-                <div class="order-header col-md-12 col-md-12">
-                    <h1 class="wow">Your Address List</h1>
-                    {{--  <h3 class="wow">Your Total Order Count till date is </h3>  --}}
-                </div>
-                <div class="oreder-content">
-                    @foreach($addressList as $address)
-                    <?php
-                    if($address['default'] == 1){
-                        $status = 'Default';
-                    }else{
-                        $status = '';
-                    }
-                    ?>
-                    <div class="col-md-6 col-sm-6" style="margin-bottom:20px">
-                        <div class='address-name'> {{ $address['name'] }} </div>
-                        <div class='edit-delete'><a href="{{ route('address-edit',['id' => $address['id']]) }}">Edit</a>/<a href="#">Delete</a></div>
-                        <div class="address-location">{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
-                        <div class="address-type">{{ $address['address_type'] }}</div>
-                        @if ($status)
-                        <div class="default-address" style="float:right">{{ $status }}</div>
-                        @endif
+            <div class="col-md-9 col-sm-12"> 
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="heading">Manage Your Address</b></div>
+                        <div class="order-content col-md-12 col-sm-12">
+                            @include('layouts.success')
+                            @include('layouts.errors')
+                            @foreach($addressList as $address)
+                            <?php
+                            if($address['default'] == 1){
+                                $status = 'Default';
+                            }else{
+                                $status = '';
+                            }
+                            ?>
+                            <div class="col-md-6 col-sm-12 address-box">
+                                <div class='address-name'> {{ $address['name'] }} </div>
+                                <div class='edit-delete'><a href="{{ route('address-edit',['id' => $address['id']]) }}">Edit</a>/<a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('address-delete', ['id' => $address['id']]) }}">Delete</a></div>
+                                <div class="address-location">{{ $address['location'].', '.$address['sector'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
+                                <div class="address-type">{{ $address['address_type'] }}</div>
+                                @if ($status)
+                                <div class="default-address" style="float:right">{{ $status }}</div>
+                                @endif
+                            </div>
+                            @endforeach
+                            <div class="col-md-6 col-sm-12" style="margin-bottom:20px">                               
+                                <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
+                            </div>       
+                            
+                        </div>        
                     </div>
-                    @endforeach
-                    <div class="col-md-4 col-sm-4" style="margin-bottom:20px">                               
-                        <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
-                    </div>       
-                    
-                </div>        
+                </div>
+                
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </section>

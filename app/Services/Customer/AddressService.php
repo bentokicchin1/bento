@@ -38,22 +38,30 @@ class AddressService
         DB::beginTransaction();
         $userId = Auth::id();
         try {
-            if ($addressParams['setAsDefault'] == 1) {
+            if ( isset($addressParams['default']) && $addressParams['default'] == 1) {
                 Address::where('user_id', $userId)
                     ->where('default', 1)
                     ->update(['default' => 0]);
             }
-            $addressObj = new Address;
+            
+            /*  */
+            if(!empty($addressParams['id'])){
+                $addressObj = Address::find($addressParams['id']);
+            }else{
+                $addressObj = new Address;
+            }
+
             $addressObj->user_id = $userId;
-            $addressObj->order_type_id = $addressParams['orderTypeId'];
-            $addressObj->address_type = $addressParams['addressTypes'];
+            $addressObj->order_type_id = $addressParams['order_type_id'];
+            $addressObj->address_type = $addressParams['address_type'];
             $addressObj->name = $addressParams['name'];
             $addressObj->location = $addressParams['location'];
             $addressObj->area = $addressParams['area'];
+            $addressObj->sector = $addressParams['sector'];
             $addressObj->city = $addressParams['city'];
             $addressObj->state = $addressParams['state'];
             $addressObj->pincode = $addressParams['pincode'];
-            $addressObj->default = $addressParams['setAsDefault'];
+            $addressObj->default = $addressParams['default']?? 0;
             $addressObj->save();
 
             DB::commit();
@@ -71,5 +79,9 @@ class AddressService
 
     public function getAddressById($addressId){
         return Address::all()->where('id', $addressId)->first()->toArray();
+    }
+
+    public function deleteAddress($addressId){
+        Address::destroy($addressId);
     }
 }

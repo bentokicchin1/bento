@@ -22,12 +22,14 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('address_type');
             $table->string('name');
             $table->text('location');
+            $table->string('sector');
             $table->string('area');
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
             $table->tinyInteger('default');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

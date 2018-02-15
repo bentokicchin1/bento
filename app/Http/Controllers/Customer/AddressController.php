@@ -17,12 +17,16 @@ class AddressController extends Controller
         $this->addressService = $addressService;
     }
 
-    public function showAddressForm($id='', Request $request)
+    /**
+     * Display adderess form for add and edit case.
+     *
+     */
+    public function showAddressForm($id = '', Request $request)
     {
         $data = [];
-        if(!empty($id)){
+        if (!empty($id)) {
             $data['addressData'] = $this->addressService->getAddressById($id);
-            
+
         }
         /* fetch order type data based on order type */
         $data['orderTypes'] = OrderType::all('id', 'name')->pluck('name', 'id')
@@ -39,15 +43,31 @@ class AddressController extends Controller
         return view('customer.address.add', $data);
     }
 
-    public function saveAddress(Request $request)
+    /**
+     * Fetch list of addresses for customer
+     *
+     * @return array address list
+     */
+    public function index()
+    {
+        $addressList = $this->addressService->getAddressList();
+        return view('customer.address.list', ['addressList' => $addressList]);
+    }
+
+    /**
+     * Save addresses for customer based on address id
+     *
+     */
+    public function store(Request $request)
     {
         $input = $request->all();
         $validatedData = $request->validate([
-            'orderTypeId' => 'required|numeric',
-            'addressTypes' => 'required',
+            'order_type_id' => 'required|numeric',
+            'address_type' => 'required',
             'location' => 'required',
             'name' => 'required',
             'area' => 'required',
+            'sector' => 'required',
             'city' => 'required',
             'state' => 'required',
             'pincode' => 'required|digits:6',
@@ -59,7 +79,7 @@ class AddressController extends Controller
             if ($request->session()->has('refererUrl')) {
                 $refereUrl = $request->session()->get('refererUrl');
                 $request->session()->forget('refererUrl');
-                return redirect($refereUrl)->with('status', 'Address added successfully!');
+                return redirect($refereUrl)->with('status', 'Address saved successfully!');
             } else {
                 return redirect()->back()->with('status', 'Address added successfully!');
             }
@@ -68,11 +88,15 @@ class AddressController extends Controller
         }
     }
 
-    public function listAddress()
+    /**
+     * Soft delete addresses for customer based on address id
+     *
+     */
+    public function delete($id, Request $request)
     {
-        $addressList = $this->addressService->getAddressList();
-
-        return view('customer.address.list', ['addressList' => $addressList]);
-        // dd($addressList);
+        if (!empty($id)) {
+            $this->addressService->deleteAddress($id);
+            return redirect()->back()->with('status', 'Address deleted successfully!');
+        }
     }
 }

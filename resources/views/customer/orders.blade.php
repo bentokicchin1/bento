@@ -3,8 +3,7 @@
 
 <section id="web">
     <div class="container">
-        <div class="row">
-
+        <div class="row content">
 
             <div class="col-md-3 col-sm-12 ">                        
                 <ul class="ma-nav ">
@@ -35,62 +34,71 @@
                 </ul>                        
             </div>
 
-            <div class="col-md-9 col-sm-12">                
-                <div class="order-header col-md-12 col-md-12">
-                    <h1 class="wow">Your Orders</h1>
-                    <h3 class="wow">Your Total Order Count till date is <b>{{count($orders)}}</b></h3>
-                </div>
-                <div class="oreder-content">
-                    <div class="col-md-12 col-md-12">
-                        <div class="col-md-1 col-sm-2">
-                            <h4>ID</h4>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <h4>Date</h4>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <h4>Status</h4>
-                        </div>
-                        <div class="col-md-2 col-sm-2">
-                            <h4>Type</h4>
-                        </div>
-                        <div class="col-md-4 col-sm-2">
-                            <h4>Items</h4>
-                        </div>
-                        <div class="col-md-1 col-sm-2">
-                            <h4>Amount</h4>
-                        </div>
-                    </div>
+            <div class="col-md-9 col-sm-12">
+                <div class="container-fluid">
+                    <div class="row">                       
+                        {{--  <div class="order-header col-md-12 col-md-12">
+                            <h1 class="wow">Your Orders</h1>
                             
-                    @foreach($orders as $order)
-                    <div class="col-md-12 col-md-12">
-                        <div class="col-md-1 col-sm-2" style="font-weight:400">
-                            <p>{{$order['orderId']}}</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2" style="font-weight:400">
-                            <p>{{date('j-M-Y', strtotime($order['date']))}}</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2" style="font-weight:400">
-                            <p>{{$order['status']}}</p>
-                        </div>
-                        <div class="col-md-2 col-sm-2" style="font-weight:400">
-                            <p>{{$order['orderType']}}</p>
-                        </div>
-                        <div class="col-md-4 col-sm-2" style="font-weight:400">
-                            <p>
-                                @foreach( $order['items'] as $item)
-                                    {{ $item.'  ' }}
+                        </div>  --}}
+                        <div class="order-content col-md-12 col-md-12">
+                            <div class="heading">Your Total Order Count is <b>{{count($orders)}}</b></div>
+                            @if (empty($orders))
+                                <div class="big-message">You have not placed any order till now.</div>
+                            @else
+                            <div class="col-md-12 col-md-12">
+                                    <div class="col-md-1 col-sm-2">
+                                        <h4>ID</h4>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <h4>Date</h4>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <h4>Status</h4>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <h4>Type</h4>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2">
+                                        <h4>Items</h4>
+                                    </div>
+                                    <div class="col-md-1 col-sm-2">
+                                        <h4>Amount</h4>
+                                    </div>
+                                </div>
+                                        
+                                @foreach($orders as $order)
+                                <div class="col-md-12 col-md-12">
+                                    <div class="col-md-1 col-sm-2" style="font-weight:400">
+                                        <p>{{$order['orderId']}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2" style="font-weight:400">
+                                        <p>{{date('j-M-Y', strtotime($order['date']))}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2" style="font-weight:400">
+                                        <p>{{$order['status']}}</p>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2" style="font-weight:400">
+                                        <p>{{$order['orderType']}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-sm-2" style="font-weight:400">
+                                        <p>
+                                            @foreach( $order['items'] as $item)
+                                                {{ $item.'  ' }}
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 col-sm-2" style="font-weight:400">
+                                        <p>{{$order['amount']}}</p>
+                                    </div>
+                                </div>
                                 @endforeach
-                            </p>
-                        </div>
-                        <div class="col-md-1 col-sm-2" style="font-weight:400">
-                            <p>{{$order['amount']}}</p>
-                        </div>
+                            @endif
+                            
+                        </div>        
                     </div>
-                    @endforeach
-                </div>        
+                </div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </section>
