@@ -27,7 +27,7 @@
                        <li><a href="{{ route('register') }}">Register</a></li>
                        <li><a href="{{ route('contact-us') }}">Contact-Us</a></li>
                        @else
-                       <li><a href="{{ route('dashboard') }}">My Account</a></li>
+                       <li><a href="{{ route('profile') }}">My Account</a></li>
                        <li ><a href="{{ route('orders') }}">Orders</a></li>
                        <li><a href="{{ route('subscriptionType') }}">Subscription</a></li>
                        <li>

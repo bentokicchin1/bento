@@ -866,7 +866,7 @@ a.icon {
 }
 .ma-nav li a {
   display: block;
-  padding: 1.6rem 2rem;
+  padding: 1.4rem 0.6rem;
   box-sizing: border-box;
   background: #fff;
   border: solid 2px transparent;
@@ -1298,6 +1298,7 @@ footer {
 
   .content{
     margin-bottom: 50px;
+    min-height: 450px;
   }
 
   .big-message{
@@ -1313,12 +1314,31 @@ footer {
     font-weight: 600;
   }
 
+  .sub-heading{
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .order-items{
+    min-height: 45px;
+  }
+
   .block-content{
     margin-bottom: 15px;
   }
 
   .alert>p, .alert>ul{
     padding-left: 0px;
+  }
+
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    background-color:black;
+    border-color: black;
+  }
+  .pagination>li>a, .pagination>li>span{
+    color: black;
   }
 
 /* Responsive Mobile styles

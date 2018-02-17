@@ -5,12 +5,12 @@
     <div class="container">
         <div class="row content">
 
-            <div class="col-md-3 col-sm-12 ">                        
+            <div class="col-md-2 col-sm-12 ">                        
                 <ul class="ma-nav ">
-                    <li id="account" class="md-12 sm-2 pf-padding-0 pf-margin-0">
-                        <a href="{{ route('dashboard')}}">
-                            <strong>Account Dashboard</strong>
-                            <span>Get An Overview Of Your Account</span>
+                    <li id="profile" class="md-12 sm-2 ">
+                        <a href="{{route('profile')}}">
+                            <strong>My Profile</strong>
+                            <span>Name, Phone, Password</span>
                         </a>
                     </li>
                     <li id="myorders" class="md-12 sm-2 ">
@@ -19,12 +19,7 @@
                             <span>Check Past Order Items</span>
                         </a>
                     </li>
-                    <li id="profile" class="md-12 sm-2 ">
-                        <a href="{{route('profile')}}">
-                            <strong>My Profile</strong>
-                            <span>Your Name, Phone No., Password</span>
-                        </a>
-                    </li>
+                    
                     <li id="address" class="md-12 sm-2 ">
                         <a href="{{route('address')}}">
                             <strong>My Address Book</strong>
@@ -34,62 +29,48 @@
                 </ul>                        
             </div>
 
-            <div class="col-md-9 col-sm-12">
+            <div class="col-md-10 col-sm-12">
                 <div class="container-fluid">
                     <div class="row">                       
-                        {{--  <div class="order-header col-md-12 col-md-12">
-                            <h1 class="wow">Your Orders</h1>
-                            
-                        </div>  --}}
                         <div class="order-content col-md-12 col-md-12">
-                            <div class="heading">Your Total Order Count is <b>{{count($orders)}}</b></div>
+
+                            <div class="heading">Your Total Order Count is <b>{{ $orders->total() }}</b></div>
                             @if (empty($orders))
                                 <div class="big-message">You have not placed any order till now.</div>
                             @else
-                            <div class="col-md-12 col-md-12">
-                                    <div class="col-md-1 col-sm-2">
-                                        <h4>ID</h4>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <h4>Date</h4>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <h4>Status</h4>
-                                    </div>
-                                    <div class="col-md-2 col-sm-2">
-                                        <h4>Type</h4>
-                                    </div>
-                                    <div class="col-md-4 col-sm-2">
-                                        <h4>Items</h4>
-                                    </div>
-                                    <div class="col-md-1 col-sm-2">
-                                        <h4>Amount</h4>
-                                    </div>
+                                <div class="col-md-12 col-md-12 sub-heading">
+                                    <div class="col-md-1 col-sm-2">ID</div>
+                                    <div class="col-md-2 col-sm-2">Date</div>
+                                    <div class="col-md-2 col-sm-2">Status</div>
+                                    <div class="col-md-2 col-sm-2">Type</div>
+                                    <div class="col-md-4 col-sm-2">Items</div>
+                                    <div class="col-md-1 col-sm-2">Amount</div>
                                 </div>
-                                        
+                                {{--  @inject('orderType','App\Model\OrderType')          --}}
                                 @foreach($orders as $order)
-                                <div class="col-md-12 col-md-12">
+                                {{--  {{dd($order)}}  --}}
+                                <div class="col-md-12 col-md-12 order-items">
                                     <div class="col-md-1 col-sm-2" style="font-weight:400">
-                                        <p>{{$order['orderId']}}</p>
+                                        <span>{{$order->id}}</span>
                                     </div>
                                     <div class="col-md-2 col-sm-2" style="font-weight:400">
-                                        <p>{{date('j-M-Y', strtotime($order['date']))}}</p>
+                                        <span>{{date('j-M-Y', strtotime($order->created_at))}}</span>
                                     </div>
                                     <div class="col-md-2 col-sm-2" style="font-weight:400">
-                                        <p>{{$order['status']}}</p>
+                                        <span>{{ ucfirst( $order->status ) }}</span>
                                     </div>
                                     <div class="col-md-2 col-sm-2" style="font-weight:400">
-                                        <p>{{$order['orderType']}}</p>
+                                        <span>{{ ucfirst( App\Model\OrderType::select('name')->where('id', $order->order_type_id)->pluck('name')->first() ) }}</span>
                                     </div>
                                     <div class="col-md-4 col-sm-2" style="font-weight:400">
-                                        <p>
-                                            @foreach( $order['items'] as $item)
-                                                {{ $item.'  ' }}
+                                        <span>
+                                            @foreach( $order['orderItems'] as $item)
+                                                {{ $item->name.' x '.$item->quantity. ' ' }}
                                             @endforeach
-                                        </p>
+                                        </span>
                                     </div>
                                     <div class="col-md-1 col-sm-2" style="font-weight:400">
-                                        <p>{{$order['amount']}}</p>
+                                        <span>{{$order->total_amount}}</span>
                                     </div>
                                 </div>
                                 @endforeach
@@ -97,6 +78,9 @@
                             
                         </div>        
                     </div>
+                </div>
+                <div class="text-center">
+                {{ $orders->links() }}
                 </div>
             </div>
         </div>

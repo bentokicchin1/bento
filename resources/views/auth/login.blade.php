@@ -16,10 +16,9 @@
                         {{ Form::open(['route' => 'login', 'method' => 'post']) }} 
                         {{ Form::text('email',null, ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
                         {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
-                        <div class="web-submit">
-                            {{ Form::submit('Get Me In', ['class' => 'form-control submit']) }}
-                            {{ link_to_route('password.request', 'Forgot Your Password?',[],  ['class' => 'btn btn-link']) }}
-                        </div>
+                        {{ Form::submit('Get Me In', ['class' => 'form-control web-submit']) }}
+                        {{ link_to_route('password.request', 'Forgot Your Password?',[],  ['class' => 'btn btn-link']) }}|
+                        {{ link_to_route('register', 'Register as New user',[],  ['class' => 'btn btn-link']) }}
                         {{ Form::close() }}
                     </div>
                 </div>

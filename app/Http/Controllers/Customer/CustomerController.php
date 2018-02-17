@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Order;
 
 class CustomerController extends Controller
 {
@@ -50,8 +51,7 @@ class CustomerController extends Controller
 
     public function orders()
     {
-        $userId = Auth::id();
-        $orders = $this->customerService->fetchOrderList($userId);
+        $orders = Order::where('user_id', Auth::id())->with('orderItems')->paginate(10);
         return view('customer.orders', ['orders' => $orders]);
     }
 
@@ -119,7 +119,7 @@ class CustomerController extends Controller
         $response = $this->customerService->changePassword($postData);
         /* Return response */
         if ($response == 'success') {
-            return redirect()->back()->with('status', 'Information updated successfully!');
+            return redirect()->back()->with('status', 'Password changed successfully!');
         } else {
             return redirect()->back()->withErrors($response);
         }

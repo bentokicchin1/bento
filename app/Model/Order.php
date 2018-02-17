@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Model;
-
-use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -15,21 +13,12 @@ class Order extends Model
      */
     protected $fillable = ['user_id', 'order_type_id', 'quantity', 'total_amount', 'shipping_address', 'status'];
 
-
     /**
-     * Fetch user orders list from db
-     * 
-     * @return array
+     * Get the order items associated with the order.
      */
-    public function getOrderListFromDb($userId)
+    public function orderItems()
     {
-        $orders = DB::table('orders')
-            ->leftJoin('order_items', 'orders.id', '=', 'order_items.order_id')
-            ->leftJoin('order_types', 'orders.order_type_id', '=', 'order_types.id')
-            ->select('orders.id', 'orders.total_amount', 'orders.status', 'orders.created_at', 'order_items.name', 'order_items.quantity', 'order_types.name as orderType')
-            ->where('orders.user_id', '=', $userId)
-            ->get()->toArray();
-        return $orders;
+        return $this->hasMany('App\Model\OrderItem');
     }
 
 }

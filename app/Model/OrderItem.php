@@ -12,4 +12,12 @@ class OrderItem extends Model
      * @var array
      */
     protected $fillable = ['order_id', 'name', 'quantity', 'base_price', 'total_amount'];
+
+    /**
+     * Get the order record associated with the  order item.
+     */
+    public function order()
+    {
+        return $this->belongsTo('App\Model\Order');
+    }
 }
