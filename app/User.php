@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get verified user id associated user.
+     */
+    public function verifyUser(){
+        return $this->hasOne('App\Model\VerifyUser');
+    }
 }

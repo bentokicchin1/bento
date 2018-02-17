@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row content">
 
-            <div class="col-md-2 col-sm-12 ">                        
+            <div class="col-md-3 col-sm-12 ">                        
                 <ul class="ma-nav ">
                     <li id="profile" class="md-12 sm-2 ">
                         <a href="{{route('profile')}}">
@@ -29,7 +29,7 @@
                 </ul>                        
             </div>
 
-            <div class="col-md-10 col-sm-12">
+            <div class="col-md-9 col-sm-12">
                 <div class="container-fluid">
                     <div class="row">                       
                         <div class="order-content col-md-12 col-md-12">

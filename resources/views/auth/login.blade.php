@@ -16,6 +16,13 @@
                         {{ Form::open(['route' => 'login', 'method' => 'post']) }} 
                         {{ Form::text('email',null, ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
                         {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                        <div class="checkbox">
+                            <label style="font-size: 1em">
+                                {{ Form::checkbox('remember', true, true) }}
+                                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                <span>Remember Me</span>
+                            </label>
+                        </div>
                         {{ Form::submit('Get Me In', ['class' => 'form-control web-submit']) }}
                         {{ link_to_route('password.request', 'Forgot Your Password?',[],  ['class' => 'btn btn-link']) }}|
                         {{ link_to_route('register', 'Register as New user',[],  ['class' => 'btn btn-link']) }}
