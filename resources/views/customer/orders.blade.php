@@ -34,8 +34,8 @@
                     <div class="row">                       
                         <div class="order-content col-md-12 col-md-12">
 
-                            <div class="heading">Your Total Order Count is <b>{{ $orders->total() }}</b></div>
-                            @if (empty($orders))
+                            @if ($orders->total() != 0)<div class="heading">Your Total Order Count is <b>{{ $orders->total() }}</b></div>@endif
+                            @if ($orders->total() == 0)
                                 <div class="big-message">You have not placed any order till now.</div>
                             @else
                                 <div class="col-md-12 col-md-12 sub-heading">
