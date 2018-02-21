@@ -14,8 +14,8 @@
                 <div class="web-form">
                     <div class="form-group">
                         {{ Form::open(['route' => 'login', 'method' => 'post']) }} 
-                        {{ Form::text('email',null, ['class' => 'form-control', 'placeholder' => 'Email Address']) }}
-                        {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                        {{ Form::number('mobile_number',old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number', 'required']) }}
+                        {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required']) }}
                         <div class="checkbox">
                             <label style="font-size: 1em">
                                 {{ Form::checkbox('remember', true, true) }}

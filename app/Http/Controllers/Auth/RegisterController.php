@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Model\VerifyUser;
-use App\Mail\VerifyMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use OTPHP\TOTP;
+/* Used for Email Verification */
+// use App\Model\VerifyUser;
+// use App\Mail\VerifyMail;
+// use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -39,7 +41,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
     }
 
     /**
@@ -53,7 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'mobile_number' => 'required|numeric|digits:10',
+            'mobile_number' => 'required|numeric|digits:10|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -73,33 +75,42 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $verifyUser = VerifyUser::create([
-            'user_id' => $user->id,
-            'token' => sha1(time()),
-        ]);
+        /* Email Verification code */
+        // $verifyUser = VerifyUser::create([
+        //     'user_id' => $user->id,
+        //     'token' => sha1(time()),
+        // ]);
 
-        Mail::to($user->email)->send(new VerifyMail($user));
+        // Mail::to($user->email)->send(new VerifyMail($user));
 
         return $user;
     }
 
+    /* Email Verification code */
     /* Validate email id */
-    public function verifyUser($token)
+    /* public function verifyUser($token)
     {
         $verifyUser = VerifyUser::where('token', $token)->first();
-        if(isset($verifyUser) ){
+        if (isset($verifyUser)) {
             $user = $verifyUser->user;
-            if(!$user->verified) {
+            if (!$user->verified) {
                 $verifyUser->user->verified = 1;
                 $verifyUser->user->save();
                 $status = "Your e-mail is verified. You can now login.";
-            }else{
+            } else {
                 $status = "Your e-mail is already verified. You can now login.";
             }
-        }else{
+        } else {
             return redirect('/login')->withErrors("Sorry your email cannot be identified.");
         }
- 
+
         return redirect('/login')->with('status', $status);
+    } */
+
+
+    public function showOtpForm(){
+        $otp = TOTP::create();
+        $otpValue = $otp->now();
+        return view('auth.verifyOtp',['otp' => $otpValue]);
     }
 }
