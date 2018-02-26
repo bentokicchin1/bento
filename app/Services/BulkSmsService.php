@@ -2,8 +2,8 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
-
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class BulkSmsService extends App
 {
@@ -20,7 +20,7 @@ class BulkSmsService extends App
         $this->username = config('constants.BULK_SMS_USERNAME');
         $this->password = config('constants.BULK_SMS_PASSWORD');
         $this->url = config('constants.BULK_SMS_URL');
-        $this->sender = 'BENTO';
+        $this->sender = config('constants.BULK_SMS_SENDER');
     }
 
     public function sendOtp($mobileNumber, $otp)
@@ -31,13 +31,9 @@ class BulkSmsService extends App
         //Don't change below code use as it is
         $bulkSmsCurlUrl = $this->url . "?user=" . urlencode($this->username) . "&password=" . urlencode($this->password) . "&mobile=" . urlencode($this->mobileNumber) . "&message=" . urlencode($this->message) . "&sender=" . urlencode($this->sender) . "&type=" . urlencode('3');
         
-        $ch = curl_init($bulkSmsCurlUrl);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $curl_scraped_page = curl_exec($ch);
-
-        curl_close($ch);
+        $client = new Client(); //GuzzleHttp\Client
+        $result = $client->get($bulkSmsCurlUrl);
+        return $result->getStatusCode();    // 200
     }
 
 }

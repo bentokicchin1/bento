@@ -15,6 +15,7 @@ return [
     'address' =>  env('DEFAULT_LOCATION', ''),
     'BULK_SMS_USERNAME' => env('BULK_SMS_USERNAME'),
     'BULK_SMS_PASSWORD' => env('BULK_SMS_PASSWORD'),
+    'BULK_SMS_SENDER' => env('BULK_SMS_SENDER'),
     'BULK_SMS_URL' => env('BULK_SMS_URL'),
     'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
 ];
