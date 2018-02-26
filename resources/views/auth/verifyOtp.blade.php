@@ -9,11 +9,11 @@
                 @include('layouts.success')
                 @include('layouts.errors')
                 
-                <h1>Verify Your OTP - {{ $otp }}</h1>
+                <h1>Verify Your OTP</h1>
                 
                 <div class="web-form">
                     <div class="form-group">
-                        {{ Form::open(['route' => 'login', 'method' => 'post']) }} 
+                        {{ Form::open(['route' => 'verifyOtp', 'method' => 'post']) }} 
                         {{ Form::number('otp',old('otp'), ['class' => 'form-control', 'placeholder' => 'Enter OTP', 'required']) }}
                         {{ Form::submit('Submit', ['class' => 'form-control web-submit']) }}
                         {{ Form::close() }}

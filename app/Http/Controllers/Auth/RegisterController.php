@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\Otp;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use OTPHP\TOTP;
+use App\Services\BulkSmsService;
+
 /* Used for Email Verification */
 // use App\Model\VerifyUser;
 // use App\Mail\VerifyMail;
@@ -33,15 +38,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    private $smsService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BulkSmsService $smsServ)
     {
-        // $this->middleware('guest');
+        $this->smsService = $smsServ;
+        $this->middleware('guest');
     }
 
     /**
@@ -75,6 +82,16 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
+        /* Otp verification cade */
+        $totpObject = TOTP::create();
+        $otpValue = $totpObject->now();
+        $verifyUser = Otp::create([
+            'user_id' => $user->id,
+            'otp' => $otpValue,
+        ]);
+
+        $this->smsService->sendOtp($data['mobile_number'], $otpValue);
+
         /* Email Verification code */
         // $verifyUser = VerifyUser::create([
         //     'user_id' => $user->id,
@@ -86,31 +103,30 @@ class RegisterController extends Controller
         return $user;
     }
 
-    /* Email Verification code */
-    /* Validate email id */
-    /* public function verifyUser($token)
+    public function showOtpForm()
     {
-        $verifyUser = VerifyUser::where('token', $token)->first();
-        if (isset($verifyUser)) {
-            $user = $verifyUser->user;
-            if (!$user->verified) {
-                $verifyUser->user->verified = 1;
-                $verifyUser->user->save();
-                $status = "Your e-mail is verified. You can now login.";
+        return view('auth.verifyOtp');
+    }
+
+    /* Mobile Number Verification code */
+    /* Validate Mobile Number */
+    public function verifyOtp(Request $request)
+    {
+        $postOtp = $request->input('otp');
+        $verifyOtp = Otp::where('otp', $postOtp)->first();
+        if (isset($verifyOtp)) {
+            $user = $verifyOtp->user;
+            if (!$user->mobile_verified) {
+                $verifyOtp->user->mobile_verified = 1;
+                $verifyOtp->user->save();
+                $status = "Your mobile number is verified. You can now login.";
             } else {
-                $status = "Your e-mail is already verified. You can now login.";
+                $status = "Your mobile number is already verified. You can now login.";
             }
         } else {
-            return redirect('/login')->withErrors("Sorry your email cannot be identified.");
+            return redirect('/otp')->withErrors("Invalid OTP!!!");
         }
 
         return redirect('/login')->with('status', $status);
-    } */
-
-
-    public function showOtpForm(){
-        $otp = TOTP::create();
-        $otpValue = $otp->now();
-        return view('auth.verifyOtp',['otp' => $otpValue]);
     }
 }
