@@ -40,7 +40,7 @@
                                 {{ Form::open(['route' => 'update-info', 'method' => 'post']) }} 
                                 {{ Form::text('name',$userInfo->name , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                                 {{ Form::number('mobile_number',$userInfo->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number (required)']) }}
-                                {{ Form::email('email',$userInfo->email, ['class' => 'form-control', 'placeholder' => 'Email Address (required)', 'readonly']) }}            
+                                {{ Form::email('email',$userInfo->email, ['class' => 'form-control', 'placeholder' => 'Email Address (required)']) }}            
                                 {{ Form::submit('Save Info', ['class' => 'form-control web-submit']) }}
                                 {{ Form::close() }}
                             </div>
