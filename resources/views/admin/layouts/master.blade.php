@@ -8,7 +8,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Site title
 ================================================== -->
-<title>Bento - Dashboard</title>
+<title>Bento - Admin Panel</title>
 <!-- Bootstrap 3.3.7 -->
 {!! Html::style('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 <!-- Font Awesome -->
