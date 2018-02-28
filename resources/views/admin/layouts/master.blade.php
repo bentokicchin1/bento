@@ -9,6 +9,8 @@
 <!-- Site title
 ================================================== -->
 <title>Bento - Admin Panel</title>
+<!-- Admin custom style css -->
+{!! Html::style('admin/style.css') !!}
 <!-- Bootstrap 3.3.7 -->
 {!! Html::style('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 <!-- Font Awesome -->
@@ -38,7 +40,11 @@
     <div class="wrapper">
     @include('admin.layouts.header')
     @include('admin.layouts.sidebar')
+    <div class="content-wrapper">
+    @include('layouts.success')
+    @include('layouts.errors')
     @yield('content')
+    </div>
     @include('admin.layouts.footer')
     </div>
     <!-- Javascript 

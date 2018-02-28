@@ -93,7 +93,14 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 
 });
 
-
+/* Admin panel routes */
 Route::group(['prefix' => 'admin'], function(){
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
+
+    Route::get('order-type/add', 'Admin\Order\OrderTypeController@showForm')->name('admin-order-type-add');
+    Route::post('order-type/add', 'Admin\Order\OrderTypeController@store')->name('admin-order-type-add');
+    Route::get('order-type/edit/{id}', 'Admin\Order\OrderTypeController@showForm')->where('id', '[0-9]+')->name('admin-order-type-edit');
+    Route::get('order-type/delete/{id}', 'Admin\Order\OrderTypeController@delete')->where('id', '[0-9]+')->name('admin-order-type-delete');
+    Route::get('order-type/list', 'Admin\Order\OrderTypeController@index')->name('admin-order-type-list');
+    
 });
