@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use OTPHP\TOTP;
 use App\Services\BulkSmsService;
 
 /* Used for Email Verification */
@@ -83,14 +82,12 @@ class RegisterController extends Controller
         ]);
 
         /* Otp verification cade */
-        $totpObject = TOTP::create();
-        $otpValue = $totpObject->now();
+        $sixDigitOtp = mt_rand(100000, 999999);
         $verifyUser = Otp::create([
             'user_id' => $user->id,
-            'otp' => $otpValue,
+            'otp' => $sixDigitOtp,
         ]);
-
-        $this->smsService->sendOtp($data['mobile_number'], $otpValue);
+        $this->smsService->sendOtp($data['mobile_number'], $sixDigitOtp);
 
         /* Email Verification code */
         // $verifyUser = VerifyUser::create([

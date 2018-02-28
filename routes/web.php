@@ -92,3 +92,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
     Route::post('profile/change-password', 'Customer\CustomerController@changePassword')->name('change-password');
 
 });
+
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
+});
