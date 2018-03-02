@@ -60,7 +60,7 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required|string',
+            $this->username() => 'required|numeric|digits:10',
             'password' => 'required|string',
         ]);
     }
@@ -114,7 +114,11 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
-        //
+        if (!$user->mobile_verified) {
+            auth()->logout();
+            return redirect()->route('showOtpForm')->with('warning', 'You need to verify your mobile number. We have sent you an OTP code, please check your inbox.');
+        }
+        return redirect()->intended($this->redirectPath());
     }
 
     /**
@@ -139,7 +143,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'email';
+        return 'mobile_number';
     }
 
     /**

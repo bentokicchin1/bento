@@ -57,6 +57,7 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        //
+        $this->guard()->logout();
+        return redirect()->route('showOtpForm')->with('status', 'You have registered successfully. Please verify your mobile number, we have just sent you an OTP on your registered mobile number.');
     }
 }

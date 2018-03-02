@@ -8,19 +8,19 @@
 
                 @include('layouts.success')
                 @include('layouts.errors')
-                
-                <h1>Verify Your Mobile Number</h1>
-                
+
+                <h1>Feedback</h1>
+
                 <div class="web-form">
                     <div class="form-group">
-                        {{ Form::open(['route' => 'verifyOtp', 'method' => 'post']) }} 
-                        {{ Form::number('otp',old('otp'), ['class' => 'form-control', 'placeholder' => 'Enter OTP', 'required']) }}
+                        {{ Form::open(['route' => 'store-feedback', 'method' => 'post']) }} 
+                        <textarea name="value" class="form-control" placeholder="Say something what do you like in us?" rows="6" required></textarea>
                         {{ Form::submit('Submit', ['class' => 'form-control web-submit']) }}
                         {{ Form::close() }}
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 </section>

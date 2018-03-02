@@ -33,6 +33,15 @@ Route::get('contact-us', 'Contact\ContactController@showContactUsForm')->name('c
 Route::post('contact-us', 'Contact\ContactController@conatctUs');
 
 /**
+ * Feedback route
+ *
+ */
+/*route to show the feedback form*/
+Route::get('feedback', 'Customer\FeedbackController@showFeedbackForm')->name('feedback')->middleware('auth');
+/*route to process the feedback form*/
+Route::post('feedback', 'Customer\FeedbackController@store')->name('store-feedback')->middleware('auth');
+
+/**
  * Order route
  *
  */

@@ -8,6 +8,7 @@
 
 namespace App\Services\Customer;
 
+use App\Model\Feedback;
 use App\Model\Order;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,19 @@ class CustomerService
             return 'success';
         } catch (Exception $e) {
             DB::rollBack();
+            return $e->getRawMessage();
+        }
+    }
+
+    public function storeFeedback($postData)
+    {
+        try {
+            $feedbackObj = new Feedback;
+            $feedbackObj->user_id = Auth::id();
+            $feedbackObj->value = $postData->value;
+            $feedbackObj->save();
+            return 'success';
+        } catch (Exception $e) {
             return $e->getRawMessage();
         }
     }

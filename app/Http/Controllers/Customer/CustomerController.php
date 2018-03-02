@@ -20,9 +20,9 @@ class CustomerController extends Controller
      *
      * @return void
      */
-    public function __construct(CustomerService $customerService)
+    public function __construct(CustomerService $customerServ)
     {
-        $this->customerService = $customerService;
+        $this->customerService = $customerServ;
     }
 
     /**

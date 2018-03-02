@@ -74,6 +74,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        /* Generate OTP */
+        $sixDigitOtp = mt_rand(100000, 999999);
+        $smsServiceResponse = $this->smsService->sendOtp($data['mobile_number'], $sixDigitOtp);
+        if($smsServiceResponse != 200){
+            return redirect()->route('register')->withErrors('Something went wrong, Please try again later.');
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -81,13 +88,11 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        /* Otp verification cade */
-        $sixDigitOtp = mt_rand(100000, 999999);
+        /* Otp insert cade */
         $verifyUser = Otp::create([
             'user_id' => $user->id,
             'otp' => $sixDigitOtp,
-        ]);
-        $this->smsService->sendOtp($data['mobile_number'], $sixDigitOtp);
+        ]);        
 
         /* Email Verification code */
         // $verifyUser = VerifyUser::create([
