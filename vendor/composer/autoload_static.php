@@ -69,7 +69,6 @@ class ComposerStaticInitbd3b31611530db537e3dfe86f5d1ac37
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
-            'Proengsoft\\JsValidation\\' => 24,
             'PhpParser\\' => 10,
         ),
         'M' => 
@@ -225,10 +224,6 @@ class ComposerStaticInitbd3b31611530db537e3dfe86f5d1ac37
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Proengsoft\\JsValidation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src',
         ),
         'PhpParser\\' => 
         array (
@@ -2727,23 +2722,6 @@ class ComposerStaticInitbd3b31611530db537e3dfe86f5d1ac37
         'PhpParser\\Serializer\\XML' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Serializer/XML.php',
         'PhpParser\\Unserializer' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
         'PhpParser\\Unserializer\\XML' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
-        'Proengsoft\\JsValidation\\Exceptions\\PropertyNotFoundException' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Exceptions/PropertyNotFoundException.php',
-        'Proengsoft\\JsValidation\\Facades\\JsValidatorFacade' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Facades/JsValidatorFacade.php',
-        'Proengsoft\\JsValidation\\Javascript\\JavascriptRulesTrait' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptRulesTrait.php',
-        'Proengsoft\\JsValidation\\Javascript\\JavascriptValidator' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Javascript/JavascriptValidator.php',
-        'Proengsoft\\JsValidation\\Javascript\\MessageParser' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Javascript/MessageParser.php',
-        'Proengsoft\\JsValidation\\Javascript\\RuleParser' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Javascript/RuleParser.php',
-        'Proengsoft\\JsValidation\\Javascript\\ValidatorHandler' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Javascript/ValidatorHandler.php',
-        'Proengsoft\\JsValidation\\JsValidationServiceProvider' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/JsValidationServiceProvider.php',
-        'Proengsoft\\JsValidation\\JsValidatorFactory' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/JsValidatorFactory.php',
-        'Proengsoft\\JsValidation\\RemoteValidationMiddleware' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/RemoteValidationMiddleware.php',
-        'Proengsoft\\JsValidation\\Remote\\Resolver' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Remote/Resolver.php',
-        'Proengsoft\\JsValidation\\Remote\\Validator' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Remote/Validator.php',
-        'Proengsoft\\JsValidation\\Support\\AccessProtectedTrait' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Support/AccessProtectedTrait.php',
-        'Proengsoft\\JsValidation\\Support\\DelegatedValidator' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Support/DelegatedValidator.php',
-        'Proengsoft\\JsValidation\\Support\\RuleListTrait' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Support/RuleListTrait.php',
-        'Proengsoft\\JsValidation\\Support\\UseDelegatedValidatorTrait' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Support/UseDelegatedValidatorTrait.php',
-        'Proengsoft\\JsValidation\\Support\\ValidationRuleParserProxy' => __DIR__ . '/..' . '/proengsoft/laravel-jsvalidation/src/Support/ValidationRuleParserProxy.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
         'Prophecy\\Argument\\Token\\AnyValueToken' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/Token/AnyValueToken.php',
@@ -3545,6 +3523,7 @@ class ComposerStaticInitbd3b31611530db537e3dfe86f5d1ac37
         'Symfony\\Component\\Routing\\Loader\\Configurator\\Traits\\RouteTrait' => __DIR__ . '/..' . '/symfony/routing/Loader/Configurator/Traits/RouteTrait.php',
         'Symfony\\Component\\Routing\\Loader\\DependencyInjection\\ServiceRouterLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/DependencyInjection/ServiceRouterLoader.php',
         'Symfony\\Component\\Routing\\Loader\\DirectoryLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/DirectoryLoader.php',
+        'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectRouteLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectRouteLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
