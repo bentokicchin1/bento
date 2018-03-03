@@ -38,6 +38,17 @@
                   <li><a href="{{ route('admin-order-type-add') }}"><i class="fa fa-circle-o"></i>Add</a></li>
                 </ul>
               </li>
+              <li class="active treeview">
+                  <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Dish_Master</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                  <li class="active"><a href="{{ route('admin-dish-type-list') }}"><i class="fa fa-circle-o"></i> Dish Type</a></li>
+                  </ul>
+                </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>

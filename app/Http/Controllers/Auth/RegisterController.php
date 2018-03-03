@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $verifyUser = Otp::create([
             'user_id' => $user->id,
             'otp' => $sixDigitOtp,
-        ]);        
+        ]);
 
         /* Email Verification code */
         // $verifyUser = VerifyUser::create([

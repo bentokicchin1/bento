@@ -23,6 +23,7 @@ class CreateDishesTable extends Migration
             $table->string('code');
             $table->decimal('price',8,2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

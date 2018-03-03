@@ -30,7 +30,7 @@ class BulkSmsService extends App
 
         //Don't change below code use as it is
         $bulkSmsCurlUrl = $this->url . "?user=" . urlencode($this->username) . "&password=" . urlencode($this->password) . "&mobile=" . urlencode($this->mobileNumber) . "&message=" . urlencode($this->message) . "&sender=" . urlencode($this->sender) . "&type=" . urlencode('3');
-        
+
         $client = new Client(); //GuzzleHttp\Client
         $result = $client->get($bulkSmsCurlUrl);
         return $result->getStatusCode();    // 200
