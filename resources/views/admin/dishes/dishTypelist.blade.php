@@ -23,7 +23,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="dishTypeTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>ID</th>
@@ -53,5 +53,20 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    <!-- DataTables -->
+    {!! Html::script('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
+    {!! Html::script('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
+    <script>
+      $(function () {
+        $('#dishTypeTable').DataTable({
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : false
+        });
+      });
+    </script>
 
 @endsection

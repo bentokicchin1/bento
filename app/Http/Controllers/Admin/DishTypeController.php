@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Dish;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\DishType;
 use DB;
 use Illuminate\Http\Request;
 
-class DishController extends Controller
+class DishTypeController extends Controller
 {
 
     public function showForm($id = '', Request $request)
@@ -16,13 +16,13 @@ class DishController extends Controller
         if (!empty($id)) {
             $dishTypesData = DishType::all()->where('id', $id)->first();
         }
-        return view('admin.dishType.add', ['dishTypesData' => $dishTypesData]);
+        return view('admin.dishes.dishTypeAdd', ['dishTypesData' => $dishTypesData]);
     }
 
     public function index()
     {
         $dishTypes = DishType::all();
-        return view('admin.dishType.list', ['dishType' => $dishTypes]);
+        return view('admin.dishes.dishTypelist', ['dishType' => $dishTypes]);
     }
 
     public function store(Request $request)

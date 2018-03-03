@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dish extends Model
 {
-    //
+    public function dishType()
+    {
+        return $this->belongsTo('App\Model\DishType');
+    }
 
     public function getDishListfromDb($orderTypeId, $day)
     {
@@ -30,6 +33,10 @@ class Dish extends Model
                 ->get()->toArray();
         }
         return $dishes;
+    }
+
+    public function abc(){
+       return $this->belongsTo('App\dishType');
     }
 
     /**
