@@ -18,6 +18,8 @@ class DishController extends Controller
         if (!empty($id)) {
             $dishTypesData = Dish::all()->where('id', $id)->first();
         }
+        // echo "<pre/>";print_r($dishData);
+        // exit;
         return view('admin.dishes.dishAdd', ['dishTypesData' => $dishTypesData,'dishData'=>$dishData]);
     }
 
@@ -32,8 +34,8 @@ class DishController extends Controller
         $validatedData = $request->validate([
             'dishTypeId' => 'required',
             'name' => 'required',
-            'price' => 'required'
-            // 'dishImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'price' => 'required',
+            'dishImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         DB::beginTransaction();
@@ -44,7 +46,6 @@ class DishController extends Controller
                 $name = time().'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path('/uploads');
                 $image->move($destinationPath, $name);
-                // $this->save();
               }
 
             if (!empty($id)) {
@@ -57,7 +58,7 @@ class DishController extends Controller
             $dishTypeObj->name = $request->input('name');
             $dishTypeObj->price = $request->input('price');
             $dishTypeObj->description = $request->input('description');
-            $dishTypeObj->image = $destinationPath."/".$name;
+            $dishTypeObj->image = url('/')."/uploads/".$name;
             $dishTypeObj->save();
 
             DB::commit();

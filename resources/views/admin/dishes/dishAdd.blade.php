@@ -33,7 +33,11 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Dish Type :</label>
                     <div class="col-sm-6">
-                            {{ Form::select('dishTypeId',$dishData,old('dish_type_id'),['id'=>'dishTypeId','class'=>'form-control','placeholder'=>'Dish Type (required)']) }}
+                        @if(!empty($dishTypesData))
+                            {{ Form::select('dishTypeId',$dishData,$dishTypesData['dish_type_id'],['id'=>'dishTypeId','class'=>'form-control','placeholder'=>'Dish Type (required)']) }}
+                        @else
+                            {{ Form::select('dishTypeId',$dishData,null,['id'=>'dishTypeId','class'=>'form-control','placeholder'=>'Dish Type (required)']) }}
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
