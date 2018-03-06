@@ -18,7 +18,9 @@ class CreateFeedbacksTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('value');
+            $table->boolean('is_verified')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,6 +21,7 @@ class CreateWeeklyDishListsTable extends Migration
             $table->unsignedInteger('dish_id');
             $table->foreign('dish_id')->references('id')->on('dishes');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

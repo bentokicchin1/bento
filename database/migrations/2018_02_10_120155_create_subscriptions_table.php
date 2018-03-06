@@ -24,6 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->text('subscription_items');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

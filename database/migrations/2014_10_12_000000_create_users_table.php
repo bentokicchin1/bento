@@ -18,10 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mobile_number');
+            $table->string('user_type')->default('customer');
             $table->string('password');
             $table->boolean('mobile_verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

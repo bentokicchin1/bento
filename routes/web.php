@@ -111,5 +111,19 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('order-type/edit/{id}', 'Admin\Order\OrderTypeController@showForm')->where('id', '[0-9]+')->name('admin-order-type-edit');
     Route::get('order-type/delete/{id}', 'Admin\Order\OrderTypeController@delete')->where('id', '[0-9]+')->name('admin-order-type-delete');
     Route::get('order-type/list', 'Admin\Order\OrderTypeController@index')->name('admin-order-type-list');
-    
+
+    Route::get('dish-type/add', 'Admin\DishTypeController@showForm')->name('admin-dish-type-add');
+    Route::post('dish-type/add', 'Admin\DishTypeController@store')->name('admin-dish-type-add');
+    Route::get('dish-type/edit/{id}', 'Admin\DishTypeController@showForm')->where('id', '[0-9]+')->name('admin-dish-type-edit');
+    Route::get('dish-type/delete/{id}', 'Admin\DishTypeController@delete')->where('id', '[0-9]+')->name('admin-dish-type-delete');
+    Route::get('dish-type/list', 'Admin\DishTypeController@index')->name('admin-dish-type-list');
+
+    Route::get('dish/add', 'Admin\DishController@showForm')->name('admin-dish-add');
+    Route::post('dish/add', 'Admin\DishController@store')->name('admin-dish-add');
+    Route::get('dish/edit/{id}', 'Admin\DishController@showForm')->where('id', '[0-9]+')->name('admin-dish-edit');
+    Route::get('dish/delete/{id}', 'Admin\DishController@delete')->where('id', '[0-9]+')->name('admin-dish-delete');
+    Route::get('dish/list', 'Admin\DishController@index')->name('admin-dish-list');
+
+    //Route::get('dish-type/list', 'Admin\DishType\DishTypeController@index')->name('admin-dishes-list');
+
 });
