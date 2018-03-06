@@ -124,6 +124,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('dish/delete/{id}', 'Admin\DishController@delete')->where('id', '[0-9]+')->name('admin-dish-delete');
     Route::get('dish/list', 'Admin\DishController@index')->name('admin-dish-list');
 
+    Route::get('city/add', 'Admin\DishController@showForm')->name('admin-city-add');
+    Route::post('city/add', 'Admin\DishController@store')->name('admin-city-add');
+    Route::get('city/edit/{id}', 'Admin\DishController@showForm')->where('id', '[0-9]+')->name('admin-city-edit');
+    Route::get('city/delete/{id}', 'Admin\DishController@delete')->where('id', '[0-9]+')->name('admin-city-delete');
+    Route::get('city/list', 'Admin\DishController@index')->name('admin-city-list');
+
+    Route::get('sector/add', 'Admin\DishController@showForm')->name('admin-sector-add');
+    Route::post('sector/add', 'Admin\DishController@store')->name('admin-sector-add');
+    Route::get('sector/edit/{id}', 'Admin\DishController@showForm')->where('id', '[0-9]+')->name('admin-sector-edit');
+    Route::get('sector/delete/{id}', 'Admin\DishController@delete')->where('id', '[0-9]+')->name('admin-sector-delete');
+    Route::get('sector/list', 'Admin\DishController@index')->name('admin-sector-list');
+
     //Route::get('dish-type/list', 'Admin\DishType\DishTypeController@index')->name('admin-dishes-list');
 
 });
