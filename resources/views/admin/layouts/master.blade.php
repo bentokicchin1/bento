@@ -14,7 +14,7 @@
 <!-- Bootstrap 3.3.7 -->
 {!! Html::style('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 <!-- Font Awesome -->
-{!! Html::style('admin/bower_components/font-awesome/css/font-awesome.min.css') !!}
+<!-- {!! Html::style('admin/bower_components/font-awesome/css/font-awesome.min.css') !!} -->
 <!-- Ionicons -->
 {!! Html::style('admin/bower_components/Ionicons/css/ionicons.min.css') !!}
 <!-- Theme style -->
@@ -31,7 +31,7 @@
 <!-- Daterange picker -->
 {!! Html::style('admin/bower_components/bootstrap-daterangepicker/daterangepicker.css') !!}
 <!-- Google Font -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+{!! Html::script('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') !!}
 
 <!-- jQuery 3 -->
 {!! Html::script('admin/bower_components/jquery/dist/jquery.min.js') !!}
@@ -54,6 +54,7 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
+    {!! Html::script('//use.fontawesome.com/releases/v5.0.8/js/all.js') !!}
     <!-- Morris.js charts -->
     {!! Html::script('admin/bower_components/raphael/raphael.min.js') !!}
     {!! Html::script('admin/bower_components/morris.js/morris.min.js') !!}

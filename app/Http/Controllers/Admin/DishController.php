@@ -25,7 +25,7 @@ class DishController extends Controller
 
     public function index()
     {
-        $dishTypes =  Dish::with('dishtype')->get();
+        $dishTypes =  Dish::with('dishtype')->get();  
         return view('admin.dishes.dishList', ['dishType' => $dishTypes]);
     }
 

@@ -12,28 +12,28 @@
             </div>
           </div>
           <ul class="sidebar-menu" data-widget="tree">
-              <li class="active treeview">
+              <li class="treeview">
                   <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dish Master</span>
+                    <i class="fas fa-utensils"></i> <span>Dish Management</span>
                     <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
+                      <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li class="active"><a href="{{ route('admin-dish-list') }}"><i class="fa fa-circle-o"></i> Dish</a></li>
-                    <li class="active"><a href="{{ route('admin-dish-type-list') }}"><i class="fa fa-circle-o"></i> Dish Type</a></li>
+                    <li><a href="{{ route('admin-dish-list') }}"><i class="fas fa-glass-martini"></i> Dish</a></li>
+                    <li><a href="{{ route('admin-dish-type-list') }}"><i class="fas fa-utensil-fork"></i> Dish Type</a></li>
                   </ul>
               </li>
-              <li class="active treeview">
+              <li class="treeview">
                   <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Locations</span>
+                    <i class="fas fa-map-marker"></i> <span>Location Management</span>
                     <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
+                      <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li class="active"><a href="{{ route('city-list') }}"><i class="fa fa-circle-o"></i> City</a></li>
-                    <li class="active"><a href="{{ route('sector-list') }}"><i class="fa fa-circle-o"></i> Sectors</a></li>
+                    <li><a href="{{ route('admin-area-list') }}"><i class="fas fa-location-arrow"></i> Area</a></li>
+                    <li><a href="{{ route('admin-location-list') }}"><i class="fas fa-building"></i> Location</a></li>
                   </ul>
               </li>
           </ul>

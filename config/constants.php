@@ -7,7 +7,7 @@ return [
     | Application CONSTANS
     |--------------------------------------------------------------------------
     |
-    | Store all conatstnts here.    
+    | Store all conatstnts here.
     |
     */
     'email' =>  env('DEFAULT_EMAIL', ''),
@@ -18,4 +18,5 @@ return [
     'BULK_SMS_SENDER' => env('BULK_SMS_SENDER'),
     'BULK_SMS_URL' => env('BULK_SMS_URL'),
     'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
+    'DEFAULT_CITY' => 1,
 ];
