@@ -24,9 +24,9 @@ class AreaController extends Controller
     {
         $area =  Area::with('cityName')->get();
 
-        echo "<pre/>";
-        print_r($area);
-        exit;
+        // echo "<pre/>";
+        // print_r($area);
+        // exit;
         return view('admin.locations.areaList', ['area' => $area]);
     }
 
