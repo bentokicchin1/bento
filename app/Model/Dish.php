@@ -13,6 +13,11 @@ class Dish extends Model
         return $this->belongsTo('App\Model\DishType');
     }
 
+    public function weeklyMenu()
+    {
+        return $this->hasMany('App\Model\WeeklyDishList');
+    }
+
     public function getDishListfromDb($orderTypeId, $day)
     {
         if ($day == 'all') {

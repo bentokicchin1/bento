@@ -30,9 +30,12 @@
 {!! Html::style('admin/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') !!}
 <!-- Daterange picker -->
 {!! Html::style('admin/bower_components/bootstrap-daterangepicker/daterangepicker.css') !!}
+<!-- fullCalendar -->
+{!! Html::style('admin/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}
 <!-- Google Font -->
-{!! Html::script('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') !!}
-
+{!! Html::style('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') !!}
+<!-- Select2 -->
+{!! Html::style('admin/bower_components/select2/dist/css/select2.min.css') !!}
 <!-- jQuery 3 -->
 {!! Html::script('admin/bower_components/jquery/dist/jquery.min.js') !!}
 <!-- jQuery UI 1.11.4 -->
@@ -49,8 +52,6 @@
     @include('layouts.success')
     @include('layouts.errors')
     @yield('content')
-    <!-- Javascript
-    ================================================== -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
@@ -64,9 +65,13 @@
     {!! Html::script('admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') !!}
     <!-- daterangepicker -->
     {!! Html::script('admin/bower_components/moment/min/moment.min.js') !!}
-    {!! Html::script('admin/bower_components/bootstrap-daterangepicker/daterangepicker.js') !!}
+    <!-- fullCalendar -->
+    {!! Html::script('admin/bower_components/fullcalendar/dist/fullcalendar.min.js') !!}
     <!-- datepicker -->
+    {!! Html::script('admin/bower_components/bootstrap-daterangepicker/daterangepicker.js') !!}
     {!! Html::script('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') !!}
+    <!-- Select2 -->
+    {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
     <!-- jQuery Knob Chart -->
     {!! Html::script('admin/bower_components/jquery-knob/dist/jquery.knob.min.js') !!}
     <!-- AdminLTE App -->

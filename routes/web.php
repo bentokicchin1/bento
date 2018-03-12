@@ -136,6 +136,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('location/delete/{id}', 'Admin\LocationController@delete')->where('id', '[0-9]+')->name('admin-location-delete');
     Route::get('location/list', 'Admin\LocationController@index')->name('admin-location-list');
 
+
+    Route::get('menu/add', 'Admin\WeeklymenuController@showForm')->name('admin-menu-add');
+    Route::post('menu/add', 'Admin\WeeklymenuController@store')->name('admin-menu-add');
+    Route::get('menu/edit/{id}', 'Admin\WeeklymenuController@showForm')->where('id', '[0-9]+')->name('admin-menu-edit');
+    Route::get('menu/delete/{id}', 'Admin\WeeklymenuController@delete')->where('id', '[0-9]+')->name('admin-menu-delete');
+    Route::get('menu/list', 'Admin\WeeklymenuController@index')->name('admin-menu-list');
     //Route::get('dish-type/list', 'Admin\DishType\DishTypeController@index')->name('admin-dishes-list');
 
 });

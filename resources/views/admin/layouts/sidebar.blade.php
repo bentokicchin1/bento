@@ -21,7 +21,7 @@
                   </a>
                   <ul class="treeview-menu">
                     <li><a href="{{ route('admin-dish-list') }}"><i class="fas fa-glass-martini"></i> Dish</a></li>
-                    <li><a href="{{ route('admin-dish-type-list') }}"><i class="fas fa-utensil-fork"></i> Dish Type</a></li>
+                    <li><a href="{{ route('admin-dish-type-list') }}"><i class="fas fa-utensil-spoon"></i> Dish Type</a></li>
                   </ul>
               </li>
               <li class="treeview">
@@ -35,6 +35,17 @@
                     <li><a href="{{ route('admin-area-list') }}"><i class="fas fa-location-arrow"></i> Area</a></li>
                     <li><a href="{{ route('admin-location-list') }}"><i class="fas fa-building"></i> Location</a></li>
                   </ul>
+              </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fas fa-tasks"></i> <span>Menu Management</span>
+                  <span class="pull-right-container">
+                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="{{ route('admin-menu-add') }}"><i class="fas fa-calendar-alt"></i> Weekly Menu</a></li>
+                </ul>
               </li>
           </ul>
         </section>
