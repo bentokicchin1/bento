@@ -14,6 +14,17 @@
           <ul class="sidebar-menu" data-widget="tree">
               <li class="treeview">
                   <a href="#">
+                    <i class="fas fa-users"></i> <span>User Management</span>
+                    <span class="pull-right-container">
+                      <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="{{ route('admin-user-list') }}"><i class="fas fa-user-secret"></i> Users</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
                     <i class="fas fa-utensils"></i> <span>Dish Management</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->

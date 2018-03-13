@@ -7,10 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('admin-dashboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('admin-menu-list')}}">Weekly Menu</a></li>
-        <li class="active">Add/Edit Weekly Menu</li>
-
-
+        <li><a href="{{ route('admin-menu-add')}}">Weekly Menu</a></li>
       </ol>
     </section>
 

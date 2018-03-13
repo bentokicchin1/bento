@@ -64,7 +64,7 @@ class CustomerController extends Controller
     public function profile()
     {
         $userId = Auth::id();
-        $userInfo = User::select('name', 'email', 'mobile_number')->where('id', $userId)->first();
+        $userInfo = User::select('name', 'email', 'mobile_number','billing_cycle')->where('id', $userId)->first();
         $profileData['userInfo'] = $userInfo;
         return view('customer.profile', $profileData);
     }
@@ -78,7 +78,7 @@ class CustomerController extends Controller
     {
 
         /* Retrieve post data */
-        $postData = $request->only(['name', 'mobile_number', 'email']);
+        $postData = $request->only(['name', 'mobile_number', 'email','billing_cycle']);
         /* Validate post data */
         $request->validate([
             'name' => 'required|string|max:255',

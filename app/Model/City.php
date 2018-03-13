@@ -13,4 +13,8 @@ class City extends Model
     {
         return $this->hasMany('App\Model\Area');
     }
+    public function address()
+    {
+        return $this->hasMany('App\Model\CustomerAddresse');
+    }
 }

@@ -12,4 +12,9 @@ class Area_location extends Model
     {
         return $this->belongsTo('App\Model\Area');
     }
+
+    public function address()
+    {
+        return $this->hasMany('App\Model\CustomerAddresse');
+    }
 }

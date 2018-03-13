@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Model\User;
+use App\Model\City;
+use App\Model\Area_location;
+use App\Model\Area;
 use App\Model\OrderType;
+use App\Model\CustomerAddresse;
 use App\Services\Customer\AddressService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
@@ -24,6 +30,12 @@ class AddressController extends Controller
     public function showAddressForm($id = '', Request $request)
     {
         $data = [];
+
+        $data['addressTypeData'] = config('constants.ADDRESS_TYPE');
+        $data['cityData'] = city::pluck('name', 'id');
+        $data['orderTypeData'] = OrderType::pluck('name', 'id');
+        $data['areaData'] = Area::pluck('name', 'id');
+        $data['areaLocationData'] = Area_location::pluck('name', 'id');
         if (!empty($id)) {
             $data['addressData'] = $this->addressService->getAddressById($id);
 
@@ -34,7 +46,7 @@ class AddressController extends Controller
                 return ucfirst($value);
             })->all();
 
-        /* If user coming from checkout page then store referer url to redirect adter address save  */
+        /* If user coming from checkout page then store referer url to redirect after address save  */
         $refereUrl = $request->server('HTTP_REFERER');
         if (!empty($refereUrl)) {
             $request->session()->put('refererUrl', $refereUrl);

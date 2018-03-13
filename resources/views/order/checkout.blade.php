@@ -10,8 +10,8 @@
                     @include('layouts.errors')
                     <div class="web-form">
                         <div class="form-group">
-                            {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }} 
-                            
+                            {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }}
+
                             @foreach($addressList as $address)
                             <?php
                             if($address['default'] == 1){
@@ -25,11 +25,11 @@
                                     <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;" {{ $status }}>
                                 </div>
                                 <div class='address-name'> {{ $address['name'] }}</div>
-                                <div class="address-location">{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
+                                <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
                                 <div class="address-type">{{ $address['address_type'] }}</div>
                             </div>
                             @endforeach
-                            <div class="col-md-4 col-sm-4" style="margin-bottom:20px">                               
+                            <div class="col-md-4 col-sm-4" style="margin-bottom:20px">
                                 <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
                             </div>
                             <div class="web-submit">
@@ -37,7 +37,7 @@
                             </div>
                             {{ Form::close() }}
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-4 col-sm-4">
                         <h1>Order Summary</h1>
@@ -51,7 +51,7 @@
                         </thead>
                         <tbody>
                             @foreach($orderData['items'] as $item => $itemValue)
-                            
+
                             @if($item != 'others')
                                 <tr>
                                     <td>{{ $itemValue['name'] }}</td>
@@ -67,7 +67,7 @@
                                     </tr>
                                 @endforeach
                             @endif
-                            
+
                             @endforeach
                         </tbody>
                         <thead>

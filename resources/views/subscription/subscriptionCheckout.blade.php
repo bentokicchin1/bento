@@ -58,7 +58,7 @@
                 @include('layouts.errors')
                 <div class="web-form">
                     <div class="form-group">
-                        {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }} 
+                        {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
                         @foreach($addressList as $address)
                         <?php
                         if($address['default'] == 1){
@@ -72,7 +72,7 @@
                                 <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;" {{ $status }}>
                             </div>
                             <div class='address-name'> {{ $address['name'] }}</div>
-                            <div class="address-location">{{ $address['location'].', '.$address['area'].', '.$address['city'].', '.$address['state'].', '.$address['pincode']}} </div>
+                            <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
                             <div class="address-type">{{ $address['address_type'] }}</div>
                             <hr>
                         </div>
@@ -82,7 +82,7 @@
                         {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
                         {{ Form::close() }}
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>

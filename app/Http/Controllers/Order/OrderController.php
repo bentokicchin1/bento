@@ -95,6 +95,11 @@ class OrderController extends Controller
     public function processOrder(Request $request)
     {
         $postData = $request->all();
+
+        $resCycle = $this->orderService->checkBillingCycle();
+        if (empty($resCycle)) {
+            return redirect()->route('profile')->withErrors('Please select billing cycle.');
+        }
         if (empty($postData['addressId'])) {
             return redirect()->back()->withErrors('Please select address.');
         }

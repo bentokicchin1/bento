@@ -19,6 +19,6 @@ return [
     'BULK_SMS_URL' => env('BULK_SMS_URL'),
     'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
     'DEFAULT_CITY' => 1,
-    'ORDER_TYPE_LUNCH' => 2,
-    'ORDER_TYPE_DINNER' => 3,
+    'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
+    'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
 ];

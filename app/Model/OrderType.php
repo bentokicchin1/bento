@@ -13,4 +13,9 @@ class OrderType extends Model
     {
         return $this->hasMany('App\Model\WeeklyDishList');
     }
+
+    public function address()
+    {
+        return $this->hasMany('App\Model\CustomerAddresse');
+    }
 }

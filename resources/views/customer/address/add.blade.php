@@ -17,19 +17,19 @@
                         {{ Form::model($addressData, ['route' => ['address-add', $addressData['id']]]) }}
                         {{ Form::hidden('id', $addressData['id']) }}
                         @else
-                        {{ Form::open(['route' => 'address-add', 'method' => 'post']) }} 
+                        {{ Form::open(['route' => 'address-add', 'method' => 'post']) }}
                         @endif
-                        
+
                         {{ Form::select('order_type_id', $orderTypes, old('order_type_id'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Order Type' ])}}
-                        {{ Form::select('address_type', ['Home' => 'Home', 'Office' => 'Office'], old('address_type'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Address Type' ])}}
-                        {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Full Name (required)']) }}
-                        {{ Form::select('city', ['Navi Mumbai' => 'Navi Mumbai'], 'Navi Mumbai', ['class' => 'form-control drpdown','placeholder' => 'Please Select Your City'])}}
-                        {{ Form::select('area', ['Koperkhairne' => 'Koperkhairne'], 'Koperkhairne', ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
-                        {{ Form::select('sector', ['Sector 2' => 'Sector 2', 'Sector 10' => 'Sector 10', 'Sector 5' => 'Sector 5'], old('sector'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Sector' ])}}
+                        {{ Form::select('address_type', $addressTypeData, old('address_type'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Address Type' ])}}
+                        {{ Form::text('name',old('name'),['class' => 'form-control', 'placeholder' => 'Full Name (required)']) }}
+                        {{ Form::select('city', $cityData, old('city'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your City'])}}
+                        {{ Form::select('area', $areaData, old('area'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
+                        {{ Form::select('sector', $areaLocationData, old('sector'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Sector' ])}}
                         {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Location (required)']) }}
-                        {{ Form::text('state','Maharashtra' , ['class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
+                        {{ Form::text('state', 'Maharashtra' , ['class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
                         {{ Form::number('pincode',old('pincode'), ['class' => 'form-control', 'placeholder' => 'Pincode (required)']) }}
-                        <div class="checkbox">
+                        <!-- <div class="checkbox">
                             <label style="font-size: 1.2em">
                                 {{ Form::checkbox('default', 1, old('default')) }}
                                 <span class="cr">
@@ -39,7 +39,7 @@
                                     Set As Default
                                 </span>
                             </label>
-                        </div>
+                        </div> -->
                         <div class="web-submit">
                             {{ Form::submit('Save Address', ['class' => 'form-control submit']) }}
                         </div>

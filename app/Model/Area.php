@@ -17,4 +17,9 @@ class Area extends Model
     {
         return $this->belongsTo('App\Model\City');
     }
+
+    public function address()
+    {
+        return $this->hasMany('App\Model\CustomerAddresse');
+    }
 }

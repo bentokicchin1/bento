@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Model;
+
+use DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class User extends Model
+{
+    // protected $table = 'city';
+    // public function areaName()
+    // {
+    //     return $this->hasMany('App\Model\Area');
+    // }
+
+   public function address()
+   {
+       return $this->hasMany('App\Model\CustomerAddresse');
+   }
+}

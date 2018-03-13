@@ -43,14 +43,13 @@ class AddressService
                     ->where('default', 1)
                     ->update(['default' => 0]);
             }
-            
+
             /*  */
             if(!empty($addressParams['id'])){
                 $addressObj = Address::find($addressParams['id']);
             }else{
                 $addressObj = new Address;
             }
-
             $addressObj->user_id = $userId;
             $addressObj->order_type_id = $addressParams['order_type_id'];
             $addressObj->address_type = $addressParams['address_type'];
@@ -74,11 +73,20 @@ class AddressService
 
     public function getAddressList(){
         $userId = Auth::id();
-        return Address::all()->where('user_id', $userId)->toArray();
+        return  Address::where('user_id', $userId)
+                        ->with('city')
+                        ->with('area')
+                        ->with('areaLocation')
+                        ->with('orderType')
+                        ->get()->toArray();
     }
 
     public function getAddressById($addressId){
-        return Address::all()->where('id', $addressId)->first()->toArray();
+        return Address::where('id', $addressId)
+                        ->with('city')
+                        ->with('area')
+                        ->with('areaLocation')
+                        ->with('orderType')->first()->toArray();
     }
 
     public function deleteAddress($addressId){

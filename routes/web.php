@@ -106,6 +106,12 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'admin'], function(){
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
 
+    Route::get('user/add', 'Admin\UserController@showForm')->name('admin-user-add');
+    Route::post('user/add', 'Admin\UserController@store')->name('admin-user-add');
+    Route::get('user/edit/{id}', 'Admin\UserController@showForm')->where('id', '[0-9]+')->name('admin-user-edit');
+    Route::get('user/delete/{id}', 'Admin\UserController@delete')->where('id', '[0-9]+')->name('admin-user-delete');
+    Route::get('user/list', 'Admin\UserController@index')->name('admin-user-list');
+
     Route::get('order-type/add', 'Admin\Order\OrderTypeController@showForm')->name('admin-order-type-add');
     Route::post('order-type/add', 'Admin\Order\OrderTypeController@store')->name('admin-order-type-add');
     Route::get('order-type/edit/{id}', 'Admin\Order\OrderTypeController@showForm')->where('id', '[0-9]+')->name('admin-order-type-edit');
@@ -136,12 +142,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('location/delete/{id}', 'Admin\LocationController@delete')->where('id', '[0-9]+')->name('admin-location-delete');
     Route::get('location/list', 'Admin\LocationController@index')->name('admin-location-list');
 
-
     Route::get('menu/add', 'Admin\WeeklymenuController@showForm')->name('admin-menu-add');
     Route::post('menu/add', 'Admin\WeeklymenuController@store')->name('admin-menu-add');
-    Route::get('menu/edit/{id}', 'Admin\WeeklymenuController@showForm')->where('id', '[0-9]+')->name('admin-menu-edit');
-    Route::get('menu/delete/{id}', 'Admin\WeeklymenuController@delete')->where('id', '[0-9]+')->name('admin-menu-delete');
-    Route::get('menu/list', 'Admin\WeeklymenuController@index')->name('admin-menu-list');
-    //Route::get('dish-type/list', 'Admin\DishType\DishTypeController@index')->name('admin-dishes-list');
 
 });

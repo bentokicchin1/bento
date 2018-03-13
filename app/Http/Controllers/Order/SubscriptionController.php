@@ -59,7 +59,7 @@ class SubscriptionController extends Controller
 
         /* Fetch Dish list from service */
         $dishData = $this->subscriptionService->getDishList($orderTypeId);
-        
+
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
 
@@ -74,7 +74,7 @@ class SubscriptionController extends Controller
     public function addressSelect(Request $request)
     {
         $postData = $request->all();
-        
+
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
@@ -103,7 +103,7 @@ class SubscriptionController extends Controller
         /* Fetch customer address list and create array that need to be sent to checkout view page */
         $viewData['addressList'] = $this->addressService->getAddressList();
         $viewData['orderData'] = $sortedPostData;
-        
+
         /* Pass customer address list and order data to checkout page */
         return view('subscription.subscriptionCheckout', $viewData);
 
@@ -117,12 +117,17 @@ class SubscriptionController extends Controller
     public function processOrder(Request $request)
     {
         $postData = $request->all();
+
+        $resCycle = $this->orderService->checkBillingCycle();
+        if (empty($resCycle)) {
+            return redirect()->route('profile')->withErrors('Please select billing cycle.');
+        }
         if (empty($postData['addressId'])) {
             return redirect()->back()->withErrors('Please select address.');
         }
         $addressId = $postData['addressId'];
         $response = $this->subscriptionService->processData($addressId);
-        
+
         if ($response == 'success') {
             $request->session()->forget('subscriptionOrderData');
             return redirect()->route('subscriptionConfirmation');

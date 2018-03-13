@@ -11,6 +11,7 @@ namespace App\Services\Checkout;
 use App\Model\Dish;
 use App\Model\DishType;
 use App\Model\Order;
+use App\Model\User;
 use App\Model\OrderItem;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -200,5 +201,10 @@ class OrderService
             }
         }
         return $message;
+    }
+
+    public function checkBillingCycle(){
+        $user_id = Auth::id();
+        return User::where(['id'=>$user_id,'billing_cycle'=>''])->first();
     }
 }
