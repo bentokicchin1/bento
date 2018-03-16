@@ -49,7 +49,7 @@
                             <div class="col-md-6 col-sm-12 address-box">
                                 <div class='address-name'> {{ $address['name'] }} </div>
                                 <div class='edit-delete'><a href="{{ route('address-edit',['id' => $address['id']]) }}">Edit</a>/<a onclick="return confirm('Are you sure you want to delete?')" href="{{ route('address-delete', ['id' => $address['id']]) }}">Delete</a></div>
-                                <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
+                                <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area_data']['name'].', '.$address['city_data']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
                                 <div class="address-type">{{ $address['address_type'] }}</div>
                                 @if ($status)
                                 <div class="default-address" style="float:right">{{ $status }}</div>

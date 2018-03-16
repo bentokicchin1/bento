@@ -66,7 +66,7 @@
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="{{ route('admin-order-add') }}"><i class="fas fa-sticky-note"></i> Orders</a></li>
+                  <li><a href="{{ route('admin-order-list') }}"><i class="fas fa-sticky-note"></i> Orders</a></li>
                 </ul>
               </li>
           </ul>

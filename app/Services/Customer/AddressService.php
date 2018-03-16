@@ -74,8 +74,8 @@ class AddressService
     public function getAddressList(){
         $userId = Auth::id();
         return  Address::where('user_id', $userId)
-                        ->with('city')
-                        ->with('area')
+                        ->with('cityData')
+                        ->with('areaData')
                         ->with('areaLocation')
                         ->with('orderType')
                         ->get()->toArray();
@@ -83,8 +83,8 @@ class AddressService
 
     public function getAddressById($addressId){
         return Address::where('id', $addressId)
-                        ->with('city')
-                        ->with('area')
+                        ->with('cityData')
+                        ->with('areaData')
                         ->with('areaLocation')
                         ->with('orderType')->first()->toArray();
     }

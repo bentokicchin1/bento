@@ -21,24 +21,28 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="orderTable" class="table table-bordered table-striped">
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>User Name</th>
                     <th>Tiffin Frequency</th>
+                    <th>Orderd For Date</th>
                     <th>Order Type</th>
                     <th>Order Amount</th>
                     <th>Delivery Address</th>
                     <th>Order Status</th>
                     <th>Operation</th>
                 </tr>
+              </thead>
                   @foreach($orders as $order)
                   <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->users->name}}</td>
                     <td>{{$order->users->billing_cycle}}</td>
+                    <td>{{date('j-M-Y', strtotime($order->created_at))}}</td>
                     <td>{{ucfirst($order->orderType->name)}}</td>
                     <td>{{$order->total_amount}}</td>
-                    <td>{{$order->shipping_address->address_type}} - {{$order->shipping_address->location}}, {{$order->shipping_address->areaLocation->name}}, {{$order->shipping_address->areaData->name}}, {{$order->shipping_address->cityData->name}}, {{$order->shipping_address->pincode}}</td>
+                    <td style="width:50px;">{{$order->shipping_address->address_type}} - {{$order->shipping_address->location}}, {{$order->shipping_address->areaLocation->name}}, {{$order->shipping_address->areaData->name}}, {{$order->shipping_address->cityData->name}}, {{$order->shipping_address->pincode}}</td>
                     <td>{{$order->status}}</td>
                     <td><a class="btn btn-warning" href="{{ route('admin-order-edit',['id' =>$order->id]) }}">Edit</a>
                         <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-order-delete', ['id' => $order->id]) }}">Delete</a></div>
@@ -64,6 +68,9 @@
         $('#orderTable').DataTable({
           'paging'      : true,
           'lengthChange': false,
+          'deferRender' : true,
+          'scrollX'     : true,
+          'scrollCollapse': true,
           'searching'   : true,
           'ordering'    : true,
           'info'        : true,

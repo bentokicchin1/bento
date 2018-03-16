@@ -33,10 +33,11 @@ class OrderService
         $this->dishes = $dishes;
     }
 
-    public function getDishList($orderTypeId)
+    public function getDishList($orderTypeId,$orderDate='')
     {
         /* TODO - Add proper day function to get data from DB. Below MONDAY is hard coded */
-        $rawDishList = $this->dishes->getDishListfromDb($orderTypeId, 'Monday');
+        $orderDay = ($orderDate=='') ? 'all' : date('l',strtotime($orderDate));
+        $rawDishList = $this->dishes->getDishListfromDb($orderTypeId,$orderDay);
 
         return $this->formatDishList($rawDishList);
     }

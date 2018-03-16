@@ -83,7 +83,6 @@ class AddressController extends Controller
             'city' => 'required',
             'state' => 'required',
             'pincode' => 'required|digits:6',
-            'city' => 'required',
         ]);
 
         $response = $this->addressService->saveAddress($input);
