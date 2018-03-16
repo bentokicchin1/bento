@@ -44,7 +44,6 @@ class OrderController extends Controller
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
 
-        // echo '<pre>'; print_r($dishList);exit;
         return view('order.menu', ['dishes' => $dishList]);
     }
 

@@ -19,14 +19,13 @@ class WeeklymenuController extends Controller
         $dishTypeSelect = $dayList = [];
         $dayList = config('constants.days');
 
-        $menuArray = self::getTotalWeekData();
+        $menuArray = WeeklyDishList::getTotalWeekMenuData();
         $orderTypeData = OrderType::pluck('name', 'id');
         $dishTypeData = DishType::pluck('name', 'id');
         $dishes = DB::table('dishes')
                 ->select("dishes.id as dish_id", "dishes.name as dishName", "dish_types.id as dish_type_id", "dish_types.name as dishTypeName")
                 ->join("dish_types","dish_types.id","=","dishes.dish_type_id")
                 ->get();
-
         foreach ($dishTypeData as $dishTypeId => $dishTypeName) {
             foreach ($dishes as $dishId => $dishData) {
                 if(!array_key_exists($dishTypeName,$dishTypeSelect)){
@@ -37,6 +36,7 @@ class WeeklymenuController extends Controller
                 }
             }
         }
+
         return view('admin.weeklyMenu.weeklyMenuAdd', ['menuArray' => $menuArray,'dishTypeSelect' => $dishTypeSelect,'dayList' => $dayList,'orderTypeData'=>$orderTypeData]);
     }
 
@@ -94,33 +94,5 @@ class WeeklymenuController extends Controller
         return redirect()->back()->withErrors('Something went wrong. Please try again.');
     }
 
-    public function getTotalWeekData()
-    {
-        $menuArray = array();
-        $weeklyMenu = DB::table('weekly_dish_lists')
-                ->select("day","order_types.name as orderType","dishes.name as dish","dish_types.name as dishType")
-                ->leftjoin("order_types","order_types.id","=","weekly_dish_lists.order_type_id")
-                ->leftjoin("dishes","dishes.id","=","weekly_dish_lists.dish_id")
-                ->leftjoin("dish_types","dish_types.id","=","dishes.dish_type_id")
-                ->orderBy("day","ASC")
-                ->get();
-
-        if(!empty($weeklyMenu)){
-            foreach($weeklyMenu as $menu){
-                if(!array_key_exists($menu->day,$menuArray)){
-                    $menuArray[$menu->day] = array();
-                    $menuArray[$menu->day][$menu->orderType] = array();
-                }
-                if(!array_key_exists($menu->orderType,$menuArray[$menu->day])) {
-                    $menuArray[$menu->day][$menu->orderType] = array();
-                }
-                if(!array_key_exists($menu->dishType,$menuArray[$menu->day][$menu->orderType])) {
-                    $menuArray[$menu->day][$menu->orderType][$menu->dishType] = array();
-                }
-                array_push($menuArray[$menu->day][$menu->orderType][$menu->dishType],$menu->dish);
-            }
-        }
-        return $menuArray;
-    }
 
 }

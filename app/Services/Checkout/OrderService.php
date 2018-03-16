@@ -8,12 +8,13 @@
 
 namespace App\Services\Checkout;
 
+use DB;
 use App\Model\Dish;
 use App\Model\DishType;
 use App\Model\Order;
 use App\Model\User;
 use App\Model\OrderItem;
-use DB;
+use App\Model\WeeklyDishList;
 use Illuminate\Support\Facades\Auth;
 use Psy\Exception\Exception;
 
@@ -36,6 +37,7 @@ class OrderService
     {
         /* TODO - Add proper day function to get data from DB. Below MONDAY is hard coded */
         $rawDishList = $this->dishes->getDishListfromDb($orderTypeId, 'Monday');
+
         return $this->formatDishList($rawDishList);
     }
 
@@ -44,12 +46,10 @@ class OrderService
 
         $sortedData = [];
         foreach ($rawDishList as $key => $dishItem) {
-
             $sortedData[$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
             $sortedData[$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-            $sortedData[$dishItem->dish_type_id]['dishList'][$dishItem->id] = Dish::where('id',$dishItem->dish_id)->pluck('name')->get();
+            $sortedData[$dishItem->dish_type_id]['dishList'][$dishItem->id] = ucfirst($dishItem->name);
             $sortedData[$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
-
         }
         return array_values($sortedData);
     }
