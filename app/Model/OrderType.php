@@ -18,4 +18,9 @@ class OrderType extends Model
     {
         return $this->hasMany('App\Model\CustomerAddresse');
     }
+
+    public function order()
+    {
+        return $this->hasMany('App\Model\Order');
+    }
 }

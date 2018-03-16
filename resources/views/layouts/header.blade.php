@@ -29,7 +29,7 @@
                        @else
                        <li><a href="{{ route('profile') }}">My Account</a></li>
                        <li ><a href="{{ route('orders') }}">Orders</a></li>
-                       <li><a href="{{ route('subscriptionType') }}">Subscription</a></li>
+                       <li><a href="{{ route('subscriptionType') }}">Weekly Menu</a></li>
                        <li><a href="{{ route('feedback') }}">Feedback</a></li>
                        <li>
                           <a href="{{ route('logout') }}"

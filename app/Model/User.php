@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-    // protected $table = 'city';
-    // public function areaName()
-    // {
-    //     return $this->hasMany('App\Model\Area');
-    // }
+    public function orders()
+    {
+        return $this->hasMany('App\Model\Order');
+    }
 
    public function address()
    {

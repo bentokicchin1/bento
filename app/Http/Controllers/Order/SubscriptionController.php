@@ -119,14 +119,21 @@ class SubscriptionController extends Controller
         $postData = $request->all();
 
         $resCycle = $this->orderService->checkBillingCycle();
-        if (empty($resCycle)) {
+        if (!empty($resCycle)) {
             return redirect()->route('profile')->withErrors('Please select billing cycle.');
         }
         if (empty($postData['addressId'])) {
             return redirect()->back()->withErrors('Please select address.');
         }
+
+        echo "<pre/>";
+        print_r(session()->all());
+        exit;
         $addressId = $postData['addressId'];
         $response = $this->subscriptionService->processData($addressId);
+        echo "<pre/>";
+        print_r($response);
+        exit;
 
         if ($response == 'success') {
             $request->session()->forget('subscriptionOrderData');

@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 use App\Model\City;
 use App\Model\Area_location;
 use App\Model\Area;
+use App\Model\Order;
 use App\Model\OrderType;
 use App\Model\CustomerAddresse;
+use App\Services\Customer\AddressService;
 use DB;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+      private $addressService;
+
+      public function __construct(AddressService $addressService)
+      {
+          $this->addressService = $addressService;
+      }
 
 
     public function showForm($id = '', Request $request)
@@ -98,6 +108,17 @@ class UserController extends Controller
             DB::rollBack();
             return redirect()->back()->withErrors('Something went wrong. Please try again.');
         }
+    }
+
+    public function order($id)
+    {
+      DB::enableQueryLog();
+        $orders = Order::where('user_id',$id)
+                  ->with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
+                  ->with('users')
+                  ->with('orderType')
+                  ->get();
+        return view('admin.orders.orderList', ['orders' => $orders]);
     }
 
     /**

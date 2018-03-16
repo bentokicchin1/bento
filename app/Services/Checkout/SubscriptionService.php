@@ -131,7 +131,6 @@ class SubscriptionService
         $orderParams['orderTypeId'] = session('orderTypeId');
         $orderParams['shippingAddressId'] = $addressId;
         $orderParams['subscriptionItems'] = json_encode($orderData);
-
         return $this->insertSubscriptionOrderIntoTable($orderParams);
     }
 

@@ -51,7 +51,8 @@ class CustomerController extends Controller
 
     public function orders()
     {
-        $orders = Order::where('user_id', Auth::id())->with('orderItems')->paginate(10);
+        $user_id = Auth::id();
+        $orders = Order::getOrderDetails($user_id);
         return view('customer.orders', ['orders' => $orders]);
     }
 

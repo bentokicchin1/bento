@@ -47,7 +47,7 @@ class OrderService
 
             $sortedData[$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
             $sortedData[$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-            $sortedData[$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
+            $sortedData[$dishItem->dish_type_id]['dishList'][$dishItem->id] = Dish::where('id',$dishItem->dish_id)->pluck('name')->get();
             $sortedData[$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
 
         }
@@ -178,10 +178,10 @@ class OrderService
             if (!empty($items)) {
                 foreach ($items as $key => $item) {
                     if ($key != 'others') {
-                        $itemParams[] = ['order_id' => $orderId, 'name' => $item['name'], 'quantity' => $item['qty'], 'base_price' => $item['base_price'], 'total_price' => $item['total_price']];
+                        $itemParams[] = ['order_id' => $orderId, 'dish_id' => $item['dish_id'], 'quantity' => $item['qty'], 'base_price' => $item['base_price'], 'total_price' => $item['total_price']];
                     } else {
                         foreach ($item as $otherItem) {
-                            $itemParams[] = ['order_id' => $orderId, 'name' => $otherItem['name'], 'quantity' => $otherItem['qty'], 'base_price' => $otherItem['base_price'], 'total_price' => $otherItem['total_price']];
+                            $itemParams[] = ['order_id' => $orderId, 'dish_id' => $otherItem['dish_id'], 'quantity' => $otherItem['qty'], 'base_price' => $otherItem['base_price'], 'total_price' => $otherItem['total_price']];
                         }
                     }
                 }
@@ -205,6 +205,6 @@ class OrderService
 
     public function checkBillingCycle(){
         $user_id = Auth::id();
-        return User::where(['id'=>$user_id,'billing_cycle'=>''])->first();
+        return User::where(['id'=>$user_id,'billing_cycle'=>null])->first();
     }
 }

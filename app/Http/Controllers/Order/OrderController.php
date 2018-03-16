@@ -97,7 +97,7 @@ class OrderController extends Controller
         $postData = $request->all();
 
         $resCycle = $this->orderService->checkBillingCycle();
-        if (empty($resCycle)) {
+        if(!empty($resCycle)) {
             return redirect()->route('profile')->withErrors('Please select billing cycle.');
         }
         if (empty($postData['addressId'])) {

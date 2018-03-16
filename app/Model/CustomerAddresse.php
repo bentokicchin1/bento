@@ -20,11 +20,11 @@ class CustomerAddresse extends Model
     {
         return $this->belongsTo('App\Model\User','user_id');
     }
-    public function city()
+    public function cityData()
     {
         return $this->belongsTo('App\Model\City','city');
     }
-    public function area()
+    public function areaData()
     {
         return $this->belongsTo('App\Model\Area','area');
     }
@@ -35,5 +35,10 @@ class CustomerAddresse extends Model
     public function orderType()
     {
         return $this->belongsTo('App\Model\OrderType','order_type_id');
+    }
+
+    public function order()
+    {
+        return $this->hasMany('App\Model\Order');
     }
 }

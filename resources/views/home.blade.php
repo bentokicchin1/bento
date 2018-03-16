@@ -48,7 +48,7 @@
                             <a href="{{ route('order', ['type'=>'dinner']) }}">
                             <img src="{{ asset('images/dinner-new-1.jpg') }}" class="img-responsive" alt="Dinner">
                             <div class="portfolio-overlay">
-                                <div class="portfolio-item">        
+                                <div class="portfolio-item">
                                     <h2>Order Now</h2>
                                 </div>
                             </div>

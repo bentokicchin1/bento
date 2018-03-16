@@ -3,42 +3,45 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        User
+        Order
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('admin-dashboard')}}"><i class="fas fa-home"></i> Home</a></li>
-        <li class="active"> User</li>
+        <li class="active"> Order</li>
       </ol>
     </section>
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-MD-12">
+        <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <a href="{{ route('admin-user-add')}}" class=" btn btn-big btn-success">Add User</a>
+              <a href="{{ route('admin-order-add')}}" class=" btn btn-big btn-success">Add Order</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="userTable" class="table table-bordered table-striped">
+              <table id="orderTable" class="table table-bordered table-striped">
                 <tr>
                     <th>ID</th>
                     <th>User Name</th>
-                    <th>User Email</th>
-                    <th>User Mobile</th>
-                    <!-- <th>Billing Cycle</th> -->
+                    <th>Tiffin Frequency</th>
+                    <th>Order Type</th>
+                    <th>Order Amount</th>
+                    <th>Delivery Address</th>
+                    <th>Order Status</th>
                     <th>Operation</th>
                 </tr>
-                  @foreach($user as $type)
+                  @foreach($orders as $order)
                   <tr>
-                    <td>{{$type->id}}</td>
-                    <td>{{ ucfirst($type->name) }}</td>
-                    <td>{{ $type->email }}</td>
-                    <td>{{ $type->mobile_number }}</td>
-                    <!-- <td>{{ $type->description }}</td> -->
-                    <td><a class="btn btn-warning" href="{{ route('admin-user-edit',['id' => $type['id']]) }}">Edit</a>
-                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-user-delete', ['id' => $type['id']]) }}">Delete</a></div>
-                        <a class="btn btn-default" href="{{ route('admin-user-order', ['id' => $type['id']]) }}">View Orders</a></div>
+                    <td>{{$order->id}}</td>
+                    <td>{{$order->users->name}}</td>
+                    <td>{{$order->users->billing_cycle}}</td>
+                    <td>{{ucfirst($order->orderType->name)}}</td>
+                    <td>{{$order->total_amount}}</td>
+                    <td>{{$order->shipping_address->address_type}} - {{$order->shipping_address->location}}, {{$order->shipping_address->areaLocation->name}}, {{$order->shipping_address->areaData->name}}, {{$order->shipping_address->cityData->name}}, {{$order->shipping_address->pincode}}</td>
+                    <td>{{$order->status}}</td>
+                    <td><a class="btn btn-warning" href="{{ route('admin-order-edit',['id' =>$order->id]) }}">Edit</a>
+                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-order-delete', ['id' => $order->id]) }}">Delete</a></div>
                     </td>
                   </tr>
                   @endforeach
@@ -58,7 +61,7 @@
     {!! Html::script('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
     <script>
       $(function () {
-        $('#userTable').DataTable({
+        $('#orderTable').DataTable({
           'paging'      : true,
           'lengthChange': false,
           'searching'   : true,

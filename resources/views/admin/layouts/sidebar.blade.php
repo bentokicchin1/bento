@@ -58,6 +58,17 @@
                   <li><a href="{{ route('admin-menu-add') }}"><i class="fas fa-calendar-alt"></i> Weekly Menu</a></li>
                 </ul>
               </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fas fa-calendar"></i> <span>Orders Management</span>
+                  <span class="pull-right-container">
+                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="{{ route('admin-order-add') }}"><i class="fas fa-sticky-note"></i> Orders</a></li>
+                </ul>
+              </li>
           </ul>
         </section>
         <!-- /.sidebar -->

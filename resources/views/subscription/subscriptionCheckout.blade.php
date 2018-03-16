@@ -79,9 +79,9 @@
                         @endforeach
                         <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
                         <hr>
-                        {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
-                        {{ Form::close() }}
                     </div>
+                      {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
+                      {{ Form::close() }}
                 </div>
             </div>
         </div>

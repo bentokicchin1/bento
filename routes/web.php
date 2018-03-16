@@ -18,9 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 // Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('otp', 'Auth\RegisterController@showOtpForm')->name('showOtpForm');
 Route::post('otp', 'Auth\RegisterController@verifyOtp')->name('verifyOtp');
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 /**
@@ -111,6 +111,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('user/edit/{id}', 'Admin\UserController@showForm')->where('id', '[0-9]+')->name('admin-user-edit');
     Route::get('user/delete/{id}', 'Admin\UserController@delete')->where('id', '[0-9]+')->name('admin-user-delete');
     Route::get('user/list', 'Admin\UserController@index')->name('admin-user-list');
+    Route::get('user/order/{id}', 'Admin\UserController@order')->where('id', '[0-9]+')->name('admin-user-order');
 
     Route::get('order-type/add', 'Admin\Order\OrderTypeController@showForm')->name('admin-order-type-add');
     Route::post('order-type/add', 'Admin\Order\OrderTypeController@store')->name('admin-order-type-add');
@@ -145,4 +146,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('menu/add', 'Admin\WeeklymenuController@showForm')->name('admin-menu-add');
     Route::post('menu/add', 'Admin\WeeklymenuController@store')->name('admin-menu-add');
 
+    Route::get('order/add', 'Admin\OrderController@showForm')->name('admin-order-add');
+    Route::post('order/add', 'Admin\OrderController@store')->name('admin-order-add');
+    Route::get('order/edit/{id}', 'Admin\OrderController@showForm')->where('id', '[0-9]+')->name('admin-order-edit');
+    Route::get('order/delete/{id}', 'Admin\OrderController@delete')->where('id', '[0-9]+')->name('admin-order-delete');
+    Route::get('order/list', 'Admin\OrderController@index')->name('admin-order-list');
 });
