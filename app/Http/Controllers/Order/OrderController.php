@@ -28,7 +28,6 @@ class OrderController extends Controller
      */
     public function showOrderForm($orderType)
     {
-
         /* fetch order type data based on order type */
         $orderTypeData = OrderType::where('name', $orderType)->first();
 
@@ -40,7 +39,8 @@ class OrderController extends Controller
         $orderTypeId = $orderTypeData->id;
 
         /* Fetch Dish list from service */
-        $dishData = $this->orderService->getDishList($orderTypeId);
+        $date = date('Y-m-d');
+        $dishData = $this->orderService->getDishList($orderTypeId,$date);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
 

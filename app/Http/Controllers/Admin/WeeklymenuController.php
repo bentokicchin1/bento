@@ -16,10 +16,11 @@ class WeeklymenuController extends Controller
 
     public function showForm($id = '', Request $request)
     {
-        $dishTypeSelect = $dayList = [];
-        $dayList = config('constants.days');
+        $dishTypeSelect = [];
 
-        $menuArray = WeeklyDishList::getTotalWeekMenuData();
+        $daysArray = WeeklyDishList::getDatesForThisWeek();
+        $menuArray = WeeklyDishList::getTotalWeekMenuData($daysArray);
+        $tableTitle = "Menu from ".date('l, d F',strtotime(reset($daysArray)))." to ".date('l, d F',strtotime(end($daysArray)));
         $orderTypeData = OrderType::pluck('name', 'id');
         $dishTypeData = DishType::pluck('name', 'id');
         $dishes = DB::table('dishes')
@@ -37,7 +38,7 @@ class WeeklymenuController extends Controller
             }
         }
 
-        return view('admin.weeklyMenu.weeklyMenuAdd', ['menuArray' => $menuArray,'dishTypeSelect' => $dishTypeSelect,'dayList' => $dayList,'orderTypeData'=>$orderTypeData]);
+        return view('admin.weeklyMenu.weeklyMenuAdd', ['menuArray' => $menuArray,'dishTypeSelect' => $dishTypeSelect,'orderTypeData'=>$orderTypeData,"tableTitle"=>$tableTitle]);
     }
 
     public function index()
@@ -51,20 +52,22 @@ class WeeklymenuController extends Controller
         $validatedData = $request->validate([
             'order_type_id' => 'required',
             'dish' => 'required',
-            'day' => 'required'
+            'menuDate' => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            $dayId = $request->input('day');
-            $day = ucfirst(config('constants.days')[$dayId]);
+            $menuDate = $request->input('menuDate');
+            $date = date('Y-m-d',strtotime($menuDate));
+            $day = ucfirst(date('l',strtotime($menuDate)));
             $orderTypeId = $request->input('order_type_id');
-            DB::table('weekly_dish_lists')->where(['day'=>$day,'order_type_id'=>$orderTypeId])->delete();
+            DB::table('weekly_dish_lists')->where(['date'=>$date,'order_type_id'=>$orderTypeId])->delete();
 
             $dish_ids = $request->input('dish');
             foreach($dish_ids as $dishId) {
                 $weeklyMenuObj = new WeeklyDishList;
                 $weeklyMenuObj->order_type_id = $orderTypeId;
+                $weeklyMenuObj->date = $date;
                 $weeklyMenuObj->day = $day;
                 $weeklyMenuObj->dish_id = $dishId;
                 $weeklyMenuObj->save();

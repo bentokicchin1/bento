@@ -42,7 +42,13 @@
                     <td>{{date('j-M-Y', strtotime($order->created_at))}}</td>
                     <td>{{ucfirst($order->orderType->name)}}</td>
                     <td>{{$order->total_amount}}</td>
-                    <td style="width:50px;">{{$order->shipping_address->address_type}} - {{$order->shipping_address->location}}, {{$order->shipping_address->areaLocation->name}}, {{$order->shipping_address->areaData->name}}, {{$order->shipping_address->cityData->name}}, {{$order->shipping_address->pincode}}</td>
+                    <td style="width:50px;">
+                      @if(!is_null($order->shipping_address->address_type)) {{$order->shipping_address->address_type}} @endif
+                      - {{$order->shipping_address->location}},
+                      @if(!is_null($order->shipping_address->areaLocation)) {{$order->shipping_address->areaLocation->name}}, @endif
+                      @if(!is_null($order->shipping_address->areaData)) {{$order->shipping_address->areaData->name}}, @endif
+                      @if(!is_null($order->shipping_address->cityData)) {{$order->shipping_address->cityData->name}}, @endif
+                      {{$order->shipping_address->pincode}}</td>
                     <td>{{$order->status}}</td>
                     <td><a class="btn btn-warning" href="{{ route('admin-order-edit',['id' =>$order->id]) }}">Edit</a>
                         <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-order-delete', ['id' => $order->id]) }}">Delete</a></div>

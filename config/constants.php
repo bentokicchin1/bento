@@ -17,7 +17,7 @@ return [
     'BULK_SMS_PASSWORD' => env('BULK_SMS_PASSWORD'),
     'BULK_SMS_SENDER' => env('BULK_SMS_SENDER'),
     'BULK_SMS_URL' => env('BULK_SMS_URL'),
-    'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'],
+    'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday','sunday'],
     'DEFAULT_CITY' => 1,
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],

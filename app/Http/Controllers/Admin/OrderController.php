@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Order;
 use App\Model\User;
 use App\Model\OrderType;
+use App\Model\WeeklyDishList;
 use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use DB;
@@ -41,7 +42,6 @@ class OrderController extends Controller
 
     public function index()
     {
-        DB::enableQueryLog();
         $orders = Order::with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
                   ->with('users')
                   ->with('orderType')

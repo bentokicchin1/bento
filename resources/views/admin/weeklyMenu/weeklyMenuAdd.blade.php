@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
                     <div class="col-sm-6">
-                        {{ Form::select('day',$dayList,null,['id'=>'day','class'=>'form-control','placeholder'=>'Day (required)']) }}
+                      {{ Form::text('menuDate',null,['id'=>'menuDate','class'=>'form-control','placeholder'=>'Date (required)']) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -61,14 +61,14 @@
           <div class="col-xs-12">
               <div class="box">
                   <div class="box-header">
-                      <h3 class="box-title">Menu Options Selected</h3>
+                      <h3 class="box-title">{{$tableTitle}}</h3>
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body no-padding">
                       @foreach ($menuArray as $dayName=>$menuData)
                         <table class="table">
                           <thead>
-                              <th colspan="2"><h4><center>{{ucfirst($dayName)}}</center></h4></th>
+                              <th colspan="2"><h4><center>{{ucfirst(date('l',strtotime($dayName)))}}</center></h4></th>
                           </thead>
                           <tbody>
                             <tr>
@@ -107,6 +107,11 @@
     <script>
       $( document ).ready(function() {
         $(".dynamicDish").select2();
+        $("#menuDate").datepicker({
+          startDate:new Date(),
+          autoclose : true,
+          format : 'DD, d MM, yyyy'
+        });
       });
     </script>
     <!-- /.content -->

@@ -11,6 +11,7 @@ namespace App\Services\Checkout;
 use DB;
 use App\Model\Dish;
 use App\Model\DishType;
+use App\Model\WeeklyDishList;
 use App\Model\Order;
 use App\Model\Subscription;
 use App\Services\Checkout\OrderService;
@@ -44,16 +45,26 @@ class SubscriptionService
     {
         $sortedData = [];
         $finalData = [];
+        $daysArray = WeeklyDishList::getDatesForThisWeek();
         if(!empty($rawDishList)){
             foreach ($rawDishList as $key => $dishItem) {
-                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
-                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
-                $sortedData[$dishItem->day][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
+                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
+                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
+                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
+                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
             }
 
-            foreach ($sortedData as $day => $value) {
-                $finalData[$day] = array_values($value);
+            foreach($daysArray as $dateFromDay){
+                foreach ($sortedData as $date => $value) {
+                    $day = date('l',strtotime($dateFromDay));
+                    if(empty($finalData[$day])){
+                      if($date==$dateFromDay){
+                        $finalData[$day] = array_values($value);
+                      }else{
+                        $finalData[$day] = array();
+                      }
+                    }
+                }
             }
         }
         return $finalData;
@@ -87,7 +98,6 @@ class SubscriptionService
     public function arrangeDayWisePostData($postData)
     {
         $newPostData = [];
-
         // $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         $weekdays = $postData['days'];
 

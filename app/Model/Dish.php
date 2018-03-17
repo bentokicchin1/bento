@@ -21,18 +21,20 @@ class Dish extends Model
     public function getDishListfromDb($orderTypeId, $day)
     {
         if ($day == 'all') {
+            $daysArray = WeeklyDishList::getDatesForThisWeek();
             $dishes = DB::table('dishes')
+                ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
                 ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
-                ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'dishes.price', 'dish_types.name as dish_type_name')
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
+                ->wherein('weekly_dish_lists.date',$daysArray)
                 ->orderby('weekly_dish_lists.id')
                 ->get()->toArray();
         } else {
             $dishes = DB::table('dishes')
+                ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
                 ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
-                ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'dishes.price', 'dish_types.name as dish_type_name')
                 ->where('weekly_dish_lists.day', '=', $day)
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->get()->toArray();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Order;
 use App\Http\Controllers\Controller;
 use App\Model\Order;
 use App\Model\OrderType;
+use App\Model\WeeklyDishList;
 use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use App\Services\Checkout\SubscriptionService;
@@ -42,7 +43,7 @@ class SubscriptionController extends Controller
     {
         /* fetch order type data based on order type */
         $orderTypeData = OrderType::where('name', $orderType)->first();
-
+        $daysArray = WeeklyDishList::getDatesForThisWeek();
         /* If invalid order type passed in url then redirect to previous page */
         if (empty($orderTypeData)) {
             return redirect()->back();
@@ -59,11 +60,9 @@ class SubscriptionController extends Controller
 
         /* Fetch Dish list from service */
         $dishData = $this->subscriptionService->getDishList($orderTypeId);
-
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
-
-        return view('subscription.subscriptionMenu', ['dishes' => $dishList]);
+        return view('subscription.subscriptionMenu', ['dishes' => $dishList,'daysArray'=>$daysArray]);
     }
 
     /**
@@ -78,10 +77,10 @@ class SubscriptionController extends Controller
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
-
             /* Validate sorted input data and redirect if error occurs. */
             foreach ($sortedPostData as $day => $eachDayItems) {
                 $validationMessage = $this->orderService->validateOrderFormData($eachDayItems);
+
                 if ($validationMessage != 'success') {
                     return redirect()->back()->withInput()->withErrors("Total amount must be greater than Rs. 45 for " . ucfirst($day));
                 }
@@ -126,14 +125,8 @@ class SubscriptionController extends Controller
             return redirect()->back()->withErrors('Please select address.');
         }
 
-        echo "<pre/>";
-        print_r(session()->all());
-        exit;
         $addressId = $postData['addressId'];
         $response = $this->subscriptionService->processData($addressId);
-        echo "<pre/>";
-        print_r($response);
-        exit;
 
         if ($response == 'success') {
             $request->session()->forget('subscriptionOrderData');

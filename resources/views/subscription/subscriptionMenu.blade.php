@@ -6,18 +6,18 @@
 <section id="header-custom">
     <div class="container">
       <div class="row">
-  
+
         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
           <div class="header-thumb">
             <h1 class="wow">Subscribe for weekly</h1>
             <h3 class="wow">Decide your weekly menu</h3>
           </div>
         </div>
-  
+
       </div>
     </div>
   </section>
-  
+
   <!-- Book Now section
     ================================================== -->
 <section id="order">
@@ -28,7 +28,7 @@
                 @include('layouts.success')
                 @include('layouts.errors')
                 <div class="order-form">
-                    {{ Form::open(['route' => 'subscriptionAddressSelect', 'method' => 'post']) }} 
+                    {{ Form::open(['route' => 'subscriptionAddressSelect', 'method' => 'post']) }}
                     {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
                     <div class="tabbable-panel">
                         <div class="tabbable-line">
@@ -41,12 +41,10 @@
                                 <li><a href="#tab_saturday" data-toggle="tab">Sat</a></li>
                             </ul>
                             <div class="tab-content">
-                                @php
-                                    $active = false
-                                @endphp
-
-                                @foreach($dishes['dishData'] as $day => $dishesArray)
-
+                              @php
+                                  $active = false
+                              @endphp
+                              @foreach($dishes['dishData'] as $day => $dishesArray)
                                 @php
                                     $dayName = strtolower($day);
                                 @endphp
@@ -56,6 +54,7 @@
                                 @else
                                     <div class="tab-pane" id="tab_{{strtolower($day)}}">
                                 @endif
+                                  @if(!empty($dishesArray))
                                     <div class="checkbox">
                                         <label style="font-size: 1.5em">
                                             {{ Form::checkbox('days[]', strtolower($day), true) }}
@@ -80,16 +79,19 @@
                                         @endforeach
                                     </div>
                                     @endif
-                                    @endforeach      
-                                    </div>
-                                    @php
-                                        $active = true
-                                    @endphp
+                                    @endforeach
+                                  @else
+                                    <center><h5>Sorry! We are closed on this day.</h5></center>
+                                  @endif
+                                  </div>
+                                  @php
+                                      $active = true
+                                  @endphp
                                 @endforeach
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="order-submit">
                         {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
                     </div>
