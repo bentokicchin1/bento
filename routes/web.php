@@ -148,6 +148,8 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::get('order/add', 'Admin\OrderController@showForm')->name('admin-order-add');
     Route::post('order/add', 'Admin\OrderController@store')->name('admin-order-add');
+    Route::post('order/getDishList', 'Admin\OrderController@getDishList')->name('admin-order-dishList');
+    Route::get('order/getAddress', 'Admin\OrderController@getUserAddress')->name('admin-order-userAddress');
     Route::get('order/edit/{id}', 'Admin\OrderController@showForm')->where('id', '[0-9]+')->name('admin-order-edit');
     Route::get('order/delete/{id}', 'Admin\OrderController@delete')->where('id', '[0-9]+')->name('admin-order-delete');
     Route::get('order/list', 'Admin\OrderController@index')->name('admin-order-list');

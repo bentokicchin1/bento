@@ -10,6 +10,7 @@ use App\Model\WeeklyDishList;
 use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use DB;
+use Response;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,11 +33,13 @@ class OrderController extends Controller
           $orderData = Order::where('id', $id)->first();
           $orderTypeId = $orderData->order_type_id;
           $orderDate = $orderData->created_at;
+
           $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
         }else {
-           $orderDate = date('Y-m-d H:i:s');
+           $orderDate = date('Y-m-d');
            $dishData = $this->orderService->getDishList(2,$orderDate);
         }
+
         return view('admin.orders.orderAdd', ['orders' => $orders,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
@@ -51,14 +54,15 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-          $postData = $request->all();
-          // echo "<pre/>";
-          // print_r($postData);
-          // exit;
-          $validatedData = $request->validate([
-              'user' => 'required',
-              'orderTypeId' => 'required'
-          ]);
+      $postData = $request->all();
+      $validatedData = $request->validate([
+          'orderDate' =>'required',
+          'user' => 'required',
+          'orderTypeId' => 'required',
+          'addressId' => 'required'
+      ]);
+          DB::beginTransaction();
+          try{
           if (!empty($postData)) {
               /* Rearrange post data */
               $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
@@ -75,13 +79,19 @@ class OrderController extends Controller
               }
               $request->session()->put('orderData', $sortedPostData);
 
-              $addressId = 6;
-              $response = $this->orderService->processData($addressId);
-              return redirect()->route('admin-order-list')->with('status', 'Order added successfully!');
+              $response = $this->orderService->processData();
+
           } elseif ($request->session()->get('orderData')) {
               /* Check if order data present in session */
               $sortedPostData = $request->session()->get('orderData');
           }
+          DB::commit();
+          return redirect()->route('admin-order-list')->with('status', 'Order added successfully!');
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Something went wrong. Please try again.');
+        }
   }
 
     /**
@@ -101,4 +111,81 @@ class OrderController extends Controller
         return redirect()->back()->withErrors('Something went wrong. Please try again.');
     }
 
+   public function getDishList(Request $request)
+   {
+     $dishResponse = array();
+     $validatedData = $request->validate([
+         'orderDate' =>'required',
+         'orderTypeId' => 'required'
+     ]);
+
+     try{
+          $orderTypeId = $request->input('orderTypeId');
+          $orderDate = $request->input('orderDate');
+          $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
+          $dishDetails =  '<label class="col-sm-3 control-label" style="padding-top:7px">Order Details</label><div class="row  col-sm-6">';
+            if(!empty($dishData)){
+              foreach ($dishData as $dish){
+                  if ($dish['dishTypeName'] != 'others'){
+                    $dishDetails .=  '<div class="form-group"><div class="col-sm-6"><select name='.$dish["dishTypeName"].' class="form-control dropdown" data-placeholder= "Please select '.$dish["dishTypeName"].'"><option val=""></option>';
+                    foreach($dish["dishList"] as $dishId=>$dishName){
+                        $dishDetails .=  '<option value="'.$dishId.'">'.$dishName.'</option>';
+                    }
+                    $dishDetails .= '</select></div>';
+                    $dishDetails .= '<div class="col-sm-3"><input type="textbox" name="qty_'.$dish["dishTypeName"].'" class="form-control" placeholder="Quantity" value="'.old('qty_'.$dish["dishTypeName"]).'"></div></div>';
+                  }else{
+                    $dishDetails .=  '<div class="checkbox">';
+                    foreach($dish['dishList'] as $dishId => $dishName){
+                        $dishDetails .=  '<label><input type="checkbox" value="'.$dishId.'" name='.$dish["dishTypeName"].'_'.strtolower($dishName).'" ><span>'.$dishName.' ( <i class="fas fa-rupee-sign"></i>'.round($dish["dishPrice"][$dishId]).')</span></label>';
+                    }
+                    $dishDetails .=  '</div>';
+                  }
+                }
+            }else{
+                $dishDetails .=  '<h4 style="text-align:center;">No data found</h4>';
+            }
+            $dishDetails .= '</div></div>';
+            $dishResponse['dishDetails'] = $dishDetails;
+          return Response::json($dishResponse);
+     } catch (Exception $e) {
+
+     }
+   }
+
+   public function getUserAddress(Request $request)
+   {
+       $addressResponse = array();
+       $addressRadio = '';
+       $validatedData = $request->validate([
+           'userId' =>'required'
+       ]);
+       try{
+            $userId = $request->input('userId');
+            $addressList = $this->addressService->getAddressList($userId);
+            $addressRadio .= '<div class="form-group"><label for="address" class="col-sm-3 control-label" style="padding-top:7px">Select Address</label><div class="col-md-6 col-sm-6" style="margin-bottom:20px">';
+            if(!empty($addressList)){
+              foreach ($addressList as $address) {
+                    $addressRadio .= '<div class="col-md-6"><div class="radio">
+                                        <input name="addressId" type="radio" value="'.$address["id"].'" style="height:20px;">
+                                      </div>
+                    <div class="address-name">'.$address["name"].'</div>
+                    <div class="address-location">'.$address["location"].', '.$address["area_location"]["name"].', '.$address["area_data"]["name"].', '.$address["city_data"]["name"].', '.$address["state"].', '.$address["pincode"].'</div>
+                    <div class="address-type">'.$address["address_type"].'</div></div>';
+              }
+              $addressRadio .= '</div>';
+              $addressResponse['success'] = true;
+            }else{
+                $addressResponse['error'] = true;
+                $addressRadio .= '<div class="col-md-12">Please add user address first. For list of users <a href="/admin/user/list">Click Here</a></div>';
+            }
+            $addressRadio .= '</div>';
+
+
+            $addressResponse['addressRadio'] = $addressRadio;
+            return Response::json($addressResponse);
+       } catch (Exception $e) {
+
+       }
+
+   }
 }

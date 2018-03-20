@@ -25,7 +25,7 @@
             {{ Form::hidden('order_type_id', config('constants.ORDER_TYPE_DINNER')) }}
             <div class="box-body">
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
+                    <label for="menuDate" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
                     <div class="col-sm-6">
                       {{ Form::text('menuDate',null,['id'=>'menuDate','class'=>'form-control','placeholder'=>'Date (required)']) }}
                     </div>

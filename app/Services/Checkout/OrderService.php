@@ -60,16 +60,17 @@ class OrderService
      * @param (array)postData
      * @return void
      */
-    public function processData($addressId)
+    public function processData($addressId="")
     {
         $orderData = session('orderData');
-
         $orderParams['orderTypeId'] = $orderData['orderTypeId'];
         $orderParams['quantity'] = 1;
-        $orderParams['shippingAddressId'] = $addressId;
+        $orderParams['user_id'] = isset($orderData['user']) ? $orderData['user'] : Auth::id();
+        $orderParams['shippingAddressId'] = ($addressId!='') ? $addressId : $orderData['addressId'];
         $orderParams['status'] = 'ordered';
         $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
         $orderParams['items'] = $orderData['items'];
+        $orderParams['created_at'] = isset($orderData['orderDate']) ? date('Y-m-d H:i:s',strtotime($orderData['orderDate'])) : date('Y-m-d H:i:s');
 
         return $this->insertOrder($orderParams);
     }
@@ -87,11 +88,8 @@ class OrderService
         $orderTypeId = $postData['orderTypeId'];
         unset($postData['orderTypeId'], $postData['_token']);
 
-        $finalItemList = $this->createFinalDetailedItemList($dishTypes, $postData);
+        $response = $this->createFinalDetailedItemList($dishTypes, $postData);
         $response['orderTypeId'] = $orderTypeId;
-        $response['orderTotalAmount'] = $finalItemList['orderTotalAmount'];
-        $response['items'] = $finalItemList['items'];
-
         return $response;
     }
 
@@ -108,6 +106,7 @@ class OrderService
                 if (!empty($postData[$dishTypeName]) && !empty($postData['qty_' . $dishTypeName])) {
 
                     $dishId = $postData[$dishTypeName];
+
                     $dishDetail = $this->dishes->getDishDetailById($dishId);
                     $item[$dishTypeName]['dish_id'] = $dishId;
                     $item[$dishTypeName]['qty'] = $postData['qty_' . $dishTypeName];
@@ -126,18 +125,19 @@ class OrderService
         if (!empty($postData)) {
             $i = 0;
             foreach ($postData as $key => $dishId) {
-
+              if(strpos($key, 'others')  !== false){
                 $dishDetail = $this->dishes->getDishDetailById($dishId);
                 $item['others'][$i]['dish_id'] = $dishId;
                 $item['others'][$i]['qty'] = 1;
                 $item['others'][$i]['name'] = $dishDetail->name;
                 $item['others'][$i]['base_price'] = $dishDetail->price;
                 $item['others'][$i]['total_price'] = $dishDetail->price;
-
                 $orderTotalAmount += $dishDetail->price;
                 $i++;
+              }
             }
         }
+        $response = $postData;
         $response['orderTotalAmount'] = $orderTotalAmount;
         $response['items'] = $item;
 
@@ -152,7 +152,7 @@ class OrderService
         DB::beginTransaction();
         try {
             $order = new Order;
-            $order->user_id = Auth::id();
+            $order->user_id = $orderParams['user_id'];
             $order->order_type_id = $orderParams['orderTypeId'];
             $order->quantity = $orderParams['quantity'];
             $order->total_amount = $orderParams['orderTotalAmount'];

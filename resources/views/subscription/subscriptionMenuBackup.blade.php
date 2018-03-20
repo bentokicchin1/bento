@@ -1,6 +1,38 @@
 @extends('layouts.master')
 
 @section('content')
+<style>
+/**
+* Change three lines
+*
+/* line 11 */
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 34px;
+    user-select: none;
+    -webkit-user-select: none; }
+
+/* line 131 */
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 32px; }
+
+/* line 139 */
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 32px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px; }
+.input-group-btn{
+    vertical-align: top;
+}
+#order .input-number{
+    height:36px;
+}
+</style>
 <!-- Header section
 ================================================== -->
 <section id="header-custom">
@@ -62,8 +94,30 @@
                                     </div>
                                     @foreach ($dishesArray as $dish)
                                     @if ($dish['dishTypeName'] != 'others')
-                                        {{ Form::select($dayName.'_'.$dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control drpdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                                        {{ Form::text($dayName.'_'.'qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                          {{ Form::select($dayName.'_'.$dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="button" id="" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                      <span class="glyphicon glyphicon-minus"></span>
+                                                    </button>
+                                                </span>
+                                                {{ Form::text($dayName.'_'.'qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control input-number']) }}
+                                                <span class="input-group-btn">
+                                                  <button type="button" id="{{$dayName}}."_".{{ $dish['dishTypeName'] }}" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                      <span class="glyphicon glyphicon-plus"></span>
+                                                  </button>
+                                              </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                          {{ Form::text($dish['dishTypeName'],old($dish['dishTypeName']) , ['class' => 'form-control','disabled'=>'disabled']) }}
+                                        </div>
+                                      </div>
+
                                     @else
                                     <div class="checkbox">
                                         @foreach ($dish['dishList'] as $dishId => $dishName)
@@ -104,4 +158,27 @@
 </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Select2 -->
+    {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
+    <script>
+      $(document).ready(function(){
+        $('select').select2({
+          width : '100%'
+        });
+        var quantitiy=0;
+        $('.quantity-right-plus').click(function(e){
+          e.preventDefault();
+          console.log($(this).parent().siblings().hasClass("input-number"));
+          var quantity = parseInt($('#quantity').val());
+          $('#quantity').val(quantity + 1);
+        });
+        $('.quantity-left-minus').click(function(e){
+          e.preventDefault();
+          var quantity = parseInt($('#quantity').val());
+          if(quantity>0){
+            $('#quantity').val(quantity - 1);
+          }
+        });
+      });
+    </script>
 @endsection

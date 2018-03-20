@@ -55,6 +55,8 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
+
+    {!! Html::script('admin/custom.js') !!}
     {!! Html::script('//use.fontawesome.com/releases/v5.0.8/js/all.js') !!}
     <!-- Morris.js charts -->
     {!! Html::script('admin/bower_components/raphael/raphael.min.js') !!}

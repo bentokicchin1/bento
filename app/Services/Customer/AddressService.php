@@ -71,8 +71,8 @@ class AddressService
         }
     }
 
-    public function getAddressList(){
-        $userId = Auth::id();
+    public function getAddressList($userId=""){
+        $userId = ($userId=="") ? Auth::id() : $userId;
         return  Address::where('user_id', $userId)
                         ->with('cityData')
                         ->with('areaData')

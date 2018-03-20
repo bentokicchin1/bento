@@ -71,8 +71,8 @@ class WeeklymenuController extends Controller
                 $weeklyMenuObj->day = $day;
                 $weeklyMenuObj->dish_id = $dishId;
                 $weeklyMenuObj->save();
-                DB::commit();
             }
+            DB::commit();
             return redirect()->route('admin-menu-add')->with('status', 'Weekly Menu added successfully!');
         } catch (Exception $e) {
             DB::rollBack();
