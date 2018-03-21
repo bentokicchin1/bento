@@ -60,13 +60,13 @@ class OrderService
      * @param (array)postData
      * @return void
      */
-    public function processData($addressId="")
+    public function processData($addressId)
     {
         $orderData = session('orderData');
         $orderParams['orderTypeId'] = $orderData['orderTypeId'];
         $orderParams['quantity'] = 1;
         $orderParams['user_id'] = isset($orderData['user']) ? $orderData['user'] : Auth::id();
-        $orderParams['shippingAddressId'] = ($addressId!='') ? $addressId : $orderData['addressId'];
+        $orderParams['shippingAddressId'] = $addressId;
         $orderParams['status'] = 'ordered';
         $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
         $orderParams['items'] = $orderData['items'];

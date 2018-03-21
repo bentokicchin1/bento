@@ -21,4 +21,9 @@ class OrderItem extends Model
     {
         return $this->belongsTo('App\Model\Order');
     }
+
+    public function orderDish()
+    {
+       return $this->belongsTo('App\Model\Dish','dish_id');
+    }
 }

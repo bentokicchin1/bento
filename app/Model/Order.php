@@ -49,6 +49,7 @@ class Order extends Model
               ->join("dishes","order_items.dish_id","=","dishes.id")
               ->where('user_id', $id)
               ->get();
+
               $i = 0;
         foreach($orders as $order){
           if(!array_key_exists($order->order_id,$orderList)){

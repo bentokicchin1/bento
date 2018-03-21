@@ -18,6 +18,11 @@ class Dish extends Model
         return $this->hasMany('App\Model\WeeklyDishList');
     }
 
+    public function order_items()
+    {
+        return $this->hasMany('App\Model\OrderItem');
+    }
+
     public function getDishListfromDb($orderTypeId, $day)
     {
         if ($day == 'all') {

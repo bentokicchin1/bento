@@ -46,26 +46,26 @@ $(document).ready(function($){
     });
   });
 
-  $( "#user" ).on( "change", function() {
-    var userId = $("#user").val();
-    $.ajax({
-      type:'GET',
-      url:'/admin/order/getAddress',
-      data:{userId:userId},
-      success:function(data){
-        if ($.trim(data.addressRadio)) {
-            $('#addressRadio').html(data.addressRadio);
-        }
-        if($.trim(data.success)){
-            $('#orderRequiredDetails').slideDown();
-        }else if ($.trim(data.error)) {
-            $('#orderRequiredDetails').slideUp();
-            $('#dishDetails').slideUp();
-        }
-      },
-      error:function(){
-        console.error();
-      }
-    });
-  });
+  // $( "#user" ).on( "change", function() {
+  //   var userId = $("#user").val();
+  //   $.ajax({
+  //     type:'GET',
+  //     url:'/admin/order/getAddress',
+  //     data:{userId:userId},
+  //     success:function(data){
+  //       if ($.trim(data.addressRadio)) {
+  //           $('#addressRadio').html(data.addressRadio);
+  //       }
+  //       if($.trim(data.success)){
+  //           $('#orderRequiredDetails').slideDown();
+  //       }else if ($.trim(data.error)) {
+  //           $('#orderRequiredDetails').slideUp();
+  //           $('#dishDetails').slideUp();
+  //       }
+  //     },
+  //     error:function(){
+  //       console.error();
+  //     }
+  //   });
+  // });
 });

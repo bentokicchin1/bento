@@ -81,6 +81,16 @@ class AddressService
                         ->get()->toArray();
     }
 
+    public function getAddressByUserOrder($userId,$orderType){
+        $userId = ($userId=="") ? Auth::id() : $userId;
+        return  Address::where(['user_id'=> $userId,'order_type_id'=>$orderType])
+                        ->with('cityData')
+                        ->with('areaData')
+                        ->with('areaLocation')
+                        ->with('orderType')
+                        ->first();
+    }
+
     public function getAddressById($addressId){
         return Address::where('id', $addressId)
                         ->with('cityData')
