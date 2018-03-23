@@ -35,7 +35,8 @@
                   <label for="user" class="col-sm-3 control-label" style="padding-top:7px">User</label>
                   <div class="col-sm-6">
                     @if(!empty($ordersData))
-                      {{ Form::label('',$ordersData['users']['name'],array('class' => 'form-control')) }}
+                      {{ Form::text('',$ordersData['users']['name'],array('class' => 'form-control','readonly'=>true)) }}
+                      {{ Form::hidden('user', $ordersData['users']['id']) }}
                     @else
                       {{ Form::select('user',$userData,null,['id'=>'user','required'=>true,'class'=>'form-control dropdown','placeholder'=>'User (required)']) }}
                     @endif
@@ -45,7 +46,7 @@
                   <label for="menuDate" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
                   <div class="col-sm-6">
                     @if(!empty($ordersData))
-                        {{ Form::label('',date('l,d F,Y',strtotime($ordersData['created_at'])),array('class' => 'form-control')) }}
+                        {{ Form::text('orderDate',date('l,d F,Y',strtotime($ordersData['created_at'])),array('class' => 'form-control','readonly'=>true)) }}
                     @else
                       {{ Form::text('orderDate',null,['id'=>'orderDate','required'=>true,'class'=>'form-control','placeholder'=>'Date (required)']) }}
                     @endif
@@ -55,7 +56,8 @@
                   <label for="order_type_id" class="col-sm-3 control-label" style="padding-top:7px">Order Type</label>
                   <div class="col-sm-6">
                     @if(!empty($ordersData))
-                      {{ Form::label('',$ordersData['order_type']['name'],array('class' => 'form-control')) }}
+                      {{ Form::text('',$ordersData['order_type']['name'],array('class' => 'form-control','readonly'=>true)) }}
+                      {{ Form::hidden('orderTypeId',$ordersData['order_type']['id']) }}
                     @else
                       {{ Form::select('orderTypeId',$orderTypeData,null,['id'=>'orderTypeId','required'=>true,'class'=>'form-control dropdown','placeholder'=>'Order Type (required)']) }}
                     @endif
@@ -71,7 +73,8 @@
                             @if ($orderItem['order_dish']['dish_type_id']==$dish['dishTypeId'])
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], $orderItem['order_dish']['id'], ['class' => 'form-control drpdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                        @if(!array_key_exists($orderItem['order_dish']['id'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
+                                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], $orderItem['order_dish']['id'], ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                     </div>
                                     <div class="col-sm-3">
                                       {{ Form::text('qty_'.$dish['dishTypeName'], $orderItem['quantity'] , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
