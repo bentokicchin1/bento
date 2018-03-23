@@ -21,4 +21,5 @@ return [
     'DEFAULT_CITY' => 1,
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
+    'DISH_TYPE_OTHER' => 5,
 ];

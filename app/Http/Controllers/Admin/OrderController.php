@@ -31,16 +31,20 @@ class OrderController extends Controller
         $userData = User::offset(0)->limit(10)->pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
-          $ordersData = Order::with('orderItems')->with('orderItems.orderDish')->where('id',$id)->first();
-          $orderTypeId = $ordersData->order_type_id;
-          $orderDate = $ordersData->created_at;
+          $ordersData = Order::with('users')
+                    ->with('orderType')
+                    ->with('orderItems.orderDish')
+                    ->where('id',$id)->first()->toArray();
+
+          $orderTypeId = $ordersData['order_type_id'];
+          $orderDate = $ordersData['created_at'];
           $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
         }else {
           $dishData = array();
         }
-        echo "<pre/>";
-        print_r($ordersData->orderItems);
-        exit;
+        // echo "<pre/>";
+        // print_r($ordersData);
+        // exit;
         return view('admin.orders.orderAdd', ['ordersData'=>$ordersData,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
