@@ -1,8 +1,8 @@
 
  /* jQuery Pre loader
   -----------------------------------------------*/
-$(window).load(function(){
-    $('.preloader').fadeOut(0); // set duration in brackets    
+$(window).on('load',function(){
+    $('.preloader').fadeOut(0); // set duration in brackets
 });
 
 
@@ -17,13 +17,13 @@ $(window).load(function(){
 //       center: new google.maps.LatLng(13.758468, 100.567481),
 //       scrollwheel: false
 //     };
-  
+
 //     map = new google.maps.Map(document.getElementById('map-canvas'),  mapOptions);
 
 //     google.maps.event.addDomListener(map, 'idle', function() {
 //         calculateCenter();
 //     });
-  
+
 //     google.maps.event.addDomListener(window, 'resize', function() {
 //         map.setCenter(center);
 //     });
@@ -49,9 +49,9 @@ $(window).load(function(){
 -----------------------------------------------*/
 jQuery(document).ready(function($){
 
-  if ( $('.iso-box-wrapper').length > 0 ) { 
+  if ( $('.iso-box-wrapper').length > 0 ) {
 
-      var $container  = $('.iso-box-wrapper'), 
+      var $container  = $('.iso-box-wrapper'),
         $imgs     = $('.iso-box img');
 
       $container.imagesLoaded(function () {
@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
         itemSelector: '.iso-box'
         });
 
-        $imgs.load(function(){
+        $imgs.on('load',function(){
           $container.isotope('reLayout');
         })
 
@@ -69,23 +69,23 @@ jQuery(document).ready(function($){
 
       //filter items on button click
 
-      $('.filter-wrapper li a').click(function(){
+      $('.filter-wrapper li a').on('click', function(){
 
           var $this = $(this), filterValue = $this.attr('data-filter');
 
-      $container.isotope({ 
+      $container.isotope({
         filter: filterValue,
-        animationOptions: { 
-            duration: 0, 
-            easing: 'linear', 
-            queue: false, 
-        }                
-      });             
+        animationOptions: {
+            duration: 0,
+            easing: 'linear',
+            queue: false,
+        }
+      });
 
-      // don't proceed if already selected 
+      // don't proceed if already selected
 
-      if ( $this.hasClass('selected') ) { 
-        return false; 
+      if ( $this.hasClass('selected') ) {
+        return false;
       }
 
       var filter_wrapper = $this.closest('.filter-wrapper');
@@ -93,7 +93,7 @@ jQuery(document).ready(function($){
       $this.addClass('selected');
 
         return false;
-      }); 
+      });
 
   }
 
@@ -102,7 +102,7 @@ jQuery(document).ready(function($){
 
  /* Navigation Bar
   -----------------------------------------------*/
-$(document).ready(function() { 
+$(document).ready(function() {
     "use strict";
 
     // Navbar Sticky
@@ -120,7 +120,7 @@ $(document).ready(function() {
                 }
             }, false );
         }
-        
+
         function scrollPage() {
             var sy = scrollY();
             if ( sy >= stickynav ) {
@@ -131,18 +131,18 @@ $(document).ready(function() {
             }
             didScroll = false;
         }
-        
+
         function scrollY() {
             return window.pageYOffset || docElem.scrollTop;
-        }        
-        init();        
+        }
+        init();
     })();
 
 });
 
 
 $(document).ready(function(){
-            
+
     "use strict";
 
     $('.menu-container').each(function(index) {
@@ -150,20 +150,19 @@ $(document).ready(function(){
         $(this).find('.list-menu').clone().appendTo('body').attr('menu-link', index);
     });
 
-    $('.menu-container .circle').click(function() {
+    $('.menu-container .circle').on('click',function() {
         var linkedVideo = $('section').closest('body').find('.list-menu[menu-link="' + $(this).attr('menu-link') + '"]');
         linkedVideo.toggleClass('reveal-modal');
-       
+
     });
 
-    $('section').closest('body').find('.close-iframe').click(function() {
+    $('section').closest('body').find('.close-iframe').on('click',function() {
         $(this).closest('.list-menu').toggleClass('reveal-modal');
     });
-    
+
 
   /* wow
   -------------------------------*/
   new WOW({ mobile: false }).init();
 
   });
-

@@ -62,6 +62,12 @@ class OrderService
     public function processData($addressId)
     {
         $orderData = session('orderData');
+
+        if(!empty($orderData['id'])){
+          $orderParams['id'] = $orderData['id'];
+        }
+        $orderParams['quantity'] = 1;
+        $orderParams['order_date'] = isset($orderData['orderDate']) ? date('Y-m-d',strtotime($orderData['orderDate'])) : date('Y-m-d');
         $orderParams['orderTypeId'] = $orderData['orderTypeId'];
         $orderParams['quantity'] = 1;
         $orderParams['user_id'] = isset($orderData['user']) ? $orderData['user'] : Auth::id();
@@ -69,7 +75,6 @@ class OrderService
         $orderParams['status'] = 'ordered';
         $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
         $orderParams['items'] = $orderData['items'];
-        $orderParams['created_at'] = isset($orderData['orderDate']) ? date('Y-m-d H:i:s',strtotime($orderData['orderDate'])) : date('Y-m-d H:i:s');
 
         return $this->insertOrder($orderParams);
     }
@@ -150,12 +155,17 @@ class OrderService
     {
         DB::beginTransaction();
         try {
-            $order = new Order;
+            if (!empty($orderParams['id'])) {
+                $order = Order::find($orderParams['id']);
+            } else {
+                $order = new Order;
+            }
             $order->user_id = $orderParams['user_id'];
             $order->order_type_id = $orderParams['orderTypeId'];
             $order->quantity = $orderParams['quantity'];
             $order->total_amount = $orderParams['orderTotalAmount'];
             $order->shipping_address_id = $orderParams['shippingAddressId'];
+            $order->order_date = $orderParams['order_date'];
             $order->status = $orderParams['status'];
             $order->save();
 
@@ -175,6 +185,7 @@ class OrderService
     private function insertOrderItems($orderId, $items)
     {
         try {
+            DB::table('order_items')->where('order_id',$orderId)->delete();
             if (!empty($items)) {
                 foreach ($items as $key => $item) {
                     if ($key != 'others') {
@@ -185,6 +196,7 @@ class OrderService
                         }
                     }
                 }
+
                 OrderItem::insert($itemParams);
             }
         } catch (Exception $e) {
@@ -206,5 +218,23 @@ class OrderService
     public function checkBillingCycle(){
         $user_id = Auth::id();
         return User::where(['id'=>$user_id,'billing_cycle'=>null])->first();
+    }
+
+    public function formatOrderItems($orderItems){
+      $finalList['orderTypeIds'] = array();
+      $finalList['orderDishes'] = array();
+      if(!empty($orderItems['order_items'])){
+        foreach ($orderItems['order_items'] as $key => $item) {
+            array_push($finalList['orderTypeIds'],$item['order_dish']['dish_type_id']);
+            $dishId = $item['order_dish']['id'];
+            $dish['dishId'] = $dishId;
+            $dish['dishTypeId'] = $item['order_dish']['dish_type_id'];
+            $dish['dishName'] = $item['order_dish']['name'];
+            $dish['dishPrice'] = $item['base_price'];
+            $dish['quantity'] = $item['quantity'];
+            $finalList['orderDishes'][$item['order_dish']['dish_type_id']] = $dish;
+        }
+      }
+      return $finalList;
     }
 }

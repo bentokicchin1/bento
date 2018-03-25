@@ -46,7 +46,7 @@
                   <label for="menuDate" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
                   <div class="col-sm-6">
                     @if(!empty($ordersData))
-                        {{ Form::text('orderDate',date('l,d F,Y',strtotime($ordersData['created_at'])),array('class' => 'form-control','readonly'=>true)) }}
+                        {{ Form::text('orderDate',date('l,d F,Y',strtotime($ordersData['order_date'])),array('class' => 'form-control','readonly'=>true)) }}
                     @else
                       {{ Form::text('orderDate',null,['id'=>'orderDate','required'=>true,'class'=>'form-control','placeholder'=>'Date (required)']) }}
                     @endif
@@ -68,47 +68,42 @@
                   <label class="col-sm-3 control-label" style="padding-top:7px">Order Details</label>
                     <div class="row  col-sm-6">
                       @foreach ($dishData as $dish)
-                        @foreach ($ordersData['order_items'] as $orderItem)
-                          @if ($dish['dishTypeName'] != 'others')
-                            @if ($orderItem['order_dish']['dish_type_id']==$dish['dishTypeId'])
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        @if(!array_key_exists($orderItem['order_dish']['id'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
-                                        {{ Form::select($dish['dishTypeName'], $dish['dishList'], $orderItem['order_dish']['id'], ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                                    </div>
-                                    <div class="col-sm-3">
-                                      {{ Form::text('qty_'.$dish['dishTypeName'], $orderItem['quantity'] , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
-                                    </div>
-                                 </div>
-                               @endif
-                             @else
-                              @if ($orderItem['order_dish']['dish_type_id']==config('constants.DISH_TYPE_OTHER'))
-                                @foreach($dish['dishList'] as $dishId => $dishName)
-                                    @if($orderItem['order_dish']['id']==$dishId)
-                                      <div class="checkbox">
-                                        <label style="font-size: 1.5em">
-                                            {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($orderItem['order_dish']['name']), $orderItem['order_dish']['id'], true) }}
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <span>{{ $orderItem['order_dish']['name'] }} ( <i class="fa fa-inr"></i>{{ round($orderItem['order_dish']['price']) }} )</span>
-                                        </label>
-                                      </div>
-                                    @else{
-                                      <div class="checkbox">
-                                        <label style="font-size: 1.5em">
-                                            {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false) }}
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <span>{{ $dishName }} ( <i class="fa fa-inr"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
-                                        </label>
-                                      </div>
-                                    @endif
-                                  @endforeach
-                                @endif
-                            @endif
-                          @endforeach
+                        @if ($dish['dishTypeName'] != 'others')
+                          <div class="form-group">
+                            <div class="col-sm-6">
+                              @if(in_array($dish['dishTypeId'],$orderItems['orderTypeIds']))
+                                @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                              @else
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'], null, ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                              @endif
+                            </div>
+                            <div class="col-sm-3">
+                              @if(in_array($dish['dishTypeId'],$orderItems['orderTypeIds']))
+                                {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                              @else
+                                {{ Form::text('qty_'.$dish['dishTypeName'], null , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                              @endif
+                            </div>
+                         </div>
+                      @else
+                        @foreach($dish['dishList'] as $dishId => $dishName)
+                          <div class="checkbox">
+                            <label>
+                              @if(in_array(config('constants.DISH_TYPE_OTHER'),$orderItems['orderTypeIds']))
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishId'], true) }}
+                                <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishPrice']) }} )</span>
+                              @else
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, false) }}
+                                <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
+                              @endif
+                            </label>
+                          </div>
                         @endforeach
-                      </div>
-                    </div>
-                  @endif
+                      @endif
+                   @endforeach
+                 </div>
+               @endif
               </div>
             </div>
             <div class="box-footer">

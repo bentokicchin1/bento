@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_amount', 8, 2);
             $table->text('shipping_address_id');
             $table->string('status');
+            $table->date('order_date');
             $table->timestamps();
             $table->softDeletes();
         });

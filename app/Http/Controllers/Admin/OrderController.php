@@ -35,17 +35,17 @@ class OrderController extends Controller
                     ->with('orderType')
                     ->with('orderItems.orderDish')
                     ->where('id',$id)->first()->toArray();
-
+          $orderItems = $this->orderService->formatOrderItems($ordersData);
           $orderTypeId = $ordersData['order_type_id'];
-          $orderDate = $ordersData['created_at'];
+          $orderDate = $ordersData['order_date'];
           $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
         }else {
           $dishData = array();
         }
         // echo "<pre/>";
-        // print_r($ordersData);
+        // print_r($orderItems);
         // exit;
-        return view('admin.orders.orderAdd', ['ordersData'=>$ordersData,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
+        return view('admin.orders.orderAdd', ['ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
     public function index()
