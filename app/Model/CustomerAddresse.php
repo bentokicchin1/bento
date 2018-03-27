@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CustomerAddresse extends Model
 {
     use SoftDeletes;
+    protected $hidden = ["deleted_at"];
 
     /**
      * The attributes that should be mutated to dates.

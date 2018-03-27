@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dish extends Model
 {
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
     public function dishType()
     {
         return $this->belongsTo('App\Model\DishType');

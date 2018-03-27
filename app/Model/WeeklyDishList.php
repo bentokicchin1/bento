@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WeeklyDishList extends Model
 {
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
     public function order_type()
     {
         return $this->belongsTo('App\Model\OrderType');

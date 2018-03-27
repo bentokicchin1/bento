@@ -8,7 +8,17 @@ use DB;
 
 class Order extends Model
 {
-
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
+    protected static function boot()
+    {
+       parent::boot();
+       static::deleting(function($users) {
+         foreach ($users->orderItems()->get() as $orderItems) {
+            $orderItems->delete();
+         }
+       });
+    }
     /**
      * The attributes that are mass assignable.
      *

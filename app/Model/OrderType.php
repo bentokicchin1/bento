@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderType extends Model
 {
-    protected $dates = ['deleted_at'];
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
 
     public function weeklyMenu()
     {

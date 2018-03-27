@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function showForm($id = '', Request $request)
     {
-        $ordersData = [];
+        $ordersData = $orderItems = [];
         $userData = User::offset(0)->limit(10)->pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
@@ -113,7 +113,9 @@ class OrderController extends Controller
     {
         if (!empty($id)) {
             try {
-                Order::destroy($id);
+                $order = Order::findOrFail($id);
+                // $order->orderItems()->delete($id);
+                $order->delete($id);
                 return redirect()->back()->with('status', 'Order deleted successfully!');
             } catch (Exception $e) {
 

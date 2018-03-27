@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Area extends Model
 {
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
     public function arealocation()
     {
         return $this->hasMany('App\Model\Area_location');

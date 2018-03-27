@@ -23,10 +23,6 @@ class AreaController extends Controller
     public function index()
     {
         $area =  Area::with('cityName')->get();
-
-        // echo "<pre/>";
-        // print_r($area);
-        // exit;
         return view('admin.locations.areaList', ['area' => $area]);
     }
 
@@ -65,7 +61,7 @@ class AreaController extends Controller
     {
         if (!empty($id)) {
             try {
-                Area::destroy($id);
+                Area::delete($id);
                 return redirect()->back()->with('status', 'Area deleted successfully!');
             } catch (Exception $e) {
 

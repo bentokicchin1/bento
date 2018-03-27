@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VerifyUser extends Model
 {
+    use SoftDeletes;
+    protected $hidden = ["deleted_at"];
     protected $guarded = [];
     /**
      * Get associated user.

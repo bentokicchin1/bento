@@ -9,6 +9,7 @@ use App\Model\City;
 use App\Model\Area_location;
 use App\Model\Area;
 use App\Model\Order;
+use App\Model\OrderItem;
 use App\Model\OrderType;
 use App\Model\CustomerAddresse;
 use App\Services\Customer\AddressService;
@@ -129,7 +130,11 @@ class UserController extends Controller
     {
         if (!empty($id)) {
             try {
-                User::destroy($id);
+                $user = User::find($id);
+                // $user->orders()->orderItems('id')->delete();
+                // $user->orders()->delete();
+                // $user->address()->delete();
+                $user->delete();
                 return redirect()->back()->with('status', 'Dish type deleted successfully!');
             } catch (Exception $e) {
 
