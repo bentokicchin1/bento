@@ -6,9 +6,8 @@
         Dish Types
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Data tables</li>
+        <li><a href="{{ route('admin-dashboard')}}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"class="active">Dish Type</a></li>
       </ol>
     </section>
 

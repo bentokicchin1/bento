@@ -6,9 +6,9 @@
         Order Type
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Data tables</li>
+        <li><a href="{{ route('admin-dashboard')}}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="{{route('admin-order-type-list')}}">Order Type</a></li>
+        <li class="active">Add Order Type</li>
       </ol>
     </section>
 
@@ -26,7 +26,7 @@
             {{ Form::model($orderTypesData, ['route' => ['admin-order-type-add', $orderTypesData['id']]]) }}
             {{ Form::hidden('id', $orderTypesData['id']) }}
             @else
-            {{ Form::open(['route' => 'admin-order-type-add', 'method' => 'post']) }} 
+            {{ Form::open(['route' => 'admin-order-type-add', 'method' => 'post']) }}
             @endif
             <div class="box-body">
                 <div class="form-group">
@@ -38,7 +38,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                {{ Form::submit('Submit', ['class' => 'btn btn-success pull-right']) }}    
+                {{ Form::submit('Submit', ['class' => 'btn btn-success pull-right']) }}
             </div>
             {{ Form::close() }}
           </div>
@@ -49,4 +49,4 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-@endsection    
+@endsection

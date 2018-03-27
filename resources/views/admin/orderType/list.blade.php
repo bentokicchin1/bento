@@ -6,9 +6,8 @@
         Order Types
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Data tables</li>
+        <li><a href="{{ route('admin-dashboard')}}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#" class="active">Order Type</a></li>
       </ol>
     </section>
 
@@ -33,7 +32,7 @@
                 </thead>
                 <tbody>
                 @foreach($orderType as $type)
-                <tr>                 
+                <tr>
                 <td>{{$type->id}}</td>
                 <td>{{ ucfirst($type->name) }}</td>
                 <td><a class="btn btn-warning" href="{{ route('admin-order-type-edit',['id' => $type['id']]) }}">Edit</a>
@@ -54,4 +53,4 @@
     </section>
     <!-- /.content -->
 
-@endsection    
+@endsection
