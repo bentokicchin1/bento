@@ -71,7 +71,7 @@
                         @if ($dish['dishTypeName'] != 'others')
                           <div class="form-group">
                             <div class="col-sm-6">
-                              @if(in_array($dish['dishTypeId'],$orderItems['orderTypeIds']))
+                              @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
                                 @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
                                 {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @else
@@ -79,7 +79,7 @@
                               @endif
                             </div>
                             <div class="col-sm-3">
-                              @if(in_array($dish['dishTypeId'],$orderItems['orderTypeIds']))
+                              @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
                                 {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
                               @else
                                 {{ Form::text('qty_'.$dish['dishTypeName'], null , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
@@ -90,7 +90,7 @@
                         @foreach($dish['dishList'] as $dishId => $dishName)
                           <div class="checkbox">
                             <label>
-                              @if(in_array(config('constants.DISH_TYPE_OTHER'),$orderItems['orderTypeIds']))
+                              @if(array_key_exists(config('constants.DISH_TYPE_OTHER'),$orderItems['orderTypeIds']))
                                 {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishId'], true) }}
                                 <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishPrice']) }} )</span>
                               @else

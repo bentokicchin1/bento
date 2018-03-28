@@ -20,8 +20,12 @@ class User extends Model
          foreach ($users->address()->get() as $address) {
             $address->delete();
          }
+         foreach ($users->verification()->get() as $verification) {
+            $verification->delete();
+         }
        });
     }
+
     public function orders()
     {
         return $this->hasMany('App\Model\Order');
@@ -30,5 +34,10 @@ class User extends Model
    public function address()
    {
        return $this->hasMany('App\Model\CustomerAddresse');
+   }
+
+   public function verification()
+   {
+        return $this->hasMany('App\Model\VerifyUser');
    }
 }

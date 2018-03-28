@@ -26,6 +26,7 @@ class WeeklymenuController extends Controller
         $dishes = DB::table('dishes')
                 ->select("dishes.id as dish_id", "dishes.name as dishName", "dish_types.id as dish_type_id", "dish_types.name as dishTypeName")
                 ->join("dish_types","dish_types.id","=","dishes.dish_type_id")
+                ->where('dishes.deleted_at',null)
                 ->get();
         foreach ($dishTypeData as $dishTypeId => $dishTypeName) {
             foreach ($dishes as $dishId => $dishData) {

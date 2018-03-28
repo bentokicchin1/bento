@@ -160,9 +160,9 @@ $(document).ready(function(){
         $(this).closest('.list-menu').toggleClass('reveal-modal');
     });
 
+    /* wow
+    -------------------------------*/
+    new WOW({ mobile: false }).init();
 
-  /* wow
-  -------------------------------*/
-  new WOW({ mobile: false }).init();
 
   });

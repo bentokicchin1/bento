@@ -25,9 +25,9 @@ class Dish extends Model
         return $this->hasMany('App\Model\OrderItem');
     }
 
-    public function getDishListfromDb($orderTypeId, $day)
+    public function getDishListfromDb($orderTypeId, $date)
     {
-        if ($day == 'all') {
+        if ($date == 'all') {
             $daysArray = WeeklyDishList::getDatesForThisWeek();
             $dishes = DB::table('dishes')
                 ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
@@ -42,7 +42,7 @@ class Dish extends Model
                 ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
                 ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
-                ->where('weekly_dish_lists.day', '=', $day)
+                ->where('weekly_dish_lists.date', '=', $date)
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->get()->toArray();
         }

@@ -36,8 +36,8 @@ class OrderService
     public function getDishList($orderTypeId,$orderDate='')
     {
         /* TODO - Add proper day function to get data from DB. Below MONDAY is hard coded */
-        $orderDay = ($orderDate=='') ? 'all' : date('l',strtotime($orderDate));
-        $rawDishList = $this->dishes->getDishListfromDb($orderTypeId,$orderDay);
+        $orderDate = ($orderDate=='') ? 'all' : date('Y-m-d',strtotime($orderDate));
+        $rawDishList = $this->dishes->getDishListfromDb($orderTypeId,$orderDate);
         return $this->formatDishList($rawDishList);
     }
 
@@ -221,11 +221,9 @@ class OrderService
     }
 
     public function formatOrderItems($orderItems){
-      $finalList['orderTypeIds'] = array();
       $finalList['orderDishes'] = array();
       if(!empty($orderItems['order_items'])){
         foreach ($orderItems['order_items'] as $key => $item) {
-            array_push($finalList['orderTypeIds'],$item['order_dish']['dish_type_id']);
             $dishId = $item['order_dish']['id'];
             $dish['dishId'] = $dishId;
             $dish['dishTypeId'] = $item['order_dish']['dish_type_id'];

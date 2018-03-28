@@ -6,7 +6,7 @@ http://www.tooplate.com/view/2082-pure-mix
 
 */
 
-/* Body 
+/* Body
 ------------------------------------- */
 body {
 		background: #ffffff;
@@ -182,7 +182,7 @@ nav a {
   text-decoration: none;
 }
 
-.navicon {  
+.navicon {
   position: relative;
   right: 0;
   display: -webkit-flex;
@@ -204,7 +204,7 @@ nav ul.right {
 }
 
 #nav-menu  {
-  padding-left: 0px; 
+  padding-left: 0px;
 }
 #nav-menu a {
   font-weight: 300;
@@ -261,7 +261,7 @@ a.icon {
   padding-right: 20px;
 }
 
-.intro-inner {  
+.intro-inner {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -472,7 +472,7 @@ a.icon {
   position: relative;
   overflow: hidden;
   margin: 0;
-} 
+}
 
 #portfolio .portfolio-thumb .portfolio-overlay {
   background: #141414;
@@ -570,7 +570,7 @@ a.icon {
     width: 100%;
     height: 100%;
     overflow: hidden;
-} 
+}
 
 .fluid-img {
     width: 100%;
@@ -615,7 +615,7 @@ a.icon {
 
 /* blog & single post section styles
 /* ========================================== */
-#blog, 
+#blog,
 #single-post {
   padding-top: 4rem;
   padding-bottom: 6rem;
@@ -948,7 +948,7 @@ li {
 
 input[type='radio'] { transform: scale(1.6); }
 
-  
+
   /* Default mode */
   .tabbable-line > .nav-tabs {
     border: none;
@@ -1006,9 +1006,9 @@ input[type='radio'] { transform: scale(1.6); }
   .portlet .tabbable-line > .tab-content {
     padding-bottom: 0;
   }
-  
+
   /* Below tabs mode */
-  
+
   .tabbable-line.tabs-below > .nav-tabs > li {
     border-top: 4px solid transparent;
   }
@@ -1087,19 +1087,19 @@ footer {
     padding-top: 1rem;
     padding-bottom: 9rem;
   }
-  
+
   #order .fa {
     font-size: 17px;
     padding-right: 10px;
   }
-  
+
   #order .order-form {
     padding-top: 14px;
   }
-  
+
   #order .form-control {
     background: transparent;
-    height: 50px;
+    height: 50px !important;
     border: 1px solid #eee;
     border-radius: 0px;
     box-shadow: none;
@@ -1120,15 +1120,15 @@ footer {
   }
 
 
-  
+
   #order .form-control:hover {
     border-color: #f0f0f0;
   }
-  
+
   #order textarea {min-height: 100px;}
-  
+
   #order input,select {height: 50px;}
-  
+
   #order input[type='submit'] {
     background: #4CAF50;
     color: #ffffff;
@@ -1139,16 +1139,16 @@ footer {
     margin-top: 10px;
     text-transform: uppercase;
   }
-  
+
   #order input[type='submit']:hover {
     background: #444;
   }
-  
+
   #order .order-submit {
       /* width: 50%; */
       margin-top: 35px;
   }
-  
+
   #order .col-md-4 {
     background: #fff;
     padding: 62px 0px 32px 42px;
@@ -1165,18 +1165,18 @@ footer {
       font-size: 17px !important;
       padding-right: 3px;
   }
-  
+
   #order .checkbox {
     margin-bottom: 20px;
 }
 
-  .checkbox label:after, 
+  .checkbox label:after,
   .radio label:after {
       content: '';
       display: table;
       clear: both;
   }
-  
+
   .checkbox .cr,
   .radio .cr {
       position: relative;
@@ -1188,11 +1188,11 @@ footer {
       float: left;
       margin-right: .5em;
   }
-  
+
   .radio .cr {
       border-radius: 50%;
   }
-  
+
   .checkbox .cr .cr-icon,
   .radio .cr .cr-icon {
       position: absolute;
@@ -1201,29 +1201,29 @@ footer {
       top: 50%;
       left: 20%;
   }
-  
+
   .radio .cr .cr-icon {
       margin-left: 0.04em;
   }
-  
+
   .checkbox label input[type="checkbox"],
   .radio label input[type="radio"] {
       display: none;
   }
-  
+
   .checkbox label input[type="checkbox"] + .cr > .cr-icon,
   .radio label input[type="radio"] + .cr > .cr-icon {
       transform: scale(3) rotateZ(-20deg);
       opacity: 0;
       transition: all .3s ease-in;
   }
-  
+
   .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
   .radio label input[type="radio"]:checked + .cr > .cr-icon {
       transform: scale(1) rotateZ(0deg);
       opacity: 1;
   }
-  
+
   .checkbox label input[type="checkbox"]:disabled + .cr,
   .radio label input[type="radio"]:disabled + .cr {
       opacity: .5;
@@ -1242,7 +1242,7 @@ footer {
     float: left;
     transition: all 0.4s ease-in-out;
   }
-  
+
   .default-address{
     border: 1px solid #d4cdcd;
     color: white;

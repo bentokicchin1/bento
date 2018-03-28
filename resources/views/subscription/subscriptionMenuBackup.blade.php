@@ -159,7 +159,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <!-- Select2 -->
-    {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
     <script>
       $(document).ready(function(){
         $('select').select2({
