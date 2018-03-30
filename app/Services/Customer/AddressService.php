@@ -52,7 +52,6 @@ class AddressService
             }
             $addressObj->user_id = $userId;
             $addressObj->order_type_id = $addressParams['order_type_id'];
-            $addressObj->address_type = $addressParams['address_type'];
             $addressObj->name = $addressParams['name'];
             $addressObj->location = $addressParams['location'];
             $addressObj->area = $addressParams['area'];
@@ -60,7 +59,6 @@ class AddressService
             $addressObj->city = $addressParams['city'];
             $addressObj->state = $addressParams['state'];
             $addressObj->pincode = $addressParams['pincode'];
-            $addressObj->default = $addressParams['default']?? 0;
             $addressObj->save();
 
             DB::commit();

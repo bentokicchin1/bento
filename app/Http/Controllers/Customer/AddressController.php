@@ -30,8 +30,6 @@ class AddressController extends Controller
     public function showAddressForm($id = '', Request $request)
     {
         $data = [];
-
-        $data['addressTypeData'] = config('constants.ADDRESS_TYPE');
         $data['cityData'] = city::pluck('name', 'id');
         $data['orderTypeData'] = OrderType::pluck('name', 'id');
         $data['areaData'] = Area::pluck('name', 'id');
@@ -51,7 +49,6 @@ class AddressController extends Controller
         if (!empty($refereUrl)) {
             $request->session()->put('refererUrl', $refereUrl);
         }
-
         return view('customer.address.add', $data);
     }
 
@@ -75,7 +72,6 @@ class AddressController extends Controller
         $input = $request->all();
         $validatedData = $request->validate([
             'order_type_id' => 'required|numeric',
-            'address_type' => 'required',
             'location' => 'required',
             'name' => 'required',
             'area' => 'required',
@@ -85,6 +81,11 @@ class AddressController extends Controller
             'pincode' => 'required|digits:6',
         ]);
 
+        $userId = Auth::id();
+        $existingRec = CustomerAddresse::where(['user_id'=>$userId,'order_type_id'=>$input['order_type_id']])->first();
+        if(!empty($existingRec)){
+            $input['id'] = $existingRec->id;
+        }
         $response = $this->addressService->saveAddress($input);
         if ($response == 'success') {
             if ($request->session()->has('refererUrl')) {

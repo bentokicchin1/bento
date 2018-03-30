@@ -70,12 +70,6 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Address Type :</label>
-                      <div class="col-sm-6">
-                        {{ Form::select('address_type', $addressTypeData, old('address_type'), ['class' => 'form-control dropdown','placeholder' => 'Please Select Address Type' ])}}
-                      </div>
-                  </div>
-                  <div class="form-group">
                       <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select City :</label>
                       <div class="col-sm-6">
                         {{ Form::select('city', $cityData,old('city'), ['class' => 'form-control dropdown','placeholder' => 'Please Select Your City'])}}

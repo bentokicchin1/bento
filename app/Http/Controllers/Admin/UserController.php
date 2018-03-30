@@ -31,19 +31,18 @@ class UserController extends Controller
     {
         $usersData = [];
         $userTypeData = config('constants.USER_TYPE');
-        $addressTypeData = config('constants.ADDRESS_TYPE');
         $cityData = city::pluck('name', 'id');
         $orderTypeData = OrderType::pluck('name', 'id');
         $areaData = Area::pluck('name', 'id');
         $areaLocationData = Area_location::pluck('name', 'id');
         if (!empty($id)) {
             $usersData = DB::table('users')
-                  ->select("users.id as id","users.name as name", "email","mobile_number","user_type","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.address_type","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
+                  ->select("users.id as id","users.name as name", "email","mobile_number","user_type","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
                   ->join("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
                   ->first();
         }
-        return view('admin.users.userAdd', ['usersData' => $usersData,'userTypeData'=>$userTypeData,'addressTypeData'=>$addressTypeData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);
+        return view('admin.users.userAdd', ['usersData' => $usersData,'userTypeData'=>$userTypeData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);
     }
 
     public function index()
@@ -60,7 +59,6 @@ class UserController extends Controller
             'user_type' => 'required',
             'mobile_number' => 'required|digits:10',
             'order_type_id' => 'required|numeric',
-            'address_type' => 'required',
             'location' => 'required',
             'area' => 'required',
             'sector' => 'required',
@@ -90,7 +88,6 @@ class UserController extends Controller
 
             $addressObj->user_id = $userId;
             $addressObj->order_type_id = $request->input('order_type_id');
-            $addressObj->address_type = $request->input('address_type');
             $addressObj->name = $request->input('name');
             $addressObj->location = $request->input('location');
             $addressObj->area = $request->input('area');
@@ -98,7 +95,6 @@ class UserController extends Controller
             $addressObj->city = $request->input('city');
             $addressObj->state = $request->input('state');
             $addressObj->pincode = $request->input('pincode');
-            $addressObj->default = $request->input('default') ?? 0;
             $addressObj->save();
             DB::commit();
 

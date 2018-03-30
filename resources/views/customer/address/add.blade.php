@@ -21,7 +21,6 @@
                         @endif
 
                         {{ Form::select('order_type_id', $orderTypes, old('order_type_id'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Order Type' ])}}
-                        {{ Form::select('address_type', $addressTypeData, old('address_type'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Address Type' ])}}
                         {{ Form::text('name',old('name'),['class' => 'form-control', 'placeholder' => 'Full Name (required)']) }}
                         {{ Form::select('city', $cityData, old('city'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your City'])}}
                         {{ Form::select('area', $areaData, old('area'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
