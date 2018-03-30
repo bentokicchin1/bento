@@ -84,7 +84,6 @@ class CustomerController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'mobile_number' => 'required|numeric|digits:10',
-            'email' => 'required|string|email|max:255|unique:users',
         ]);
         /* Save post data */
         $response = $this->customerService->updateUserInfo($postData);

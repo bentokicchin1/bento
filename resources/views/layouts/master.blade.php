@@ -18,8 +18,8 @@
 {!! Html::style('css/animate.min.css') !!}
 <!-- Font Icons CSS
 ================================================== -->
-{!! Html::style('css/font-awesome.min.css') !!}
 {!! Html::style('css/ionicons.min.css') !!}
+{!! Html::style('admin/bower_components/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.min.css') !!}
 <!-- Select2 -->
 {!! Html::style('admin/bower_components/select2/dist/css/select2.min.css') !!}
 <!-- Main CSS
@@ -27,7 +27,8 @@
 {!! Html::style('css/style.css') !!}
 <!-- Google web font
 ================================================== -->
-{!! Html::style('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300') !!}
+
+{!! Html::style('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') !!}
 <!-- jQuery 3 -->
 {!! Html::script('admin/bower_components/jquery/dist/jquery.min.js') !!}
 <!-- jQuery UI 1.11.4 -->
@@ -36,6 +37,7 @@
 {!! Html::script('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') !!}
 <!-- Select2 -->
 {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
+{!! Html::script('admin/bower_components/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min.js') !!}
 </head>
 <body>
     @include('layouts.header')
@@ -44,8 +46,6 @@
 
     <!-- Javascript
     ================================================== -->
-    <!-- Select2 -->
-    {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
     {!! Html::script('js/isotope.js') !!}
     {!! Html::script('js/imagesloaded.min.js') !!}
     {!! Html::script('js/wow.min.js') !!}

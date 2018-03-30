@@ -73,7 +73,6 @@ class SubscriptionController extends Controller
     public function addressSelect(Request $request)
     {
         $postData = $request->all();
-
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);

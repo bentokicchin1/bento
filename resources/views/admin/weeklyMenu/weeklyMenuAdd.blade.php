@@ -25,20 +25,20 @@
             {{ Form::hidden('order_type_id', config('constants.ORDER_TYPE_DINNER')) }}
             <div class="box-body">
                 <div class="form-group">
-                    <label for="menuDate" class="col-sm-3 control-label" style="padding-top:7px">Select Day :</label>
+                    <label for="menuDate" class="col-sm-3 control-label">Select Day :</label>
                     <div class="col-sm-6">
                       {{ Form::text('menuDate',null,['id'=>'menuDate','class'=>'form-control','placeholder'=>'Date (required)']) }}
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Order Type :</label>
+                    <label for="name" class="col-sm-3 control-label">Select Order Type :</label>
                     <div class="col-sm-6">
                         {{ Form::select('order_type_id',$orderTypeData,null,['id'=>'order_type_id','class'=>'form-control','placeholder'=>'Order Type (required)']) }}
                     </div>
                 </div>
                 @foreach ($dishTypeSelect as $dishType=>$dishData)
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select {{$dishType}} :</label>
+                        <label for="name" class="col-sm-3 control-label">Select {{$dishType}} :</label>
                         <div class="col-sm-6">
                             {{ Form::select('dish[]',$dishData,null,['id'=>'dish[]','multiple'=>'multiple','class'=>'form-control dynamicDish']) }}
                         </div>
@@ -106,7 +106,7 @@
     </section>
     <script>
       $( document ).ready(function() {
-        $(".dynamicDish").select2();
+        $("select").select2();
         $("#menuDate").datepicker({
           startDate:new Date(),
           autoclose : true,

@@ -59,7 +59,6 @@ class UserController extends Controller
             'name' => 'required',
             'user_type' => 'required',
             'mobile_number' => 'required|digits:10',
-            'email' => 'required|string|email|max:255|unique:users',
             'order_type_id' => 'required|numeric',
             'address_type' => 'required',
             'location' => 'required',
@@ -81,7 +80,6 @@ class UserController extends Controller
             }
             $userObj->name = $request->input('name');
             $userObj->user_type = $request->input('user_type');
-            $userObj->email = $request->input('email');
             $userObj->password = bcrypt('123456');
             $userObj->mobile_number = $request->input('mobile_number');
             $userObj->mobile_verified = ($request->input('mobile_verified')!=null) ? $request->input('mobile_verified') : false;

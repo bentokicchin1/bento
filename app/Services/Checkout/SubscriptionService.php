@@ -102,31 +102,30 @@ class SubscriptionService
         $weekdays = $postData['days'];
 
         $monday = array_filter($postData, function ($key) {
-            return strpos($key, 'monday') === 0;
+            return strpos($key, 'monday') > 0;
         }, ARRAY_FILTER_USE_KEY);
         $tuesday = array_filter($postData, function ($key) {
-            return strpos($key, 'tuesday') === 0;
+            return strpos($key, 'tuesday') > 0;
         }, ARRAY_FILTER_USE_KEY);
         $wednesday = array_filter($postData, function ($key) {
-            return strpos($key, 'wednesday') === 0;
+            return strpos($key, 'wednesday') > 0;
         }, ARRAY_FILTER_USE_KEY);
         $thursday = array_filter($postData, function ($key) {
-            return strpos($key, 'thursday') === 0;
+            return strpos($key, 'thursday') > 0;
         }, ARRAY_FILTER_USE_KEY);
         $friday = array_filter($postData, function ($key) {
-            return strpos($key, 'friday') === 0;
+            return strpos($key, 'friday') > 0;
         }, ARRAY_FILTER_USE_KEY);
         $saturday = array_filter($postData, function ($key) {
-            return strpos($key, 'saturday') === 0;
+            return strpos($key, 'saturday') > 0;
         }, ARRAY_FILTER_USE_KEY);
 
         foreach ($weekdays as $day) {
             foreach ($$day as $key => $value) {
-                $newKey = str_replace($day . '_', '', $key);
+                $newKey = str_replace('_'.$day, '', $key);
                 $newPostData[$day][$newKey] = $value;
             }
         }
-
         return $newPostData;
     }
 

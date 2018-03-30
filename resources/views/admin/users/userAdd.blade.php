@@ -45,12 +45,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Email :</label>
-                    <div class="col-sm-6">
-                            {{ Form::email('email',old('email') , ['id' => 'email', 'class' => 'form-control', 'placeholder' => 'User Email (required)']) }}
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Mobile :</label>
                     <div class="col-sm-6">
                           {{ Form::checkbox('mobile_verified', 1, old('mobile_verified'), ['class' => 'checkbox-inline']) }}

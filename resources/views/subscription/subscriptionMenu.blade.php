@@ -30,7 +30,7 @@
                     {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
                     <div class="tabbable-panel">
                         <div class="tabbable-line">
-                            <ul class="nav nav-tabs ">
+                            <ul class="nav nav-tabs" id="dayTabs">
                                 <li class="active"><a href="#tab_monday" data-toggle="tab">Mon</a></li>
                                 <li><a href="#tab_tuesday" data-toggle="tab">Tue</a></li>
                                 <li><a href="#tab_wednesday" data-toggle="tab">Wed</a></li>
@@ -54,21 +54,47 @@
                                 @endif
                                   @if(!empty($dishesArray))
                                     <div class="checkbox">
-                                        <label style="font-size: 1.5em">
-                                            {{ Form::checkbox('days[]', strtolower($day), true) }}
+                                        <label style="font-size: 1.5em;width:100%;">
+                                             {{ Form::checkbox('days[]', strtolower($day), true) }}
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <span>{{ $day }}</span>
+                                            <span>Want to Opt out for {{ $day }} ?</span>
                                         </label>
                                     </div>
                                     @foreach ($dishesArray as $dish)
                                     @if ($dish['dishTypeName'] != 'others')
-                                        {{ Form::select($dayName.'_'.$dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control drpdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                                        {{ Form::text($dayName.'_'.'qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                          {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                        </div>
+                                        <div class="col-md-3">
+                                          <div class="input-group">
+                                              <span class="input-group-btn">
+                                                  <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                    <span class="glyphicon glyphicon-minus"></span>
+                                                  </button>
+                                              </span>
+                                              {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                              <span class="input-group-btn">
+                                                <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                          <div class="input-group">
+                                              {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
+                                              <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span>
+                                              {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
+                                          </div>
+                                       </div>
+                                    </div>
                                     @else
                                     <div class="checkbox">
                                         @foreach ($dish['dishList'] as $dishId => $dishName)
                                         <label style="font-size: 1.5em">
-                                            {{ Form::checkbox($dayName.'_'.$dish['dishTypeName'].'_'.strtolower($dishName), $dishId, true) }}
+                                            {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
+                                            {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             <span>
                                                 {{ $dishName }} ( <i class="fa fa-inr"></i>{{ round($dish['dishPrice'][$dishId]) }} )
@@ -89,7 +115,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        {{ Form::label('grandTotal','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
+                        <div class="input-group">
+                          <span><i class="fas fa-rupee-sign"></i></span>
+                          {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'form-control','readonly'=>'true']) }}
+                        </div>
+                    </div>
                     <div class="order-submit">
                         {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
                     </div>
@@ -102,6 +134,10 @@
         </div>
     </div>
 </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+var dishes = '<?php echo json_encode($dishes['dishData']); ?>';
+  $(document).ready(function() {
+      // alert($(".tab-content div.active").attr('id'));
+  });
+</script>
 @endsection
