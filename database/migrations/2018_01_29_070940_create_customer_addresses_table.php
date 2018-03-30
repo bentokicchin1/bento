@@ -19,7 +19,6 @@ class CreateCustomerAddressesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('order_type_id');
             $table->foreign('order_type_id')->references('id')->on('order_types');
-            $table->string('address_type');
             $table->string('name');
             $table->text('location');
             $table->string('sector');
@@ -27,7 +26,6 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('pincode');
-            $table->tinyInteger('default');
             $table->timestamps();
             $table->softDeletes();
         });
