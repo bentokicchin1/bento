@@ -131,9 +131,11 @@
                                         <label style="font-size: 1.5em">
                                               {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                                               {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                            <span class="cr">
+                                              <!-- <i class="cr-icon fa fa-check"></i> -->
+                                            </span>
                                             <span>
-                                                {{ $dishName }} ( <i class="fa fa-inr"></i>{{ round($dish['dishPrice'][$dishId]) }} )
+                                                {{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )
                                             </span>
                                         </label>
                                         @endforeach
