@@ -36,7 +36,7 @@ class Dish extends Model
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->wherein('weekly_dish_lists.date',$daysArray)
                 ->where('dishes.deleted_at',null)
-                ->orderby('weekly_dish_lists.id')
+                ->orderby('dish_types.id')
                 ->get()->toArray();
         } else {
             $dishes = DB::table('dishes')
@@ -46,6 +46,7 @@ class Dish extends Model
                 ->where('weekly_dish_lists.date', '=', $date)
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->where('dishes.deleted_at',null)
+                ->orderby('dish_types.id')
                 ->get()->toArray();
         }
         return $dishes;

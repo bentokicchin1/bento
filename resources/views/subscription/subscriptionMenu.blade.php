@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+<style>
+.input-group-addon, .input-group-btn{
+  vertical-align: top;
+}
+</style>
 <!-- Header section
 ================================================== -->
 <section id="header-custom">
@@ -128,7 +133,7 @@
                                     @else
                                     <div class="checkbox">
                                         @foreach ($dish['dishList'] as $dishId => $dishName)
-                                        <label style="font-size: 1.5em">
+                                        <label>
                                               {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                                               {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
                                             <span class="cr">

@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+<style>
+.input-group-addon, .input-group-btn{
+  vertical-align: top;
+}
+</style>
 <!-- Header section
     ================================================== -->
 <section id="header-custom">
@@ -55,7 +60,7 @@
                         <div class="col-md-2">
                           <div class="input-group">
                               {{ Form::hidden('basePrice_'.$dish['dishTypeName'],0, []) }}
-                              <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span>
+                              <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
                               {{ Form::text('price_'.$dish['dishTypeName'],0, ['class' => 'form-control','readonly'=>'true']) }}
                           </div>
                        </div>
@@ -69,7 +74,7 @@
                                     {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                                     {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
                                     <span class="cr">
-                                        <i class="cr-icon fa fa-check"></i>
+                                        <!-- <i class="cr-icon fa fa-check"></i> -->
                                     </span>
                                     <span>
                                         {{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )
@@ -84,7 +89,7 @@
                     <div class="form-group">
                         {{ Form::label('grandTotal','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
                         <div class="input-group">
-                          <span><i class="fas fa-rupee-sign"></i></span>
+                          <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
                           {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'form-control','readonly'=>'true']) }}
                         </div>
                     </div>
