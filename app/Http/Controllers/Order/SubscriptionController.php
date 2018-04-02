@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Model\Order;
 use App\Model\OrderType;
 use App\Model\WeeklyDishList;
+use App\Model\Subscription;
 use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use App\Services\Checkout\SubscriptionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
@@ -41,6 +43,7 @@ class SubscriptionController extends Controller
      */
     public function showSubscriptionForm($orderType, Request $request)
     {
+        $subscribedDishes = array();
         /* fetch order type data based on order type */
         $orderTypeData = OrderType::where('name', $orderType)->first();
         $daysArray = WeeklyDishList::getDatesForThisWeek();
@@ -57,12 +60,16 @@ class SubscriptionController extends Controller
             $request->session()->forget('orderTypeId');
         }
         $request->session()->put('orderTypeId', $orderTypeId);
-
+        $subscribed = Subscription::where(['user_id'=>Auth::id(),'order_type_id'=>$orderTypeId])->first();
+        if(!empty($subscribed)){
+          $subscribedDishes = json_decode($subscribed->subscription_items,true);
+        }
         /* Fetch Dish list from service */
+
         $dishData = $this->subscriptionService->getDishList($orderTypeId);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
-        return view('subscription.subscriptionMenu', ['dishes' => $dishList,'daysArray'=>$daysArray]);
+        return view('subscription.subscriptionMenu', ['subscribedDishes'=>$subscribedDishes,'dishes' => $dishList,'daysArray'=>$daysArray]);
     }
 
     /**
@@ -73,10 +80,20 @@ class SubscriptionController extends Controller
     public function addressSelect(Request $request)
     {
         $postData = $request->all();
+        $rules = [
+            'days' => 'required'
+        ];
+        // $validatedData = $request->validate([
+        // ]);
+        $customMessages = [
+           'days.required' => 'Please select tiffin details for atleast one day.'
+        ];
+        $this->validate($request, $rules, $customMessages);
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
             /* Validate sorted input data and redirect if error occurs. */
+
             foreach ($sortedPostData as $day => $eachDayItems) {
                 $validationMessage = $this->orderService->validateOrderFormData($eachDayItems);
 

@@ -10,7 +10,7 @@
 
                 <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <div class="header-thumb">
-                        <h1 class="wow fadeIn">Subscription Type</h1>
+                        <h1 class="wow fadeIn">Weekly Tiffin Type</h1>
                         <h3 class="wow fadeInUp">Make Your Choice</h3>
                     </div>
                 </div>

@@ -150,7 +150,15 @@ class SubscriptionService
     {
         DB::beginTransaction();
         try {
-            $subscription = new Subscription;
+            $userId = Auth::id();
+            $orderTypeId = $orderParams['orderTypeId'];
+            $existingSub = Subscription::where(['user_id'=>$id,'order_type_id'=>$orderTypeId])->first();
+            if(!empty($existingSub)){
+              $subscriptionId = $existingSub->id;
+              $subscription = Subscription::find();
+            }else{
+              $subscription = new Subscription;
+            }
             $subscription->user_id = Auth::id();
             $subscription->order_type_id = $orderParams['orderTypeId'];
             $subscription->shipping_address_id = $orderParams['shippingAddressId'];

@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
           <div class="header-thumb">
-            <h1 class="wow">Subscribe for weekly</h1>
+            <h1 class="wow">Weekly menu</h1>
             <h3 class="wow">Decide your weekly menu</h3>
           </div>
         </div>
@@ -26,7 +26,7 @@
                 @include('layouts.success')
                 @include('layouts.errors')
                 <div class="order-form">
-                    {{ Form::open(['route' => 'subscriptionAddressSelect', 'method' => 'post']) }}
+                    {{ Form::open(['route' => 'subscriptionAddressSelect', 'method' => 'post','id'=>'subscriptionForm']) }}
                     {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
                     <div class="tabbable-panel">
                         <div class="tabbable-line">
@@ -55,16 +55,28 @@
                                   @if(!empty($dishesArray))
                                     <div class="checkbox">
                                         <label style="font-size: 1.5em;width:100%;">
-                                             {{ Form::checkbox('days[]', strtolower($day), true) }}
-                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                            <span>Want to Opt out for {{ $day }} ?</span>
-                                        </label>
+                                           {{ Form::checkbox('days[]', strtolower($day), true) }}
+                                           <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                                           <span>Want to Opt out for {{ $day }} ?</span>
+                                        <!-- </label> -->
                                     </div>
                                     @foreach ($dishesArray as $dish)
+                                    @php
+                                      $selectedDish = array();
+                                      if(array_key_exists(strtolower($day),$subscribedDishes)){
+                                        if(array_key_exists($dish['dishTypeName'],$subscribedDishes[strtolower($day)]['items'])){
+                                            $selectedDish = $subscribedDishes[strtolower($day)]['items'][$dish['dishTypeName']];
+                                        }
+                                      }
+                                    @endphp
                                     @if ($dish['dishTypeName'] != 'others')
-                                    <div class="row">
+                                      <div class="row">
                                         <div class="col-md-5">
-                                          {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                          @if(!empty($selectedDish))
+                                              {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                          @else
+                                            {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                          @endif
                                         </div>
                                         <div class="col-md-3">
                                           <div class="input-group">
@@ -73,7 +85,15 @@
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                   </button>
                                               </span>
-                                              {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                              @if(!empty($selectedDish))
+                                                @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'form-control input-number']) }}
+                                                @else
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                                @endif
+                                              @else
+                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                              @endif
                                               <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                                     <span class="glyphicon glyphicon-plus"></span>
@@ -83,9 +103,25 @@
                                         </div>
                                         <div class="col-md-2">
                                           <div class="input-group">
-                                              {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
-                                              <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span>
-                                              {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
+                                              @if(!empty($selectedDish))
+                                                @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                    {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['base_price'], []) }}
+                                                @else
+                                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
+                                                @endif
+                                              @else
+                                                {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
+                                              @endif
+                                              <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                              @if(!empty($selectedDish))
+                                                  @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                    {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['total_price'], ['class' => 'form-control','readonly'=>'true']) }}
+                                                  @else
+                                                    {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
+                                                  @endif
+                                              @else
+                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
+                                              @endif
                                           </div>
                                        </div>
                                     </div>
@@ -93,8 +129,8 @@
                                     <div class="checkbox">
                                         @foreach ($dish['dishList'] as $dishId => $dishName)
                                         <label style="font-size: 1.5em">
-                                            {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
-                                            {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
+                                              {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
+                                              {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
                                             <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                                             <span>
                                                 {{ $dishName }} ( <i class="fa fa-inr"></i>{{ round($dish['dishPrice'][$dishId]) }} )
@@ -104,6 +140,13 @@
                                     </div>
                                     @endif
                                     @endforeach
+                                    <div class="form-group">
+                                        {{ Form::label('','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
+                                        <div class="input-group">
+                                          <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
+                                          {{ Form::text('grandTotal_'.$dayName,'', ['id'=>'grandTotal_'.$dayName,'class' => 'form-control readonly']) }}
+                                        </div>
+                                    </div>
                                   @else
                                     <center><h5>Sorry! We are closed on this day.</h5></center>
                                   @endif
@@ -115,15 +158,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        {{ Form::label('grandTotal','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
-                        <div class="input-group">
-                          <span><i class="fas fa-rupee-sign"></i></span>
-                          {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'form-control','readonly'=>'true']) }}
-                        </div>
-                    </div>
                     <div class="order-submit">
-                        {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
+                        {{ Form::submit('Place Your Order', ['id'=>'subscribe','class' => 'form-control submit']) }}
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -137,7 +173,6 @@
 <script>
 var dishes = '<?php echo json_encode($dishes['dishData']); ?>';
   $(document).ready(function() {
-      // alert($(".tab-content div.active").attr('id'));
   });
 </script>
 @endsection

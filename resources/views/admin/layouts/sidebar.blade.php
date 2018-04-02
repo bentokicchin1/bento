@@ -12,16 +12,49 @@
             </div>
           </div>
           <ul class="sidebar-menu" data-widget="tree">
-              <li class="treeview">
-                  <a href="#">
+              <li class="">
+                  <a href="{{ route('admin-user-list') }}">
                     <i class="fas fa-users"></i> <span>User Management</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
                   </a>
-                  <ul class="treeview-menu">
+                  <!-- <ul class="treeview-menu">
                     <li><a href="{{ route('admin-user-list') }}"><i class="fas fa-user-secret"></i> Users</a></li>
-                  </ul>
+                  </ul> -->
+              </li>
+              <li class="">
+                <a href="{{ route('admin-menu-add') }}">
+                  <i class="fas fa-tasks"></i> <span>Menu Management</span>
+                  <span class="pull-right-container">
+                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                  </span>
+                </a>
+                <!-- <ul class="treeview-menu">
+                  <li><a href="{{ route('admin-menu-add') }}"><i class="fas fa-calendar-alt"></i> Weekly Menu</a></li>
+                </ul> -->
+              </li>
+              <li class="">
+                <a href="{{ route('admin-order-list') }}">
+                  <i class="fas fa-tasks"></i> <span>Order Management</span>
+                  <span class="pull-right-container">
+                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                  </span>
+                </a>
+                <!-- <ul class="treeview-menu">
+                  <li><a href="{{ route('admin-menu-add') }}"><i class="fas fa-calendar-alt"></i> Weekly Menu</a></li>
+                </ul> -->
+              </li>
+              <li class="">
+                <a href="{{ route('admin-billpayment-list') }}">
+                  <i class="fas fa-calendar"></i> <span>Bill Payments</span>
+                  <span class="pull-right-container">
+                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                  </span>
+                </a>
+                <!-- <ul class="treeview-menu">
+                  <li><a href="{{ route('admin-order-list') }}"><i class="fas fa-sticky-note"></i> Orders</a></li>
+                </ul> -->
               </li>
               <li class="treeview">
                   <a href="#">
@@ -46,28 +79,6 @@
                     <li><a href="{{ route('admin-area-list') }}"><i class="fas fa-location-arrow"></i> Area</a></li>
                     <li><a href="{{ route('admin-location-list') }}"><i class="fas fa-building"></i> Location</a></li>
                   </ul>
-              </li>
-              <li class="treeview">
-                <a href="#">
-                  <i class="fas fa-tasks"></i> <span>Menu Management</span>
-                  <span class="pull-right-container">
-                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
-                  </span>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="{{ route('admin-menu-add') }}"><i class="fas fa-calendar-alt"></i> Weekly Menu</a></li>
-                </ul>
-              </li>
-              <li class="treeview">
-                <a href="#">
-                  <i class="fas fa-calendar"></i> <span>Orders Management</span>
-                  <span class="pull-right-container">
-                    <!-- <i class="fas fa-angle-left pull-right"></i> -->
-                  </span>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="{{ route('admin-order-list') }}"><i class="fas fa-sticky-note"></i> Orders</a></li>
-                </ul>
               </li>
           </ul>
         </section>

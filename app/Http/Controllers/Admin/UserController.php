@@ -40,6 +40,8 @@ class UserController extends Controller
                   ->select("users.id as id","users.name as name", "email","mobile_number","user_type","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
                   ->join("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
+                  ->where('users.deleted_at',null)
+                  ->where('customer_addresses.deleted_at',null)
                   ->first();
         }
         return view('admin.users.userAdd', ['usersData' => $usersData,'userTypeData'=>$userTypeData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);

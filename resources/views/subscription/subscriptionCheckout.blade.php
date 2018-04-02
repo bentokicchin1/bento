@@ -60,20 +60,13 @@
                     <div class="form-group">
                         {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
                         @foreach($addressList as $address)
-                        <?php
-                        if($address['default'] == 1){
-                            $status = 'checked';
-                        }else{
-                            $status = '';
-                        }
-                        ?>
                         <div class="address">
                             <div class="radio">
-                                <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;" {{ $status }}>
+                                <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;">
                             </div>
                             <div class='address-name'> {{ $address['name'] }}</div>
                             <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
-                            <div class="address-type">{{ $address['address_type'] }}</div>
+                            <div class="address-type">{{ $address['order_type']['name'] }}</div>
                             <hr>
                         </div>
                         @endforeach

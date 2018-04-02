@@ -38,6 +38,7 @@
 <!-- Select2 -->
 {!! Html::script('admin/bower_components/select2/dist/js/select2.full.min.js') !!}
 {!! Html::script('admin/bower_components/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min.js') !!}
+{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') !!}
 </head>
 <body>
     @include('layouts.header')

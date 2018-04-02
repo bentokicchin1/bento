@@ -35,6 +35,7 @@ class Dish extends Model
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->wherein('weekly_dish_lists.date',$daysArray)
+                ->where('dishes.deleted_at',null)
                 ->orderby('weekly_dish_lists.id')
                 ->get()->toArray();
         } else {
@@ -44,6 +45,7 @@ class Dish extends Model
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
                 ->where('weekly_dish_lists.date', '=', $date)
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
+                ->where('dishes.deleted_at',null)
                 ->get()->toArray();
         }
         return $dishes;

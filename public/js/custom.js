@@ -164,7 +164,21 @@ $(document).ready(function(){
     -------------------------------*/
     new WOW({ mobile: false }).init();
 
+    var rules = new Object();
+    var messages = new Object();
+    $. each($("input[name='days[]']:checked"), function(){
+        var inputName = $(this).val();
+        rules['grandTotal_'+inputName] = { required:true,min: 45 };
+        messages['grandTotal_'+inputName] = {required:'Please select dishes for tiffin', min: 'Min price for tiffin should be greater than 45Rs.' };
+    });
+
+    $(".readonly").on('keydown paste', function(e){
+        e.preventDefault();
+    });
+
+
     $('select').select2({
+      minimumResultsForSearch: Infinity,
       width : '100%',
       height: '50px'
     });
@@ -199,28 +213,6 @@ $(document).ready(function(){
         }
     });
 
-    // $(".dayDishLists").on('change',function(){
-    //     var dishTypeName = $(this).attr('name');
-    //     var selectedDishId = $(this).val();
-    //     var tabName = $(".tab-content div.active").attr('id');
-    //     var dayName = tabName.replace('tab_','');
-    //     dishTypeName = dishTypeName.replace(dayName+'_','');
-    //     var capsDayName = dayName[0].toUpperCase() + dayName.slice(1);
-    //     if(dishesData.hasOwnProperty(capsDayName)){
-    //         $(dishesData[capsDayName]).each(function(key,dishList) {
-    //           if(dishList['dishTypeName']==dishTypeName){
-    //               $(dishList).each(function( key,dish) {
-    //                   if(dish['dishPrice'].hasOwnProperty(selectedDishId)){
-    //                     $("[name='"+dayName+"_basePrice_"+dishTypeName+"']").val(Math.round(dish['dishPrice'][selectedDishId]));
-    //                     calculateTotal();
-    //                     return true;
-    //                   }
-    //               });
-    //             }
-    //         });
-    //     }
-    // });
-
     var quantitiy=0;
     $('.quantity-right-plus').on('click',function(e) {
         e.preventDefault();
@@ -252,6 +244,9 @@ $(document).ready(function(){
     function calculateTotal(){
         var orderTotal = 0;
         var dishTotal = 0;
+        var dayName = '';
+        var tabName = $(".tab-content div.active").attr('id');
+        var dayName = tabName.replace('tab_','');
         $(".dishLists").each(function() {
             var dishTypeName = $(this).attr('name');
             var quantity = parseInt($('[name="qty_'+dishTypeName+'"]').val());
@@ -266,9 +261,7 @@ $(document).ready(function(){
         });
         $(".otherDish").each(function() {
             var inputName = $(this).attr('name');
-            var tabName = $(".tab-content div.active").attr('id');
             if(tabName!==undefined){
-              var dayName = tabName.replace('tab_','');
               var dishPriceName = inputName.replace('others_'+dayName+'_','');
             }else{
               var dishPriceName = inputName.replace('others_','');
@@ -277,19 +270,41 @@ $(document).ready(function(){
               orderTotal = parseInt(orderTotal) + parseInt($('[name="'+dishPriceName+'"]').val());
             }
         });
-        $('#grandTotal').val(Math.round(orderTotal));
+        if(dayName != ''){
+          $('#grandTotal_'+dayName).val(Math.round(orderTotal));
+        }else{
+          $('#grandTotal').val(Math.round(orderTotal));
+        }
     }
 
+
     $("input[name='days[]']").on('change',function (){
-      $(this).each(function (){
-        var dayName = $(this).val();
-        if($(this).prop('checked')==false){
-          $( "[name^='"+dayName+"']" ).attr('disabled',true);
-        }else{
-          $( "[name^='"+dayName+"']" ).removeAttr('disabled');
-        }
+        $(this).each(function (){
+          var dayName = $(this).val();
+          if($(this).prop('checked')==false){
+            $( "[name$='"+dayName+"']" ).attr('disabled',true);
+          }else{
+            $( "[name$='"+dayName+"']" ).removeAttr('disabled');
+          }
+        });
+
+        $. each($("input[name='days[]']:checked"), function(){
+            var inputName = $(this).val();
+            rules['grandTotal_'+inputName] = { min: 45 };
+            messages['grandTotal_'+inputName] = { min: 'Min price for tiffin should be greater than 45Rs.' };
+        });
+    });
+
+    $('#subscribe').on('click',function(){
+      $("#subscriptionForm").validate({
+          rules: rules,
+          messages: messages,
+          errorPlacement: function(error, element) {
+              error.appendTo(element);
+          }
       });
     });
+
 
 
 });

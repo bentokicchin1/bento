@@ -65,7 +65,7 @@ class CustomerController extends Controller
     public function profile()
     {
         $userId = Auth::id();
-        $userInfo = User::select('name', 'email', 'mobile_number','billing_cycle')->where('id', $userId)->first();
+        $userInfo = User::select('name', 'mobile_number','billing_cycle')->where('id', $userId)->first();
         $profileData['userInfo'] = $userInfo;
         return view('customer.profile', $profileData);
     }

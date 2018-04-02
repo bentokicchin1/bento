@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 {{ Form::open(['route' => 'update-info', 'method' => 'post']) }}
                                 {{ Form::text('name',$userInfo->name , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
-                                {{ Form::number('mobile_number',$userInfo->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number (required)']) }}
+                                {{ Form::text('mobile_number',$userInfo->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number (required)']) }}
                                 <div class="form-group">
                                     {!! Form::label('daily', ' Billing Cycle',['class'=>'control-label']) !!}
                                     {!! Form::label('daily', 'Daily',['class'=>'radio-inline control-label']) !!}

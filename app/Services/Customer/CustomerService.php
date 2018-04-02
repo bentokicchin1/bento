@@ -36,7 +36,6 @@ class CustomerService
             $user = Auth::user();
             $user->name = $postData['name'];
             $user->mobile_number = $postData['mobile_number'];
-            $user->email = $postData['email'];
             $user->billing_cycle = $postData['billing_cycle'];
             $user->save();
 

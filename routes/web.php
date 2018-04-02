@@ -153,4 +153,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('order/edit/{id}', 'Admin\OrderController@showForm')->where('id', '[0-9]+')->name('admin-order-edit');
     Route::get('order/delete/{id}', 'Admin\OrderController@delete')->where('id', '[0-9]+')->name('admin-order-delete');
     Route::get('order/list', 'Admin\OrderController@index')->name('admin-order-list');
+
+    Route::get('billpayment/add', 'Admin\BillingController@showForm')->name('admin-billpayment-add');
+    Route::post('billpayment/add', 'Admin\BillingController@store')->name('admin-billpayment-add');
+    Route::get('billpayment/edit/{id}', 'Admin\BillingController@showForm')->where('id', '[0-9]+')->name('admin-billpayment-edit');
+    Route::get('billpayment/delete/{id}', 'Admin\BillingController@delete')->where('id', '[0-9]+')->name('admin-billpayment-delete');
+    Route::get('billpayment/list', 'Admin\BillingController@index')->name('admin-billpayment-list');
 });
