@@ -83,8 +83,6 @@ class SubscriptionController extends Controller
         $rules = [
             'days' => 'required'
         ];
-        // $validatedData = $request->validate([
-        // ]);
         $customMessages = [
            'days.required' => 'Please select tiffin details for atleast one day.'
         ];

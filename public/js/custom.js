@@ -163,7 +163,7 @@ $(document).ready(function(){
     /* wow
     -------------------------------*/
     new WOW({ mobile: false }).init();
-
+    calculateTotal();
     var rules = new Object();
     var messages = new Object();
     $. each($("input[name='days[]']:checked"), function(){
@@ -244,30 +244,33 @@ $(document).ready(function(){
     function calculateTotal(){
         var orderTotal = 0;
         var dishTotal = 0;
-        var dayName = '';
         var tabName = $(".tab-content div.active").attr('id');
-        var dayName = tabName.replace('tab_','');
+        var dayName = (tabName!==undefined) ? tabName.replace('tab_','') : '';
         $(".dishLists").each(function() {
             var dishTypeName = $(this).attr('name');
-            var quantity = parseInt($('[name="qty_'+dishTypeName+'"]').val());
-            var basePrice = parseInt($('[name="basePrice_'+dishTypeName+'"]').val());
-            if(!isNaN(quantity) && !isNaN(basePrice)){
-              dishTotal = quantity * basePrice;
-            }else{
-              dishTotal = 0;
+            if((dishTypeName.includes(dayName) && dayName!='') || dayName==''){
+              var quantity = parseInt($('[name="qty_'+dishTypeName+'"]').val());
+              var basePrice = parseInt($('[name="basePrice_'+dishTypeName+'"]').val());
+              if(!isNaN(quantity) && !isNaN(basePrice)){
+                dishTotal = quantity * basePrice;
+              }else{
+                dishTotal = 0;
+              }
+              $('[name="price_'+dishTypeName+'"]').val(dishTotal);
+              orderTotal = parseInt(orderTotal) + parseInt(dishTotal);
             }
-            $('[name="price_'+dishTypeName+'"]').val(dishTotal);
-            orderTotal = parseInt(orderTotal) + parseInt(dishTotal);
         });
         $(".otherDish").each(function() {
             var inputName = $(this).attr('name');
-            if(tabName!==undefined){
-              var dishPriceName = inputName.replace('others_'+dayName+'_','');
-            }else{
-              var dishPriceName = inputName.replace('others_','');
-            }
-            if ($('[name="'+inputName+'"]').is(':checked')) {
-              orderTotal = parseInt(orderTotal) + parseInt($('[name="'+dishPriceName+'"]').val());
+            if((inputName.includes(dayName) && dayName!='') || dayName==''){
+              if(tabName!==undefined){
+                var dishPriceName = inputName.replace('others_'+dayName+'_','');
+              }else{
+                var dishPriceName = inputName.replace('others_','');
+              }
+              if ($('[name="'+inputName+'"]').is(':checked')) {
+                orderTotal = parseInt(orderTotal) + parseInt($('[name="'+dishPriceName+'"]').val());
+              }
             }
         });
         if(dayName != ''){

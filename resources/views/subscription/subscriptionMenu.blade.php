@@ -132,12 +132,25 @@
                                     </div>
                                     @else
                                     <div class="checkbox">
+                                        @php
+                                          $selectedOtherDish = array();
+                                          if(array_key_exists(strtolower($day),$subscribedDishes)){
+                                            if(array_key_exists('others',$subscribedDishes[strtolower($day)]['items'])){
+                                                $selectedDish = $subscribedDishes[strtolower($day)]['items']['others'];
+                                                $selectedOtherDish = array_column($subscribedDishes[strtolower($day)]['items'][$dish['dishTypeName']],'dish_id');
+                                            }
+                                          }
+                                        @endphp
                                         @foreach ($dish['dishList'] as $dishId => $dishName)
                                         <label>
                                               {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
-                                              {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
+                                              @if(in_array($dishId,$selectedOtherDish))
+                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, true,['class'=>'form-control otherDish']) }}
+                                              @else
+                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
+                                              @endif
                                             <span class="cr">
-                                              <!-- <i class="cr-icon fa fa-check"></i> -->
+                                              <i class="cr-icon fa fa-check"></i>
                                             </span>
                                             <span>
                                                 {{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )
@@ -151,7 +164,7 @@
                                         {{ Form::label('','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
                                         <div class="input-group">
                                           <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
-                                          {{ Form::text('grandTotal_'.$dayName,'', ['id'=>'grandTotal_'.$dayName,'class' => 'form-control readonly']) }}
+                                          {{ Form::text('grandTotal_'.$dayName,0, ['id'=>'grandTotal_'.$dayName,'class' => 'form-control readonly']) }}
                                         </div>
                                     </div>
                                   @else

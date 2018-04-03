@@ -74,7 +74,7 @@
                                     {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                                     {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
                                     <span class="cr">
-                                        <!-- <i class="cr-icon fa fa-check"></i> -->
+                                        <i class="cr-icon fa fa-check"></i>
                                     </span>
                                     <span>
                                         {{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )

@@ -53,16 +53,15 @@ class SubscriptionService
                 $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
                 $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
             }
-
             foreach($daysArray as $dateFromDay){
                 foreach ($sortedData as $date => $value) {
                     $day = date('l',strtotime($dateFromDay));
                     if(empty($finalData[$day])){
-                      if($date==$dateFromDay){
-                        $finalData[$day] = array_values($value);
-                      }else{
-                        $finalData[$day] = array();
-                      }
+                        if($date==$dateFromDay){
+                          $finalData[$day] = array_values($value);
+                        }else{
+                          $finalData[$day] = array();
+                        }
                     }
                 }
             }
@@ -152,10 +151,10 @@ class SubscriptionService
         try {
             $userId = Auth::id();
             $orderTypeId = $orderParams['orderTypeId'];
-            $existingSub = Subscription::where(['user_id'=>$id,'order_type_id'=>$orderTypeId])->first();
+            $existingSub = Subscription::where(['user_id'=>$userId,'order_type_id'=>$orderTypeId])->first();
             if(!empty($existingSub)){
               $subscriptionId = $existingSub->id;
-              $subscription = Subscription::find();
+              $subscription = Subscription::find($subscriptionId);
             }else{
               $subscription = new Subscription;
             }
