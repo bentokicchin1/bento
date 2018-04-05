@@ -45,13 +45,21 @@ class SubscriptionService
     {
         $sortedData = [];
         $finalData = [];
+        $currentDateTime = date('Y-m-d h:i a');
         $daysArray = WeeklyDishList::getDatesForThisWeek();
         if(!empty($rawDishList)){
-            foreach ($rawDishList as $key => $dishItem) {
-                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
-                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
-                $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
+            foreach($rawDishList as $key => $dishItem) {
+              if($dishItem->order_type_id==config('constants.ORDER_TYPE_LUNCH')){
+                  $maxDate = date('Y-m-d')." ".config('constants.LUNCH_ORDER_MAX_TIME');
+              } elseif($dishItem->order_type_id==config('constants.ORDER_TYPE_DINNER')) {
+                  $maxDate = date('Y-m-d')." ".config('constants.DINNER_ORDER_MAX_TIME');
+              }
+              if(date('Y-m-d',strtotime($dishItem->date))==date('Y-m-d') && $currentDateTime <= date('Y-m-d h:i a',strtotime($maxDate)) || date('Y-m-d',strtotime($dishItem->date))>date('Y-m-d')) {
+                  $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
+                  $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
+                  $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
+                  $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
+              }
             }
             foreach($daysArray as $dateFromDay){
                 foreach ($sortedData as $date => $value) {

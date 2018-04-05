@@ -27,6 +27,7 @@ class Dish extends Model
 
     public function getDishListfromDb($orderTypeId, $date)
     {
+        $currentDate = date('Y-m-d');
         if ($date == 'all') {
             $daysArray = WeeklyDishList::getDatesForThisWeek();
             $dishes = DB::table('dishes')
@@ -35,6 +36,7 @@ class Dish extends Model
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->wherein('weekly_dish_lists.date',$daysArray)
+                ->where('weekly_dish_lists.date','>=',$currentDate)
                 ->where('dishes.deleted_at',null)
                 ->orderby('dish_types.id')
                 ->get()->toArray();
@@ -44,6 +46,7 @@ class Dish extends Model
                 ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
                 ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
                 ->where('weekly_dish_lists.date', '=', $date)
+                ->where('weekly_dish_lists.date','>=',$currentDate)
                 ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                 ->where('dishes.deleted_at',null)
                 ->orderby('dish_types.id')

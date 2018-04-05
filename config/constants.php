@@ -21,5 +21,9 @@ return [
     'DEFAULT_CITY' => 1,
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
+    'LUNCH_ORDER_MAX_TIME' => '11:00 am',
+    'DINNER_ORDER_MAX_TIME' => '06:30 pm',
+    'ORDER_TYPE_LUNCH' => 2,
+    'ORDER_TYPE_DINNER' => 3,
     'DISH_TYPE_OTHER' => 5,
 ];
