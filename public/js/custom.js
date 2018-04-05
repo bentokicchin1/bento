@@ -282,6 +282,7 @@ $(document).ready(function(){
 
 
     $("input[name='days[]']").on('change',function (){
+        calculateTotal();
         $(this).each(function (){
           var dayName = $(this).val();
           if($(this).prop('checked')==false){
