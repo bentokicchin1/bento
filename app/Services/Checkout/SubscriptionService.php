@@ -54,7 +54,7 @@ class SubscriptionService
               } elseif($dishItem->order_type_id==config('constants.ORDER_TYPE_DINNER')) {
                   $maxDate = date('Y-m-d')." ".config('constants.DINNER_ORDER_MAX_TIME');
               }
-              if(date('Y-m-d',strtotime($dishItem->date))==date('Y-m-d') && $currentDateTime <= date('Y-m-d h:i a',strtotime($maxDate)) || date('Y-m-d',strtotime($dishItem->date))>date('Y-m-d')) {
+              if(date('Y-m-d',strtotime($dishItem->date))==date('Y-m-d') && strtotime($currentDateTime) <= strtotime($maxDate) || date('Y-m-d',strtotime($dishItem->date))>date('Y-m-d')) {
                   $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
                   $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
                   $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
