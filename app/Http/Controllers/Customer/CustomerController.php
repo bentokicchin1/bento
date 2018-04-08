@@ -65,7 +65,7 @@ class CustomerController extends Controller
     public function profile()
     {
         $userId = Auth::id();
-        $userInfo = User::select('name', 'mobile_number','billing_cycle')->where('id', $userId)->first();
+        $userInfo = User::select('name', 'mobile_number','billing_cycle','food_preference','tiffin_quantity')->where('id', $userId)->first();
         $profileData['userInfo'] = $userInfo;
         return view('customer.profile', $profileData);
     }
@@ -79,11 +79,14 @@ class CustomerController extends Controller
     {
 
         /* Retrieve post data */
-        $postData = $request->only(['name', 'mobile_number', 'email','billing_cycle']);
+        $postData = $request->only(['name', 'mobile_number', 'email','billing_cycle','food_preference','tiffin_quantity']);
         /* Validate post data */
         $request->validate([
             'name' => 'required|string|max:255',
             'mobile_number' => 'required|numeric|digits:10',
+            'billing_cycle' => 'required',
+            'food_preference' => 'required_if:billing_cycle,monthly',
+            'tiffin_quantity' => 'required_if:billing_cycle,monthly',
         ]);
         /* Save post data */
         $response = $this->customerService->updateUserInfo($postData);

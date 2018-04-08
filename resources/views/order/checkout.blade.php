@@ -5,32 +5,18 @@
     <div class="container">
         <div class="row" style="margin-bottom:15px">
                 <div class="col-md-8 col-sm-8">
-                    <h1>Select address</h1>
+                    <h1>Delivery address</h1>
                     @include('layouts.success')
                     @include('layouts.errors')
                     <div class="web-form">
                         <div class="form-group">
                             {{ Form::open(['route' => 'processOrder', 'method' => 'post']) }}
-
-                            @foreach($addressList as $address)
-                            <?php
-                            if($address['default'] == 1){
-                                $status = 'checked';
-                            }else{
-                                $status = '';
-                            }
-                            ?>
                             <div class="col-md-6 col-sm-6" style="margin-bottom:20px">
-                                <div class="radio">
-                                    <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;" {{ $status }}>
+                                {{ Form::hidden('addressId',$addressStored['id']) }}
+                                <div class="address">
+                                    <div class='address-name'> {{ $addressStored['name'] }}  </div><div class="address-type"> {{ ucfirst($addressStored['orderType']['name']) }}</div>
+                                    <div class="address-location">{{ $addressStored['location'].', '.$addressStored['areaLocation']['name'].', '.$addressStored['areaData']['name'].', '.$addressStored['cityData']['name'].', '.$addressStored['state'].', '.$addressStored['pincode']}} </div>
                                 </div>
-                                <div class='address-name'> {{ $address['name'] }}</div>
-                                <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
-                                <div class="address-type">{{ $address['address_type'] }}</div>
-                            </div>
-                            @endforeach
-                            <div class="col-md-4 col-sm-4" style="margin-bottom:20px">
-                                <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
                             </div>
                             <div class="web-submit">
                                 {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}

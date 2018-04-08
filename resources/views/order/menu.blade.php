@@ -40,7 +40,7 @@
                     @if ($dish['dishTypeName'] != 'others')
                     <div class="row">
                         <div class="col-md-5">
-                          {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                          {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                         </div>
                         <div class="col-md-3">
                           <div class="input-group">

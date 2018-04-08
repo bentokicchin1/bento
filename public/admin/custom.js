@@ -7,10 +7,6 @@ $(document).ready(function($){
     },
   });
 
-  $('.dropdown').select2({
-    width: '100%'
-  });
-
   $("#orderDate").datepicker({
     startDate:new Date(),
     autoclose : true,

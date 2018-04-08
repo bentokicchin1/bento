@@ -8,6 +8,7 @@ use App\Model\OrderType;
 use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -53,7 +54,9 @@ class OrderController extends Controller
      */
     public function addressSelect(Request $request)
     {
+        $userId = Auth::id();
         $postData = $request->all();
+        $orderTypeId = $postData['orderTypeId'];
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
@@ -78,7 +81,7 @@ class OrderController extends Controller
         }
 
         /* Fetch customer address list and create array that need to be sent to checkout view page */
-        $viewData['addressList'] = $this->addressService->getAddressList();
+        $viewData['addressStored'] = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
         $viewData['orderData'] = $sortedPostData;
 
         /* Pass customer address list and order data to checkout page */

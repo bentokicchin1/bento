@@ -37,6 +37,13 @@ class CustomerService
             $user->name = $postData['name'];
             $user->mobile_number = $postData['mobile_number'];
             $user->billing_cycle = $postData['billing_cycle'];
+            if($postData['billing_cycle']=='monthly'){
+              $user->food_preference = $postData['food_preference'];
+              $user->tiffin_quantity = $postData['tiffin_quantity'];
+            }else{
+              $user->food_preference = NULL;
+              $user->tiffin_quantity = NULL;
+            }
             $user->save();
 
             DB::commit();

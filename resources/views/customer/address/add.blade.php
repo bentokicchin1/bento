@@ -28,17 +28,6 @@
                         {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Location (required)']) }}
                         {{ Form::text('state', 'Maharashtra' , ['class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
                         {{ Form::number('pincode',old('pincode'), ['class' => 'form-control', 'placeholder' => 'Pincode (required)']) }}
-                        <!-- <div class="checkbox">
-                            <label style="font-size: 1.2em">
-                                {{ Form::checkbox('default', 1, old('default')) }}
-                                <span class="cr">
-                                    <i class="cr-icon fa fa-check"></i>
-                                </span>
-                                <span>
-                                    Set As Default
-                                </span>
-                            </label>
-                        </div> -->
                         <div class="web-submit">
                             {{ Form::submit('Save Address', ['class' => 'form-control submit']) }}
                         </div>

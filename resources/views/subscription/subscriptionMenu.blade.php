@@ -78,9 +78,9 @@
                                       <div class="row">
                                         <div class="col-md-5">
                                           @if(!empty($selectedDish))
-                                              {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                              {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @else
-                                            {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                            {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @endif
                                         </div>
                                         <div class="col-md-3">

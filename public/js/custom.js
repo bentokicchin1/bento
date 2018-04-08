@@ -145,6 +145,14 @@ $(document).ready(function(){
 
     "use strict";
 
+    $('input:radio[name=billing_cycle]').on('change',function() {
+        if($(this).val()=='monthly'){
+          $('.monthly_preference').show();
+        }else{
+          $('.monthly_preference').hide();
+        }
+    });
+
     $('.menu-container').each(function(index) {
         $(this).find('.circle').attr('menu-link', index);
         $(this).find('.list-menu').clone().appendTo('body').attr('menu-link', index);
@@ -177,7 +185,7 @@ $(document).ready(function(){
     });
 
 
-    $('select').select2({
+    $('.ordersSelect').select2({
       minimumResultsForSearch: Infinity,
       width : '100%',
       height: '50px'
@@ -308,6 +316,7 @@ $(document).ready(function(){
           }
       });
     });
+
 
 
 
