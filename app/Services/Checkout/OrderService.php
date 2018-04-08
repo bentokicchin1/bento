@@ -54,6 +54,26 @@ class OrderService
         return array_values($sortedData);
     }
 
+
+    /**
+     * Process order form data.
+     * @param (array)postData
+     * @return void
+     */
+    public function processSubscriptionData($orderData)
+    {
+        $orderParams['quantity'] = 1;
+        $orderParams['order_date'] = isset($orderData['orderDate']) ? date('Y-m-d',strtotime($orderData['orderDate'])) : date('Y-m-d');
+        $orderParams['orderTypeId'] = $orderData['orderTypeId'];
+        $orderParams['quantity'] = 1;
+        $orderParams['user_id'] = isset($orderData['user']) ? $orderData['user'] : Auth::id();
+        $orderParams['shippingAddressId'] = $orderData['shippingAddressId'];
+        $orderParams['status'] = 'ordered';
+        $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
+        $orderParams['items'] = $orderData['items'];
+        return $this->insertOrder($orderParams);
+    }
+
     /**
      * Process order form data.
      * @param (array)postData
