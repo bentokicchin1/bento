@@ -53,25 +53,17 @@
                 @endforeach
             </div>
             <div class="col-md-4 col-sm-4">
-                <h1>Select address</h1>
+                <h1>Delivery address</h1>
                 @include('layouts.success')
                 @include('layouts.errors')
                 <div class="web-form">
-                    <div class="form-group">
+                    <div class="form-group m-b-20">
                         {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
-                        @foreach($addressList as $address)
+                        {{ Form::hidden('addressId',$addressStored['id']) }}
                         <div class="address">
-                            <div class="radio">
-                                <input name="addressId" type="radio" value="{{$address['id']}}" style="height:20px;">
-                            </div>
-                            <div class='address-name'> {{ $address['name'] }}</div>
-                            <div class="address-location">{{ $address['location'].', '.$address['area_location']['name'].', '.$address['area']['name'].', '.$address['city']['name'].', '.$address['state'].', '.$address['pincode']}} </div>
-                            <div class="address-type">{{ $address['order_type']['name'] }}</div>
-                            <hr>
+                            <div class='address-name'> {{ $addressStored['name'] }}  </div><div class="address-type"> {{ ucfirst($addressStored['orderType']['name']) }}</div>
+                            <div class="address-location">{{ $addressStored['location'].', '.$addressStored['areaLocation']['name'].', '.$addressStored['areaData']['name'].', '.$addressStored['cityData']['name'].', '.$addressStored['state'].', '.$addressStored['pincode']}} </div>
                         </div>
-                        @endforeach
-                        <label class="address-new"><a href="{{ route('address-add')}}">Add New Address</a></label>
-                        <hr>
                     </div>
                       {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
                       {{ Form::close() }}
