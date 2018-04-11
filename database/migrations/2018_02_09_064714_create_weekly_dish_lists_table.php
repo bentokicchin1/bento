@@ -20,6 +20,7 @@ class CreateWeeklyDishListsTable extends Migration
             $table->unsignedInteger('order_type_id');
             $table->foreign('order_type_id')->references('id')->on('order_types');
             $table->unsignedInteger('dish_id');
+            $table->enum('is_default',['Y', 'N'])->default('N');
             $table->foreign('dish_id')->references('id')->on('dishes');
             $table->timestamps();
             $table->softDeletes();

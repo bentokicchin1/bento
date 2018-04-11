@@ -12,12 +12,6 @@
     </section>
     <!-- Main content -->
     <section class="content">">
-                        {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
-                        {{ Form::hidden('addressId',$addressStored['id']) }}
-                        <div class="address">
-                            <div class='address-name'> {{ $addressStored['name'] }}  </div><div class="address-type"> {{ ucfirst($addressStored['orderType']['name']) }}</div>
-                            <div class="address-location">{{ $addressStored['location'].', '.$addressStored['areaLocation']['name'].', '.$addressStored['areaData']['name'].', '.$addressStored['cityData']['name'].', '.$addressStored['state'].', '.$addressStored['pincode']}} </div>
-                        </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">

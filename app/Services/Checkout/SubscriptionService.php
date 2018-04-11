@@ -34,6 +34,37 @@ class SubscriptionService
         $this->orderService = $orderService;
     }
 
+
+    public function getDefaultDishList($orderTypeId)
+    {
+        $rawDishList = $this->dishes->getDefaultDishListfromDb($orderTypeId);
+        $sortedData = [];
+        $finalData = [];
+        $currentDateTime = date('Y-m-d h:i a');
+        $daysArray = WeeklyDishList::getDatesForThisWeek();
+        if(!empty($rawDishList)){
+            foreach($rawDishList as $key => $dishItem) {
+              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
+              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
+              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
+              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
+            }
+            foreach($daysArray as $dateFromDay){
+                foreach ($sortedData as $date => $value) {
+                    $day = date('l',strtotime($dateFromDay));
+                    if(empty($finalData[$day])){
+                        if($date==$dateFromDay){
+                          $finalData[$day] = array_values($value);
+                        }else{
+                          $finalData[$day] = array();
+                        }
+                    }
+                }
+            }
+        }
+        return $finalData;
+    }
+
     public function getDishList($orderTypeId)
     {
         $rawDishList = $this->dishes->getDishListfromDb($orderTypeId, 'all');
@@ -44,7 +75,7 @@ class SubscriptionService
     public function formatDishList($rawDishList)
     {
         $sortedData = [];
-        $finalData = [];
+        $finalData =  [];
         $currentDateTime = date('Y-m-d h:i a');
         $daysArray = WeeklyDishList::getDatesForThisWeek();
         if(!empty($rawDishList)){
@@ -93,6 +124,10 @@ class SubscriptionService
         foreach ($newPostData as $day => $postData) {
 
             $finalItemList = $this->orderService->createFinalDetailedItemList($dishTypes, $postData);
+            echo "<pre/>";
+            print_r($newPostData);
+            exit;
+
             if (!empty($finalItemList['orderTotalAmount']) && !empty($finalItemList['items'])) {
                 $response[$day]['orderTotalAmount'] = $finalItemList['orderTotalAmount'];
                 $response[$day]['orderTypeId'] = $orderTypeId;
@@ -107,7 +142,6 @@ class SubscriptionService
         $newPostData = [];
         // $weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         $weekdays = $postData['days'];
-
         $monday = array_filter($postData, function ($key) {
             return strpos($key, 'monday') > 0;
         }, ARRAY_FILTER_USE_KEY);
@@ -125,6 +159,9 @@ class SubscriptionService
         }, ARRAY_FILTER_USE_KEY);
         $saturday = array_filter($postData, function ($key) {
             return strpos($key, 'saturday') > 0;
+        }, ARRAY_FILTER_USE_KEY);
+        $sunday = array_filter($postData, function ($key) {
+            return strpos($key, 'sunday') > 0;
         }, ARRAY_FILTER_USE_KEY);
 
         foreach ($weekdays as $day) {

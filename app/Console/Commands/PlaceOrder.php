@@ -23,7 +23,7 @@ class PlaceOrder extends Command
      *
      * @var string
      */
-    protected $description = 'Place Default Orders Daily';
+    protected $description = 'Place Subscribed Orders Daily';
 
     /**
      * Create a new command instance.

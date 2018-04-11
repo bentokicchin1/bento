@@ -191,8 +191,6 @@
     </div>
 </section>
 <script>
-var dishes = '<?php echo json_encode($dishes['dishData']); ?>';
-  $(document).ready(function() {
-  });
+  var dishes = '<?php echo json_encode($dishes['dishData']); ?>';
 </script>
 @endsection

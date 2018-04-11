@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\App\Console\Commands\PlaceOrder',
+        '\App\Console\Commands\PlaceDefaultSubscription',
     ];
 
     /**
@@ -24,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('PlaceOrder:placeOrder')->dailyAt('07:00');
+        $schedule->command('PlaceOrder:placeOrder')->dailyAt('07:00')->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->sundays('01:00')->emailOutputTo('bentokicchin@gmail.com');
     }
 
     /**

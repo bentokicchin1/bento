@@ -36,13 +36,15 @@
                         {{ Form::select('order_type_id',$orderTypeData,null,['id'=>'order_type_id','class'=>'form-control','placeholder'=>'Order Type (required)']) }}
                     </div>
                 </div>
-                @foreach ($dishTypeSelect as $dishType=>$dishData)
+                @foreach($dishTypeSelect as $dishType=>$dishData)
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Select {{$dishType}} :</label>
                         <div class="col-sm-6">
-                            {{ Form::select('dish[]',$dishData,null,['id'=>'dish[]','multiple'=>'multiple','class'=>'form-control dynamicDish']) }}
+                            @php $dishTypeFormat = str_replace(" ","-",$dishType); @endphp
+                            {{ Form::select('dish[]',$dishData,null,['id'=>$dishTypeFormat,'multiple'=>'multiple','class'=>'form-control dynamicDish']) }}
                         </div>
                     </div>
+                    <div id="divDefault_{{$dishTypeFormat}}"></div>
                 @endforeach
             </div>
             <!-- /.box-body -->
@@ -106,7 +108,24 @@
     </section>
     <script>
       $( document ).ready(function() {
-        $("select").select2();
+        $(".dynamicDish").select2();
+
+        $(".dynamicDish").on('change',function(){
+          var defaultRadio = '';
+          var controlId = $(this).attr('id');
+          var dishArray = $(this).select2('data');
+          $('#divDefault_'+dishType).html(defaultRadio);
+          if(!$.isEmptyObject(dishArray)){
+            var dishType = controlId.replace("-"," ");
+            defaultRadio = defaultRadio+'<div class="form-group"><label for="name" class="col-sm-3 control-label">Select Default '+dishType+' :</label><div class="col-sm-6">';
+            $.each(dishArray,function(i,val){
+              defaultRadio = defaultRadio+'<input class="radio-inline" required="true" name="default['+dishType+']" value="'+val.id+'" type="radio"><label for="default_'+dishType+'">'+val.text+'</label>';
+            });
+            defaultRadio = defaultRadio+'</div></div>';
+          }
+          $('#divDefault_'+controlId).html(defaultRadio);
+        });
+
         $("#menuDate").datepicker({
           startDate:new Date(),
           autoclose : true,

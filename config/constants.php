@@ -18,6 +18,7 @@ return [
     'BULK_SMS_SENDER' => env('BULK_SMS_SENDER'),
     'BULK_SMS_URL' => env('BULK_SMS_URL'),
     'days' => ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday','sunday'],
+    'FOOD_TYPE' => ['veg'=>'Veg','nonveg'=>'Non-veg','both'=>'Both'],
     'DEFAULT_CITY' => 1,
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],

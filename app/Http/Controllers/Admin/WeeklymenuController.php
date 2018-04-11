@@ -55,18 +55,28 @@ class WeeklymenuController extends Controller
             'dish' => 'required',
             'menuDate' => 'required'
         ]);
-
         DB::beginTransaction();
         try {
             $menuDate = $request->input('menuDate');
+            $default = $request->input('default');
             $date = date('Y-m-d',strtotime($menuDate));
             $day = ucfirst(date('l',strtotime($menuDate)));
             $orderTypeId = $request->input('order_type_id');
+
             DB::table('weekly_dish_lists')->where(['date'=>$date,'order_type_id'=>$orderTypeId])->delete();
 
             $dish_ids = $request->input('dish');
             foreach($dish_ids as $dishId) {
                 $weeklyMenuObj = new WeeklyDishList;
+                $dishType = Dish::where('id', $dishId)->with('dishType')->first();
+                $dishTypeName = $dishType['dishtype']['name'];
+                if(array_key_exists($dishTypeName,$default)){
+                    if($default[$dishTypeName]==$dishId){
+                      $weeklyMenuObj->is_default = 'Y';
+                    }else{
+                      $weeklyMenuObj->is_default = 'N';
+                    }
+                }
                 $weeklyMenuObj->order_type_id = $orderTypeId;
                 $weeklyMenuObj->date = $date;
                 $weeklyMenuObj->day = $day;

@@ -13,10 +13,11 @@ class DishTypeController extends Controller
     public function showForm($id = '', Request $request)
     {
         $dishTypesData = [];
+        $food_type = config('constants.FOOD_TYPE');
         if (!empty($id)) {
             $dishTypesData = DishType::all()->where('id', $id)->first();
         }
-        return view('admin.dishes.dishTypeAdd', ['dishTypesData' => $dishTypesData]);
+        return view('admin.dishes.dishTypeAdd', ['dishTypesData' => $dishTypesData,'food_type'=>$food_type]);
     }
 
     public function index()
@@ -40,6 +41,7 @@ class DishTypeController extends Controller
                 $dishTypeObj = new dishType;
             }
             $dishTypeObj->name = $request->input('name');
+            $dishTypeObj->food_type = $request->input('food_type');
             $dishTypeObj->save();
 
             DB::commit();

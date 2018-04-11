@@ -16,6 +16,7 @@ class CreateDishTypesTable extends Migration
         Schema::create('dish_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->enum('food_type',['veg','nonveg','both'])->default('both');
             $table->timestamps();
             $table->softDeletes();
         });

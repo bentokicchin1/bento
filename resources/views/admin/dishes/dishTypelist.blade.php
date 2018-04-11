@@ -27,17 +27,19 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
+                  <th>Food Type</th>
                   <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($dishType as $type)
                 <tr>
-                <td>{{$type->id}}</td>
-                <td>{{ ucfirst($type->name) }}</td>
-                <td><a class="btn btn-warning" href="{{ route('admin-dish-type-edit',['id' => $type['id']]) }}">Edit</a>
-                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-dish-type-delete', ['id' => $type['id']]) }}">Delete</a></div>
-                </td>
+                  <td>{{$type->id}}</td>
+                  <td>{{ ucfirst($type->name) }}</td>
+                  <td>{{ ucfirst($type->food_type) }}</td>
+                  <td><a class="btn btn-warning" href="{{ route('admin-dish-type-edit',['id' => $type['id']]) }}">Edit</a>
+                      <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-dish-type-delete', ['id' => $type['id']]) }}">Delete</a></div>
+                  </td>
                 </tr>
                 @endforeach
                 </tbody>

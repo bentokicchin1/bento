@@ -22,17 +22,22 @@
                 <a href="{{ url()->previous() }}" class="btn btn-info" style="float:right">Back</a>
             </div>
             <!-- /.box-header -->
+            {{ Form::open(['route' => 'admin-dish-type-add' ,'class'=>'form-horizontal', 'method' => 'post']) }}
             @if(!empty($dishTypesData))
             {{ Form::model($dishTypesData, ['route' => ['admin-dish-type-add', $dishTypesData['id']]]) }}
             {{ Form::hidden('id', $dishTypesData['id']) }}
-            @else
-            {{ Form::open(['route' => 'admin-dish-type-add', 'method' => 'post']) }}
             @endif
             <div class="box-body">
                 <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label" style="padding-top:7px">Name</label>
-                    <div class="col-sm-10">
-                            {{ Form::text('name',old('name') , ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Order Type Name (required)']) }}
+                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Name :</label>
+                    <div class="col-sm-6">
+                        {{ Form::text('name',old('name') , ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Order Type Name (required)']) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Food Type :</label>
+                    <div class="col-sm-6">
+                        {{ Form::select('food_type',$food_type,old('food_type'),['id'=>'food_type','class'=>'form-control','placeholder'=>'Food Type (required)']) }}
                     </div>
                 </div>
             </div>
