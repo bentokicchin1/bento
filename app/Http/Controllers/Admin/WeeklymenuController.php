@@ -64,7 +64,6 @@ class WeeklymenuController extends Controller
             $orderTypeId = $request->input('order_type_id');
 
             DB::table('weekly_dish_lists')->where(['date'=>$date,'order_type_id'=>$orderTypeId])->delete();
-
             $dish_ids = $request->input('dish');
             foreach($dish_ids as $dishId) {
                 $weeklyMenuObj = new WeeklyDishList;

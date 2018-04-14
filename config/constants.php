@@ -22,6 +22,8 @@ return [
     'DEFAULT_CITY' => 1,
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
+    'DEFAULT_HALF_VEG_TIFFIN' => ['Sabji','Chapati','Others'],
+    'DEFAULT_HALF_NONVEG_TIFFIN' => ['Non Veg Dish','Chapati','Others'],
     'LUNCH_ORDER_MAX_TIME' => '11:00 am',
     'DINNER_ORDER_MAX_TIME' => '10:30 pm',
     'ORDER_TYPE_LUNCH' => 2,

@@ -116,7 +116,7 @@
           var dishArray = $(this).select2('data');
           $('#divDefault_'+dishType).html(defaultRadio);
           if(!$.isEmptyObject(dishArray)){
-            var dishType = controlId.replace("-"," ");
+            var dishType = controlId.replace(/-/g," ");
             defaultRadio = defaultRadio+'<div class="form-group"><label for="name" class="col-sm-3 control-label">Select Default '+dishType+' :</label><div class="col-sm-6">';
             $.each(dishArray,function(i,val){
               defaultRadio = defaultRadio+'<input class="radio-inline" required="true" name="default['+dishType+']" value="'+val.id+'" type="radio"><label for="default_'+dishType+'">'+val.text+'</label>';

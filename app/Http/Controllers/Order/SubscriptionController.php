@@ -90,9 +90,6 @@ class SubscriptionController extends Controller
         if (!empty($postData)) {
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
-    echo "<pre/>";
-    print_r($sortedPostData);
-    exit;
             /* Validate sorted input data and redirect if error occurs. */
 
             foreach ($sortedPostData as $day => $eachDayItems) {
@@ -108,9 +105,6 @@ class SubscriptionController extends Controller
                 $request->session()->forget('subscriptionOrderData');
             }
             $request->session()->put('subscriptionOrderData', $sortedPostData);
-echo "<pre/>";
-print_r($sortedPostData);
-exit;
         } elseif ($request->session()->get('subscriptionOrderData')) {
             /* Check if subscription order data present in session */
             $sortedPostData = $request->session()->get('subscriptionOrderData');

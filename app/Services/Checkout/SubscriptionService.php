@@ -37,32 +37,42 @@ class SubscriptionService
 
     public function getDefaultDishList($orderTypeId)
     {
+        $finalData = array();
         $rawDishList = $this->dishes->getDefaultDishListfromDb($orderTypeId);
-        $sortedData = [];
-        $finalData = [];
-        $currentDateTime = date('Y-m-d h:i a');
-        $daysArray = WeeklyDishList::getDatesForThisWeek();
         if(!empty($rawDishList)){
             foreach($rawDishList as $key => $dishItem) {
-              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeId'] = $dishItem->dish_type_id;
-              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishTypeName'] = strtolower(str_replace(' ', '_', $dishItem->dish_type_name));
-              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishList'][$dishItem->id] = $dishItem->name;
-              $sortedData[$dishItem->date][$dishItem->dish_type_id]['dishPrice'][$dishItem->id] = $dishItem->price;
-            }
-            foreach($daysArray as $dateFromDay){
-                foreach ($sortedData as $date => $value) {
-                    $day = date('l',strtotime($dateFromDay));
-                    if(empty($finalData[$day])){
-                        if($date==$dateFromDay){
-                          $finalData[$day] = array_values($value);
-                        }else{
-                          $finalData[$day] = array();
-                        }
-                    }
-                }
+              $items = array();
+              $day = strtolower($dishItem->day);
+              if(!array_key_exists($day,$finalData)){
+                  $finalData[$day] = array();
+                  $finalData[$day]['orderTotalAmount'] = 0;
+                  $finalData[$day]['orderTypeId'] = $dishItem->order_type_id;
+                  $finalData[$day]['items'] = array();
+              }
+              if(!array_key_exists($dishItem->dish_type_name,$finalData[$day]['items'])){
+                  $finalData[$day]['items'][$dishItem->dish_type_name] = array();
+              }
+              $finalData[$day]['items'][$dishItem->dish_type_name]['dish_id'] =  $dishItem->id;
+              $qty =  ($dishItem->dish_type_name=='Chapati') ? 3 : 1;
+              $finalData[$day]['items'][$dishItem->dish_type_name]['qty'] = $qty;
+              $finalData[$day]['items'][$dishItem->dish_type_name]['name'] =  $dishItem->name;
+              $finalData[$day]['items'][$dishItem->dish_type_name]['food_type'] = $dishItem->dish_food_type;
+              $finalData[$day]['items'][$dishItem->dish_type_name]['base_price'] =  $dishItem->price;
+              $finalData[$day]['items'][$dishItem->dish_type_name]['total_price'] =  $dishItem->price * $qty;
+              $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishItem->dish_type_name]['total_price'];
             }
         }
         return $finalData;
+    }
+
+    /**
+     * Process default subscription
+     * @param (array)postData
+     * @return void
+     */
+    public function processDefaultSubscription($orderParams,$userId)
+    {
+        return $this->insertSubscriptionOrderIntoTable($orderParams,$userId);
     }
 
     public function getDishList($orderTypeId)
@@ -122,11 +132,7 @@ class SubscriptionService
 
         $orderTotalAmount = 0;
         foreach ($newPostData as $day => $postData) {
-
             $finalItemList = $this->orderService->createFinalDetailedItemList($dishTypes, $postData);
-            echo "<pre/>";
-            print_r($newPostData);
-            exit;
 
             if (!empty($finalItemList['orderTotalAmount']) && !empty($finalItemList['items'])) {
                 $response[$day]['orderTotalAmount'] = $finalItemList['orderTotalAmount'];
@@ -190,11 +196,11 @@ class SubscriptionService
     /**
      * Insert subscription in table
      */
-    private function insertSubscriptionOrderIntoTable($orderParams)
+    private function insertSubscriptionOrderIntoTable($orderParams,$userId=0)
     {
         DB::beginTransaction();
         try {
-            $userId = Auth::id();
+            $userId = ($userId==0) ? Auth::id() : $userId;
             $orderTypeId = $orderParams['orderTypeId'];
             $existingSub = Subscription::where(['user_id'=>$userId,'order_type_id'=>$orderTypeId])->first();
             if(!empty($existingSub)){
@@ -203,7 +209,7 @@ class SubscriptionService
             }else{
               $subscription = new Subscription;
             }
-            $subscription->user_id = Auth::id();
+            $subscription->user_id = $userId;
             $subscription->order_type_id = $orderParams['orderTypeId'];
             $subscription->shipping_address_id = $orderParams['shippingAddressId'];
             $subscription->subscription_items = $orderParams['subscriptionItems'];
