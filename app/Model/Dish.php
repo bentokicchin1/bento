@@ -27,6 +27,7 @@ class Dish extends Model
 
     public function getDishListfromDb($orderTypeId, $date)
     {
+      DB::enableQueryLog();
       $dishes = array();
         if ($date == 'all') {
             $currentDate = date('Y-m-d');
@@ -42,14 +43,13 @@ class Dish extends Model
                 ->orderby('dish_types.id')
                 ->get()->toArray();
         } else {
-          $currentDate = date('h:i a');
-          if(($orderTypeId==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentDate)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($orderTypeId==config('constants.ORDER_TYPE_DINNER') && strtotime($currentDate)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) {
+          $currentTime= date('h:i a');
+          if(($orderTypeId==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentTime)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($orderTypeId==config('constants.ORDER_TYPE_DINNER') && strtotime($currentTime)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) {
             $dishes = DB::table('dishes')
                   ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
                   ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
                   ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
                   ->where('weekly_dish_lists.date', '=', $date)
-                  ->where('weekly_dish_lists.date','>=',$currentDate)
                   ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
                   ->where('dishes.deleted_at',null)
                   ->orderby('dish_types.id')
