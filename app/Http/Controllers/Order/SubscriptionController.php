@@ -63,7 +63,6 @@ class SubscriptionController extends Controller
           $subscribedDishes = json_decode($subscribed->subscription_items,true);
         }
         /* Fetch Dish list from service */
-
         $dishData = $this->subscriptionService->getDishList($orderTypeId);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;

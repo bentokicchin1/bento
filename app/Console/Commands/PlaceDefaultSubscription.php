@@ -53,11 +53,11 @@ class PlaceDefaultSubscription extends Command
                 $userId = $userDetails->id;
                 $foodPreference = $userDetails->food_preference;
                 $foodQuantity = $userDetails->tiffin_quantity;
-                $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
-                if(!empty($subscribedData)){
-                    foreach ($subscribedData as $subscriptionDetails) {
+                // $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
+                // if(!empty($subscribedData)){
+                //     foreach ($subscribedData as $subscriptionDetails) {
                         $defaultData = array();
-                        $orderTypeId = $subscriptionDetails['order_type_id'];
+                        $orderTypeId = 3;
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
@@ -65,18 +65,16 @@ class PlaceDefaultSubscription extends Command
                               foreach ($details['items'] as $dishType => $dishDetails) {
                                 switch($foodPreference){
                                   case 'veg':
-                                      if($foodQuantity=='half'){
-                                          $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
-                                          if(!array_key_exists($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
-                                            unset($dishData[$day]['items'][$dishType]);
-                                          }else if($dishDetails['food_type']=='nonveg'){
-                                            unset($dishData[$day]['items'][$dishType]);
-                                          }
-                                      }
+                                        $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
+                                        if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
+                                          unset($dishData[$day]['items'][$dishType]);
+                                        }else if($dishDetails['food_type']=='nonveg'){
+                                          unset($dishData[$day]['items'][$dishType]);
+                                        }
                                     break;
                                   case 'nonveg':
                                         $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
-                                        if(!array_key_exists($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
+                                        if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
                                           unset($dishData[$day]['items'][$dishType]);
                                         }else if($dishDetails['food_type']=='veg'){
                                           unset($dishData[$day]['items'][$dishType]);
@@ -93,9 +91,9 @@ class PlaceDefaultSubscription extends Command
                           $result = $this->subscriptionService->processDefaultSubscription($defaultData,$userId);
                           echo $result;
                         }
-                      }
-                    }
-                  }
+                  //     }
+                  //   }
+                }
            }
         } catch (Exception $e) {
             return $e->getRawMessage();
