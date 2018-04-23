@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('otp', 'Auth\RegisterController@showOtpForm')->name('showOtpForm');
 Route::post('otp', 'Auth\RegisterController@verifyOtp')->name('verifyOtp');
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 /**
  * Contact-Us route

@@ -27,13 +27,17 @@ class BulkSmsService extends App
     {
         $this->mobileNumber = $mobileNumber;
         $this->message = "Thank you for registration. Your OTP is " . $otp;
+        try{
+          //Don't change below code use as it is
+          $bulkSmsCurlUrl = $this->url . "?user=" . urlencode($this->username) . "&password=" . urlencode($this->password) . "&mobile=" . urlencode($this->mobileNumber) . "&message=" . urlencode($this->message) . "&sender=" . urlencode($this->sender) . "&type=" . urlencode('3');
+          $client = new Client(); //GuzzleHttp\Client
+          $result = $client->get($bulkSmsCurlUrl);
+          return $result->getStatusCode();    // 200
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Something went wrong. Please try again.');
+        }
 
-        //Don't change below code use as it is
-        $bulkSmsCurlUrl = $this->url . "?user=" . urlencode($this->username) . "&password=" . urlencode($this->password) . "&mobile=" . urlencode($this->mobileNumber) . "&message=" . urlencode($this->message) . "&sender=" . urlencode($this->sender) . "&type=" . urlencode('3');
-
-        $client = new Client(); //GuzzleHttp\Client
-        $result = $client->get($bulkSmsCurlUrl);
-        return $result->getStatusCode();    // 200
     }
 
 }

@@ -99,7 +99,7 @@
                     {{ Form::close() }}
                 </div>
                 @else
-                <h4 style="text-align:center;">No data found</h4>
+                <h4 style="text-align:center;">Sorry we are closed!</h4>
                 @endif
             </div>
         </div>

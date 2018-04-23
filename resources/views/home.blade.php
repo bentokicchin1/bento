@@ -7,7 +7,7 @@
     <section id="header" >
         <div class="container">
             <div class="row">
-
+                @include('layouts.errors')
                 <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <div class="header-thumb">
                         <h1 class="wow fadeIn">Food With Difference</h1>
