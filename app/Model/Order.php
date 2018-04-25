@@ -57,6 +57,7 @@ class Order extends Model
               ->join("order_items","orders.id","=","order_items.order_id")
               ->join("order_types","orders.order_type_id","=","order_types.id")
               ->join("dishes","order_items.dish_id","=","dishes.id")
+              ->where('orders.deleted_at', NULL)
               ->where('user_id', $id)
               ->get();
 
@@ -70,6 +71,7 @@ class Order extends Model
             $orderList[$order->order_id]['status'] = $order->status;
             $orderList[$order->order_id]['created_at'] =  $order->created_at;
             $orderList[$order->order_id]['orderTypeName'] =  $order->orderTypeName;
+            $orderList[$order->order_id]['orderTypeId'] =  $order->order_type_id;
             array_push($orderList[$order->order_id]['dishList'],array('dishName'=>$order->dishName,'quantity'=>$order->quantity,'base_price'=>$order->base_price));
           }else{
             array_push($orderList[$order->order_id]['dishList'],array('dishName'=>$order->dishName,'quantity'=>$order->quantity,'base_price'=>$order->base_price));

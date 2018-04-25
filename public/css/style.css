@@ -861,6 +861,10 @@ a.icon {
   padding: 0!important;
 }
 
+#web input[type="radio"]{
+	  height: 10px;
+}
+
 .ma-nav{
   margin-left: -60px!important;
 }

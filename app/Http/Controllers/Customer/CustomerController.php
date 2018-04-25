@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Customer;
-
+use DB;
 use App\Http\Controllers\Controller;
 use App\Model\Customer;
 use App\Services\Customer\CustomerService;
@@ -128,6 +128,28 @@ class CustomerController extends Controller
             return redirect()->back()->withErrors($response);
         }
 
+    }
+
+    /**
+     * Soft delete order type
+     *
+     */
+    public function cancelOrder($id, Request $request)
+    {
+        if (!empty($id)) {
+            DB::beginTransaction();
+            try {
+                $order = Order::find($id);
+                $order->status = 'cancelled';
+                $order->save();
+                DB::commit();
+                return redirect()->back()->with('status', 'Order cancelled successfully!');
+            } catch (Exception $e) {
+                DB::rollBack();
+                return $e->getRawMessage();
+            }
+        }
+        return redirect()->back()->withErrors('Something went wrong. Please try again.');
     }
 
 }

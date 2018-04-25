@@ -53,17 +53,21 @@
                                 <div class="monthly_preference" style="{{$showDiv}}">
                                     <div class="form-group">
                                         {!! Form::label('veg', ' Food Preference',['class'=>'control-label']) !!}
-                                        {!! Form::label('veg', 'Veg',['class'=> 'radio-inline control-label']) !!}
+                                        {!! Form::label('veg', 'Veg',['class'=> 'radio-inline control-label', 'data-toggle'=>'tooltip', 'title'=>'Hooray!']) !!}
                                         {{ Form::radio('food_preference', 'veg',$userInfo->food_preference=='veg',['class'=>'']) }}
                                         {!! Form::label('nonveg', 'Non-Veg',['class'=> 'radio-inline control-label']) !!}
-                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['class'=>'']) }}
+                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['class'=>'','data-toggle'=>'tooltip', 'title'=>'Hooray!']) }}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('daily', ' Tiffin Quantity Preference',['class'=>'control-label']) !!}
-                                        {!! Form::label('full', 'Full (Sabji,3*Chapati,Dal,Rice,Buttermilk)',['class'=> 'radio-inline control-label']) !!}
-                                        {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',['class'=>'']) }}
-                                        {!! Form::label('half', 'Half (Sabji,3*Chapati,Buttermilk)',['class'=> 'radio-inline control-label']) !!}
-                                        {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',['class'=>'']) }}
+                                        <div class="radio col-sm-offset-1 col-sm-12">
+                                          {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',[]) }}
+                                          {!! Form::label('full', 'Full(Sabji,3*Chapati,Dal,Rice,Buttermilk)',[]) !!}
+                                        </div>
+                                        <div class="radio col-sm-offset-1 col-sm-12">
+                                          {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',[]) }}
+                                          {!! Form::label('half', 'Half(Sabji,3*Chapati,Buttermilk)',[]) !!}
+                                        </div>
                                     </div>
                                 </div>
                                 {{ Form::submit('Save Info', ['class' => 'form-control web-submit']) }}

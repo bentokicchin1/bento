@@ -83,6 +83,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
     /*route to show the customer dashboard*/
     // Route::get('dashboard', 'Customer\CustomerController@dashboard')->name('dashboard');
     Route::get('orders','Customer\CustomerController@orders')->name('orders');
+    /* Route to cancel the order*/
+    Route::get('order/cancel/{id}', 'Customer\CustomerController@cancelOrder')->name('orderCancel')->where('id', '[0-9]+');
 
     Route::get('address/add', 'Customer\AddressController@showAddressForm')->name('address-add');
     Route::post('address/add', 'Customer\AddressController@store')->name('address-add');
