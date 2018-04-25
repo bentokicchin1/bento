@@ -46,7 +46,7 @@ Route::post('feedback', 'Customer\FeedbackController@store')->name('store-feedba
  *
  */
 /* Route to show the order form*/
-Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('type', '[a-z]+')->middleware('auth');
+Route::get('order/{type}', 'Order\OrderController@showOrderForm')->name('order')->where('type', '[a-z]+');
 /* Route to show address select and order summary page*/
 Route::post('checkout', 'Order\OrderController@addressSelect')->name('addressSelect')->middleware('auth');
 /* get method used when user redirect to checkout page after adding new address */
