@@ -17,7 +17,8 @@ class CreateOrderItemsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->string('name');
+            $table->unsignedInteger('dish_id');
+            $table->foreign('dish_id')->references('id')->on('dishes');
             $table->integer('quantity');
             $table->decimal('base_price', 8, 2);
             $table->decimal('total_price', 8, 2);

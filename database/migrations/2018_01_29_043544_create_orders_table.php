@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->integer('quantity')->default(1);
             $table->decimal('total_amount', 8, 2);
             $table->text('shipping_address_id');
-            $table->string('status');
+            $table->enum('status',['ordered','cancelled'])->default('ordered');
             $table->date('order_date');
             $table->timestamps();
             $table->softDeletes();
