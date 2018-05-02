@@ -105,7 +105,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 });
 
 /* Admin panel routes */
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'wpradmin'], function(){
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
 
     Route::get('user/add', 'Admin\UserController@showForm')->name('admin-user-add');
