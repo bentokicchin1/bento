@@ -33,7 +33,7 @@ class User extends Authenticatable
     public function verifyUser(){
         return $this->hasOne('App\Model\VerifyUser');
     }
-    
+
     /**
      * Get verified user id associated otp.
      */
