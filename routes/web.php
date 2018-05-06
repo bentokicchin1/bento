@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 // Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 
-Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
 Route::get('otp', 'Auth\RegisterController@showOtpForm')->name('showOtpForm');
 Route::post('otp', 'Auth\RegisterController@verifyOtp')->name('verifyOtp');
 //Route::get('/home', 'HomeController@index')->name('home');
