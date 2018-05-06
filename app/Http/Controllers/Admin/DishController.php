@@ -35,7 +35,7 @@ class DishController extends Controller
             'dishTypeId' => 'required',
             'name' => 'required',
             'price' => 'required',
-            'dishImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'dishImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         DB::beginTransaction();

@@ -20,10 +20,10 @@ class CreateDishesTable extends Migration
             // $table->unsignedInteger('order_type_id');
             // $table->foreign('order_type_id')->references('id')->on('order_types');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->decimal('price',8,2);
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
