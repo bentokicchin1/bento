@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $userData = array();
         if(Auth::user()){
             $userData = Auth::user();
