@@ -8,10 +8,10 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                     <div class="header-thumb">
-                        <h1 class="wow fadeIn">Weekly Tiffin Type</h1>
-                        <h3 class="wow fadeInUp">Make Your Choice</h3>
+                        <h1 class="wow fadeIn">Personalize Your Tiffin For This week</h1>
+                        <h3 class="wow fadeInUp">Make Your Own Choice</h3>
                     </div>
                 </div>
 
@@ -26,18 +26,18 @@
         <div class="container body-content">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                <!-- <div class="portfolio-thumb">
+                <div class="portfolio-thumb">
                     <img src="{{ asset('images/lunch1.jpg') }}" class="img-responsive" alt="Lunch">
-                </div> -->
+                </div>
                 <div id="custom-btn">
                     <a  href="{{ route('subscription', ['type'=>'lunch']) }}" class="btn btn-default">LUNCH</a>
                 </div>
             </div>
 
             <div class="col-md-6 col-sm-12">
-                <!-- <div class="portfolio-thumb">
+                <div class="portfolio-thumb">
                     <img src="{{ asset('images/dinner.jpg') }}" class="img-responsive" alt="Dinner">
-                </div> -->
+                </div>
                 <div id="custom-btn">
                     <a href="{{ route('subscription', ['type'=>'dinner']) }}" class="btn btn-default">DINNER</a>
                 </div>

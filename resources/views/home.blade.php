@@ -11,7 +11,7 @@
                 <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
                     <div class="header-thumb">
                         <h1 class="wow fadeIn">Food With Difference</h1>
-                        <h3 class="wow fadeInUp" data-wow-delay="0.3s">Make Your Choice</h3>
+                        <h3 class="wow fadeInUp" data-wow-delay="0.3s">Make Your Own Choice</h3>
                     </div>
                 </div>
 

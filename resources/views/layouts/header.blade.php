@@ -29,11 +29,13 @@
                        @else
                        <li><a href="{{ route('profile') }}">My Account</a></li>
                        @if(!empty($userData))
-                          
-                          <li ><a href="{{ route('orders') }}">Orders</a></li>
-                          <li><a href="{{ route('subscriptionType') }}">Weekly Menu</a></li>
+                          @if($userData->billing_cycle=='daily')
+                            <li ><a href="{{ route('orders') }}">Order Now</a></li>
+                          @else
+                            <li><a href="{{ route('subscriptionType') }}">Personalize Your Order</a></li>
+                          @endif
                         @else
-                          <li ><a href="{{ route('orders') }}">Orders</a></li>
+                          <li ><a href="{{ route('orders') }}">Order Now</a></li>
                         @endif
                        <li><a href="{{ route('feedback') }}">Feedback</a></li>
                        <li>
