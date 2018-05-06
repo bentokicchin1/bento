@@ -76,17 +76,18 @@ class SubscriptionController extends Controller
      */
     public function addressSelect(Request $request)
     {
+
         $userId = Auth::id();
         $postData = $request->all();
-        $rules = [
-            'days' => 'required'
-        ];
-        $customMessages = [
-           'days.required' => 'Please select tiffin details for atleast one day.'
-        ];
-        $this->validate($request, $rules, $customMessages);
-        $orderTypeId = $postData['orderTypeId'];
         if (!empty($postData)) {
+            $orderTypeId = $postData['orderTypeId'];
+            $rules = [
+                'days' => 'required'
+            ];
+            $customMessages = [
+               'days.required' => 'Please select tiffin details for atleast one day.'
+            ];
+            $this->validate($request, $rules, $customMessages);
             /* Rearrange post data */
             $sortedPostData = $this->subscriptionService->reArrangeSubscriptionPostData($postData);
             /* Validate sorted input data and redirect if error occurs. */
@@ -110,6 +111,9 @@ class SubscriptionController extends Controller
         } else {
             /* if no order data found then redirect to home page */
             return redirect()->route('home');
+        }
+        if(empty($orderTypeId) && $request->session()->has('orderTypeId')){
+          $orderTypeId = $request->session()->get('orderTypeId');
         }
         /* Fetch customer address list and create array that need to be sent to checkout view page */
         $viewData['addressStored'] = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);

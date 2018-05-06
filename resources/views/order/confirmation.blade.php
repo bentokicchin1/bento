@@ -22,7 +22,7 @@
     <div class="container body-content">
         <div class="row">
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 order wow fadeIn" data-wow-delay="0s">
-                    <div class="big-message">Your order ID is 1234. You will receive an order confirmation email.</div>
+                    <div class="big-message">You can make changes or cancel your tiffin before 10:30AM for lunch & 6:30PM for dinner on the same day.</div>
             </div>
         </div>
     </div>

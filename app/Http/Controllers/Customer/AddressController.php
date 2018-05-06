@@ -88,6 +88,7 @@ class AddressController extends Controller
         }
         $response = $this->addressService->saveAddress($input);
         if ($response == 'success') {
+            $request->session()->put('orderTypeId', $input['order_type_id']);
             if ($request->session()->has('refererUrl')) {
                 $refereUrl = $request->session()->get('refererUrl');
                 $request->session()->forget('refererUrl');

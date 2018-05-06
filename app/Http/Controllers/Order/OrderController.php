@@ -56,8 +56,8 @@ class OrderController extends Controller
     {
         $userId = Auth::id();
         $postData = $request->all();
-        $orderTypeId = $postData['orderTypeId'];
         if (!empty($postData)) {
+            $orderTypeId = $postData['orderTypeId'];
             /* Rearrange post data */
             $sortedPostData = $this->orderService->rearrangeOrderPostData($postData);
 
@@ -79,7 +79,9 @@ class OrderController extends Controller
             /* if no order data found then redirect to home page */
             return redirect()->route('home');
         }
-
+        if(empty($orderTypeId) && $request->session()->has('orderTypeId')){
+          $orderTypeId = $request->session()->get('orderTypeId');
+        }
         /* Fetch customer address list and create array that need to be sent to checkout view page */
         $viewData['addressStored'] = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
         $viewData['orderData'] = $sortedPostData;

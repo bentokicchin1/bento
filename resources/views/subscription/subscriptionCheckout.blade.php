@@ -57,16 +57,22 @@
                 @include('layouts.success')
                 @include('layouts.errors')
                 <div class="web-form">
-                    <div class="form-group m-b-20">
-                        {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
-                        {{ Form::hidden('addressId',$addressStored['id']) }}
-                        <div class="address">
-                            <div class='address-name'> {{ $addressStored['name'] }}  </div><div class="address-type"> {{ ucfirst($addressStored['orderType']['name']) }}</div>
-                            <div class="address-location">{{ $addressStored['location'].', '.$addressStored['areaLocation']['name'].', '.$addressStored['areaData']['name'].', '.$addressStored['cityData']['name'].', '.$addressStored['state'].', '.$addressStored['pincode']}} </div>
+                    @if(!empty($addressStored))
+                        <div class="form-group m-b-20">
+                            {{ Form::open(['route' => 'subscriptionProcessOrder', 'method' => 'post']) }}
+                            {{ Form::hidden('addressId',$addressStored['id']) }}
+                            <div class="address">
+                                <div class='address-name'> {{ $addressStored['name'] }}  </div><div class="address-type"> {{ ucfirst($addressStored['orderType']['name']) }}</div>
+                                <div class="address-location">{{ $addressStored['location'].', '.$addressStored['areaLocation']['name'].', '.$addressStored['areaData']['name'].', '.$addressStored['cityData']['name'].', '.$addressStored['state'].', '.$addressStored['pincode']}} </div>
+                            </div>
                         </div>
-                    </div>
-                      {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
-                      {{ Form::close() }}
+                          {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
+                          {{ Form::close() }}
+                    @else
+                      <div class="form-group m-b-20">
+                        <a href="{{ route('address-add')}}"><label class="address-new">Add Delivery Address</label></a>
+                      </div>
+                    @endif
                 </div>
             </div>
         </div>
