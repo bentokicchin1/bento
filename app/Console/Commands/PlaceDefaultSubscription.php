@@ -53,11 +53,11 @@ class PlaceDefaultSubscription extends Command
                 $userId = $userDetails->id;
                 $foodPreference = $userDetails->food_preference;
                 $foodQuantity = $userDetails->tiffin_quantity;
-                // $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
-                // if(!empty($subscribedData)){
-                //     foreach ($subscribedData as $subscriptionDetails) {
+                $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
+                if(!empty($subscribedData)){
+                    foreach ($subscribedData as $subscriptionDetails) {
                         $defaultData = array();
-                        $orderTypeId = 3;
+                        $orderTypeId = $subscriptionDetails->order_type_id;
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
@@ -91,8 +91,8 @@ class PlaceDefaultSubscription extends Command
                           $result = $this->subscriptionService->processDefaultSubscription($defaultData,$userId);
                           echo $result;
                         }
-                  //     }
-                  //   }
+                      }
+                    }
                 }
            }
         } catch (Exception $e) {
