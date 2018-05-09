@@ -171,6 +171,11 @@ $(document).ready(function(){
     -------------------------------*/
     new WOW({ mobile: false }).init();
     calculateTotal();
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        calculateTotal();
+    });
+
     var rules = new Object();
     var messages = new Object();
     $. each($("input[name='days[]']:checked"), function(){
@@ -268,6 +273,7 @@ $(document).ready(function(){
             }
         });
         $(".otherDish").each(function() {
+          // alert("otherDish");
             var inputName = $(this).attr('name');
             if((inputName.includes(dayName) && dayName!='') || dayName==''){
               if(tabName!==undefined){
@@ -280,6 +286,7 @@ $(document).ready(function(){
               }
             }
         });
+        alert(orderTotal);
         if(dayName != ''){
           $('#grandTotal_'+dayName).val(Math.round(orderTotal));
         }else{
