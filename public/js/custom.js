@@ -286,7 +286,6 @@ $(document).ready(function(){
               }
             }
         });
-        alert(orderTotal);
         if(dayName != ''){
           $('#grandTotal_'+dayName).val(Math.round(orderTotal));
         }else{
