@@ -16,7 +16,7 @@
                     <li id="myorders" class="md-12 sm-2 ">
                         <a class="active" href="{{ route('orders')}}">
                             <strong>View My Orders</strong>
-                            <span>Check Past Order Items</span>
+                            <span>Check Order Items</span>
                         </a>
                     </li>
 
@@ -70,7 +70,7 @@
                                         </td>
                                         <td>{{$order['total_amount']}}</td>
                                         <td>
-                                          @if((($order['orderTypeId']==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentTime)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($order['orderTypeId']==config('constants.ORDER_TYPE_DINNER') && strtotime($currentTime)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) && $order['status']!='cancelled') {
+                                          @if((($order['orderTypeId']==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentTime)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($order['orderTypeId']==config('constants.ORDER_TYPE_DINNER') && strtotime($currentTime)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) && $order['status']!='cancelled') 
                                             <a href="{{ route('order', ['type'=>$order['orderTypeName']]) }}">Edit</a>/<a onclick="return confirm('Are you sure you want to cancel?')" href="{{ route('orderCancel', ['id'=>$order['id']]) }}">Cancel</a>
                                           @else
                                             <span class='label label-info'>Completed</span>

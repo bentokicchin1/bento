@@ -249,8 +249,13 @@ class OrderService
             $dish['dishTypeId'] = $item['order_dish']['dish_type_id'];
             $dish['dishName'] = $item['order_dish']['name'];
             $dish['dishPrice'] = $item['base_price'];
+            $dish['totalPrice'] = $item['total_price'];
             $dish['quantity'] = $item['quantity'];
-            $finalList['orderDishes'][$item['order_dish']['dish_type_id']] = $dish;
+            if($item['order_dish']['dish_type_id']!=config('constants.DISH_TYPE_OTHER')){
+              $finalList['orderDishes'][$item['order_dish']['dish_type_id']] = $dish;
+            }else{
+              $finalList['orderDishes'][$item['order_dish']['dish_type_id']][$dishId] = $dish;
+            }
         }
       }
       return $finalList;

@@ -29,6 +29,7 @@ class OrderController extends Controller
      */
     public function showOrderForm($orderType)
     {
+        $ordersData = $orderItems['orderDishes'] = $orderItems['orderTypeIds'] = array();
         /* fetch order type data based on order type */
         $orderTypeData = OrderType::where('name', $orderType)->first();
 
@@ -38,13 +39,22 @@ class OrderController extends Controller
         }
 
         $orderTypeId = $orderTypeData->id;
+        $date = date('Y-m-d');
+        if (!empty(Auth::id())) {
+          $userId = Auth::id();
+          $ordersData = Order::with('orderType')
+                    ->with('orderItems.orderDish')
+                    ->where(['user_id'=>$userId,'order_date'=>$date])->first()->toArray();
+          $orderItems = $this->orderService->formatOrderItems($ordersData);
+        }
 
         /* Fetch Dish list from service */
         $date = date('Y-m-d');
         $dishData = $this->orderService->getDishList($orderTypeId,$date);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
-        return view('order.menu', ['dishes' => $dishList]);
+        
+        return view('order.menu', ['dishes' => $dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems]);
     }
 
     /**

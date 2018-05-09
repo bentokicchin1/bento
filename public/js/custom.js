@@ -142,7 +142,6 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
-
     "use strict";
 
     $('input:radio[name=billing_cycle]').on('change',function() {

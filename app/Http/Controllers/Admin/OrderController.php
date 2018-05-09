@@ -27,7 +27,7 @@ class OrderController extends Controller
 
     public function showForm($id = '', Request $request)
     {
-        $ordersData = $orderItems = [];
+        $ordersData = $orderItems = $orderItems['orderTypeIds'] = [];
         $userData = User::offset(0)->limit(10)->pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
@@ -36,15 +36,13 @@ class OrderController extends Controller
                     ->with('orderItems.orderDish')
                     ->where('id',$id)->first()->toArray();
           $orderItems = $this->orderService->formatOrderItems($ordersData);
+          $orderItems['orderTypeIds'] = [];
           $orderTypeId = $ordersData['order_type_id'];
           $orderDate = $ordersData['order_date'];
           $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
         }else {
           $dishData = array();
         }
-        // echo "<pre/>";
-        // print_r($orderItems);
-        // exit;
         return view('admin.orders.orderAdd', ['ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
