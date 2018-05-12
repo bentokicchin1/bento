@@ -52,11 +52,12 @@
                                   @foreach($orders as $order)
                                     @if (is_array($order))
                                       @php
+                                        $currentDate= date('Y-m-d');
                                         $currentTime= date('h:i a');
                                         $statusClass = ($order['status']=='ordered') ?  'label label-success' : 'label label-danger';
                                       @endphp
                                       <tr>
-                                        <td>{{date('j-M-Y', strtotime($order['created_at']))}}</td>
+                                        <td>{{date('j-M-Y', strtotime($order['order_date']))}}</td>
                                         <td><span class='{{$statusClass}}'>{{ ucfirst( $order['status'] ) }}</span></td>
                                         <td>{{ ucfirst( $order['orderTypeName'] ) }}</td>
                                         <td>
@@ -70,7 +71,9 @@
                                         </td>
                                         <td>{{$order['total_amount']}}</td>
                                         <td>
-                                          @if((($order['orderTypeId']==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentTime)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($order['orderTypeId']==config('constants.ORDER_TYPE_DINNER') && strtotime($currentTime)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) && $order['status']!='cancelled') 
+                                          @if((strtotime($order['order_date']) < strtotime($currentDate)))
+                                            <span class='label label-info'>Completed</span>
+                                          @elseif((($order['orderTypeId']==config('constants.ORDER_TYPE_LUNCH') && strtotime($currentTime)<=strtotime(config('constants.LUNCH_ORDER_MAX_TIME'))) || ($order['orderTypeId']==config('constants.ORDER_TYPE_DINNER') && strtotime($currentTime)<=strtotime(config('constants.DINNER_ORDER_MAX_TIME')))) && $order['status']!='cancelled')
                                             <a href="{{ route('order', ['type'=>$order['orderTypeName']]) }}">Edit</a>/<a onclick="return confirm('Are you sure you want to cancel?')" href="{{ route('orderCancel', ['id'=>$order['id']]) }}">Cancel</a>
                                           @else
                                             <span class='label label-info'>Completed</span>
