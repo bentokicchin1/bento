@@ -44,7 +44,7 @@ class OrderController extends Controller
           $userId = Auth::id();
           $ordersData = Order::with('orderType')
                     ->with('orderItems.orderDish')
-                    ->where(['user_id'=>$userId,'order_date'=>$date])->first()->toArray();
+                    ->where('user_id',$userId)->where('order_date',$date)->get()->toArray();
           $orderItems = $this->orderService->formatOrderItems($ordersData);
         }
 
@@ -53,7 +53,7 @@ class OrderController extends Controller
         $dishData = $this->orderService->getDishList($orderTypeId,$date);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
-        
+
         return view('order.menu', ['dishes' => $dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems]);
     }
 
