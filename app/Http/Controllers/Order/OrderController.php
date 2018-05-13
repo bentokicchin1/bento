@@ -44,7 +44,7 @@ class OrderController extends Controller
           $userId = Auth::id();
           $ordersData = Order::with('orderType')
                     ->with('orderItems.orderDish')
-                    ->where('user_id',$userId)->where('order_date',$date)->first()->toArray();
+                    ->where('user_id',$userId)->where('order_date',$date)->get()->toArray();
           $orderItems = $this->orderService->formatOrderItems($ordersData);
         }
 

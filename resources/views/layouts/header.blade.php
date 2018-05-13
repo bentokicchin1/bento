@@ -28,7 +28,8 @@
                        <li><a href="{{ route('contact-us') }}">Contact-Us</a></li>
                        @else
                        <li><a href="{{ route('profile') }}">My Account</a></li>
-                       <li ><a href="{{ route('orders') }}">Order Now</a></li>
+                       <li><a href="{{ route('orders') }}">My Orders</a></li>
+                       <li ><a href="{{ route('home') }}">Order Now</a></li>
                        <li><a href="{{ route('subscriptionType') }}">Personalize Your Order</a></li>
                        <!-- @if(!empty($userData))
                           @if($userData->billing_cycle=='daily')
