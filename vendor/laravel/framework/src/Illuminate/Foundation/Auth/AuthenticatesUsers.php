@@ -120,6 +120,8 @@ trait AuthenticatesUsers
             return redirect()->route('showOtpForm')->with('warning', 'You need to verify your mobile number. We have sent you an OTP code, please check your inbox.');
             // auth()->logout();
             // return redirect()->route('showOtpForm');
+        }elseif(!$user->billing_cycle){
+          return redirect()->route('profile')->with('warning', 'Please enter food preferences and delevery address.');
         }
         return redirect()->intended($this->redirectPath());
     }
