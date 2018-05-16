@@ -27,7 +27,7 @@
                          @if(Auth::user()->billing_cycle=='daily')
                             <li ><a href="{{ route('home') }}">Order Now</a></li>
                          @else
-                            <li><a href="{{ route('subscriptionType') }}">Personalize Your Order</a></li>
+                            <li><a href="{{ route('home') }}">Personalize Your Order</a></li>
                          @endif
                        <li><a href="{{ route('feedback') }}">Feedback</a></li>
                        <li>

@@ -163,7 +163,7 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
-        return redirect('/');
+        $this->showLoginForm();
     }
 
     /**
