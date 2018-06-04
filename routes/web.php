@@ -11,9 +11,9 @@
 |
  */
 // abort(404);
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 Auth::routes();
 

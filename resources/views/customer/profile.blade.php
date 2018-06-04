@@ -41,33 +41,29 @@
                                 {{ Form::text('name',$userInfo->name , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                                 {{ Form::text('mobile_number',$userInfo->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number','readonly'=>'true']) }}
                                 <div class="form-group">
-                                    {!! Form::label('daily', ' Billing Cycle',['class'=>'control-label']) !!}
-                                    {!! Form::label('daily', 'Daily',['class'=>'radio-inline control-label']) !!}
-                                    {{ Form::radio('billing_cycle', 'daily',$userInfo->billing_cycle=='daily',['class'=>'']) }}
-                                    {!! Form::label('monthly', 'Monthly',['class'=> 'radio-inline control-label']) !!}
-                                    {{ Form::radio('billing_cycle', 'monthly',$userInfo->billing_cycle=='monthly',['class'=>'']) }}
+                                    {!! Form::label('daily', ' Billing Cycle',['class'=>'control-label','data-toggle'=>'tooltip','title'=>'Select frequency of tiffin.']) !!}
+                                    {!! Form::label('daily', 'Daily',['class'=>'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Order daily']) !!}
+                                    {{ Form::radio('billing_cycle', 'daily',$userInfo->billing_cycle=='daily',['class'=>'','data-toggle'=>'tooltip','title'=>'Order daily']) }}
+                                    {!! Form::label('monthly', 'Monthly',['class'=> 'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Subscribe for a month']) !!}
+                                    {{ Form::radio('billing_cycle', 'monthly',$userInfo->billing_cycle=='monthly',['class'=>'','data-toggle'=>'tooltip','title'=>'Subscribe for a month']) }}
                                 </div>
                                 @php
                                   $showDiv = ($userInfo->billing_cycle=='monthly') ? 'display:block;' : 'display:none;';
                                 @endphp
                                 <div class="monthly_preference" style="{{$showDiv}}">
                                     <div class="form-group">
-                                        {!! Form::label('veg', ' Food Preference',['class'=>'control-label']) !!}
-                                        {!! Form::label('veg', 'Veg',['class'=> 'radio-inline control-label', 'data-toggle'=>'tooltip', 'title'=>'Hooray!']) !!}
+                                        {!! Form::label('veg', ' Food Preference',['class'=>'control-label', 'data-toggle'=>'tooltip','title'=>"Select preferred food type, If you can't get time to personalise your tiffin."]) !!}
+                                        {!! Form::label('veg', 'Veg',['class'=> 'radio-inline control-label']) !!}
                                         {{ Form::radio('food_preference', 'veg',$userInfo->food_preference=='veg',['class'=>'']) }}
                                         {!! Form::label('nonveg', 'Non-Veg',['class'=> 'radio-inline control-label']) !!}
-                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['class'=>'','data-toggle'=>'tooltip', 'title'=>'Hooray!']) }}
+                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['class'=>'']) }}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('daily', ' Tiffin Quantity Preference',['class'=>'control-label']) !!}
-                                        <div class="radio col-sm-offset-1 col-sm-12">
-                                          {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',[]) }}
-                                          {!! Form::label('full', 'Full(Sabji,3*Chapati,Dal,Rice,Buttermilk)',[]) !!}
-                                        </div>
-                                        <div class="radio col-sm-offset-1 col-sm-12">
-                                          {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',[]) }}
-                                          {!! Form::label('half', 'Half(Sabji,3*Chapati,Buttermilk)',[]) !!}
-                                        </div>
+                                        {!! Form::label('daily', ' Tiffin Quantity Preference',['class'=>'control-label','data-toggle'=>'tooltip','title'=>"Select preffered food quantity, If you can't get time to personalise your tiffin."]) !!}
+                                        {!! Form::label('full', 'Full',['class'=> 'radio-inline control-label','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Dal <br> Rice <br> Buttermilk"]) !!}
+                                        {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',['data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Dal <br> Rice <br> Buttermilk"]) }}
+                                        {!! Form::label('half', 'Half',['class'=> 'radio-inline control-label','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Buttermilk"]) !!}
+                                        {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',['data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 * Chapati <br> Buttermilk"]) }}
                                     </div>
                                 </div>
                                 {{ Form::submit('Save Info', ['class' => 'form-control web-submit']) }}

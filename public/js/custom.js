@@ -49,6 +49,7 @@ $(window).on('load',function(){
 -----------------------------------------------*/
 jQuery(document).ready(function($){
 
+  $('[data-toggle="tooltip"]').tooltip();
   if ( $('.iso-box-wrapper').length > 0 ) {
 
       var $container  = $('.iso-box-wrapper'),

@@ -7,6 +7,8 @@ $(document).ready(function($){
     },
   });
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   $("#orderDate").datepicker({
     startDate:new Date(),
     autoclose : true,
