@@ -9,7 +9,9 @@ use App\Model\Area_location;
 use App\Model\Area;
 use App\Model\OrderType;
 use App\Model\CustomerAddresse;
+use App\Mail\VerifyMail;
 use App\Services\Customer\AddressService;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +31,9 @@ class AddressController extends Controller
      */
     public function showAddressForm($id = '', Request $request)
     {
+
+        Mail::to('skhilari26@gmail.com')->send(new VerifyMail(Auth::user()));
+        exit;
         $data = [];
         $data['cityData'] = city::pluck('name', 'id');
         $data['orderTypeData'] = OrderType::pluck('name', 'id');

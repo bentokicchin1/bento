@@ -33,7 +33,6 @@ class CustomerController extends Controller
 
     public function dashboard(Request $request)
     {
-
         $userId = Auth::id();
 
         $userInfo = User::select('name', 'email', 'mobile_number')->where('id', $userId)->first()->toArray();
