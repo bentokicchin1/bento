@@ -14,7 +14,7 @@
 <!-- Bootstrap 3.3.7 -->
 {!! Html::style('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') !!}
 <!-- Font Awesome -->
-{!! Html::style('admin/bower_components/fontawesome-free-5.0.8/web-fonts-with-css/css/fontawesome-all.min.css') !!}
+{!! Html::style('admin/bower_components/font-awesome/css/font-awesome.min.css') !!}
 <!-- Ionicons -->
 {!! Html::style('admin/bower_components/Ionicons/css/ionicons.min.css') !!}
 <!-- Theme style -->
@@ -57,7 +57,6 @@
     </script>
 
     {!! Html::script('admin/custom.js') !!}
-    {!! Html::script('admin/bower_components/fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.min.js') !!}
     <!-- Morris.js charts -->
     {!! Html::script('admin/bower_components/raphael/raphael.min.js') !!}
     {!! Html::script('admin/bower_components/morris.js/morris.min.js') !!}
