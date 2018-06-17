@@ -32,7 +32,7 @@ class AddressController extends Controller
     public function showAddressForm($id = '', Request $request)
     {
         // $user = Auth::user();
-        Mail::send(['text' => 'emails.verifyUser'], ['name' => 'Bento'], function ($m) {
+        Mail::send('emails.verifyUser', ['name' => 'Bento'], function ($m) {
             $m->from('bentokicchin@gmail.com', 'Bento');
             $m->to('skhilari26@gmail.com')->subject('Setup Done');
         });
