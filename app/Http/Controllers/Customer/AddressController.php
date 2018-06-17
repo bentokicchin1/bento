@@ -31,8 +31,12 @@ class AddressController extends Controller
      */
     public function showAddressForm($id = '', Request $request)
     {
-
-        Mail::to('skhilari26@gmail.com')->send(new VerifyMail(Auth::user()));
+        // $user = Auth::user();
+        Mail::send(['text' => 'emails.verifyUser'], ['name' => 'Bento'], function ($m) {
+            $m->from('bentokicchin@gmail.com', 'Bento');
+            $m->to('skhilari26@gmail.com')->subject('Setup Done');
+        });
+        // Mail::to('skhilari26@gmail.com')->send('emails.verifyUser',);
         exit;
         $data = [];
         $data['cityData'] = city::pluck('name', 'id');
