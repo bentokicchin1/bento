@@ -34,7 +34,7 @@ class AddressController extends Controller
         // $user = Auth::user();
         Mail::send('emails.verifyUser', ['name' => 'Bento'], function ($m) {
             $m->from('bentokicchin@gmail.com', 'Bento');
-            $m->to('skhilari26@gmail.com')->subject('Setup Done');
+            $m->to('anilpgupta@gmail.com')->subject('Setup Done');
         });
         // Mail::to('skhilari26@gmail.com')->send('emails.verifyUser',);
         exit;
