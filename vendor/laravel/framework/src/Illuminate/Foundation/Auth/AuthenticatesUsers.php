@@ -60,7 +60,7 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $this->validate($request, [
-            $this->username() => 'required|numeric|digits:10',
+            $this->username() => 'required|string',
             'password' => 'required|string',
         ]);
     }
@@ -114,16 +114,7 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
-
-        if (!$user->mobile_verified) {
-            auth()->logout();
-            return redirect()->route('showOtpForm')->with('warning', 'You need to verify your mobile number. We have sent you an OTP code, please check your inbox.');
-            // auth()->logout();
-            // return redirect()->route('showOtpForm');
-        }elseif(!$user->billing_cycle){
-          return redirect()->route('profile')->with('warning', 'Please enter food preferences and delevery address.');
-        }
-        return redirect()->intended($this->redirectPath());
+        //
     }
 
     /**
@@ -148,7 +139,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'mobile_number';
+        return 'email';
     }
 
     /**
@@ -163,7 +154,7 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
-        return redirect('/login');
+        return redirect('/');
     }
 
     /**
