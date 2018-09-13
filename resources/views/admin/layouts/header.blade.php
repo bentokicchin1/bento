@@ -19,7 +19,12 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- {{--  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">  --}} -->
-              <span class="hidden-xs">Anil Gupta</span>
+              <span class="hidden-xs">Anil</span>
+
+                 <a href="{{ route('admin-logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                 <form id="logout-form" action="{{ route('admin-logout') }}" method="POST" style="display: none;">
+                     {{ csrf_field() }}
+                 </form>
             </a>
             <ul class="dropdown-menu">
               <!-- Menu Footer-->
@@ -28,7 +33,11 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                   <a href="{{ route('admin-logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                   <form id="logout-form" action="{{ route('admin-logout') }}" method="POST" style="display: none;">
+                       {{ csrf_field() }}
+                   </form>
+                  <!-- <a href="#" class="btn btn-default btn-flat">Sign out</a> -->
                 </div>
               </li>
             </ul>

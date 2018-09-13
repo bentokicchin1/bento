@@ -25,11 +25,8 @@ Route::get('/', function () {
   }
 })->name('home');
 
-// Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
-// Route::get('/', 'HomeController@index')->name('home');
 Route::get('otp', 'Auth\RegisterController@showOtpForm')->name('showOtpForm');
 Route::post('otp', 'Auth\RegisterController@verifyOtp')->name('verifyOtp');
-//Route::get('/home', 'HomeController@index')->name('home');
 
 /**
  * Contact-Us route
@@ -112,22 +109,30 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 
 });
 
-/* Admin panel routes */
-Route::group(['prefix' => 'wpradmin'], function(){
-    Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
 
+Route::get('admin/login','Admin\LoginController@showLoginForm')->name('admin-login');
+Route::post('admin/login','Admin\LoginController@login');
+Route::post('admin/logout', 'Admin\LoginController@logout')->name('admin-logout');
+Route::post('admin/password/email','Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin-password-email');
+Route::get('admin/password/reset','Admin\ForgotPasswordController@showLinkRequestForm')->name('admin-password-request');
+Route::post('admin/password/reset','Admin\ResetPasswordController@reset');
+Route::get('admin/password/reset/{token}','Admin\ResetPasswordController@showResetForm')->name('admin-password-reset');
+
+/* Admin panel routes */
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
+    Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
     Route::get('user/add', 'Admin\UserController@showForm')->name('admin-user-add');
     Route::post('user/add', 'Admin\UserController@store')->name('admin-user-add');
     Route::get('user/edit/{id}', 'Admin\UserController@showForm')->where('id', '[0-9]+')->name('admin-user-edit');
     Route::get('user/delete/{id}', 'Admin\UserController@delete')->where('id', '[0-9]+')->name('admin-user-delete');
     Route::get('user/list', 'Admin\UserController@index')->name('admin-user-list');
-    Route::get('user/order/{id}', 'Admin\UserController@order')->where('id', '[0-9]+')->name('admin-user-order');
+    Route::get('user/order/{id} ', 'Admin\UserController@order')->where('id', '[0-9]+')->name('admin-user-order');
 
-    Route::get('order-type/add', 'Admin\Order\OrderTypeController@showForm')->name('admin-order-type-add');
-    Route::post('order-type/add', 'Admin\Order\OrderTypeController@store')->name('admin-order-type-add');
-    Route::get('order-type/edit/{id}', 'Admin\Order\OrderTypeController@showForm')->where('id', '[0-9]+')->name('admin-order-type-edit');
-    Route::get('order-type/delete/{id}', 'Admin\Order\OrderTypeController@delete')->where('id', '[0-9]+')->name('admin-order-type-delete');
-    Route::get('order-type/list', 'Admin\Order\OrderTypeController@index')->name('admin-order-type-list');
+    Route::get('order-type/add', 'Admin\OrderTypeController@showForm')->name('admin-order-type-add');
+    Route::post('order-type/add', 'Admin\OrderTypeController@store')->name('admin-order-type-add');
+    Route::get('order-type/edit/{id}', 'Admin\OrderTypeController@showForm')->where('id', '[0-9]+')->name('admin-order-type-edit');
+    Route::get('order-type/delete/{id}', 'Admin\OrderTypeController@delete')->where('id', '[0-9]+')->name('admin-order-type-delete');
+    Route::get('order-type/list', 'Admin\OrderTypeController@index')->name('admin-order-type-list');
 
     Route::get('dish-type/add', 'Admin\DishTypeController@showForm')->name('admin-dish-type-add');
     Route::post('dish-type/add', 'Admin\DishTypeController@store')->name('admin-dish-type-add');

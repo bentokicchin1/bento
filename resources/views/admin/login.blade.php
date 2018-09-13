@@ -13,8 +13,8 @@
 
                 <div class="web-form">
                     <div class="form-group">
-                        {{ Form::open(['route' => 'login', 'method' => 'post']) }}
-                        {{ Form::number('mobile_number',old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number', 'required']) }}
+                        {{ Form::open(['route' => 'admin-login', 'method' => 'post']) }}
+                        {{ Form::email('email',old('email'), ['class' => 'form-control', 'placeholder' => 'Email', 'required']) }}
                         {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required']) }}
                         <div class="checkbox">
                             <label style="font-size: 1em">
@@ -24,8 +24,7 @@
                             </label>
                         </div>
                         {{ Form::submit('Get Me In', ['class' => 'form-control web-submit']) }}
-                        {{ link_to_route('password.request', 'Forgot Your Password?',[],  ['class' => 'btn btn-link']) }}|
-                        {{ link_to_route('register', 'Register as New user',[],  ['class' => 'btn btn-link']) }}
+                        {{ link_to_route('admin-password-request', 'Forgot Your Password?',[],  ['class' => 'btn btn-link']) }}|
                         {{ Form::close() }}
                     </div>
                 </div>
