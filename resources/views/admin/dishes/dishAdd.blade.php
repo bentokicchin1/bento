@@ -6,7 +6,7 @@
         Dish
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ route('admin-dashboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin-dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="{{ route('admin-dish-list')}}">Dish</a></li>
         <li class="active">Add/Edit Dish</li>
 

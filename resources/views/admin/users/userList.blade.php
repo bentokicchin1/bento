@@ -6,7 +6,7 @@
         User
       </h1>
       <ol class="breadcrumb">
-        <li><a href="{{ route('admin-dashboard')}}"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="{{ route('admin-dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
         <li class="active"> User</li>
       </ol>
     </section>
