@@ -131,7 +131,7 @@ class UserController extends Controller
                 // $user->orders()->delete();
                 // $user->address()->delete();
                 $user->delete();
-                return redirect()->back()->with('status', 'Dish type deleted successfully!');
+                return redirect()->back()->with('status', 'User deleted successfully!');
             } catch (Exception $e) {
 
             }
