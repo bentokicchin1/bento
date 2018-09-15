@@ -14,7 +14,7 @@
           <ul class="sidebar-menu" data-widget="tree">
               <li class="">
                   <a href="{{ route('admin-user-list') }}">
-                    <i class="fas fa-users"></i> <span>User Management</span>
+                    <i class="fa fa-users"></i> <span>User Management</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
@@ -25,7 +25,7 @@
               </li>
               <li class="">
                 <a href="{{ route('admin-menu-add') }}">
-                  <i class="fas fa-tasks"></i> <span>Menu Management</span>
+                  <i class="fa fa-calendar"></i> <span>Menu Management</span>
                   <span class="pull-right-container">
                     <!-- <i class="fas fa-angle-left pull-right"></i> -->
                   </span>
@@ -36,7 +36,7 @@
               </li>
               <li class="">
                 <a href="{{ route('admin-order-list') }}">
-                  <i class="fas fa-tasks"></i> <span>Order Management</span>
+                  <i class="fa fa-bars"></i> <span>Order Management</span>
                   <span class="pull-right-container">
                     <!-- <i class="fas fa-angle-left pull-right"></i> -->
                   </span>
@@ -47,33 +47,33 @@
               </li>
               <!-- <li class="">
                 <a href="{{ route('admin-billpayment-list') }}">
-                  <i class="fas fa-calendar"></i> <span>Bill Payments</span>
+                  <i class="fas fa-credit-card"></i> <span>Bill Payments</span>
                   <span class="pull-right-container">
                   </span>
                 </a>
               </li> -->
               <li class="treeview">
                   <a href="#">
-                    <i class="fas fa-utensils"></i> <span>Dish Management</span>
+                    <i class="fa fa-cutlery"></i> <span>Dish Management</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="{{ route('admin-dish-list') }}"><i class="fas fa-glass-martini"></i> Dish</a></li>
-                    <li><a href="{{ route('admin-dish-type-list') }}"><i class="fas fa-utensil-spoon"></i> Dish Type</a></li>
+                    <li><a href="{{ route('admin-dish-list') }}"><i class="fa fa-glass"></i> Dish</a></li>
+                    <li><a href="{{ route('admin-dish-type-list') }}"><i class="fa fa-spoon"></i> Dish Type</a></li>
                   </ul>
               </li>
               <li class="treeview">
                   <a href="#">
-                    <i class="fas fa-map-marker"></i> <span>Location Management</span>
+                    <i class="fa fa-map-marker"></i> <span>Location Management</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="{{ route('admin-area-list') }}"><i class="fas fa-location-arrow"></i> Area</a></li>
-                    <li><a href="{{ route('admin-location-list') }}"><i class="fas fa-building"></i> Location</a></li>
+                    <li><a href="{{ route('admin-area-list') }}"><i class="fa fa-location-arrow"></i> Area</a></li>
+                    <li><a href="{{ route('admin-location-list') }}"><i class="fa fa-hand-o-right"></i> Location</a></li>
                   </ul>
               </li>
           </ul>
