@@ -49,12 +49,8 @@
                 <a href="{{ route('admin-billpayment-list') }}">
                   <i class="fa fa-credit-card"></i> <span>Bill Payments</span>
                   <span class="pull-right-container">
-                    <!-- <i class="fa fa-angle-left pull-right"></i> -->
                   </span>
                 </a>
-                <!-- <ul class="treeview-menu">
-                  <li><a href="{{ route('admin-order-list') }}"><i class="fa fa-sticky-note"></i> Orders</a></li>
-                </ul> -->
               </li> -->
               <li class="treeview">
                   <a href="#">
