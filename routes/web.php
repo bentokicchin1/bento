@@ -126,7 +126,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('user/edit/{id}', 'Admin\UserController@showForm')->where('id', '[0-9]+')->name('admin-user-edit');
     Route::get('user/delete/{id}', 'Admin\UserController@delete')->where('id', '[0-9]+')->name('admin-user-delete');
     Route::get('user/list', 'Admin\UserController@index')->name('admin-user-list');
-    Route::get('user/order/{id} ', 'Admin\UserController@order')->where('id', '[0-9]+')->name('admin-user-order');
+    Route::get('user/order/{id}', 'Admin\UserController@order')->where('id', '[0-9]+')->name('admin-user-order');
 
     Route::get('order-type/add', 'Admin\OrderTypeController@showForm')->name('admin-order-type-add');
     Route::post('order-type/add', 'Admin\OrderTypeController@store')->name('admin-order-type-add');

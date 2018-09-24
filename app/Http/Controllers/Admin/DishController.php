@@ -77,8 +77,15 @@ class DishController extends Controller
     {
         if (!empty($id)) {
             try {
-                Dish::destroy($id);
-                return redirect()->back()->with('status', 'Dish type deleted successfully!');
+                  $dish = Dish::where('id', $id)->first(); // File::find($id)
+                  if($dish) {
+                      if (!empty($dish->order_items()->get()) || !empty($dish->weeklyMenu()->get())) {
+                        return redirect()->back()->withErrors('This dish is associated some order. So can not delete dish.');
+                      }else{
+                        Dish::destroy($id);
+                        return redirect()->back()->with('status', 'Dish deleted successfully!');
+                      }
+                  }
             } catch (Exception $e) {
 
             }

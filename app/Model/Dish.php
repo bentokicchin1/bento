@@ -10,6 +10,18 @@ class Dish extends Model
 {
     use SoftDeletes;
     protected $hidden = ["deleted_at"];
+    protected static function boot()
+    {
+       parent::boot();
+       static::deleting(function($dish) {
+         foreach ($dish->weeklyMenu()->get() as $weeklyMenu) {
+            $weeklyMenu->delete();
+         }
+         foreach ($dish->order_items()->get() as $order_items) {
+            $order_items->delete();
+         }
+       });
+    }
     public function dishType()
     {
         return $this->belongsTo('App\Model\DishType');

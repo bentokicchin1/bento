@@ -63,8 +63,12 @@ class AreaController extends Controller
             try {
                 $area = Area::where('id', $id)->first(); // File::find($id)
                 if($area) {
-                    $area->delete();
-                    return redirect()->back()->with('status', 'Area deleted successfully!');
+                    if (!empty($area->arealocation()->get()) || !empty($area->address()->get())) {
+                      return redirect()->back()->withErrors('This area is associated with other locations or addresses. So can not delete area.');
+                    }else{
+                      $area->delete();
+                      return redirect()->back()->with('status', 'Area deleted successfully!');
+                    }
                 }
             } catch (Exception $e) {
                 return redirect()->back()->withErrors('Something went wrong. Please try again.');

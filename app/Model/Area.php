@@ -10,6 +10,19 @@ class Area extends Model
 {
     use SoftDeletes;
     protected $hidden = ["deleted_at"];
+    protected static function boot()
+    {
+       parent::boot();
+       static::deleting(function($area) {
+         foreach ($area->address()->get() as $address) {
+            $address->delete();
+         }
+         foreach ($area->verification()->get() as $verification) {
+            $verification->delete();
+         }
+       });
+    }
+
     public function arealocation()
     {
         return $this->hasMany('App\Model\Area_location');
