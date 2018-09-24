@@ -34,6 +34,7 @@ class OrderController extends Controller
           $ordersData = Order::with('users')
                     ->with('orderType')
                     ->with('orderItems.orderDish')
+                    ->where("orders.deleted_at", NULL)
                     ->where('id',$id)->first()->toArray();
           $orderItems = $this->orderService->formatOrderItems($ordersData);
           $orderItems['orderTypeIds'] = [];
@@ -51,6 +52,7 @@ class OrderController extends Controller
         $orders = Order::with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
                   ->with('users')
                   ->with('orderType')
+                  ->where("orders.deleted_at", NULL)
                   ->get();
         return view('admin.orders.orderList', ['orders' => $orders]);
     }
