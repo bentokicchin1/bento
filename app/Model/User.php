@@ -20,8 +20,8 @@ class User extends Model
          foreach ($users->address()->get() as $address) {
             $address->delete();
          }
-         foreach ($users->arealocation()->get() as $arealocation) {
-            $arealocation->delete();
+         foreach ($users->verification()->get() as $verification) {
+            $verification->delete();
          }
        });
     }
