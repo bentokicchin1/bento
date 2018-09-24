@@ -134,7 +134,7 @@ class OrderController extends Controller
      try{
           $orderTypeId = $request->input('orderTypeId');
           $orderDate = $request->input('orderDate');
-          $dishData = $this->orderService->getDishList($orderTypeId,$orderDate);
+          $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
           $dishDetails =  '<label class="col-sm-3 control-label" style="padding-top:7px">Order Details</label><div class="row  col-sm-6">';
             if(!empty($dishData)){
               foreach ($dishData as $dish){
