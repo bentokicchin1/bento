@@ -90,9 +90,9 @@
                         @foreach($dish['dishList'] as $dishId => $dishName)
                           <div class="checkbox">
                             <label>
-                              @if(array_key_exists(config('constants.DISH_TYPE_OTHER'),$orderItems['orderTypeIds']))
-                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishId'], true) }}
-                                <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]['dishPrice']) }} )</span>
+                              @if(array_key_exists($dishId,$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]))
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishId'], true) }}
+                                <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishPrice']) }} )</span>
                               @else
                                 {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, false) }}
                                 <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
