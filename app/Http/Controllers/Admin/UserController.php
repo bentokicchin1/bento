@@ -21,10 +21,10 @@ class UserController extends Controller
 
       private $addressService;
 
-      public function __construct(AddressService $addressService)
-      {
-          $this->addressService = $addressService;
-      }
+    public function __construct(AddressService $addressService)
+    {
+        $this->addressService = $addressService;
+    }
 
 
     public function showForm($id = '', Request $request)
@@ -38,7 +38,7 @@ class UserController extends Controller
         if (!empty($id)) {
             $usersData = DB::table('users')
                   ->select("users.id as id","users.name as name", "email","mobile_number","user_type","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
-                  ->join("customer_addresses","customer_addresses.user_id","=","users.id")
+                  ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
                   ->where('users.deleted_at',null)
                   ->where('customer_addresses.deleted_at',null)
@@ -109,7 +109,6 @@ class UserController extends Controller
 
     public function order($id)
     {
-      DB::enableQueryLog();
         $orders = Order::where('user_id',$id)
                   ->with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
                   ->with('users')
