@@ -114,6 +114,7 @@ class UserController extends Controller
                   ->with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
                   ->with('users')
                   ->with('orderType')
+                  ->where('orders.deleted_at',null)
                   ->get();
         return view('admin.orders.orderList', ['orders' => $orders]);
     }
@@ -127,9 +128,6 @@ class UserController extends Controller
         if (!empty($id)) {
             try {
                 $user = User::find($id);
-                // $user->orders()->orderItems('id')->delete();
-                // $user->orders()->delete();
-                // $user->address()->delete();
                 $user->delete();
                 return redirect()->back()->with('status', 'User deleted successfully!');
             } catch (Exception $e) {

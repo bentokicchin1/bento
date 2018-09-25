@@ -41,24 +41,23 @@ class DishController extends Controller
         DB::beginTransaction();
         $id = $request->input('id');
         try {
-          if ($request->hasFile('dishImage')) {
-                $image = $request->file('dishImage');
-                $name = time().'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path('/uploads');
-                $image->move($destinationPath, $name);
-              }
-
             if (!empty($id)) {
                 $dishTypeObj = dish::find($id);
             } else {
                 $dishTypeObj = new dish;
             }
 
+            if ($request->hasFile('dishImage')) {
+              $image = $request->file('dishImage');
+              $name = time().'.'.$image->getClientOriginalExtension();
+              $destinationPath = public_path('/uploads');
+              $image->move($destinationPath, $name);
+              $dishTypeObj->image = url('/')."/uploads/".$name;
+            }
             $dishTypeObj->dish_type_id = $request->input('dishTypeId');
             $dishTypeObj->name = $request->input('name');
             $dishTypeObj->price = $request->input('price');
             $dishTypeObj->description = $request->input('description');
-            $dishTypeObj->image = url('/')."/uploads/".$name;
             $dishTypeObj->save();
 
             DB::commit();
