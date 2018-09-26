@@ -53,7 +53,6 @@ class OrderController extends Controller
         $dishData = $this->orderService->getDishList($orderTypeId,$date);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
-
         return view('order.menu', ['dishes' => $dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems]);
     }
 

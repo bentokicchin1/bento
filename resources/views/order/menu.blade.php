@@ -87,8 +87,12 @@
                             @endphp
                                 <label>
                                 {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
-                                  @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
-                                    {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'form-control otherDish']) }}
+                                  @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                    @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
+                                      {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'form-control otherDish']) }}
+                                    @else
+                                      {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
+                                    @endif
                                   @else
                                     {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
                                   @endif
