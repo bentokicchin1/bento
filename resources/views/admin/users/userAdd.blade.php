@@ -88,9 +88,9 @@
                       </div>
                   </div>
                   <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Enter Detailed Address :</label>
+                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Office Name/Building Name :</label>
                       <div class="col-sm-6">
-                        {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Address (required)']) }}
+                        {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Office Name/Building Name (required)']) }}
                       </div>
                   </div>
                   <div class="form-group">

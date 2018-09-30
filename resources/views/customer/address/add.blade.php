@@ -25,7 +25,7 @@
                         {{ Form::select('city', $cityData, old('city'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your City'])}}
                         {{ Form::select('area', $areaData, old('area'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
                         {{ Form::select('sector', $areaLocationData, old('sector'), ['class' => 'form-control drpdown','placeholder' => 'Please Select Your Sector' ])}}
-                        {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Location (required)']) }}
+                        {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Office Name/Building Name (required)']) }}
                         {{ Form::text('state', 'Maharashtra' , ['class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
                         {{ Form::number('pincode',old('pincode'), ['class' => 'form-control', 'placeholder' => 'Pincode (required)']) }}
                         <div class="web-submit">

@@ -4,7 +4,6 @@
 <section id="web">
     <div class="container">
         <div class="row content">
-
             <div class="col-md-3 col-sm-12 ">
                 <ul class="ma-nav ">
                     <li id="profile" class="md-12 sm-2 ">
