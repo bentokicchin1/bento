@@ -44,6 +44,20 @@ $(document).ready(function($){
     });
   });
 
+  calculateTotal();
+
+
+  $(".dishLists").on('change',function(){
+      calculateTotal();
+  });
+
+  $('.otherDish').on('change',function(e) {
+    calculateTotal();
+  });
+
+  $('.orderQuantity').on('change',function(e) {
+    calculateTotal();
+  });
   // $( "#user" ).on( "change", function() {
   //   var userId = $("#user").val();
   //   $.ajax({
@@ -66,4 +80,30 @@ $(document).ready(function($){
   //     }
   //   });
   // });
+
+  function calculateTotal(){
+      var orderTotal = 0;
+      var dishTotal = 0;
+      $(".dishLists").each(function() {
+          var dishTypeName = $(this).attr('name');
+          var quantity = parseInt($('[name="qty_'+dishTypeName+'"]').val());
+          var basePrice = parseInt($('[name="basePrice_'+dishTypeName+'"]').val());
+          if(!isNaN(quantity) && !isNaN(basePrice)){
+            dishTotal = quantity * basePrice;
+          }else{
+            dishTotal = 0;
+          }
+          $('[name="price_'+dishTypeName+'"]').val(dishTotal);
+          orderTotal = parseInt(orderTotal) + parseInt(dishTotal);
+      });
+      $(".otherDish").each(function() {
+          var inputName = $(this).attr('name');
+          var dishPriceName = inputName.replace('others_','');
+          if ($('[name="'+inputName+'"]').is(':checked')) {
+            orderTotal = parseInt(orderTotal) + parseInt($('[name="'+dishPriceName+'"]').val());
+          }
+      });
+      // alert(orderTotal);
+      $('#grandTotal').val(Math.round(orderTotal));
+  }
 });

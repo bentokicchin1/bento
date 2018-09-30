@@ -70,31 +70,45 @@
                       @foreach ($dishData as $dish)
                         @if ($dish['dishTypeName'] != 'others')
                           <div class="form-group">
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
                                 @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
-                                {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @else
-                                {{ Form::select($dish['dishTypeName'], $dish['dishList'], null, ['class' => 'form-control dropdown','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'], null, ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @endif
                             </div>
                             <div class="col-sm-3">
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                                {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                                {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control text orderQuantity', 'placeholder' => 'Quantity']) }}
                               @else
-                                {{ Form::text('qty_'.$dish['dishTypeName'], null , ['class' => 'form-control text', 'placeholder' => 'Quantity']) }}
+                                {{ Form::text('qty_'.$dish['dishTypeName'], null , ['class' => 'form-control text orderQuantity', 'placeholder' => 'Quantity']) }}
                               @endif
                             </div>
+                            <div class="col-md-2">
+                              <div class="input-group">
+                                @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['dishPrice']), []) }}
+                                  <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                  {{ Form::text('price_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['totalPrice']), ['class' => 'form-control','readonly'=>'true']) }}
+                                @else
+                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'],0, []) }}
+                                  <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                  {{ Form::text('price_'.$dish['dishTypeName'],0, ['class' => 'form-control','readonly'=>'true']) }}
+                                @endif
+                              </div>
+                           </div>
                          </div>
                       @else
                         @foreach($dish['dishList'] as $dishId => $dishName)
                           <div class="checkbox">
                             <label>
+                              {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                               @if(array_key_exists($dishId,$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]))
-                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishId'], true) }}
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishId'], true,['class' => 'otherDish']) }}
                                 <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishPrice']) }} )</span>
                               @else
-                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, false) }}
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, false,['class' => 'otherDish']) }}
                                 <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
                               @endif
                             </label>
@@ -102,6 +116,13 @@
                         @endforeach
                       @endif
                    @endforeach
+                  <div class="form-group">
+                       {{ Form::label('grandTotal','Grand Total:', ['class' => 'col-sm-6 control-label']) }}
+                       <div class="input-group">
+                         <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
+                         {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'form-control','readonly'=>'true']) }}
+                       </div>
+                   </div>
                  </div>
                @endif
               </div>
@@ -117,5 +138,8 @@
       </div>
       <!-- /.row -->
     </section>
+    <script>
+      var dishes = '<?php echo json_encode($dishes); ?>';
+    </script>
     <!-- /.content -->
 @endsection

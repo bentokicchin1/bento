@@ -28,7 +28,7 @@ class OrderController extends Controller
     public function showForm($id = '', Request $request)
     {
         $dishData = array();
-        $ordersData = $orderItems = $orderItems['orderTypeIds'] = [];
+        $ordersData = $dishList = $orderItems = $orderItems['orderTypeIds'] = [];
         $userData = User::offset(0)->limit(10)->pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
@@ -42,8 +42,11 @@ class OrderController extends Controller
           $orderTypeId = $ordersData['order_type_id'];
           $orderDate = $ordersData['order_date'];
           $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
+          $dishList['orderTypeId'] = $orderTypeId;
+          $dishList['dishData'] = $dishData;
+
         }
-        return view('admin.orders.orderAdd', ['ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
+        return view('admin.orders.orderAdd', ['dishes'=>$dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
     public function index()

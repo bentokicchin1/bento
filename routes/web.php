@@ -84,7 +84,6 @@ Route::get('subscribe/confirmation', 'Order\SubscriptionController@confirmSubscr
  */
 
 Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
-
     /*route to show the customer dashboard*/
     // Route::get('dashboard', 'Customer\CustomerController@dashboard')->name('dashboard');
     Route::get('orders','Customer\CustomerController@orders')->name('orders');
