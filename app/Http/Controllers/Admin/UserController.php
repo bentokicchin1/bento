@@ -58,7 +58,6 @@ class UserController extends Controller
         $input = $request->all();
         $validatedData = $request->validate([
             'name' => 'required',
-            'user_type' => 'required',
             'mobile_number' => 'required|digits:10',
             'order_type_id' => 'required|numeric',
             'location' => 'required',
@@ -79,7 +78,7 @@ class UserController extends Controller
                 $addressObj = new CustomerAddresse;
             }
             $userObj->name = $request->input('name');
-            $userObj->user_type = $request->input('user_type');
+            // $userObj->user_type = $request->input('user_type');
             $userObj->password = bcrypt('123456');
             $userObj->mobile_number = $request->input('mobile_number');
             $userObj->mobile_verified = ($request->input('mobile_verified')!=null) ? $request->input('mobile_verified') : false;

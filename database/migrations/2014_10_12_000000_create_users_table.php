@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mobile_number');
-            $table->enum('user_type',['admin', 'customer'])->default('customer');
             $table->enum('billing_cycle',['daily', 'monthly'])->default(NULL);
             $table->enum('food_preference',['veg', 'nonveg'])->default(NULL);
             $table->enum('tiffin_quantity',['full','half'])->default(NULL);
