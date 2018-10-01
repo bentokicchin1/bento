@@ -28,16 +28,6 @@
             {{ Form::hidden('id', $usersData->id) }}
             @endif
             <div class="box-body">
-                <!-- <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select User Type :</label>
-                    <div class="col-sm-6">
-                        @if(!empty($usersData))
-                            {{ Form::select('user_type',$userTypeData,$usersData->user_type,['id'=>'user_type','class'=>'form-control','placeholder'=>'User Type (required)']) }}
-                        @else
-                            {{ Form::select('user_type',$userTypeData,null,['id'=>'user_type','class'=>'form-control','placeholder'=>'User Type (required)']) }}
-                        @endif
-                    </div>
-                </div> -->
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Name :</label>
                     <div class="col-sm-6">
