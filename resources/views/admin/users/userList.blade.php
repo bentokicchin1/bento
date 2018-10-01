@@ -21,14 +21,17 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="userTable" class="table table-bordered table-striped">
-                <tr>
-                    <th>ID</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>User Mobile</th>
-                    <!-- <th>Billing Cycle</th> -->
-                    <th>Operation</th>
-                </tr>
+                <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>User Name</th>
+                      <th>User Email</th>
+                      <th>User Mobile</th>
+                      <!-- <th>Billing Cycle</th> -->
+                      <th>Operation</th>
+                  </tr>
+                </thead>
+                <tbody>
                   @foreach($user as $type)
                   <tr>
                     <td>{{$type->id}}</td>
@@ -43,6 +46,7 @@
                     </td>
                   </tr>
                   @endforeach
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->
