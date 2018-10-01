@@ -57,7 +57,7 @@ class UserController extends Controller
         $input = $request->all();
         $validatedData = $request->validate([
             'name' => 'required',
-            'mobile_number' => 'required|digits:10',
+            // 'mobile_number' => 'required|digits:10',
             'order_type_id' => 'required|numeric',
             'location' => 'required',
             'area' => 'required',
