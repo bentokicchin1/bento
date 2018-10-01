@@ -30,21 +30,20 @@ class UserController extends Controller
     public function showForm($id = '', Request $request)
     {
         $usersData = [];
-        $userTypeData = config('constants.USER_TYPE');
         $cityData = city::pluck('name', 'id');
         $orderTypeData = OrderType::pluck('name', 'id');
         $areaData = Area::pluck('name', 'id');
         $areaLocationData = Area_location::pluck('name', 'id');
         if (!empty($id)) {
             $usersData = DB::table('users')
-                  ->select("users.id as id","users.name as name", "email","mobile_number","user_type","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
+                  ->select("users.id as id","users.name as name", "email","mobile_number","billing_cycle","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
                   ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
                   ->where('users.deleted_at',null)
                   ->where('customer_addresses.deleted_at',null)
                   ->first();
         }
-        return view('admin.users.userAdd', ['usersData' => $usersData,'userTypeData'=>$userTypeData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);
+        return view('admin.users.userAdd', ['usersData' => $usersData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);
     }
 
     public function index()
