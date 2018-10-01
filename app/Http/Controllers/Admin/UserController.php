@@ -79,7 +79,7 @@ class UserController extends Controller
             }
             $userObj->name = $request->input('name');
             // $userObj->user_type = $request->input('user_type');
-            $userObj->password = bcrypt('123456');
+            $userObj->password = bcrypt('bento@123');
             $userObj->mobile_number = $request->input('mobile_number');
             $userObj->mobile_verified = ($request->input('mobile_verified')!=null) ? $request->input('mobile_verified') : false;
             $userObj->billing_cycle = $request->input('billing_cycle');
