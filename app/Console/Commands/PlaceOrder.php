@@ -46,7 +46,7 @@ class PlaceOrder extends Command
         try {
           $today = strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
-          if(!empty($subscribed)){
+          if(!empty($subscribed) && date('Y-m-d',$subscribed['updated_at'])==date('Y-m-d',strtotime('last sunday'))) {
             foreach($subscribed as $subscribedData){
               $subscribedDishes = json_decode($subscribedData->subscription_items,true);
               if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
