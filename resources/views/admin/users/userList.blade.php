@@ -23,26 +23,32 @@
               <table id="userTable" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                      <th>ID</th>
-                      <th>User Name</th>
-                      <th>User Email</th>
-                      <th>User Mobile</th>
-                      <!-- <th>Billing Cycle</th> -->
+                      <!-- <th>ID</th> -->
+                      <th>Name</th>
+                      <th>Mobile</th>
+                      <th>Billing Cycle</th>
+                      <th>Food Preference</th>
+                      <th>Tiffin Quantity</th>
+                      <th>Location</th>
+                      <th>Sector</th>
                       <th>Operation</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($user as $type)
                   <tr>
-                    <td>{{$type->id}}</td>
+                    <!-- <td>{{$type->id}}</td> -->
                     <td>{{ ucfirst($type->name) }}</td>
-                    <td>{{ $type->email }}</td>
                     <td>{{ $type->mobile_number }}</td>
-                    <!-- <td>{{ $type->description }}</td> -->
-                    <td><a class="btn btn-warning" href="{{ route('admin-user-edit',['id' => $type['id']]) }}">Edit</a>
-                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-user-delete', ['id' => $type['id']]) }}">Delete</a></div>
-                        <a class="btn btn-default" href="{{ route('admin-user-order', ['id' => $type['id']]) }}">View Orders</a></div>
-                        <a class="btn btn-default" href="{{ route('admin-billpayment-add', ['id' => $type['id']]) }}">Accept Payments</a></div>
+                    <td>{{ $type->billing_cycle }}</td>
+                    <td>{{ $type->food_preference }}</td>
+                    <td>{{ $type->tiffin_quantity }}</td>
+                    <td>{{ $type->location }}</td>
+                    <td>{{ $type->sector }}</td>
+                    <td><a class="btn btn-warning" href="{{ route('admin-user-edit',['id' => $type->id]) }}">Edit</a>
+                        <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-user-delete', ['id' => $type->id]) }}">Delete</a></div>
+                        <a class="btn btn-default" href="{{ route('admin-user-order', ['id' => $type->id]) }}">View Orders</a></div>
+                        <a class="btn btn-default" href="{{ route('admin-billpayment-add', ['id' => $type->id]) }}">Bills</a></div>
                     </td>
                   </tr>
                   @endforeach

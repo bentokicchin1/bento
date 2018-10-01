@@ -51,6 +51,26 @@
                           {{ Form::radio('billing_cycle', 'monthly',old('billing_cycle'),['class'=>'radio-inline']) }}
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Food Preference :</label>
+                    <div class="col-sm-6">
+                          {!! Form::label('veg', 'Veg') !!}
+                          {{ Form::radio('food_preference', 'veg',old('food_preference'),['class'=>'radio-inline']) }}
+                          {!! Form::label('nonveg', 'Non-Veg') !!}
+                          {{ Form::radio('food_preference', 'nonveg',old('food_preference'),['class'=>'radio-inline']) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Tiffin Quantity :</label>
+                    <div class="col-sm-6">
+                          {!! Form::label('half', 'Half') !!}
+                          {{ Form::radio('tiffin_quantity', 'half',old('tiffin_quantity'),['class'=>'radio-inline']) }}
+                          {!! Form::label('full', 'Full') !!}
+                          {{ Form::radio('tiffin_quantity', 'full',old('tiffin_quantity'),['class'=>'radio-inline']) }}
+                    </div>
+                </div>
                 <div class="col-md-8 col-sm-10 box">
                   <h4 class="m-b-20">Address</h4>
                   <div class="form-group">
