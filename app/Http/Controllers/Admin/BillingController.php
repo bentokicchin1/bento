@@ -86,4 +86,22 @@ class BillingController extends Controller
         return redirect()->back()->withErrors('Something went wrong. Please try again.');
     }
 
+
+    public function billformat(Request $request)
+    {
+        $datesArray = array();
+        $currentYear = date('Y');
+        $lastMonth = date('m', strtotime(date('Y-m')." -1 month"));
+        $noOfDays = cal_days_in_month(CAL_GREGORIAN, $lastMonth, $currentYear);
+        for($i=1; $i<=$noOfDays; $i++){
+            $dateString = $currentYear."-".$lastMonth."-".$i;
+            if(date('l', strtotime($dateString))!='Sunday') {
+              $datesArray[] = date('Y-m-d', strtotime($dateString));
+            }
+        }
+        $tiffintype = array('half'=>'Half','full'=>'Full');
+        $foodPreference = array('veg'=>'Veg','nonveg'=>'Non-veg');
+        return view('admin.billing.createBill', ['tiffintype'=>$tiffintype,'foodPreference'=>$foodPreference,'dates'=>$datesArray,'billingMonth'=>$lastMonth,'billingYear'=>$currentYear]);
+    }
+
 }

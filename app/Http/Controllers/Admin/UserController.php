@@ -48,7 +48,6 @@ class UserController extends Controller
 
     public function index()
     {
-        // $users = User::all();
         $users = DB::table('users')
               ->select("users.id as id","users.name as name", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","area_locations.name as sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
               ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
