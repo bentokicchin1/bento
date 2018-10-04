@@ -33,19 +33,19 @@
                 <div class="form-group col-sm-6">
                     <label for="menuDate" class="col-sm-6 control-label">select Tiffin Type :</label>
                     <div class="col-sm-6">
-                      {{ Form::select('tiffinType',$tiffintype,null,['id'=>'tiffinType','class'=>'form-control','placeholder'=>'Tiffin Type (required)']) }}
+                      {{ Form::select('tiffinType',$tiffintype,null,['id'=>'tiffinType','class'=>'form-control','placeholder'=>'Tiffin Type (required)','required'=>true]) }}
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="name" class="col-sm-6 control-label">Select Food Preference :</label>
                     <div class="col-sm-6">
-                      {{ Form::select('foodPreference',$foodPreference,null,['id'=>'foodPreference','class'=>'form-control','placeholder'=>'Food Preference (required)']) }}
+                      {{ Form::select('foodPreference',$foodPreference,null,['id'=>'foodPreference','class'=>'form-control','placeholder'=>'Food Preference (required)','required'=>true]) }}
                     </div>
                 </div>
                 <div class="col-sm-offset-3 col-sm-6">
                     <label for="name" class="col-sm-6 control-label">Enter Pending Bill Amount :</label>
                     <div class="col-sm-6">
-                      {{ Form::text('pendingAmount',0,['id'=>'pendingAmount','class'=>'form-control','placeholder'=>'Pending Bill Amount (required)']) }}
+                      {{ Form::text('pendingAmount',0,['id'=>'pendingAmount','class'=>'form-control','placeholder'=>'Pending Bill Amount (required)','required'=>true]) }}
                     </div>
                 </div>
               </div>
