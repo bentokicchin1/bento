@@ -84,7 +84,7 @@ class AddressController extends Controller
         ]);
 
         $userId = Auth::id();
-        $existingRec = CustomerAddresse::where(['user_id'=>$userId,'order_type_id'=>$input['order_type_id']])->first();
+        $existingRec = CustomerAddresse::withTrashed()->where(['user_id'=>$userId,'order_type_id'=>$input['order_type_id']])->first();
         if(!empty($existingRec)){
             $input['id'] = $existingRec->id;
         }

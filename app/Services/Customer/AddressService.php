@@ -46,7 +46,9 @@ class AddressService
 
             /*  */
             if(!empty($addressParams['id'])){
-                $addressObj = Address::find($addressParams['id']);
+                $addressObj = Address::withTrashed()->where(['id'=>$addressParams['id']])->first();
+                $addressObj->updated_at = date('Y-m-d H:i:s');
+                $addressObj->deleted_at = NULL;
             }else{
                 $addressObj = new Address;
             }

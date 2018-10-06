@@ -27,7 +27,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showOrderForm($orderType)
+    public function showOrderForm($orderType, Request $request)
     {
         $ordersData = $orderItems['orderDishes'] = $orderItems['orderTypeIds'] = array();
         /* fetch order type data based on order type */
@@ -39,6 +39,10 @@ class OrderController extends Controller
         }
 
         $orderTypeId = $orderTypeData->id;
+        if ($request->session()->has('orderTypeId')) {
+            $request->session()->forget('orderTypeId');
+        }
+        $request->session()->put('orderTypeId', $orderTypeId);
         $date = date('Y-m-d');
         if (!empty(Auth::id())) {
           $userId = Auth::id();
