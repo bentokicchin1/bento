@@ -127,7 +127,7 @@
         });
 
         $("#menuDate").datepicker({
-          startDate:new Date(),
+          // startDate:new Date(),
           autoclose : true,
           format : 'DD, d MM, yyyy'
         });
