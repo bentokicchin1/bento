@@ -43,18 +43,20 @@ class OrderController extends Controller
             $request->session()->forget('orderTypeId');
         }
         $request->session()->put('orderTypeId', $orderTypeId);
-        $date = date('Y-m-d',strtotime('2018-10-06'));
+        $date = date('Y-m-d');
         if (!empty(Auth::id())) {
           $userId = Auth::id();
           $ordersData = Order::with('orderType')
                     ->with('orderItems.orderDish')
-                    ->where('user_id',$userId)->where('order_date',$date)->first()->toArray();
+                    ->where('user_id',$userId)
+                    ->where('order_date',$date)
+                    ->where("orders.deleted_at", NULL)->first()->toArray();
           $orderItems = $this->orderService->formatOrderItems($ordersData);
         }
 
         /* Fetch Dish list from service */
         // $date = date('Y-m-d');
-        $date = date('Y-m-d',strtotime('2018-10-06'));
+        $date = date('Y-m-d');
         $dishData = $this->orderService->getDishList($orderTypeId,$date);
         $dishList['orderTypeId'] = $orderTypeId;
         $dishList['dishData'] = $dishData;
