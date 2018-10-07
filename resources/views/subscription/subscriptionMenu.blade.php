@@ -15,7 +15,7 @@
   padding: 13px 16px;
 }
 .input-number,.dishPriceShow{
-  max-width:40px;
+  max-width:50px;
 }
 </style>
 <!-- Header section
