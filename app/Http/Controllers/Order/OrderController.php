@@ -50,7 +50,10 @@ class OrderController extends Controller
                     ->with('orderItems.orderDish')
                     ->where('user_id',$userId)
                     ->where('order_date',$date)
-                    ->where("orders.deleted_at", NULL)->first()->toArray();
+                    ->where("orders.deleted_at", NULL)->first();
+          if($ordersData){
+              $ordersData = $ordersData->toArray();
+          }
           $orderItems = $this->orderService->formatOrderItems($ordersData);
         }
 
