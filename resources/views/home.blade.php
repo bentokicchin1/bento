@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 @include('layouts.errors')
-                @if (Auth::user() && (Auth::user()->billing_cycle==NULL || Auth::user()->food_preference==NULL || Auth::user()->tiffin_quantity==NULL))
+                @if (Auth::user() && (Auth::user()->billing_cycle==NULL || (Auth::user()->billing_cycle=='monthly' && (Auth::user()->food_preference=='' || Auth::user()->tiffin_quantity==''))))
                   <div class="alert alert-info">
                       <ul><strong><a href="{{ route('profile') }}">Click here to complete your profile by selecting your food preferences and address details.</a></strong><br></ul>
                   </div>

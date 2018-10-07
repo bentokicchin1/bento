@@ -185,7 +185,6 @@
                                         @endforeach
                                     </div>
                                     @endif
-
                                   </tr>
                                     @endforeach
                                   </tbody>

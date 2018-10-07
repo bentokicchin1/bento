@@ -7,7 +7,11 @@
     <section id="header" >
         <div class="container">
             <div class="row">
-
+                @if (Auth::user() && (Auth::user()->billing_cycle==NULL || (Auth::user()->billing_cycle=='monthly' && (Auth::user()->food_preference=='' || Auth::user()->tiffin_quantity==''))))
+                  <div class="alert alert-info">
+                      <ul><strong><a href="{{ route('profile') }}">Click here to complete your profile by selecting your food preferences and address details.</a></strong><br></ul>
+                  </div>
+                @endif
                 <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                     <div class="header-thumb">
                         <h1 class="wow fadeIn">Personalize Your Tiffin For This week</h1>
