@@ -17,6 +17,28 @@
 .input-number,.dishPriceShow{
   max-width:50px;
 }
+@media only screen and (max-width: 600px) {
+    .tab-content .btn-number {
+            padding: 3px 3px !important;
+    }
+
+    .tab-content .table > tbody > tr > td {
+        padding: 2px !important;
+    }
+
+    .tab-content .input-number, .tab-content .dishPriceShow {
+        max-width: 30px !important;
+        height: 30px !important;
+    }
+
+    .tab-content .svg-inline--fa {
+        font-size: 14px !important;
+        font-weight: normal !important;
+    }
+    .tab-content .checkbox span {
+        font-size: 19px !important;
+    }
+}
 </style>
 <!-- Header section
 ================================================== -->
