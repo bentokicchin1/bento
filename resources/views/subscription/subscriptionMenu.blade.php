@@ -14,6 +14,9 @@
 .btn-number{
   padding: 13px 16px;
 }
+.input-number,.dishPriceShow{
+  max-width:40px;
+}
 </style>
 <!-- Header section
 ================================================== -->
@@ -74,9 +77,15 @@
                                            <span>Want to Opt out for {{ $day }} ?</span>
                                         <!-- </label> -->
                                     </div>
-
-                                  <table  class="table">
-                                    <thead></thead>
+                                <div style="overflow-x:auto;">
+                                  <table class="table">
+                                    <thead>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                    </thead>
                                     <tbody>
                                     @foreach ($dishesArray as $dish)
                                     @php
@@ -87,31 +96,35 @@
                                         }
                                       }
                                     @endphp
-                                        <tr>
+                                    <tr>
                                     @if ($dish['dishTypeName'] != 'others')
-                                        <td style="width:50%;">
+                                        <td>
                                           @if(!empty($selectedDish))
                                               {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @else
                                             {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @endif
                                         </td>
-                                        <td style="width:25%;">
-                                          <div class="input-group col-sm-2">
+                                        <td >
+                                          <div class="input-group">
                                               <span class="input-group-btn">
                                                   <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                   </button>
                                               </span>
+                                          </td>
+                                          <td >
                                               @if(!empty($selectedDish))
                                                 @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'col-sm-1 input-number']) }}
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'input-number']) }}
                                                 @else
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'col-sm-1 input-number']) }}
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'input-number']) }}
                                                 @endif
                                               @else
-                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'col-sm-1 input-number']) }}
+                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'input-number']) }}
                                               @endif
+                                          </td>
+                                          <td>
                                               <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                                     <span class="glyphicon glyphicon-plus"></span>
@@ -119,7 +132,8 @@
                                             </span>
                                           </div>
                                         </td>
-                                        <td  style="width:25%;">
+                                        <td>
+                                          <div class="input-group">
                                             @if(!empty($selectedDish))
                                               @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
                                                   {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['base_price'], []) }}
@@ -132,14 +146,15 @@
                                             <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
                                             @if(!empty($selectedDish))
                                                 @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['total_price'], ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['total_price'], ['class' => 'dishPriceShow','readonly'=>'true']) }}
                                                 @else
-                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'dishPriceShow','readonly'=>'true']) }}
                                                 @endif
                                             @else
-                                                {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                                {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'dishPriceShow','readonly'=>'true']) }}
                                             @endif
-                                                <i class="fa fa-rupee-sign" style="font-size:24px;"></i>
+                                            <span class="input-group-btn m-l-5"><i class="fa fa-rupee-sign" style="font-size:24px;"></i></span>
+                                          </div>
                                           </td>
                                     @else
                                     <div class="checkbox">
@@ -175,6 +190,7 @@
                                     @endforeach
                                   </tbody>
                                 </table>
+                              </div>
                                     <div class="form-group">
                                         {{ Form::label('','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
                                         <div class="input-group">
