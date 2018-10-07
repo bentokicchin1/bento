@@ -21,7 +21,7 @@ class DashboardController extends Controller
                   ->join("dishes","order_items.dish_id","=","dishes.id")
                   ->join("dish_types","dishes.dish_type_id","=","dish_types.id")
                   ->where("orders.deleted_at", NULL)
-                  ->where("orders.order_date",'2018-03-26')
+                  ->where("orders.order_date",$date)
                   ->groupBy("order_items.dish_id")
                   ->get();
         return view('admin.dashboard', ['orders' => $orders]);
