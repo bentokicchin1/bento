@@ -39,7 +39,6 @@ class Dish extends Model
 
     public function getDishListfromDb($orderTypeId, $date)
     {
-      DB::enableQueryLog();
       $dishes = array();
         if ($date == 'all') {
             $currentDate = date('Y-m-d');
@@ -73,7 +72,6 @@ class Dish extends Model
 
     public function getDishListfromDbForAdmin($orderTypeId,$orderDate)
     {
-      DB::enableQueryLog();
       $dishes = DB::table('dishes')
             ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name')
             ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')

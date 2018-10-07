@@ -5,6 +5,15 @@
 .input-group-addon, .input-group-btn{
   vertical-align: top;
 }
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{
+  margin-left: 0px;
+}
+.input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group{
+  margin-right: 0px;
+}
+.btn-number{
+  padding: 13px 16px;
+}
 </style>
 <!-- Header section
 ================================================== -->
@@ -65,6 +74,10 @@
                                            <span>Want to Opt out for {{ $day }} ?</span>
                                         <!-- </label> -->
                                     </div>
+
+                                  <table  class="table">
+                                    <thead></thead>
+                                    <tbody>
                                     @foreach ($dishesArray as $dish)
                                     @php
                                       $selectedDish = array();
@@ -74,17 +87,17 @@
                                         }
                                       }
                                     @endphp
+                                        <tr>
                                     @if ($dish['dishTypeName'] != 'others')
-                                      <div class="row">
-                                        <div class="col-md-5">
+                                        <td style="width:50%;">
                                           @if(!empty($selectedDish))
-                                              {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                              {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], $selectedDish['dish_id'], ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @else
-                                            {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
+                                            {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @endif
-                                        </div>
-                                        <div class="col-md-3">
-                                          <div class="input-group">
+                                        </td>
+                                        <td style="width:25%;">
+                                          <div class="input-group col-sm-2">
                                               <span class="input-group-btn">
                                                   <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                                     <span class="glyphicon glyphicon-minus"></span>
@@ -92,12 +105,12 @@
                                               </span>
                                               @if(!empty($selectedDish))
                                                 @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'form-control input-number']) }}
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'col-sm-1 input-number']) }}
                                                 @else
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'col-sm-1 input-number']) }}
                                                 @endif
                                               @else
-                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'form-control input-number']) }}
+                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'col-sm-1 input-number']) }}
                                               @endif
                                               <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
@@ -105,31 +118,29 @@
                                                 </button>
                                             </span>
                                           </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                          <div class="input-group">
-                                              @if(!empty($selectedDish))
-                                                @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                    {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['base_price'], []) }}
-                                                @else
-                                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
-                                                @endif
+                                        </td>
+                                        <td  style="width:25%;">
+                                            @if(!empty($selectedDish))
+                                              @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['base_price'], []) }}
                                               @else
                                                 {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
                                               @endif
-                                              <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
-                                              @if(!empty($selectedDish))
-                                                  @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                    {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['total_price'], ['class' => 'form-control','readonly'=>'true']) }}
-                                                  @else
-                                                    {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
-                                                  @endif
-                                              @else
-                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'form-control','readonly'=>'true']) }}
-                                              @endif
-                                          </div>
-                                       </div>
-                                    </div>
+                                            @else
+                                              {{ Form::hidden('basePrice_'.$dish['dishTypeName'].'_'.$dayName,0, []) }}
+                                            @endif
+                                            <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                            @if(!empty($selectedDish))
+                                                @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['total_price'], ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                                @else
+                                                  {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                                @endif
+                                            @else
+                                                {{ Form::text('price_'.$dish['dishTypeName'].'_'.$dayName,0, ['class' => 'col-sm-1','readonly'=>'true']) }}
+                                            @endif
+                                                <i class="fa fa-rupee-sign" style="font-size:24px;"></i>
+                                          </td>
                                     @else
                                     <div class="checkbox">
                                         @php
@@ -159,7 +170,11 @@
                                         @endforeach
                                     </div>
                                     @endif
+
+                                  </tr>
                                     @endforeach
+                                  </tbody>
+                                </table>
                                     <div class="form-group">
                                         {{ Form::label('','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
                                         <div class="input-group">
