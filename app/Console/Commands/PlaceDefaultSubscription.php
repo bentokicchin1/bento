@@ -46,18 +46,23 @@ class PlaceDefaultSubscription extends Command
     public function handle()
     {
         try {
-          $monthlyUsers = User::where('billing_cycle','monthly')->get();
+
+          DB::enableQueryLog();
+          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
-              DB::enableQueryLog();
-                $userId = $userDetails->id;
-                $foodPreference = $userDetails->food_preference;
-                $foodQuantity = $userDetails->tiffin_quantity;
-                $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
-                if(!empty($subscribedData)){
-                    foreach ($subscribedData as $subscriptionDetails) {
+                $userId = $userDetails['id'];
+                $foodPreference = $userDetails['food_preference'];
+                $foodQuantity = $userDetails['tiffin_quantity'];
+
+                if(!empty($userDetails['address'])){
+                  foreach ($userDetails['address'] as $address) {
+                    $orderTypeId = $address['order_type_id'];
+                // $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
+                // if(!empty($subscribedData)){
+                //     foreach ($subscribedData as $subscriptionDetails) {
                         $defaultData = array();
-                        $orderTypeId = $subscriptionDetails->order_type_id;
+                        // $orderTypeId = $subscriptionDetails->order_type_id;
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
