@@ -46,18 +46,20 @@ class PlaceOrder extends Command
         try {
           $today = strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
-          if(!empty($subscribed) && date('Y-m-d',$subscribed['updated_at'])==date('Y-m-d',strtotime('last sunday'))) {
+          if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
-              $subscribedDishes = json_decode($subscribedData->subscription_items,true);
-              if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
-                $orderDetails = array();
-                $orderDetails['orderDate'] = date('Y-m-d');
-                $orderDetails['user'] = $subscribedData['user_id'];
-                $orderDetails['orderTypeId'] = $subscribedData['order_type_id'];
-                $orderDetails['shippingAddressId'] = $subscribedData['shipping_address_id'];
-                $orderDetails['orderTotalAmount'] = $subscribedDishes[$today]['orderTotalAmount'];
-                $orderDetails['items'] = $subscribedDishes[$today]['items'];
-                $response = $this->orderService->processSubscriptionData($orderDetails);
+              if(date('Y-m-d',strtotime($subscribedData->updated_at))==date('Y-m-d',strtotime('last sunday'))){
+                $subscribedDishes = json_decode($subscribedData->subscription_items,true);
+                if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
+                  $orderDetails = array();
+                  $orderDetails['orderDate'] = date('Y-m-d');
+                  $orderDetails['user'] = $subscribedData['user_id'];
+                  $orderDetails['orderTypeId'] = $subscribedData['order_type_id'];
+                  $orderDetails['shippingAddressId'] = $subscribedData['shipping_address_id'];
+                  $orderDetails['orderTotalAmount'] = $subscribedDishes[$today]['orderTotalAmount'];
+                  $orderDetails['items'] = $subscribedDishes[$today]['items'];
+                  $response = $this->orderService->processSubscriptionData($orderDetails);
+                }
               }
             }
           }
