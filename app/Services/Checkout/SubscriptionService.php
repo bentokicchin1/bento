@@ -62,9 +62,6 @@ class SubscriptionService
               $finalData[$day]['items'][$dishType]['total_price'] =  $dishItem->price * $qty;
               $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
             }
-            echo "<pre/>";
-            print_r($finalData);
-            exit;
         }
         return $finalData;
     }
