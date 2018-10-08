@@ -79,10 +79,19 @@ class PlaceDefaultSubscription extends Command
                                     break;
                                   case 'nonveg':
                                         $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
-                                        if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
-                                          unset($dishData[$day]['items'][$dishType]);
-                                        }else if($dishDetails['food_type']=='veg'){
-                                          unset($dishData[$day]['items'][$dishType]);
+                                        if(date('l')=='wednesday' || date('l')=='friday'){
+                                          if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
+                                            unset($dishData[$day]['items'][$dishType]);
+                                          }else if($dishDetails['food_type']=='veg'){
+                                            unset($dishData[$day]['items'][$dishType]);
+                                          }
+                                        }else{
+                                          $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
+                                          if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
+                                            unset($dishData[$day]['items'][$dishType]);
+                                          }else if($dishDetails['food_type']=='nonveg'){
+                                            unset($dishData[$day]['items'][$dishType]);
+                                          }
                                         }
                                     break;
                                 }
