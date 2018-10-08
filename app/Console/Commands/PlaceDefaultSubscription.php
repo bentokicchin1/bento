@@ -54,8 +54,7 @@ class PlaceDefaultSubscription extends Command
                 $userId = $userDetails['id'];
                 $foodPreference = $userDetails['food_preference'];
                 $foodQuantity = $userDetails['tiffin_quantity'];
-
-                if(!empty($userDetails['address'])){
+                if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
                   foreach ($userDetails['address'] as $address) {
                     $orderTypeId = $address['order_type_id'];
                 // $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
@@ -66,30 +65,37 @@ class PlaceDefaultSubscription extends Command
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
+                            $orderTotalAmount = $details['orderTotalAmount'];
                             if(!empty($details['items'])){
                               foreach ($details['items'] as $dishType => $dishDetails) {
                                 switch($foodPreference){
                                   case 'veg':
                                         $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                         if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
+                                          $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                           unset($dishData[$day]['items'][$dishType]);
                                         }else if($dishDetails['food_type']=='nonveg'){
+                                          $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                           unset($dishData[$day]['items'][$dishType]);
                                         }
                                     break;
                                   case 'nonveg':
                                         $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
-                                        if(date('l')=='wednesday' || date('l')=='friday'){
+                                        if(date('l',strtotime($day))=='Wednesday' || date('l',strtotime($day))=='Friday'){
                                           if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
+                                            $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }else if($dishDetails['food_type']=='veg'){
+                                            $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }
                                         }else{
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
+                                            $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }else if($dishDetails['food_type']=='nonveg'){
+                                            $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }
                                         }
@@ -97,6 +103,7 @@ class PlaceDefaultSubscription extends Command
                                 }
                               }
                             }
+                            $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                           }
                           $defaultData['subscriptionItems'] = json_encode($dishData);
                           $defaultData['orderTypeId'] = $orderTypeId;
