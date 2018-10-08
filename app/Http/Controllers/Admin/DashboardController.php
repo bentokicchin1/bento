@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
+
         $date = date('Y-m-d');
         $orders = DB::table("orders")
-                  ->select("dish_types.name as dishType","dishes.name as dishName",DB::raw("count(*) as dishCount"))
+                  ->select("dish_types.name as dishType","dishes.name as dishName",DB::raw("sum(order_items.quantity) as dishCount"))
                   ->join("order_items","orders.id","=","order_items.order_id")
                   ->join("dishes","order_items.dish_id","=","dishes.id")
                   ->join("dish_types","dishes.dish_type_id","=","dish_types.id")
