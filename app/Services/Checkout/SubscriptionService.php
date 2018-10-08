@@ -39,8 +39,6 @@ class SubscriptionService
     {
         $finalData = array();
         $rawDishList = $this->dishes->getDefaultDishListfromDb($orderTypeId);
-        echo "<pre/>";
-        print_r($rawDishList);
         if(!empty($rawDishList)){
             foreach($rawDishList as $key => $dishItem) {
               $items = array();
@@ -62,9 +60,10 @@ class SubscriptionService
               $finalData[$day]['items'][$dishType]['food_type'] = $dishItem->dish_food_type;
               $finalData[$day]['items'][$dishType]['base_price'] =  $dishItem->price;
               $finalData[$day]['items'][$dishType]['total_price'] =  $dishItem->price * $qty;
-              echo $finalData[$day]['items'][$dishType]['total_price']."<br/>";
               $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
             }
+            echo "<pre/>";
+            print_r($finalData);
             exit;
         }
         return $finalData;
