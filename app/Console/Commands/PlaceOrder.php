@@ -46,6 +46,9 @@ class PlaceOrder extends Command
         try {
           $today = strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
+          echo "<pre/>";
+          print_r($subscribed);
+          exit;
           if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
               if(date('Y-m-d',strtotime($subscribedData->updated_at))==date('Y-m-d',strtotime('last sunday'))){
