@@ -45,7 +45,7 @@ class PlaceOrder extends Command
     {
         try {
           DB::enableQueryLog();
-          $today = strtolower(date('l'));
+          $today = 'friday';//strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
           echo "<pre/>";
           print_r(DB::getQueryLog());
