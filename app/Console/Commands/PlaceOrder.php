@@ -58,6 +58,8 @@ class PlaceOrder extends Command
                   $orderDetails['shippingAddressId'] = $subscribedData['shipping_address_id'];
                   $orderDetails['orderTotalAmount'] = $subscribedDishes[$today]['orderTotalAmount'];
                   $orderDetails['items'] = $subscribedDishes[$today]['items'];
+                  echo "<pre/>";
+                  print_r($orderDetails);
                   $response = $this->orderService->processSubscriptionData($orderDetails);
                 }
               }
