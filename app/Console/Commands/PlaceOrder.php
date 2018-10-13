@@ -44,10 +44,11 @@ class PlaceOrder extends Command
     public function handle()
     {
         try {
+          DB::enableQueryLog();
           $today = strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
           echo "<pre/>";
-          print_r($subscribed);
+          print_r(DB::getQueryLog());
           exit;
           if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
