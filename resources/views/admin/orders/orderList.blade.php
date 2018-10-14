@@ -39,7 +39,7 @@
                     <td>{{$order->id}}</td>
                     <td>{{$order->users->name}}</td>
                     <td>{{$order->users->billing_cycle}}</td>
-                    <td>{{date('j-M-Y', strtotime($order->order_date))}}</td>
+                    <td>{{date('DD-M-Y', strtotime($order->order_date))}}</td>
                     <td>{{ucfirst($order->orderType->name)}}</td>
                     <td>{{$order->total_amount}}</td>
                     <td style="width:50px;">
@@ -69,14 +69,9 @@
     <!-- DataTables -->
     {!! Html::script('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
     {!! Html::script('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
-    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js') !!}
     <script>
       $(function () {
-        $.fn.dataTable.moment( 'DD-MMM-YYYY' );
         $('#orderTable').DataTable({
-          "columnDefs": [
-                { "type": "datetime-moment", targets: 4 }
-          ],
           'paging'      : true,
           'lengthChange': false,
           'deferRender' : true,
