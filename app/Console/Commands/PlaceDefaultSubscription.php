@@ -110,11 +110,11 @@ class PlaceDefaultSubscription extends Command
                           $address = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
                           $defaultData['shippingAddressId'] = $address->id;
                           $result = $this->subscriptionService->processDefaultSubscription($defaultData,$userId);
-                          echo $result;
                         }
                       }
                     }
                 }
+                echo $result;
            }
         } catch (Exception $e) {
             return $e->getRawMessage();
