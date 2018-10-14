@@ -89,7 +89,7 @@ class Dish extends Model
     {
         $dishes = array();
         $currentDate = date('Y-m-d',strtotime('2018-10-09'));
-        $daysArray = WeeklyDishList::getDatesForLastWeek();
+        $daysArray = WeeklyDishList::getDatesForThisWeek();
         echo "<pre/>";
         print_r($daysArray);
         $dishes = DB::table('dishes')
