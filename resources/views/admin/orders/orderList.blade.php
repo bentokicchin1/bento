@@ -39,7 +39,7 @@
                     <td>{{$order->id}}</td>
                     <td>{{$order->users->name}}</td>
                     <td>{{$order->users->billing_cycle}}</td>
-                    <td>{{date('dd-M-Y', strtotime($order->order_date))}}</td>
+                    <td>{{date('d-M-Y', strtotime($order->order_date))}}</td>
                     <td>{{ucfirst($order->orderType->name)}}</td>
                     <td>{{$order->total_amount}}</td>
                     <td style="width:50px;">
