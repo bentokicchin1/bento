@@ -23,7 +23,7 @@ return [
     'USER_TYPE' => ['admin'=>'admin','customer'=> 'customer'],
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
     'DEFAULT_HALF_VEG_TIFFIN' => ['veg_sabaji','chapati','others'],
-    'DEFAULT_HALF_NONVEG_TIFFIN' => ['non-veg-sabaji','chapati','others'],
+    'DEFAULT_HALF_NONVEG_TIFFIN' => ['non_veg_sabaji','chapati','others'],
     'LUNCH_ORDER_MAX_TIME' => '10:30 am',
     'DINNER_ORDER_MAX_TIME' => '11:45 pm',
     'ORDER_TYPE_LUNCH' => 2,
