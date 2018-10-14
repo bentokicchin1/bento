@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label for="menuDate" class="col-sm-3 control-label">Select Day :</label>
                     <div class="col-sm-6">
-                      {{ Form::text('menuDate',null,['id'=>'menuDate','class'=>'form-control','placeholder'=>'Date (required)']) }}
+                      {{ Form::text('menuDate',null,['id'=>'menuDate','class'=>'form-control','placeholder'=>'Date (required)', 'autocomplete'=>'off']) }}
                     </div>
                 </div>
                 <div class="form-group">
