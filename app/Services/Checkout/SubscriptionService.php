@@ -63,13 +63,16 @@ class SubscriptionService
                 $finalData[$day]['items'][$dishType]['total_price'] =  $dishItem->price * $qty;
                 $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
               }else{
-                $finalData[$day]['items'][$dishType][]['dish_id'] =  $dishItem->id;
-                $finalData[$day]['items'][$dishType][]['qty'] = 1;
-                $finalData[$day]['items'][$dishType][]['name'] =  $dishItem->name;
-                $finalData[$day]['items'][$dishType][]['food_type'] = $dishItem->dish_food_type;
-                $finalData[$day]['items'][$dishType][]['base_price'] =  $dishItem->price;
-                $finalData[$day]['items'][$dishType][]['total_price'] =  $dishItem->price * $qty;
+                $others = array();
+                $others['dish_id'] =  $dishItem->id;
+                $others['qty'] = 1;
+                $others['name'] =  $dishItem->name;
+                $others['food_type'] = $dishItem->dish_food_type;
+                $others['base_price'] =  $dishItem->price;
+                $others['total_price'] =  $dishItem->price * $qty;
+                array_push($finalData[$day]['items'][$dishType],$others);
                 $finalData[$day]['orderTotalAmount'] += $dishItem->price;
+
               }
             }
         }
