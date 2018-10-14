@@ -54,11 +54,11 @@ class WeeklyDishList extends Model
         $week = array();
         $weekDays = config('constants.days');
         foreach($weekDays as $day){
-          if(date('l')==='Sunday'){
-            array_push($week,date( 'Y-m-d', strtotime( $day.' next week' ) ));
-          }else{
+          // if(date('l')==='Sunday'){
+          //   array_push($week,date( 'Y-m-d', strtotime( $day.' next week' ) ));
+          // }else{
             array_push($week,date( 'Y-m-d', strtotime( $day.' this week' ) ));
-          }
+          // }
         }
         return $week;
     }
