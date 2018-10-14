@@ -69,9 +69,13 @@
     <!-- DataTables -->
     {!! Html::script('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
     {!! Html::script('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
+    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js') !!}
     <script>
       $(function () {
         $('#orderTable').DataTable({
+          "columnDefs": [
+                { "type": "datetime-moment", targets: 3 }
+          ],
           'paging'      : true,
           'lengthChange': false,
           'deferRender' : true,
