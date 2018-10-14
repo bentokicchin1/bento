@@ -72,6 +72,7 @@
     <script>
       $(function () {
         $('#orderTable').DataTable({
+          "order": [[ 3, "desc" ]],
           'paging'      : true,
           'lengthChange': false,
           'deferRender' : true,
