@@ -72,6 +72,7 @@
     {!! Html::script('//cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js') !!}
     <script>
       $(function () {
+        $.fn.dataTable.moment( 'DD-MMM-YYYY' );
         $('#orderTable').DataTable({
           "columnDefs": [
                 { "type": "datetime-moment", targets: 3 }
