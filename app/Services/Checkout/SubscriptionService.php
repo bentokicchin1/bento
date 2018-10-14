@@ -53,16 +53,29 @@ class SubscriptionService
               if(!array_key_exists($dishType,$finalData[$day]['items'])){
                   $finalData[$day]['items'][$dishType] = array();
               }
-              $finalData[$day]['items'][$dishType]['dish_id'] =  $dishItem->id;
-              $qty =  ($dishType=='chapati') ? 3 : 1;
-              $finalData[$day]['items'][$dishType]['qty'] = $qty;
-              $finalData[$day]['items'][$dishType]['name'] =  $dishItem->name;
-              $finalData[$day]['items'][$dishType]['food_type'] = $dishItem->dish_food_type;
-              $finalData[$day]['items'][$dishType]['base_price'] =  $dishItem->price;
-              $finalData[$day]['items'][$dishType]['total_price'] =  $dishItem->price * $qty;
-              $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
+              if($dishType!='others'){
+                $finalData[$day]['items'][$dishType]['dish_id'] =  $dishItem->id;
+                $qty =  ($dishType=='chapati') ? 3 : 1;
+                $finalData[$day]['items'][$dishType]['qty'] = $qty;
+                $finalData[$day]['items'][$dishType]['name'] =  $dishItem->name;
+                $finalData[$day]['items'][$dishType]['food_type'] = $dishItem->dish_food_type;
+                $finalData[$day]['items'][$dishType]['base_price'] =  $dishItem->price;
+                $finalData[$day]['items'][$dishType]['total_price'] =  $dishItem->price * $qty;
+                $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
+              }else{
+                $finalData[$day]['items'][$dishType][]['dish_id'] =  $dishItem->id;
+                $finalData[$day]['items'][$dishType][]['qty'] = 1;
+                $finalData[$day]['items'][$dishType][]['name'] =  $dishItem->name;
+                $finalData[$day]['items'][$dishType][]['food_type'] = $dishItem->dish_food_type;
+                $finalData[$day]['items'][$dishType][]['base_price'] =  $dishItem->price;
+                $finalData[$day]['items'][$dishType][]['total_price'] =  $dishItem->price * $qty;
+                $finalData[$day]['orderTotalAmount'] += $dishItem->price;
+              }
             }
         }
+        echo "<pre/>";
+        print_R($finalData);
+        exit;
         return $finalData;
     }
 

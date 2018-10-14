@@ -88,7 +88,7 @@ class Dish extends Model
     public function getDefaultDishListfromDb($orderTypeId)
     {
         $dishes = array();
-        $currentDate = date('Y-m-d');
+        $currentDate = date('Y-m-d',strtotime('2018-10-11'));
         $daysArray = WeeklyDishList::getDatesForThisWeek();
         $dishes = DB::table('dishes')
             ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name', 'dish_types.food_type as dish_food_type')

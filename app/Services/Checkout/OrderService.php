@@ -71,8 +71,6 @@ class OrderService
         $orderParams['status'] = 'ordered';
         $orderParams['orderTotalAmount'] = $orderData['orderTotalAmount'];
         $orderParams['items'] = $orderData['items'];
-        echo "<pre/>";
-        print_r($orderParams);
         return $this->insertOrder($orderParams);
     }
 
@@ -207,9 +205,6 @@ class OrderService
     private function insertOrderItems($orderId, $items)
     {
         try {
-          echo "<pre/>";
-          print_r($items);
-          exit;
             DB::table('order_items')->where('order_id',$orderId)->delete();
             if (!empty($items)) {
                 foreach ($items as $key => $item) {
