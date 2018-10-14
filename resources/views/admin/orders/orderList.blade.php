@@ -75,7 +75,7 @@
         $.fn.dataTable.moment( 'DD-MMM-YYYY' );
         $('#orderTable').DataTable({
           "columnDefs": [
-                { "type": "datetime-moment", targets: 3 }
+                { "type": "datetime-moment", targets: 4 }
           ],
           'paging'      : true,
           'lengthChange': false,
