@@ -87,11 +87,10 @@ class Dish extends Model
 
     public function getDefaultDishListfromDb($orderTypeId)
     {
+        DB::enableQueryLog();
         $dishes = array();
-        $currentDate = date('Y-m-d',strtotime('2018-10-07'));
+        $currentDate = date('Y-m-d');
         $daysArray = WeeklyDishList::getDatesForThisWeek();
-        echo "<pre/>";
-        print_r($daysArray);
         $dishes = DB::table('dishes')
             ->select('dishes.id', 'dishes.dish_type_id', 'weekly_dish_lists.order_type_id', 'dishes.name', 'weekly_dish_lists.day', 'weekly_dish_lists.date', 'dishes.price', 'dish_types.name as dish_type_name', 'dish_types.food_type as dish_food_type')
             ->leftJoin('dish_types', 'dish_types.id', '=', 'dishes.dish_type_id')
@@ -103,6 +102,8 @@ class Dish extends Model
             ->where('weekly_dish_lists.is_default','Y')
             ->orderby('dish_types.id')
             ->get()->toArray();
+            echo "<pre/>";
+            print_r(DB::getQueryLog());
         return $dishes;
     }
 
