@@ -43,6 +43,7 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!-- Bootstrap 3.3.7 -->
 {!! Html::script('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') !!}
+{!! Html::script('admin/bower_components/moment/min/moment.min.js') !!}
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -64,8 +65,6 @@
     {!! Html::script('admin/bower_components/jvectormap/jquery-jvectormap.js') !!}
     <!-- Sparkline -->
     {!! Html::script('admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') !!}
-    <!-- daterangepicker -->
-    {!! Html::script('admin/bower_components/moment/min/moment.min.js') !!}
     <!-- fullCalendar -->
     {!! Html::script('admin/bower_components/fullcalendar/dist/fullcalendar.min.js') !!}
     <!-- datepicker -->
