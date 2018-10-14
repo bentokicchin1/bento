@@ -88,7 +88,7 @@ class Dish extends Model
     public function getDefaultDishListfromDb($orderTypeId)
     {
         $dishes = array();
-        $currentDate = date('Y-m-d');
+        $currentDate = date('Y-m-d',strtotime('2018-10-07'));
         $daysArray = WeeklyDishList::getDatesForThisWeek();
         echo "<pre/>";
         print_r($daysArray);
