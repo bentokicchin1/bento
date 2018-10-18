@@ -44,6 +44,9 @@ class OrderController extends Controller
           $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
           $dishList['orderTypeId'] = $orderTypeId;
           $dishList['dishData'] = $dishData;
+          echo "<pre/>";
+          print_R($orderItems);
+          exit;
 
         }
         return view('admin.orders.orderAdd', ['dishes'=>$dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
