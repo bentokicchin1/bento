@@ -44,7 +44,7 @@ class PlaceOrder extends Command
     public function handle()
     {
         try {
-          $today = strtolower(date('l'));
+          $today = 'monday';//strtolower(date('l'));
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
           if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
