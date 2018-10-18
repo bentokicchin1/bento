@@ -51,7 +51,7 @@ class PlaceDefaultSubscription extends Command
           $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
-                $userId = $userDetails['id'];
+                $userId = 25;
                 $foodPreference = $userDetails['food_preference'];
                 $foodQuantity = $userDetails['tiffin_quantity'];
                 if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
@@ -63,9 +63,6 @@ class PlaceDefaultSubscription extends Command
                         $defaultData = array();
                         // $orderTypeId = $subscriptionDetails->order_type_id;
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
-                        echo "<pre/>";
-                        print_r($dishData);
-                        exit;
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
                             $orderTotalAmount = $details['orderTotalAmount'];
@@ -108,6 +105,9 @@ class PlaceDefaultSubscription extends Command
                             }
                             $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                           }
+                          echo "<pre/>";
+                          print_r($dishData);
+                          exit;
                           $defaultData['subscriptionItems'] = json_encode($dishData);
                           $defaultData['orderTypeId'] = $orderTypeId;
                           $address = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
