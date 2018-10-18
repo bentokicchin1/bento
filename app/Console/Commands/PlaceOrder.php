@@ -52,7 +52,7 @@ class PlaceOrder extends Command
                 $subscribedDishes = json_decode($subscribedData->subscription_items,true);
                 if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
                   $orderDetails = array();
-                  $orderDetails['orderDate'] = date('Y-m-d');
+                  $orderDetails['orderDate'] = date('Y-m-d',strtotime('2018-10-15'));
                   $orderDetails['user'] = $subscribedData['user_id'];
                   $orderDetails['orderTypeId'] = $subscribedData['order_type_id'];
                   $orderDetails['shippingAddressId'] = $subscribedData['shipping_address_id'];
