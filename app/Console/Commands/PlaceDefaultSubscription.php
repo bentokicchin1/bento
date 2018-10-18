@@ -48,12 +48,12 @@ class PlaceDefaultSubscription extends Command
         try {
 
           DB::enableQueryLog();
-          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->get()->toArray();
+          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->where('userId',25)->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
-                $userId = 25;
-                $foodPreference = 'nonveg';//$userDetails['food_preference'];
-                $foodQuantity = 'full';//$userDetails['tiffin_quantity'];
+                $userId = $userDetails['userId'];
+                $foodPreference = $userDetails['food_preference'];
+                $foodQuantity = $userDetails['tiffin_quantity'];
                 if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
                   foreach ($userDetails['address'] as $address) {
                     $orderTypeId = $address['order_type_id'];
@@ -83,17 +83,12 @@ class PlaceDefaultSubscription extends Command
                                         $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
                                         if(date('l',strtotime($day))=='Wednesday' || date('l',strtotime($day))=='Friday'){
                                           if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
-                                            echo "if";
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
-                                          }else if($dishDetails['food_type']=='veg'){
-                                            echo "elseif";
+                                          }else if(($dishDetails['food_type']=='veg') || (date('l',strtotime($day))=='Wednesday' && $dishDetails['food_type']=='both')){
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }
-                                          echo "out";
-                                          echo "<pre/>";
-                                          print_r($dishData['wednesday']);
                                         }else{
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
@@ -110,6 +105,8 @@ class PlaceDefaultSubscription extends Command
                             }
                             $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                           }
+                          echo "<pre/>";
+                          print_r($dishData);
                           exit;
                           $defaultData['subscriptionItems'] = json_encode($dishData);
                           $defaultData['orderTypeId'] = $orderTypeId;
