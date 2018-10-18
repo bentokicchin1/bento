@@ -51,7 +51,7 @@ class PlaceDefaultSubscription extends Command
           $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->where('users.id',25)->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
-                $userId = $userDetails['userId'];
+                $userId = $userDetails['id'];
                 $foodPreference = $userDetails['food_preference'];
                 $foodQuantity = $userDetails['tiffin_quantity'];
                 if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
