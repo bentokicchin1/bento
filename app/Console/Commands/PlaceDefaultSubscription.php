@@ -48,7 +48,7 @@ class PlaceDefaultSubscription extends Command
         try {
 
           DB::enableQueryLog();
-          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->where('users.id',25)->get()->toArray();
+          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $userId = $userDetails['id'];
@@ -105,9 +105,6 @@ class PlaceDefaultSubscription extends Command
                             }
                             $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                           }
-                          echo "<pre/>";
-                          print_r($dishData);
-                          exit;
                           $defaultData['subscriptionItems'] = json_encode($dishData);
                           $defaultData['orderTypeId'] = $orderTypeId;
                           $address = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
