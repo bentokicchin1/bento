@@ -251,7 +251,6 @@ class OrderService
             $dish['dishPrice'] = $item['base_price'];
             $dish['totalPrice'] = $item['total_price'];
             $dish['quantity'] = $item['quantity'];
-            echo $item['order_dish']['dish_type_id']."  ".$item['order_dish']['name']."<br/>";
             if($item['order_dish']['dish_type_id']!=config('constants.DISH_TYPE_OTHER')){
               $finalList['orderDishes'][$item['order_dish']['dish_type_id']] = $dish;
             }else{

@@ -28,5 +28,5 @@ return [
     'DINNER_ORDER_MAX_TIME' => '11:45 pm',
     'ORDER_TYPE_LUNCH' => 2,
     'ORDER_TYPE_DINNER' => 3,
-    'DISH_TYPE_OTHER' => 5,
+    'DISH_TYPE_OTHER' => 6,
 ];
