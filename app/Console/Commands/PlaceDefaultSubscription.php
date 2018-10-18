@@ -93,7 +93,7 @@ class PlaceDefaultSubscription extends Command
                                           }
                                           echo "out";
                                           echo "<pre/>";
-                                          print_r($dishData);
+                                          print_r($dishData['Wednesday']);
                                         }else{
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
