@@ -48,7 +48,7 @@ class PlaceDefaultSubscription extends Command
         try {
 
           DB::enableQueryLog();
-          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->where('userId',25)->get()->toArray();
+          $monthlyUsers = User::with('address')->where('billing_cycle','monthly')->where('users.id',25)->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $userId = $userDetails['userId'];
