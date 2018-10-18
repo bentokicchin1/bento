@@ -63,6 +63,9 @@ class PlaceDefaultSubscription extends Command
                         $defaultData = array();
                         // $orderTypeId = $subscriptionDetails->order_type_id;
                         $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
+                        echo "<pre/>";
+                        print_r($dishData);
+                        exit;
                         if(!empty($dishData)){
                           foreach ($dishData as $day => $details) {
                             $orderTotalAmount = $details['orderTotalAmount'];
