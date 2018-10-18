@@ -85,7 +85,7 @@ class PlaceDefaultSubscription extends Command
                                           if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
-                                          }else if(($dishDetails['food_type']=='veg') || (date('l',strtotime($day))=='Wednesday' && $dishDetails['food_type']=='both')){
+                                          }else if(($dishDetails['food_type']=='veg') || (date('l',strtotime($day))=='Wednesday' && $dishDetails['food_type']!='both')){
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }
