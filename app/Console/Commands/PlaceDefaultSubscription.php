@@ -52,8 +52,8 @@ class PlaceDefaultSubscription extends Command
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $userId = 25;
-                $foodPreference = $userDetails['food_preference'];
-                $foodQuantity = $userDetails['tiffin_quantity'];
+                $foodPreference = 'nonveg';//$userDetails['food_preference'];
+                $foodQuantity = 'full';//$userDetails['tiffin_quantity'];
                 if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
                   foreach ($userDetails['address'] as $address) {
                     $orderTypeId = $address['order_type_id'];
