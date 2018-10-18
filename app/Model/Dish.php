@@ -96,7 +96,7 @@ class Dish extends Model
             ->Join('weekly_dish_lists', 'dishes.id', '=', 'weekly_dish_lists.dish_id')
             ->where('weekly_dish_lists.order_type_id', '=', $orderTypeId)
             ->wherein('weekly_dish_lists.date',$daysArray)
-            ->where('weekly_dish_lists.date','>=',$currentDate)
+            // ->where('weekly_dish_lists.date','>=',$currentDate)
             ->where('dishes.deleted_at',null)
             ->where('weekly_dish_lists.is_default','Y')
             ->orderby('dish_types.id')
