@@ -83,12 +83,17 @@ class PlaceDefaultSubscription extends Command
                                         $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
                                         if(date('l',strtotime($day))=='Wednesday' || date('l',strtotime($day))=='Friday'){
                                           if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
+                                            echo "if";
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }else if($dishDetails['food_type']=='veg'){
+                                            echo "elseif";
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }
+                                          echo "out";
+                                          echo "<pre/>";
+                                          print_r($dishData);
                                         }else{
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
@@ -105,8 +110,6 @@ class PlaceDefaultSubscription extends Command
                             }
                             $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                           }
-                          echo "<pre/>";
-                          print_r($dishData);
                           exit;
                           $defaultData['subscriptionItems'] = json_encode($dishData);
                           $defaultData['orderTypeId'] = $orderTypeId;
