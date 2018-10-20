@@ -5,6 +5,43 @@
 .input-group-addon, .input-group-btn{
   vertical-align: top;
 }
+.input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group{
+  margin-left: 0px;
+}
+.input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group{
+  margin-right: 0px;
+}
+.btn-number{
+  padding: 13px 16px;
+}
+.input-number,.dishPriceShow{
+  max-width:50px;
+}
+.grandTotal{
+  max-width:100px;
+}
+@media only screen and (max-width: 600px) {
+    .btn-number {
+            padding: 3px 3px !important;
+    }
+
+    .table > tbody > tr > td {
+        padding: 2px !important;
+    }
+
+    .input-number, .dishPriceShow {
+        max-width: 30px !important;
+        height: 30px !important;
+    }
+
+    .svg-inline--fa {
+        font-size: 14px !important;
+        font-weight: normal !important;
+    }
+    .checkbox span {
+        font-size: 19px !important;
+    }
+}
 </style>
 <!-- Header section
     ================================================== -->
@@ -32,88 +69,99 @@
                 @include('layouts.success')
                 @include('layouts.errors')
                 <div class="order-form">
-
-                    {{ Form::open(['route' => 'addressSelect', 'method' => 'post']) }}
-                    {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
-
-                    @foreach ($dishes['dishData'] as $dish)
-                    @if ($dish['dishTypeName'] != 'others')
-                    <div class="row">
-                        <div class="col-md-5">
-                          @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                            @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
-                            {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control  ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                          @else
-                            {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'form-control ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
-                          @endif
-                        </div>
-                        <div class="col-md-3">
-                          <div class="input-group">
-                              <span class="input-group-btn">
-                                  <button type="button" id="" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                  </button>
-                              </span>
+                  {{ Form::open(['route' => 'addressSelect', 'method' => 'post']) }}
+                  {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
+                  <div style="overflow-x:auto;">
+                    <table class="table">
+                      <thead>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </thead>
+                      <tbody>
+                        @foreach ($dishes['dishData'] as $dish)
+                        @if ($dish['dishTypeName'] != 'others')
+                          <tr>
+                            <td>
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                                {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control input-number', 'placeholder' => 'Quantity']) }}
+                                @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => '','readonly'=>true ])}} @endif
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @else
-                                {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'form-control input-number']) }}
+                                {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @endif
-                              <span class="input-group-btn">
-                                <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                            </span>
-                          </div>
-                        </div>
-                        <div class="col-md-2">
-                          <div class="input-group">
-                            @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                              {{ Form::hidden('basePrice_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['dishPrice']), []) }}
-                              <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
-                              {{ Form::text('price_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['totalPrice']), ['class' => 'form-control','readonly'=>'true']) }}
-                            @else
-                              {{ Form::hidden('basePrice_'.$dish['dishTypeName'],0, []) }}
-                              <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
-                              {{ Form::text('price_'.$dish['dishTypeName'],0, ['class' => 'form-control','readonly'=>'true']) }}
-                            @endif
-                          </div>
-                       </div>
-                    </div>
-                    @else
-                        <div class="checkbox">
-                            @php
-                                foreach($dish['dishList'] as $dishId => $dishName){
-                            @endphp
-                                <label>
-                                {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
-                                  @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                                    @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
-                                      {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'form-control otherDish']) }}
-                                    @else
-                                      {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
-                                    @endif
-                                  @else
-                                    {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'form-control otherDish']) }}
-                                  @endif
-                                  <span class="cr">
-                                    <i class="cr-icon fa fa-check"></i>
+                            </td>
+                            <td>
+                              <div class="input-group">
+                                  <span class="input-group-btn">
+                                      <button type="button" id="" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
                                   </span>
-                                  <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
-                                </label>
-                            @php
-                                }
-                            @endphp
-                        </div>
+                                  @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                    {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'input-number', 'placeholder' => 'Quantity']) }}
+                                  @else
+                                    {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'input-number']) }}
+                                  @endif
+                                  <span class="input-group-btn">
+                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="input-group">
+                                @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['dishPrice']), []) }}
+                                  <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                  {{ Form::text('price_'.$dish['dishTypeName'],round($orderItems['orderDishes'][$dish['dishTypeId']]['totalPrice']), ['class' => 'dishPriceShow','readonly'=>'true']) }}
+                                @else
+                                  {{ Form::hidden('basePrice_'.$dish['dishTypeName'],0, []) }}
+                                  <!-- <span><i class="fas fa-rupee-sign"  aria-hidden="true"></i></span> -->
+                                  {{ Form::text('price_'.$dish['dishTypeName'],0, ['class' => 'dishPriceShow','readonly'=>'true']) }}
+                                @endif
+                                <span class="input-group-btn m-l-5"><i class="fa fa-rupee-sign" style="font-size:24px;"></i></span>
+                              </div>
+                           </td>
+                         </tr>
+                        @endif
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                @foreach ($dishes['dishData'] as $dish)
+                  @if ($dish['dishTypeName'] == 'others')
+                    <div class="checkbox">
+                      @php
+                          foreach($dish['dishList'] as $dishId => $dishName){
+                      @endphp
+                          <label>
+                          {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => '']) }}
+                            @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                              @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'otherDish']) }}
+                              @else
+                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
+                              @endif
+                            @else
+                              {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
+                            @endif
+                            <span class="cr">
+                              <i class="cr-icon fa fa-check"></i>
+                            </span>
+                            <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
+                          </label>
+                        @php
+                          }
+                        @endphp
+                      </div>
                     @endif
-                    @endforeach
-                    <div class="form-group">
-                        {{ Form::label('grandTotal','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
-                        <div class="input-group">
-                          <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
-                          {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'form-control','readonly'=>'true']) }}
-                        </div>
-                    </div>
+                  @endforeach
+                    {{ Form::label('grandTotal','Grand Total:', ['class' => '']) }}
+                    {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'grandTotal m-l-10','readonly'=>'true']) }}
+                    <span class="m-l-5"><i class="fa fa-rupee-sign"></i></span>
                     <div class="order-submit">
                         {{ Form::submit('Place Your Order', ['class' => 'form-control submit']) }}
                     </div>
