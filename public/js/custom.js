@@ -108,6 +108,15 @@ $(document).ready(function() {
 
     // Navbar Sticky
 
+
+    var cycle = $("input[type=radio][name='billing_cycle']:checked").val();
+    if(cycle=='monthly'){
+      $('.monthly_preference').show();
+    }else {
+      $('.monthly_preference').hide();
+    }
+
+
     (function() {
         var docElem = document.documentElement,
             didScroll = false,
@@ -322,8 +331,5 @@ $(document).ready(function(){
           }
       });
     });
-
-
-
 
 });
