@@ -95,7 +95,7 @@
                             <td>
                               <div class="input-group">
                                   <span class="input-group-btn">
-                                      <button type="button" id="" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                      <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                         <span class="glyphicon glyphicon-minus"></span>
                                       </button>
                                   </span>
@@ -130,35 +130,35 @@
                       @endforeach
                     </tbody>
                   </table>
-                </div>
-                @foreach ($dishes['dishData'] as $dish)
-                  @if ($dish['dishTypeName'] == 'others')
-                    <div class="checkbox">
-                      @php
-                          foreach($dish['dishList'] as $dishId => $dishName){
-                      @endphp
-                          <label>
-                          {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => '']) }}
-                            @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                              @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
-                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'otherDish']) }}
-                              @else
-                                {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
-                              @endif
-                            @else
-                              {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
-                            @endif
-                            <span class="cr">
-                              <i class="cr-icon fa fa-check"></i>
-                            </span>
-                            <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
-                          </label>
-                        @php
-                          }
-                        @endphp
-                      </div>
-                    @endif
-                  @endforeach
+                    @foreach ($dishes['dishData'] as $dish)
+                      @if ($dish['dishTypeName'] == 'others')
+                        <div class="checkbox">
+                          @php
+                              foreach($dish['dishList'] as $dishId => $dishName){
+                          @endphp
+                              <label>
+                              {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => '']) }}
+                                @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                  @if(array_key_exists($dishId,$orderItems['orderDishes'][$dish['dishTypeId']]))
+                                    {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$dishId, true,['class' => 'otherDish']) }}
+                                  @else
+                                    {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
+                                  @endif
+                                @else
+                                  {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName), $dishId, false,['class' => 'otherDish']) }}
+                                @endif
+                                <span class="cr">
+                                  <i class="cr-icon fa fa-check"></i>
+                                </span>
+                                <span>{{ $dishName }} ( <i class="fas fa-rupee-sign"></i>{{ round($dish['dishPrice'][$dishId]) }} )</span>
+                              </label>
+                            @php
+                              }
+                            @endphp
+                          </div>
+                        @endif
+                      @endforeach
+                    </div>
                     {{ Form::label('grandTotal','Grand Total:', ['class' => '']) }}
                     {{ Form::text('grandTotal','', ['id'=>'grandTotal','class' => 'grandTotal m-l-10','readonly'=>'true']) }}
                     <span class="m-l-5"><i class="fa fa-rupee-sign"></i></span>

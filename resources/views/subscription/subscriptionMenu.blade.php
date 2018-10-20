@@ -178,7 +178,21 @@
                                             <span class="input-group-btn m-l-5"><i class="fa fa-rupee-sign" style="font-size:24px;"></i></span>
                                           </div>
                                           </td>
-                                    @else
+                                      @endif
+                                    </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                                @foreach ($dishesArray as $dish)
+                                  @php
+                                    $selectedDish = array();
+                                    if(array_key_exists(strtolower($day),$subscribedDishes)){
+                                      if(array_key_exists($dish['dishTypeName'],$subscribedDishes[strtolower($day)]['items'])){
+                                          $selectedDish = $subscribedDishes[strtolower($day)]['items'][$dish['dishTypeName']];
+                                      }
+                                    }
+                                  @endphp
+                                  @if ($dish['dishTypeName'] == 'others')
                                     <div class="checkbox">
                                         @php
                                           $selectedOtherDish = array();
@@ -206,40 +220,33 @@
                                         </label>
                                         @endforeach
                                     </div>
-                                    @endif
-                                  </tr>
-                                    @endforeach
-                                  </tbody>
-                                </table>
-                              </div>
-                                    <div class="form-group">
-                                        {{ Form::label('','Grand Total:', ['class' => 'col-sm-3 control-label']) }}
-                                        <div class="input-group">
-                                          <!-- <span><i class="fas fa-rupee-sign"></i></span> -->
-                                          {{ Form::text('grandTotal_'.$dayName,0, ['id'=>'grandTotal_'.$dayName,'class' => 'form-control readonly']) }}
-                                        </div>
-                                    </div>
-                                  @else
-                                    <center><h5>Sorry! We are closed on this day.</h5></center>
                                   @endif
-                                  </div>
-                                  @php
-                                      $active = true
-                                  @endphp
                                 @endforeach
-                            </div>
-                        </div>
+                              </div>
+                                  {{ Form::label('grandTotal','Grand Total:', ['class' => '']) }}
+                                  {{ Form::text('grandTotal_'.$dayName,'',['id'=>'grandTotal_'.$dayName,'class' => 'grandTotal m-l-10','readonly'=>'true']) }}
+                                  <span class="m-l-5"><i class="fa fa-rupee-sign"></i></span>
+                            @else
+                              <center><h5>Sorry! We are closed on this day.</h5></center>
+                            @endif
+                          </div>
+                          @php
+                              $active = true
+                          @endphp
+                        @endforeach
+                      </div>
                     </div>
-                    <div class="order-submit">
-                        {{ Form::submit('Place Your Order', ['id'=>'subscribe','class' => 'form-control submit']) }}
-                    </div>
-                    {{ Form::close() }}
+                  </div>
+                <div class="order-submit">
+                    {{ Form::submit('Place Your Order', ['id'=>'subscribe','class' => 'form-control submit']) }}
                 </div>
-                @else
-                <h4 style="text-align:center;">No data found</h4>
-                @endif
+              {{ Form::close() }}
             </div>
+          @else
+            <h4 style="text-align:center;">No data found</h4>
+          @endif
         </div>
+      </div>
     </div>
 </section>
 <script>
