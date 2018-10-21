@@ -238,7 +238,7 @@ $(document).ready(function(){
     var quantitiy=0;
     $('.quantity-right-plus').on('click',function(e) {
         e.preventDefault();
-        var boxName = $(this).parent().siblings('input').attr('name');
+        var boxName = $(this).parent().parent().siblings().find('.input-number').attr('name');
         var quantity = parseInt($('[name="'+boxName+'"]').val());
         if(isNaN(quantity)){
           quantity = 1;
@@ -251,7 +251,7 @@ $(document).ready(function(){
 
     $('.quantity-left-minus').on('click',function(e) {
         e.preventDefault();
-        var boxName = $(this).parent().siblings('input').attr('name');
+        var boxName = $(this).parent().parent().siblings().find('.input-number').attr('name');
         var quantity = parseInt($('[name="'+boxName+'"]').val());
         if(quantity>0){
           $('[name="'+boxName+'"]').val(quantity - 1);
