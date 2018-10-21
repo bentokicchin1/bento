@@ -106,7 +106,7 @@
                                   {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'input-number']) }}
                                 @endif
                             </td>
-                            </td>
+                            <td>
                                 <span class="input-group-btn">
                                   <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                       <span class="glyphicon glyphicon-plus"></span>
