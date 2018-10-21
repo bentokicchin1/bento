@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\Order;
+use App\Model\OrderItem;
 use App\Model\DishType;
 use App\Model\Dish;
 use App\Model\OrderType;
@@ -25,6 +26,19 @@ class DashboardController extends Controller
                   ->where("orders.order_date",$date)
                   ->groupBy("order_items.dish_id")
                   ->get();
-        return view('admin.dashboard', ['orders' => $orders]);
+
+
+      $orderList = Order::with('shipping_address','shipping_address.cityData','shipping_address.areaData','shipping_address.areaLocation')
+                ->with('users')
+                ->with('orderType')
+                ->with('orderItems')
+                ->where("orders.deleted_at", NULL)
+                ->where("orders.order_date",$date)
+                ->get()->toArray();
+        // echo "<pre/>";
+        // print_r($orderList);
+        // exit;
+
+        return view('admin.dashboard', ['orders' => $orders,'orderList'=>$orderList]);
     }
 }
