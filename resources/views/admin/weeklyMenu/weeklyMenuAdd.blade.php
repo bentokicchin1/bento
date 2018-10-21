@@ -14,7 +14,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-12">
+        <div class="col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-12">
           <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Add Weekly Menu </h3>
@@ -119,7 +119,7 @@
             var dishType = controlId.replace(/-/g," ");
             defaultRadio = defaultRadio+'<div class="form-group"><label for="name" class="col-sm-3 control-label">Select Default '+dishType+' :</label><div class="col-sm-6">';
             $.each(dishArray,function(i,val){
-              defaultRadio = defaultRadio+'<input class="radio-inline" required="true" name="default['+dishType+']" value="'+val.id+'" type="radio"><label for="default_'+dishType+'">'+val.text+'</label>';
+              defaultRadio = defaultRadio+'<input class="radio-inline" required="true" id="default['+dishType+']" name="default['+dishType+']" value="'+val.id+'" type="radio"><label for="default['+dishType+']">'+val.text+'</label>';
             });
             defaultRadio = defaultRadio+'</div></div>';
           }
@@ -127,7 +127,7 @@
         });
 
         $("#menuDate").datepicker({
-          // startDate:new Date(),
+          startDate:new Date(),
           autoclose : true,
           format : 'DD, d MM, yyyy'
         });
