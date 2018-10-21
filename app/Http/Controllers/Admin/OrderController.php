@@ -56,9 +56,6 @@ class OrderController extends Controller
                   ->with('orderType')
                   ->where("orders.deleted_at", NULL)
                   ->get();
-                  echo "<pre/>";
-                  print_r($orders);
-                  exit;
         return view('admin.orders.orderList', ['orders' => $orders]);
     }
 

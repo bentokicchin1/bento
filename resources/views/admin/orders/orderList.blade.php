@@ -43,8 +43,8 @@
                     <td>{{ucfirst($order->orderType->name)}}</td>
                     <td>{{$order->total_amount}}</td>
                     <td style="width:50px;">
-                      @if(!is_null($order->shipping_address->address_type)) {{$order->shipping_address->address_type}} @endif
-                      - {{$order->shipping_address->location}},
+                      @if(!is_null($order->shipping_address->address_type)) {{$order->shipping_address->address_type}} - {{$order->shipping_address->location}},@endif
+
                       @if(!is_null($order->shipping_address->areaLocation)) {{$order->shipping_address->areaLocation->name}}, @endif
                       @if(!is_null($order->shipping_address->areaData)) {{$order->shipping_address->areaData->name}}, @endif
                       @if(!is_null($order->shipping_address->cityData)) {{$order->shipping_address->cityData->name}}, @endif
