@@ -127,32 +127,30 @@
                                             {{ Form::select($dish['dishTypeName'].'_'.$dayName, $dish['dishList'], '', ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                                           @endif
                                         </td>
-                                        <td >
-                                          <div class="input-group">
-                                              <span class="input-group-btn">
-                                                  <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                                    <span class="glyphicon glyphicon-minus"></span>
-                                                  </button>
-                                              </span>
-                                          </td>
-                                          <td >
-                                              @if(!empty($selectedDish))
-                                                @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'input-number']) }}
-                                                @else
-                                                    {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'input-number']) }}
-                                                @endif
+                                        <td>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                  <span class="glyphicon glyphicon-minus"></span>
+                                                </button>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if(!empty($selectedDish))
+                                              @if(array_key_exists($selectedDish['dish_id'],$dish['dishList']))
+                                                  {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,$selectedDish['qty'], ['class' => 'input-number']) }}
                                               @else
                                                   {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'input-number']) }}
                                               @endif
-                                          </td>
-                                          <td>
-                                              <span class="input-group-btn">
-                                                <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                                    <span class="glyphicon glyphicon-plus"></span>
-                                                </button>
-                                            </span>
-                                          </div>
+                                            @else
+                                                {{ Form::text('qty_'.$dish['dishTypeName'].'_'.$dayName,old($dayName.'_'.'qty_'.$dish['dishTypeName']), ['class' => 'input-number']) }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <span class="input-group-btn">
+                                              <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                  <span class="glyphicon glyphicon-plus"></span>
+                                              </button>
+                                          </span>
                                         </td>
                                         <td>
                                           <div class="input-group">
