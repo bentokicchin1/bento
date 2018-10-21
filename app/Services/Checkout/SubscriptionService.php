@@ -39,6 +39,9 @@ class SubscriptionService
     {
         $finalData = array();
         $rawDishList = $this->dishes->getDefaultDishListfromDb($orderTypeId);
+        echo "<pre/>";
+        print_r($rawDishList);
+        exit;
         if(!empty($rawDishList)){
             foreach($rawDishList as $key => $dishItem) {
               $items = array();
