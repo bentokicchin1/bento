@@ -24,5 +24,30 @@
             </div>
             @endforeach
         </div>
+        @if(!empty($orderList))
+        <div class="box-body">
+          <table id="userTable" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                  <!-- <th>ID</th> -->
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Billing Cycle</th>
+                  <th>Food Preference</th>
+                  <th>Tiffin Quantity</th>
+                  <th>Location</th>
+                  <th>Sector</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($orderList as $orders)
+              <tr>
+                <td></td>
+              </tr>
+              @endforeach
+          </tbody>
+        </table>
+      </div>
+      @endif
     </section>
 @endsection
