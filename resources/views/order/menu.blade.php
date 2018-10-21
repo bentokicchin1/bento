@@ -93,23 +93,25 @@
                               @endif
                             </td>
                             <td>
-                              <div class="input-group">
-                                  <span class="input-group-btn">
-                                      <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                        <span class="glyphicon glyphicon-minus"></span>
-                                      </button>
-                                  </span>
-                                  @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                                    {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'input-number', 'placeholder' => 'Quantity']) }}
-                                  @else
-                                    {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'input-number']) }}
-                                  @endif
-                                  <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                              </div>
+                              <span class="input-group-btn">
+                                  <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                  </button>
+                              </span>
+                            </td>
+                            <td>
+                                @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
+                                  {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'input-number', 'placeholder' => 'Quantity']) }}
+                                @else
+                                  {{ Form::text('qty_'.$dish['dishTypeName'],old('qty_'.$dish['dishTypeName']) , ['class' => 'input-number']) }}
+                                @endif
+                            </td>
+                            </td>
+                                <span class="input-group-btn">
+                                  <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                      <span class="glyphicon glyphicon-plus"></span>
+                                  </button>
+                              </span>
                             </td>
                             <td>
                               <div class="input-group">
