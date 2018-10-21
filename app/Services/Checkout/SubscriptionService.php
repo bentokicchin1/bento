@@ -63,6 +63,9 @@ class SubscriptionService
               $finalData[$day]['orderTotalAmount'] += $finalData[$day]['items'][$dishType]['total_price'];
             }
         }
+        echo "<pre/>";
+        print_r($finalData);
+        exit;
         return $finalData;
     }
 
