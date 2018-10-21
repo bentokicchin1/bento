@@ -76,9 +76,6 @@ class SubscriptionService
               }
             }
         }
-        echo "<pre/>";
-        print_r($finalData);
-        exit;
         return $finalData;
     }
 
