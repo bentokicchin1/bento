@@ -40,10 +40,15 @@
             </thead>
             <tbody>
               @foreach($orderList as $orders)
-                $orderItems = '';
+                @php
+                  $orderItems = '';
+                @endphp
                 @foreach($orders['order_items'] as $items)
-                  $orderItems .= $items['dish_id'] .'*'. $items['quantity'] .",";
+                  @php
+                    $orderItems .= $items['dish_id'] .'*'. $items['quantity'] .",";
+                  @endphp
                 @endforeach
+
               <tr>
                 <td>{{ ucfirst($orders['users']['name']) }}</td>
                 <td>{{ $orders['users']['mobile_number'] }}</td>
