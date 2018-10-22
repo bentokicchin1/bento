@@ -40,7 +40,6 @@ class UserController extends Controller
                   ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
                   ->where('users.deleted_at',null)
-                  ->where('customer_addresses.deleted_at',null)
                   ->first();
         }
         return view('admin.users.userAdd', ['usersData' => $usersData,'cityData'=>$cityData,'orderTypeData'=>$orderTypeData,'areaData'=>$areaData,'areaLocationData'=>$areaLocationData]);
@@ -52,8 +51,7 @@ class UserController extends Controller
               ->select("users.id as id","users.name as name", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","area_locations.name as sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
               ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
               ->leftJoin("area_locations","customer_addresses.sector","=","area_locations.id")
-              ->where('users.deleted_at',null)
-              ->where('customer_addresses.deleted_at',null)->get();
+              ->where('users.deleted_at',null)->get();
         return view('admin.users.userList', ['user' => $users]);
     }
 

@@ -45,11 +45,9 @@
                                   <div class="address-type">{{ ucfirst($address['order_type']['name']) }}</div>
                               </div>
                             @endforeach
-                            @if(count($addressList)<=0)
                             <div class="col-md-6 col-sm-12" style="margin-bottom:20px">
                                 <a href="{{ route('address-add')}}"><label class="address-new">Add New Address</label></a>
                             </div>
-                            @endif
                           </div>
                     </div>
                 </div>
