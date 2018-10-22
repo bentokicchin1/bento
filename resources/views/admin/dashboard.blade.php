@@ -32,9 +32,8 @@
                   <!-- <th>ID</th> -->
                   <th>Name</th>
                   <th>Mobile</th>
-                  <th>Billing Cycle</th>
-                  <th>Food Preference</th>
-                  <th>Tiffin Quantity</th>
+                  <th>Tiffin</th>
+                  <th>Office/Building</th>
                   <th>Location</th>
                   <th>Sector</th>
               </tr>
@@ -42,6 +41,10 @@
             <tbody>
               @foreach($orderList as $orders)
               <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
               </tr>
               @endforeach
