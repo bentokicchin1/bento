@@ -46,7 +46,7 @@
                 @endforeach
               <tr>
                 <td>{{ ucfirst($orders['users']['name']) }}</td>
-                <td>{{ $orders['users']['mobile'] }}</td>
+                <td>{{ $orders['users']['mobile_number'] }}</td>
                 <td>{{ $orderItems }}</td>
                 <td>{{ ucfirst($orders['shipping_address']['location']) }}</td>
                 <td>{{ ucfirst($orders['shipping_address']['area_location']['name']) }}</td>
