@@ -34,18 +34,23 @@
                   <th>Mobile</th>
                   <th>Tiffin</th>
                   <th>Office/Building</th>
-                  <th>Location</th>
                   <th>Sector</th>
+                  <th>Location</th>
               </tr>
             </thead>
             <tbody>
               @foreach($orderList as $orders)
+                $orderItems = '';
+                @foreach($orders['order_items'] as $items)
+                  $orderItems .= $items['dish_id'] .'*'. $items['quantity'] .",";
+                @endforeach
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ ucfirst($orders['users']['name']) }}</td>
+                <td>{{ $orders['users']['mobile'] }}</td>
+                <td>{{ $orderItems }}</td>
+                <td>{{ ucfirst($orders['shipping_address']['location']) }}</td>
+                <td>{{ ucfirst($orders['shipping_address']['area_location']['name']) }}</td>
+                <td>{{ ucfirst($orders['shipping_address']['area_data']['name']) }}</td>
               </tr>
               @endforeach
           </tbody>
