@@ -2,28 +2,6 @@
 
 @section('content')
 
-<!-- Header section
-    ================================================== -->
-    <section id="header" >
-        <div class="container">
-            <div class="row">
-                @include('layouts.errors')
-                @if (Auth::user() && (Auth::user()->billing_cycle==NULL || (Auth::user()->billing_cycle=='monthly' && (Auth::user()->food_preference=='' || Auth::user()->tiffin_quantity==''))))
-                  <div class="alert alert-info">
-                      <ul><strong><a href="{{ route('profile') }}">Click here to complete your profile by selecting your food preferences and address details.</a></strong><br></ul>
-                  </div>
-                @endif
-                <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-                    <div class="header-thumb">
-                        <h1 class="wow fadeIn">Food With Difference</h1>
-                        <h3 class="wow fadeInUp" data-wow-delay="0.3s">Make Your Own Choice</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
 <!-- Item section
     ================================================== -->
     <section id="portfolio">
@@ -34,7 +12,7 @@
                     <div class="iso-box col-md-6 col-sm-6">
                         <div class="portfolio-thumb">
                             <a href="{{ route('order', ['type'=>'lunch']) }}">
-                            <img src="{{ asset('images/lunch-new-1.jpg') }}" class="img-responsive" alt="Lunch">
+                            <img src="{{ asset('images/lunch1.jpg') }}" class="img-responsive" alt="Lunch">
                             <div class="portfolio-overlay">
                                 <div class="portfolio-item">
                                     <h2>Order Now</h2>
@@ -50,7 +28,7 @@
                     <div class="iso-box col-md-6 col-sm-6">
                         <div class="portfolio-thumb">
                             <a href="{{ route('order', ['type'=>'dinner']) }}">
-                            <img src="{{ asset('images/dinner-new-1.jpg') }}" class="img-responsive" alt="Dinner">
+                            <img src="{{ asset('images/dinner.jpg') }}" class="img-responsive" alt="Dinner">
                             <div class="portfolio-overlay">
                                 <div class="portfolio-item">
                                     <h2>Order Now</h2>

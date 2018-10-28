@@ -43,7 +43,9 @@
 </head>
 <body>
     @include('layouts.header')
-    @yield('content')
+    <div class="content-section">
+      @yield('content')
+    </div>
     @include('layouts.footer')
 
     <!-- Javascript
