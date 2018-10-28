@@ -26,6 +26,13 @@
                             <span>Add, Edit Addresses</span>
                         </a>
                     </li>
+
+                    <li id="address" class="md-12 sm-2 ">
+                        <a href="{{route('changepassword')}}">
+                            <strong>Change Password</strong>
+                            <span>Password</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 

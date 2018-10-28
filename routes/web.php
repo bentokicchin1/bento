@@ -98,6 +98,7 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
     Route::get('address/delete/{id}', 'Customer\AddressController@delete')->where('id', '[0-9]+')->name('address-delete');
 
     Route::get('address', 'Customer\AddressController@index')->name('address');
+    Route::get('changepassword', 'Customer\CustomerController@changepass')->name('changepassword');
 
     /* Ferch profile page */
     Route::get('profile', 'Customer\CustomerController@profile')->name('profile');

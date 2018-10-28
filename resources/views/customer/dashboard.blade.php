@@ -6,7 +6,7 @@
         <div class="row">
 
 
-            <div class="col-md-3 col-sm-12 ">                        
+            <div class="col-md-3 col-sm-12 ">
                 <ul class="ma-nav ">
                     <li id="account" class="md-12 sm-2 pf-padding-0 pf-margin-0">
                         <a class="active" href="{{ route('dashboard')}}">
@@ -32,7 +32,14 @@
                             <span>Add, Edit Addresses</span>
                         </a>
                     </li>
-                </ul>                        
+
+                    <li id="address" class="md-12 sm-2 ">
+                        <a href="{{route('changepassword')}}">
+                            <strong>Change Password</strong>
+                            <span>Password</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
 
@@ -53,7 +60,7 @@
                 <div >
                     <div class="col-md-2 col-sm-2 pf-col"><p>Order No.</p> <span class="pf-semi-bold-text">200010339</span></div>
                     <div class="col-md-2 col-sm-2 pf-col"><p>Date</p> <span class="pf-semi-bold-text">1st October 2017</span></div>
-                    <div class="col-md-4 col-sm-4 pf-col"><p>Order Items</p> 
+                    <div class="col-md-4 col-sm-4 pf-col"><p>Order Items</p>
                         <ul class="ma-nav ">
                             <li><span>Bhendi x 1</span></li>
                             <li><span>Roti x 5</span></li>

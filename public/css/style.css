@@ -10,7 +10,7 @@ http://www.tooplate.com/view/2082-pure-mix
 ------------------------------------- */
 body {
 		background: #ffffff;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Abril Fatface';
     font-style: normal;
     font-weight: 300;
     position: relative;
@@ -31,7 +31,7 @@ html {
 
 h1,h2,h3,h4 {
   font-weight: 400;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
 
@@ -49,12 +49,12 @@ h2 {
 h3 {
   color: #444;
   font-size: 14px;
-  letter-spacing: 4px;
+  letter-spacing: 0.1rem;
 }
 
 h5 {
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: 0.1rem;
 }
 
 p {
@@ -172,10 +172,10 @@ nav a {
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.1rem;
 }
 .brand a {
-  color: #333;
+  color: #ffffff;
   font-size: 24px;
   font-weight: 700;
   opacity: 1;
@@ -303,7 +303,7 @@ a.icon {
 
 .circle i {
   font-size: 36px;
-  color: #111112;
+  color: #ffffff;
 }
 
 .circle.dark {
@@ -402,6 +402,7 @@ a.icon {
   background-size: cover;
   background-position: center center;
   text-align: center;
+	background-color: #fffaf0;
   /* padding-top: 130px;
   padding-bottom: 100px; */
 }
@@ -416,8 +417,8 @@ a.icon {
 }
 
 #header .header-thumb {
-  background: #ffffff;
-  /* border: 10px solid #f9f9f9;
+  /* background: #ffffff;
+  border: 10px solid #f9f9f9;
   padding: 62px 20px 62px 20px; */
 }
 
@@ -456,12 +457,18 @@ a.icon {
   background: url('../images/header-five-bg.jpg') no-repeat;
 }
 
+.radio-btn {
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+}
+
 /* Portfolio section styles
 /* ========================================== */
 #portfolio {
   text-align: center;
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
   padding-bottom: 6rem;
+	background: #fffaf0;
 }
 
 #portfolio img {
@@ -472,6 +479,7 @@ a.icon {
   position: relative;
   overflow: hidden;
   margin: 0;
+	border-radius: 25px;
 }
 
 #portfolio .portfolio-thumb .portfolio-overlay {
@@ -653,18 +661,27 @@ a.icon {
   color: #ffffff;
 }
 
+.content-section {
+    background: #fffaf0;
+		padding: 40px 0;
+}
 /* Custom Button - Start */
 #custom-btn .btn {
   border-radius: 0px;
-  padding: 10px 32px;
+  padding-top: 10px;
+	padding-bottom: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-top: 10px;
   width: 50%;
   transition: all 0.4s ease-in-out;
+	background: #cb202d;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 700;
 }
 #custom-btn .btn:hover {
-  background: #111112;
+  background: #282C35;
   border-color: transparent;
   color: #ffffff;
 }
@@ -1002,7 +1019,7 @@ input[type='radio'] { transform: scale(1.6); }
   }
   .tabbable-line > .tab-content {
     margin-top: -3px;
-    background-color: #fff;
+    /* background-color: #fff; */
     border: 0;
     border-top: 1px solid #eee;
     padding: 15px 0;
@@ -1037,12 +1054,19 @@ input[type='radio'] { transform: scale(1.6); }
 /* footer section styles
 /* ========================================== */
 footer {
-  background: #141414;
+  background: #282C35;
   padding-top: 60px;
   padding-bottom: 30px;
   text-align: center;
 }
 
+footer p {
+
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bolder;
+
+}
 
 /* social icon */
 .social-icon {
@@ -1345,6 +1369,10 @@ footer {
   .pagination>li>a, .pagination>li>span{
     color: black;
   }
+
+.nav-container {
+	background: #cb202d;
+}
 
 /* Responsive Mobile styles
 /* ========================================== */

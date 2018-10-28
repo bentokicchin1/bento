@@ -69,6 +69,15 @@ class CustomerController extends Controller
         return view('customer.profile', $profileData);
     }
 
+
+    public function changepass()
+    {
+        // $userId = Auth::id();
+        // $userInfo = User::select('name', 'mobile_number','billing_cycle','food_preference','tiffin_quantity')->where('id', $userId)->first();
+        // $profileData['userInfo'] = $userInfo;
+        return view('customer.changepassword');
+    }
+
     /**
      * Update updated user info into database table
      *

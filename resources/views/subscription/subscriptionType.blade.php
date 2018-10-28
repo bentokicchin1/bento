@@ -4,7 +4,7 @@
 
 <!-- Header section
     ================================================== -->
-    <section id="header" >
+    <!-- <section id="header" >
         <div class="container">
             <div class="row">
                 @if (Auth::user() && (Auth::user()->billing_cycle==NULL || (Auth::user()->billing_cycle=='monthly' && (Auth::user()->food_preference=='' || Auth::user()->tiffin_quantity==''))))
@@ -21,7 +21,7 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
 
 
 <!-- Item section

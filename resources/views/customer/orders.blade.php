@@ -25,6 +25,13 @@
                             <span>Add, Edit Addresses</span>
                         </a>
                     </li>
+
+                    <li id="address" class="md-12 sm-2 ">
+                        <a href="{{route('changepassword')}}">
+                            <strong>Change Password</strong>
+                            <span>Password</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -36,6 +43,7 @@
                             @if ($orders['total'] == 0)
                                 <div class="big-message">You have not placed any order till now.</div>
                             @else
+                            <div class="table-responsive">
                               <table id="orderTable" class="table table-bordered table-striped">
                                 <thead>
                                   <tr>
@@ -83,6 +91,7 @@
                                   @endforeach
                                 </tbody>
                             </table>
+                          </div>
                           @endif
                         </div>
                     </div>
