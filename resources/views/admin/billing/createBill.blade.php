@@ -104,7 +104,7 @@
         // var messageFormat = "<p>Hi,</p><p>Total tiffins count of September 2018 = [totalTiffin]</p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount]<br />Current unbilled amount = [totalBillAmount]<br />Total unbilled amount = [grandTotal]</p><p>Thanks and Regards<br />Bento</p>";
 
         $("#billformat").submit(function(e) {
-            var messageFormat = "<p>Hi,</p><p>Total tiffins count of September 2018 = [totalTiffin] </p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount] <br />Current unbilled amount = [totalBillAmount] <br />Total unbilled amount = [grandTotal] </p><p>Thanks and Regards<br />Bento</p>";
+            var messageFormat = "<p>Hi,</p><p>Total tiffins count of November 2018 = [totalTiffin] </p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount] <br />Current unbilled amount = [totalBillAmount] <br />Total unbilled amount = [grandTotal] </p><p>Thanks and Regards<br />Bento</p>";
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
