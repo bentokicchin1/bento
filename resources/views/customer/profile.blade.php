@@ -119,6 +119,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 m-l-30">
+                            <p style="font-size:12px;font-weight:bold;">Food preference - If you select food preference as Nonveg then we can send you nonveg tiffins on Wednesdays and Fridays.</p>
                             <p style="font-size:12px;font-weight:bold;">Monthly subscription vanishes your tension to order your food everyday, We will send you default tiffin as per your food and quantity preference.</p>
                             <p style="font-size:12px;font-weight:bold;">Even after default order is placed you can always go and change items and quantity of your tiffin or cancel your tiffin.</p>
                         </div>
