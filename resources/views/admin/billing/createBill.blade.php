@@ -100,11 +100,15 @@
     <script>
       var billAmount = 0;
       $( document ).ready(function() {
+        var months = new Array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
         var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
         // var messageFormat = "<p>Hi,</p><p>Total tiffins count of September 2018 = [totalTiffin]</p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount]<br />Current unbilled amount = [totalBillAmount]<br />Total unbilled amount = [grandTotal]</p><p>Thanks and Regards<br />Bento</p>";
 
         $("#billformat").submit(function(e) {
-            var messageFormat = "<p>Hi,</p><p>Total tiffins count of October 2018 = [totalTiffin] </p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount] <br />Current unbilled amount = [totalBillAmount] <br />Total unbilled amount = [grandTotal] </p><p>Thanks and Regards<br />Bento</p>";
+          var now = new Date();
+          var lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+          var monthNo = parseInt(lastDay.getMonth()) - 1;
+          var messageFormat = "<p>Hi,</p><p>Total tiffins count of "+months[monthNo]+" 2018 = [totalTiffin] </p><p>Veg Tiffins On ([vegTiffinDates])</p><p>Non Veg Tiffins On ([nonvegTiffinDates])</p><p>Previous unbilled amount = [pendingAmount] <br />Current unbilled amount = [totalBillAmount] <br />Total unbilled amount = [grandTotal] </p><p>Thanks and Regards<br />Bento</p>";
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
             var form = $(this);
