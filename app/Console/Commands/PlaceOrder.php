@@ -48,7 +48,7 @@ class PlaceOrder extends Command
           $subscribed = Subscription::where('subscription_items','like','%'.$today.'%')->get();
           if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
-              if(date('Y-m-d',strtotime($subscribedData->updated_at))==date('Y-m-d',strtotime('last sunday'))){
+              // if(date('Y-m-d',strtotime($subscribedData->updated_at))==date('Y-m-d',strtotime('last sunday'))){
                 $subscribedDishes = json_decode($subscribedData->subscription_items,true);
                 if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
                   $orderDetails = array();
@@ -60,7 +60,7 @@ class PlaceOrder extends Command
                   $orderDetails['items'] = $subscribedDishes[$today]['items'];
                   $response = $this->orderService->processSubscriptionData($orderDetails);
                 }
-              }
+              // }
             }
           }
           return 'success';
