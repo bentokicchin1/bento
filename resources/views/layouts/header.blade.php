@@ -6,6 +6,7 @@
         <div class="container">
           <!-- <div class="row"> -->
           <div class="brand">
+              <!-- <a  href="/"><img src="images/logo/2/2.png" style="height:80px;"/></a> -->
               <a  href="/">Bento</a>
           </div>
           <div class="navicon">
