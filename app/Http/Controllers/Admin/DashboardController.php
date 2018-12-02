@@ -16,7 +16,7 @@ class DashboardController extends Controller
 {
     public function index(){
 
-        $date = date('Y-m-d');
+        $date = '2018-12-03';//date('Y-m-d');
         $orders = DB::table("orders")
                   ->select("dish_types.name as dishType","dishes.name as dishName",DB::raw("sum(order_items.quantity) as dishCount"))
                   ->join("order_items","orders.id","=","order_items.order_id")
