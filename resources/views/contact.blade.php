@@ -13,7 +13,7 @@
 
                 <div class="web-form">
                     <div class="form-group">
-                        {{ Form::open(['route' => 'contact-us', 'method' => 'post']) }} 
+                        {{ Form::open(['route' => 'contact-us', 'method' => 'post']) }}
                         {{ Form::text('name',old('name') , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                         {{ Form::number('mobile_number',old('mobile_number'), ['class' => 'form-control', 'placeholder' => 'Mobile Number (required)']) }}
                         {{ Form::email('email',old('email'), ['class' => 'form-control', 'placeholder' => 'Email Address (required)']) }}
@@ -36,7 +36,8 @@
                 </div>
                 <div class="media-body">
                     <h3 class="media-heading">Phone</h3>
-                    <p>{{ config('constants.number') }}</p>
+                    <!-- <p>{{ config('constants.number') }}</p> -->
+                    <p>9819304243</p>
                 </div>
                 {{-- </div> --}}
             </div>
