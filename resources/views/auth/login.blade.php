@@ -7,7 +7,7 @@
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
 
                 @include('layouts.success')
-                @include('layouts.errors')
+                <!-- @include('layouts.errors') -->
 
                 <h1>Log In</h1>
 
