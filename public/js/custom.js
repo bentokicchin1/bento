@@ -154,6 +154,22 @@ $(document).ready(function() {
 $(document).ready(function(){
     "use strict";
 
+    var areaLocations = jQuery.parseJSON(locations);
+     $('#area').change(function(){
+       var area = $(this).val();
+       if(area!=''){
+          $('#sector').empty();
+          var mySelect = $('#sector');
+          $.each(areaLocations, function(key, val) {
+            if(val['area_id']==area){
+              mySelect.append(
+                  $('<option></option>').val(val['id']).html(val['name'])
+              );
+            }
+          });
+        }
+    });
+
     $('input:radio[name=billing_cycle]').on('change',function() {
         if($(this).val()=='monthly'){
           $('.monthly_preference').show();

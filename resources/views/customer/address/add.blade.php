@@ -23,8 +23,8 @@
                         {{ Form::select('order_type_id', $orderTypes, old('order_type_id'), ['required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Order Type' ])}}
                         {{ Form::text('name',old('name'),['required'=>true,'class' => 'form-control', 'placeholder' => 'Full Name (required)']) }}
                         {{ Form::select('city', $cityData, old('city'), ['required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Your City'])}}
-                        {{ Form::select('area', $areaData, old('area'), ['required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
-                        {{ Form::select('sector', $areaLocationData, old('sector'), ['required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Your Sector' ])}}
+                        {{ Form::select('area', $areaData, old('area'), ['id'=>'area','required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Your Area' ])}}
+                        {{ Form::select('sector', [], old('sector'), ['id'=>'sector','required'=>true,'class' => 'form-control drpdown','placeholder' => 'Please Select Your Sector' ])}}
                         {{ Form::text('location',old('location') , ['required'=>true,'class' => 'form-control', 'placeholder' => 'Office Name/Building Name (required)']) }}
                         {{ Form::text('state', 'Maharashtra' , ['required'=>true,'class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
                         {{ Form::number('pincode',old('pincode'), ['required'=>true,'class' => 'form-control', 'placeholder' => 'Pincode (required)']) }}
@@ -40,3 +40,6 @@
     </div>
 </section>
 @endsection
+<script>
+  var locations = '<?php echo json_encode($areaLocationData); ?>';
+</script>
