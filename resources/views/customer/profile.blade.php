@@ -47,7 +47,7 @@
                                 {{ Form::open(['route' => 'update-info', 'method' => 'post']) }}
                                 {{ Form::text('name',$userInfo->name , ['class' => 'form-control', 'placeholder' => 'Name (required)']) }}
                                 {{ Form::text('mobile_number',$userInfo->mobile_number, ['class' => 'form-control', 'placeholder' => 'Mobile Number','readonly'=>'true']) }}
-                                <table border="2">
+                                <table>
                                   <tr>
                                     <td>
                                       {!! Form::label('daily', ' Billing Cycle',['class'=>'control-label','data-toggle'=>'tooltip','title'=>'Select frequency of tiffin.']) !!}
