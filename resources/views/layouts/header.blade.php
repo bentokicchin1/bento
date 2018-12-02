@@ -59,12 +59,14 @@
                     <ul><strong><a href="{{ route('profile') }}">Click here to complete your profile by selecting your food preferences and address details.</a></strong><br></ul>
                 </div>
               @endif
-              <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
-                  <div class="header-thumb">
-                      <h1 class="wow fadeIn">Food With Difference</h1>
-                      <h3 class="wow fadeInUp" data-wow-delay="0.3s">Make Your Own Choice</h3>
-                  </div>
-              </div>
+              @if(route('home') == Request::url())
+                <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
+                    <div class="header-thumb">
+                        <h1 class="wow fadeIn">Food With Difference</h1>
+                        <h3 class="wow fadeInUp" data-wow-delay="0.3s">Make Your Own Choice</h3>
+                    </div>
+                </div>
+              @endif
           </div>
       </div>
   </section>
