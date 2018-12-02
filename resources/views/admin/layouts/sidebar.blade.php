@@ -11,7 +11,18 @@
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
-          <ul class="sidebar-menu" data-widget="tree">
+          <ul class="sidebar-menu" data-widget="tree" style="margin-top:30px;">
+              <li class="">
+                  <a href="{{ route('admin-dashboard') }}">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    <span class="pull-right-container">
+                      <!-- <i class="fas fa-angle-left pull-right"></i> -->
+                    </span>
+                  </a>
+                  <!-- <ul class="treeview-menu">
+                    <li><a href="{{ route('admin-user-list') }}"><i class="fas fa-user-secret"></i> Users</a></li>
+                  </ul> -->
+              </li>
               <li class="">
                   <a href="{{ route('admin-user-list') }}">
                     <i class="fa fa-users"></i> <span>User Management</span>
