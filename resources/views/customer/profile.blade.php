@@ -57,13 +57,13 @@
                                       {!! Form::label('daily', 'Daily',['class'=>'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Order daily']) !!}
                                     </td>
                                     <td>
-                                      {{ Form::radio('billing_cycle', 'daily',$userInfo->billing_cycle=='daily',['class'=>'radio-btn','data-toggle'=>'tooltip','title'=>'Order daily']) }}
+                                      {{ Form::radio('billing_cycle', 'daily',$userInfo->billing_cycle=='daily',['id'=>'daily','class'=>'radio-btn','data-toggle'=>'tooltip','title'=>'Order daily']) }}
                                     </td>
                                     <td>
                                       {!! Form::label('monthly', 'Monthly',['class'=> 'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Subscribe for a month']) !!}
                                     </td>
                                     <td>
-                                      {{ Form::radio('billing_cycle', 'monthly',$userInfo->billing_cycle=='monthly',['class'=>'radio-btn','data-toggle'=>'tooltip','title'=>'Subscribe for a month']) }}
+                                      {{ Form::radio('billing_cycle', 'monthly',$userInfo->billing_cycle=='monthly',['id'=>'monthly','class'=>'radio-btn','data-toggle'=>'tooltip','title'=>'Subscribe for a month']) }}
                                     </td>
                                   </tr>
                                   <!-- </div> -->
@@ -83,13 +83,13 @@
                                         {!! Form::label('veg', 'Veg',['class'=> 'radio-inline control-label']) !!}
                                       </td>
                                       <td>
-                                        {{ Form::radio('food_preference', 'veg',$userInfo->food_preference=='veg',['class'=>'radio-btn']) }}
+                                        {{ Form::radio('food_preference', 'veg',$userInfo->food_preference=='veg',['id'=>'veg','class'=>'radio-btn']) }}
                                       </td>
                                       <td>
                                         {!! Form::label('nonveg', 'Non-Veg',['class'=> 'radio-inline control-label']) !!}
                                       </td>
                                       <td>
-                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['class'=>'radio-btn']) }}
+                                        {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['id'=>'nonveg','class'=>'radio-btn']) }}
                                       </td>
                                     </tr>
                                     <tr>
@@ -102,13 +102,13 @@
                                         {!! Form::label('full', 'Full',['class'=> 'radio-inline control-label','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Dal <br> Rice"]) !!}
                                       </td>
                                       <td>
-                                        {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',['class'=>'radio-btn','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Dal <br> Rice"]) }}
+                                        {{ Form::radio('tiffin_quantity', 'full',$userInfo->tiffin_quantity=='full',['id'=>'full','class'=>'radio-btn','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati <br> Dal <br> Rice"]) }}
                                       </td>
                                       <td>
                                         {!! Form::label('half', 'Half',['class'=> 'radio-inline control-label','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 Chapati"]) !!}
                                       </td>
                                       <td>
-                                        {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',['class'=>'radio-btn','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 * Chapati"]) }}
+                                        {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',['id'=>'half','class'=>'radio-btn','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 * Chapati"]) }}
                                       </td>
                                     </tr>
                                     <!-- </div> -->

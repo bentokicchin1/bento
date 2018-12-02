@@ -47,8 +47,8 @@
       <div class="row">
         <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
           <div class="header-thumb">
-            <h1 class="wow">Weekly menu</h1>
-            <h3 class="wow">Decide your weekly menu</h3>
+            <h1 class="wow">Decide your weekly menu</h1>
+            <h3 class="wow">We'll place your order everyday accordingly.</h3>
           </div>
         </div>
       </div>
