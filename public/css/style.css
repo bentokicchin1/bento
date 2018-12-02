@@ -1013,6 +1013,7 @@ input[type='radio'] { transform: scale(1.6); }
   .tabbable-line > .nav-tabs > li.active > a {
     border: 0;
     color: #333333;
+    background-color: #DD423E;
   }
   .tabbable-line > .nav-tabs > li.active > a > i {
     color: #404040;
