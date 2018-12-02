@@ -43,9 +43,6 @@
     .nav>li>a {
       padding: 8px 3px  !important;
     }
-    .nav-tabs>li {
-        border-right: 1px solid #737373  !important;
-    }
 }
 </style>
 <section id="header-custom">
