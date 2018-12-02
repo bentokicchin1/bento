@@ -40,6 +40,9 @@
     .tab-content .checkbox span {
         font-size: 19px !important;
     }
+    .nav>li>a {
+      padding: 8px 3px  !important;
+    }
 }
 </style>
 <section id="header-custom">
