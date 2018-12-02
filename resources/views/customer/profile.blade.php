@@ -73,9 +73,8 @@
                                 @php
                                   $showDiv = ($userInfo->billing_cycle=='monthly' || $userInfo->billing_cycle=='') ? 'display:block;' : 'display:none;';
                                 @endphp
-                                <!-- <div class="monthly_preference" style="{{$showDiv}}"> -->
                                     <!-- <div class="form-group"> -->
-                                      <tr>
+                                      <tr class="monthly_preference" style="{{$showDiv}}">
                                         <td>
                                         {!! Form::label('veg', ' Food Preference',['class'=>'control-label', 'data-toggle'=>'tooltip','title'=>"Select preferred food type, If you can't get time to personalise your tiffin."]) !!}
                                       </td>
@@ -92,7 +91,7 @@
                                         {{ Form::radio('food_preference', 'nonveg',$userInfo->food_preference=='nonveg',['id'=>'nonveg','class'=>'radio-btn']) }}
                                       </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="monthly_preference" style="{{$showDiv}}">
                                     <!-- </div>
                                     <div class="form-group"> -->
                                       <td>
@@ -111,8 +110,7 @@
                                         {{ Form::radio('tiffin_quantity', 'half',$userInfo->tiffin_quantity=='half',['id'=>'half','class'=>'radio-btn','data-html'=>"true",'data-toggle'=>'tooltip','title'=>"Sabji <br> 3 * Chapati"]) }}
                                       </td>
                                     </tr>
-                                    <!-- </div> -->
-                                <!-- </div> -->
+                                </div>
                               </table>
                                 {{ Form::submit('Save Info', ['class' => 'form-control web-submit']) }}
                                 {{ Form::close() }}
