@@ -154,8 +154,8 @@ $(document).ready(function() {
 $(document).ready(function(){
     "use strict";
 
-    var areaLocations = jQuery.parseJSON(locations);
      $('#area').change(function(){
+       var areaLocations = jQuery.parseJSON(locations);
        var area = $(this).val();
        if(area!=''){
           $('#sector').empty();
@@ -221,9 +221,9 @@ $(document).ready(function(){
       height: '50px'
     });
 
-    var dishesData = jQuery.parseJSON(dishes);
 
     $(".dishLists").on('change',function(){
+        var dishesData = jQuery.parseJSON(dishes);
         var dishTypeName = $(this).attr('name');
         var selectedDishId = $(this).val();
 
