@@ -25,7 +25,7 @@ return [
     'DEFAULT_HALF_VEG_TIFFIN' => ['veg_sabaji','chapati','others'],
     'DEFAULT_HALF_NONVEG_TIFFIN' => ['non_veg_sabaji','chapati','others'],
     'LUNCH_ORDER_MAX_TIME' => '10:30 am',
-    'DINNER_ORDER_MAX_TIME' => '11:45 pm',
+    'DINNER_ORDER_MAX_TIME' => '06:30 pm',
     'ORDER_TYPE_LUNCH' => 2,
     'ORDER_TYPE_DINNER' => 3,
     'DISH_TYPE_OTHER' => 6,
