@@ -29,14 +29,11 @@ class Kernel extends ConsoleKernel
         // {
         //     $message->to('skhilari26@gmail.com', 'Shital')->subject('Welcome!');
         // });
-        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->dailyAt('05:58')->emailOutputTo('bentokicchin@gmail.com');
-        $schedule->command('PlaceOrder:placeOrder')->dailyAt('06:00')->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('06:55','11:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceOrder:placeOrder')->between('07:00','11:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
 
-        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->dailyAt('11:28')->emailOutputTo('bentokicchin@gmail.com');
-        $schedule->command('PlaceOrder:placeOrder')->dailyAt('11:30')->emailOutputTo('bentokicchin@gmail.com');
-
-        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->dailyAt('18:28')->emailOutputTo('bentokicchin@gmail.com');
-        $schedule->command('PlaceOrder:placeOrder')->dailyAt('18:30')->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('15:55','20:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceOrder:placeOrder')->between('15:30','20:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
     }
 
     /**
