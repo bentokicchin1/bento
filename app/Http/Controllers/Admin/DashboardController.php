@@ -17,7 +17,7 @@ class DashboardController extends Controller
 {
     public function index(){
 
-        Mail::to('skhilari26@gmail.com')->send('Hello');
+        Mail::to('skhilari26@gmail.com')->send('text'=>'Hello');
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
