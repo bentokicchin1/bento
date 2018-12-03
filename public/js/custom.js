@@ -160,6 +160,9 @@ $(document).ready(function(){
        if(area!=''){
           $('#sector').empty();
           var mySelect = $('#sector');
+          mySelect.append(
+              $('<option></option>').val('').html('--- Select --- ')
+          );
           $.each(areaLocations, function(key, val) {
             if(val['area_id']==area){
               mySelect.append(

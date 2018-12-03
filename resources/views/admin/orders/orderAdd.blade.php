@@ -104,7 +104,7 @@
                           <div class="checkbox">
                             <label>
                               {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
-                              @if(array_key_exists($dishId,$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]))
+                              @if(isset($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]) && array_key_exists($dishId,$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')]))
                                 {{ Form::checkbox($dish['dishTypeName'].'_'.strtolower($dishName),$orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishId'], true,['class' => 'otherDish']) }}
                                 <span>{{ $orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishName'] }} ( <i class="fas fa-rupee-sign"></i>{{ round($orderItems['orderDishes'][config('constants.DISH_TYPE_OTHER')][$dishId]['dishPrice']) }} )</span>
                               @else
