@@ -32,8 +32,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('06:55','11:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
         $schedule->command('PlaceOrder:placeOrder')->between('07:00','11:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
 
-        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('15:55','21:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
-        $schedule->command('PlaceOrder:placeOrder')->between('15:30','21:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('15:55','18:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
+        $schedule->command('PlaceOrder:placeOrder')->between('15:30','18:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
     }
 
     /**
