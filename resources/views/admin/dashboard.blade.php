@@ -10,12 +10,11 @@
     <section class="content">
         <div class="row">
             @foreach($orders as $order)
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-2 col-xs-4">
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3>{{$order->dishCount}}</h3>
-                        <h2>{{$order->dishName}}</h2>
-                        <p>{{$order->dishType}}</p>
+                        <p>{{$order->dishName}}</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-cutlery"></i>
