@@ -31,10 +31,10 @@ class DashboardController extends Controller
                   ->groupBy("order_items.dish_id")
                   ->get();
 
-          $orderList = DB::select( DB::raw("SELECT u.id as userId,u.name as user,oi.quantity,d.name as dish,c.location as address,u.mobile_number
+          $orderList = DB::select( DB::raw("SELECT u.id as userId,u.name as user,oi.quantity,d.name as dish,c.location as address,al.name as area, a.name as city,u.mobile_number
                         FROM `users` u
                         INNER JOIN customer_addresses c  ON c.user_id = u.id
-                        LEFT JOIN area_locations al  ON c.location = al.id
+                        LEFT JOIN area_locations al  ON c.sector = al.id
                         LEFT JOIN areas a  ON al.area_id = a.id
                         LEFT JOIN orders o  ON o.user_id = u.id
                         LEFT JOIN order_items oi  ON oi.order_id = o.id
@@ -53,6 +53,8 @@ class DashboardController extends Controller
             $list[$value->userId]['name'] = $value->user;
             $list[$value->userId]['address'] = $value->address;
             $list[$value->userId]['mobile_number'] = $value->mobile_number;
+            $list[$value->userId]['area'] = $value->area;
+            $list[$value->userId]['city'] = $value->city;
             $list[$value->userId]['menu'] = '';
           }
           $list[$value->userId]['menu'] .= $value->quantity."*".$value->dish.", ";

@@ -34,7 +34,7 @@
                   <th>Tiffin</th>
                   <th>Office/Building</th>
                   <th>Sector</th>
-                  <th>Location</th>
+                  <th>City</th>
               </tr>
             </thead>
             <tbody>
@@ -44,6 +44,8 @@
                 <td>{{ $list['mobile_number'] }}</td>
                 <td>{{ $list['menu'] }}</td>
                 <td>{{ ucfirst($list['address']) }}</td>
+                <td>{{ ucfirst($list['area']) }}</td>
+                <td>{{ ucfirst($list['city']) }}</td>
               </tr>
               @endforeach
           </tbody>
