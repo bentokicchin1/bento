@@ -35,9 +35,9 @@ class DashboardController extends Controller
                 ->where("orders.deleted_at", NULL)
                 ->where("orders.order_date",$date)
                 ->get()->toArray();
-        // echo "<pre/>";
-        // print_r($orderList);
-        // exit;
+        echo "<pre/>";
+        print_r($orderList);
+        exit;
 
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$orderList]);
     }
