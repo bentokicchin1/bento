@@ -38,23 +38,12 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($orderList as $orders)
-                @php
-                  $orderItems = '';
-                @endphp
-                @foreach($orders['order_items'] as $items)
-                  @php
-                    $orderItems .= $items['dish_id'] .'*'. $items['quantity'] .",";
-                  @endphp
-                @endforeach
-
+              @foreach($orderList as $list)
               <tr>
-                <td>{{ ucfirst($orders['users']['name']) }}</td>
-                <td>{{ $orders['users']['mobile_number'] }}</td>
-                <td>{{ $orderItems }}</td>
-                <td>{{ ucfirst($orders['shipping_address']['location']) }}</td>
-                <td>{{ ucfirst($orders['shipping_address']['area_location']['name']) }}</td>
-                <td>{{ ucfirst($orders['shipping_address']['area_data']['name']) }}</td>
+                <td>{{ ucfirst($list['name']) }}</td>
+                <td>{{ $list['mobile_number'] }}</td>
+                <td>{{ $list['menu'] }}</td>
+                <td>{{ ucfirst($list['address']) }}</td>
               </tr>
               @endforeach
           </tbody>
