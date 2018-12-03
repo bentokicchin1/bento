@@ -69,7 +69,7 @@ class DashboardController extends Controller
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
-        $orderTypeId = (strtotime($currentTime) > strtotime(config('constants.DASHBOARD_ORDER_MAX_TIME'))) ? 3 : 2;
+        $orderTypeId = (strtotime($currentTime) > strtotime(config('constants.DASHBOARD_ORDER_MAX_TIME'))) ? 2 : 2;
 
         $orderList = DB::select( DB::raw("SELECT u.id as userId,u.name as user,oi.quantity,d.name as dish,c.location as address,al.name as area, a.name as city,u.mobile_number
                       FROM `users` u
