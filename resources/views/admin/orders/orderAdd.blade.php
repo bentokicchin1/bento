@@ -70,7 +70,7 @@
                       @foreach ($dishData as $dish)
                         @if ($dish['dishTypeName'] != 'others')
                           <div class="form-group">
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
                                 @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => 'form-control','readonly'=>true ])}} @endif
                                 {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
@@ -78,7 +78,7 @@
                                 {{ Form::select($dish['dishTypeName'], $dish['dishList'], null, ['class' => 'form-control dropdown dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @endif
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
                                 {{ Form::text('qty_'.$dish['dishTypeName'],$orderItems['orderDishes'][$dish['dishTypeId']]['quantity'] , ['class' => 'form-control text orderQuantity', 'placeholder' => 'Quantity']) }}
                               @else
