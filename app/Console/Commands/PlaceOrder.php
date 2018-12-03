@@ -53,7 +53,7 @@ class PlaceOrder extends Command
               if(date('Y-m-d',strtotime($subscribedData['updated_at']))>=date('Y-m-d',strtotime('last sunday'))){
                 $ordered = Order::where('user_id',$subscribedData['user_id'])
                           ->where('order_type_id',$subscribedData['order_type_id'])
-                          ->where('order_date',$todayDate)->get();
+                          ->where('order_date',$todayDate)->get()->toArray();
                 echo "<pre/>";
                 print_r($ordered);
                 exit;
