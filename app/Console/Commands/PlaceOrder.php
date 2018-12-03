@@ -51,10 +51,12 @@ class PlaceOrder extends Command
           if(!empty($subscribed)) {
             foreach($subscribed as $subscribedData){
               if(date('Y-m-d',strtotime($subscribedData['updated_at']))>=date('Y-m-d',strtotime('last sunday'))){
-
                 $ordered = Order::where('user_id',$subscribedData['user_id'])
                           ->where('order_type_id',$subscribedData['order_type_id'])
                           ->where('order_date',$todayDate)->get();
+                echo "<pre/>";
+                print_r($ordered);
+                exit;
                 if(empty($ordered)){
                   echo "in";
                   $subscribedDishes = json_decode($subscribedData['subscription_items'],true);
