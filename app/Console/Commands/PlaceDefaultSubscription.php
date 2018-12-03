@@ -57,7 +57,7 @@ class PlaceDefaultSubscription extends Command
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $notSubscribed = Subscription::where('user_id',$userDetails['id'])
-                        ->where('updated_at','<',$lastSunday)->get();
+                        ->where('updated_at','>=',$lastSunday)->get();
                         echo "<pre/>";
                         print_r($notSubscribed);
                         exit;
