@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
-
-        Mail::send('errors.404', array(), function($message)
-        {
-            $message->to('skhilari26@gmail.com', 'Shital')->subject('Welcome!');
-        });
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
