@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Model\Order;
@@ -12,6 +11,7 @@ use App\Model\OrderType;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class DashboardController extends Controller
 {
@@ -61,5 +61,50 @@ class DashboardController extends Controller
           $list[$value->userId]['menu'] .= $value->quantity."*".$value->dish.", ";
         }
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
+    }
+
+
+    public function generatePDF()
+    {
+        $list = array();
+        $date = date('Y-m-d');
+        $currentTime= date('h:i a');
+        $orderTypeId = (strtotime($currentTime) > strtotime(config('constants.DASHBOARD_ORDER_MAX_TIME'))) ? 3 : 2;
+
+        $orderList = DB::select( DB::raw("SELECT u.id as userId,u.name as user,oi.quantity,d.name as dish,c.location as address,al.name as area, a.name as city,u.mobile_number
+                      FROM `users` u
+                      INNER JOIN customer_addresses c  ON c.user_id = u.id
+                      LEFT JOIN area_locations al  ON c.sector = al.id
+                      LEFT JOIN areas a  ON al.area_id = a.id
+                      LEFT JOIN orders o  ON o.user_id = u.id
+                      LEFT JOIN order_items oi  ON oi.order_id = o.id
+                      INNER JOIN dishes d  ON oi.dish_id = d.id
+                      WHERE o.order_date = :orderDate
+                      AND o.order_type_id = :orderType
+                      AND c.order_type_id = :orderTypeId
+                      ORDER BY sector,city"),
+                      array(
+                        'orderDate' => $date,
+                        'orderType' => $orderTypeId,
+                        'orderTypeId' => $orderTypeId
+                      ));
+        foreach ($orderList as $key => $value) {
+          if(!array_key_exists($value->userId,$list)){
+            $list[$value->userId] = array();
+            $list[$value->userId]['name'] = $value->user;
+            $list[$value->userId]['address'] = $value->address;
+            $list[$value->userId]['mobile_number'] = $value->mobile_number;
+            $list[$value->userId]['area'] = $value->area;
+            $list[$value->userId]['city'] = $value->city;
+            $list[$value->userId]['menu'] = '';
+          }
+          $list[$value->userId]['menu'] .= $value->quantity."*".$value->dish.", ";
+        }
+        $data = ['orderList' => $list];
+        $pdf = PDF::loadView('exportOrders', $data);
+        $date = date('Ymd');
+
+        return $pdf->download('orders'.$date.'.pdf');
+
     }
 }

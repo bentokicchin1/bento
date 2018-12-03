@@ -120,6 +120,7 @@ Route::get('admin/password/reset/{token}','Admin\ResetPasswordController@showRes
 
 /* Admin panel routes */
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
+    Route::get('generate-pdf','Admin\DashboardController@generatePDF')->name('generate-pdf');
     Route::get('dashboard', 'Admin\DashboardController@index')->name('admin-dashboard');
     Route::get('user/add', 'Admin\UserController@showForm')->name('admin-user-add');
     Route::post('user/add', 'Admin\UserController@store')->name('admin-user-add');
