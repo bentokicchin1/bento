@@ -54,9 +54,6 @@ class PlaceOrder extends Command
                 $ordered = Order::where('user_id',$subscribedData['user_id'])
                           ->where('order_type_id',$subscribedData['order_type_id'])
                           ->where('order_date',$todayDate)->get()->toArray();
-                echo "<pre/>";
-                print_r($ordered);
-                exit;
                 if(empty($ordered)){
                   echo "in";
                   $subscribedDishes = json_decode($subscribedData['subscription_items'],true);
