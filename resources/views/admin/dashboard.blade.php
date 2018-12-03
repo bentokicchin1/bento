@@ -53,4 +53,18 @@
       </div>
       @endif
     </section>
+    {!! Html::script('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
+    {!! Html::script('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
+    <script>
+      $(function () {
+        $('#userTable').DataTable({
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : true,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : false
+        });
+      });
+    </script>
 @endsection
