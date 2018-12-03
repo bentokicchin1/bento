@@ -57,6 +57,10 @@ class PlaceOrder extends Command
                           ->where('order_date',$todayDate)->get();
                 if(empty($ordered)){
                   $subscribedDishes = json_decode($subscribedData->subscription_items,true);
+
+                  echo "<pre/>";
+                  print_r($orderDetails);
+                  exit;
                   if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
                     $orderDetails = array();
                     $orderDetails['orderDate'] = date('Y-m-d');
