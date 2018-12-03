@@ -55,12 +55,7 @@ class PlaceOrder extends Command
                           ->where('order_type_id',$subscribedData['order_type_id'])
                           ->where('order_date',$todayDate)->get()->toArray();
                 if(empty($ordered)){
-                  echo "in";
                   $subscribedDishes = json_decode($subscribedData['subscription_items'],true);
-
-                  echo "<pre/>";
-                  print_r($orderDetails);
-                  exit;
                   if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){
                     $orderDetails = array();
                     $orderDetails['orderDate'] = date('Y-m-d');
@@ -69,9 +64,6 @@ class PlaceOrder extends Command
                     $orderDetails['shippingAddressId'] = $subscribedData['shipping_address_id'];
                     $orderDetails['orderTotalAmount'] = $subscribedDishes[$today]['orderTotalAmount'];
                     $orderDetails['items'] = $subscribedDishes[$today]['items'];
-                    echo "<pre/>";
-                    print_r($orderDetails);
-                    exit;
                     $response = $this->orderService->processSubscriptionData($orderDetails);
                   }
                 }
