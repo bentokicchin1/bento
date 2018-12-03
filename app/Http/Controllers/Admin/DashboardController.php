@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
-        $orderTypeId = (strtotime($currentTime) > strtotime(config('constants.DASHBOARD_ORDER_MAX_TIME'))) ? 2 : 2;
+        $orderTypeId = (strtotime($currentTime) > strtotime(config('constants.DASHBOARD_ORDER_MAX_TIME'))) ? 3 : 2;
 
         $orders = DB::table("orders")
                   ->select("dish_types.name as dishType","dishes.name as dishName",DB::raw("sum(order_items.quantity) as dishCount"))
