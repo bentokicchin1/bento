@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Model\Order;
 use App\Model\OrderItem;
 use App\Model\DishType;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
+
+        Mail::to('skhilari26@gmail.com')->send('Hello');
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
