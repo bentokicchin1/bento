@@ -120,10 +120,10 @@ class PlaceDefaultSubscription extends Command
                             $result = $this->subscriptionService->processDefaultSubscription($defaultData,$userId);
                           }
                         }
+                        echo $result;
                      }
                    }
                 }
-                echo $result;
            }
         } catch (Exception $e) {
             return $e->getRawMessage();
