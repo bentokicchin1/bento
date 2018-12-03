@@ -52,8 +52,9 @@ class PlaceDefaultSubscription extends Command
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
                           ->get()->toArray();
-
-
+          echo "<pre/>";
+          print_r($monthlyUsers);
+          exit;
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $notSubscribed = Subscription::where('user_id',$userDetails['id'])
