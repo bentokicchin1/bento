@@ -134,7 +134,7 @@ class OrderController extends Controller
             $data = array('userId'=>Auth::id());
             Mail::send('emails.orderPlaced', $data, function($message)
             {
-                $message->to('bentokicchin@gmail.com', 'Bento')->subject('Order Placed!');
+                $message->to('magdumsujit@gmail.com', 'Bento')->subject('Order Placed!');
             });
             $request->session()->forget('orderData');
             return redirect()->route('confirmation');
