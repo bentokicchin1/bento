@@ -28,7 +28,7 @@ class DashboardController extends Controller
                   ->join("dish_types","dishes.dish_type_id","=","dish_types.id")
                   ->where("orders.deleted_at", NULL)
                   ->where("orders.order_date",$date)
-                  ->where("orders.steps",'ordered')
+                  ->where("orders.status",'ordered')
                   ->where("orders.order_type_id",$orderTypeId)
                   ->groupBy("order_items.dish_id")
                   ->get();
@@ -44,7 +44,7 @@ class DashboardController extends Controller
                         WHERE o.order_date = :orderDate
                         AND o.order_type_id = :orderType
                         AND c.order_type_id = :orderTypeId
-                        AND o.steps = 'ordered'
+                        AND o.status = 'ordered'
                         ORDER BY sector,city"),
                         array(
                           'orderDate' => $date,
@@ -86,7 +86,7 @@ class DashboardController extends Controller
                       WHERE o.order_date = :orderDate
                       AND o.order_type_id = :orderType
                       AND c.order_type_id = :orderTypeId
-                      AND o.steps = 'ordered'
+                      AND o.status = 'ordered'
                       ORDER BY sector,city"),
                       array(
                         'orderDate' => $date,
