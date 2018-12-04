@@ -34,6 +34,7 @@ class CustomerService
         DB::beginTransaction();
         try {
             $user = Auth::user();
+            $userId = Auth::id();
             $user->name = $postData['name'];
             $user->mobile_number = $postData['mobile_number'];
             $user->billing_cycle = $postData['billing_cycle'];
@@ -41,6 +42,7 @@ class CustomerService
               $user->food_preference = $postData['food_preference'];
               $user->tiffin_quantity = $postData['tiffin_quantity'];
             }else{
+              // $this->removeSubscription($userId);
               $user->food_preference = NULL;
               $user->tiffin_quantity = NULL;
             }
@@ -84,6 +86,18 @@ class CustomerService
         }
     }
 
+    public function removeSubscription($userId)
+    {
+      try {
+          $feedbackObj = new Feedback;
+          $feedbackObj->user_id = Auth::id();
+          $feedbackObj->value = $postData->value;
+          $feedbackObj->save();
+          return 'success';
+      } catch (Exception $e) {
+          return $e->getRawMessage();
+      }
+    }
 
 
 }
