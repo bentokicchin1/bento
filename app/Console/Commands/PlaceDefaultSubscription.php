@@ -53,11 +53,12 @@ class PlaceDefaultSubscription extends Command
                           ->where('billing_cycle','monthly')
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
-                          
+
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $notSubscribed = Subscription::where('user_id',$userDetails['id'])
-                        ->where('updated_at','>=',$lastSunday)->get()->toArray();
+                        ->where('updated_at','>=',$lastSunday)
+                        ->where("subscriptions.deleted_at", NULL)->get()->toArray();
                 if(empty($notSubscribed)){
                   $userId = $userDetails['id'];
                   $foodPreference = $userDetails['food_preference'];
