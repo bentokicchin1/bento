@@ -29,7 +29,13 @@
 									<td>{{ $i }}</td>
 									<td>{{ ucfirst($list['name']) }}</td>
 									<td>{{ $list['mobile_number'] }}</td>
-									<td>{{ $list['menu'] }}</td>
+									<td>
+	                  <ul>
+	                    @foreach($list['menu'] as $val)
+	                      <li>{{ $val['quantity'].' '.$val['dish'] }}</li>
+	                    @endforeach
+	                 </ul>
+								  </td> 
 									<td>{{ ucfirst($list['address']) }}</td>
 									<td>{{ ucfirst($list['area']) }}</td>
 									<td>{{ ucfirst($list['city']) }}</td>

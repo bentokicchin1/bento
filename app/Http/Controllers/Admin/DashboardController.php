@@ -42,7 +42,8 @@ class DashboardController extends Controller
                         INNER JOIN dishes d  ON oi.dish_id = d.id
                         WHERE o.order_date = :orderDate
                         AND o.order_type_id = :orderType
-                        AND c.order_type_id = :orderTypeId"),
+                        AND c.order_type_id = :orderTypeId
+                        ORDER BY sector,city"),
                         array(
                           'orderDate' => $date,
                           'orderType' => $orderTypeId,
@@ -56,9 +57,9 @@ class DashboardController extends Controller
             $list[$value->userId]['mobile_number'] = $value->mobile_number;
             $list[$value->userId]['area'] = $value->area;
             $list[$value->userId]['city'] = $value->city;
-            $list[$value->userId]['menu'] = '';
+            $list[$value->userId]['menu'] = array();
           }
-          $list[$value->userId]['menu'] .= $value->quantity."*".$value->dish.", ";
+          array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
@@ -96,9 +97,9 @@ class DashboardController extends Controller
             $list[$value->userId]['mobile_number'] = $value->mobile_number;
             $list[$value->userId]['area'] = $value->area;
             $list[$value->userId]['city'] = $value->city;
-            $list[$value->userId]['menu'] = '';
+            $list[$value->userId]['menu'] = array();
           }
-          $list[$value->userId]['menu'] .= $value->quantity."*".$value->dish.", ";
+          array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
         $data = ['orderList' => $list];
         $pdf = PDF::loadView('exportOrders', $data);
