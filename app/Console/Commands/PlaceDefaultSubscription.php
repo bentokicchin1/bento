@@ -53,9 +53,7 @@ class PlaceDefaultSubscription extends Command
                           ->where('billing_cycle','monthly')
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
-                          echo "<pre/>";
-                          print_R($monthlyUsers);
-                          exit;
+                          
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                 $notSubscribed = Subscription::where('user_id',$userDetails['id'])
