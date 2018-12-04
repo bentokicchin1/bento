@@ -14,8 +14,8 @@
 										<th>No</th>
 										<th>Name</th>
 										<th>Mobile</th>
-	                  <th style="width:30%;">Tiffin</th>
-	                  <th style="width:20%;">Office/Building</th>
+	                  <th style="width:25%;">Tiffin</th>
+	                  <th style="width:15%;">Office/Building</th>
 										<th>Sector</th>
 										<th>City</th>
 								</tr>
