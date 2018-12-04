@@ -11,13 +11,14 @@
 						<table id="userTable" border="1" cellspacing="2" cellpadding="2">
 							<thead>
 								<tr>
-										<th>No</th>
-										<th>Name</th>
-										<th>Mobile</th>
-	                  <th style="width:25%;">Tiffin</th>
-	                  <th style="width:15%;">Office/Building</th>
-										<th>Sector</th>
-										<th>City</th>
+										<th class="text-center">No</th>
+										<th class="text-center">Name</th>
+										<th class="text-center">Mobile</th>
+	                  <th class="text-center" style="width:20%;">Tiffin</th>
+	                  <th class="text-center">Price</th>
+	                  <th class="text-center" style="width:15%;">Office/Building</th>
+										<th class="text-center">Sector</th>
+										<th class="text-center">City</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -36,6 +37,7 @@
 	                    @endforeach
 	                 </ul>
 								  </td>
+									<td>{{ ucfirst($list['price']) }}</td>
 									<td>{{ ucfirst($list['address']) }}</td>
 									<td>{{ ucfirst($list['area']) }}</td>
 									<td>{{ ucfirst($list['city']) }}</td>

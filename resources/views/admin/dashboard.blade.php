@@ -30,12 +30,13 @@
             <thead>
               <tr>
                   <!-- <th>ID</th> -->
-                  <th>Name</th>
-                  <th>Mobile</th>
-                  <th style="width:30%;">Tiffin</th>
-                  <th style="width:20%;">Office/Building</th>
-                  <th>Sector</th>
-                  <th>City</th>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Mobile</th>
+                  <th class="text-center" style="width:20%;">Tiffin</th>
+                  <th class="text-center">Price</th>
+                  <th class="text-center" style="width:15%;">Office/Building</th>
+                  <th class="text-center">Sector</th>
+                  <th class="text-center">City</th>
               </tr>
             </thead>
             <tbody>
@@ -50,6 +51,7 @@
                     @endforeach
                  </ul>
                 </td>
+                <td>{{ ucfirst($list['price']) }}</td>
                 <td>{{ ucfirst($list['address']) }}</td>
                 <td>{{ ucfirst($list['area']) }}</td>
                 <td>{{ ucfirst($list['city']) }}</td>
