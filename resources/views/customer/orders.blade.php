@@ -71,7 +71,7 @@
                                           @if (is_array($order['dishList']))
                                           <ul>
                                             @foreach($order['dishList'] as $dish)
-                                                <li>{{ $dish['dishName'].' x '.$dish['quantity']. ' ' }}</li>
+                                                <li>{{ $dish['quantity'].' '.$dish['dishName']. ' ' }}</li>
                                             @endforeach
                                           </ul>
                                           @endif
