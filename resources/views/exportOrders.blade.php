@@ -2,10 +2,10 @@
 
 <html>
 	<head>
-		<title>Hi</title>
+		<title>Todays Orders</title>
 	</head>
 	<body>
-		<h1>Todays Orders</h1>
+		<h2>Orders On {{ date('jS M Y') }}</h2>
 				@if(!empty($orderList))
 					<div class="box-body">
 						<table id="userTable" border="1" cellspacing="2" cellpadding="2">
