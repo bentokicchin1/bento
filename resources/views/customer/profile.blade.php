@@ -50,10 +50,10 @@
                                 <table>
                                   <tr>
                                     <td>
-                                      {!! Form::label('daily', ' Billing Cycle',['class'=>'control-label','data-toggle'=>'tooltip','title'=>'Select frequency of tiffin.']) !!}
+                                      {!! Form::label('daily', 'Membership',['class'=>'control-label','data-toggle'=>'tooltip','title'=>'Select frequency of tiffin.']) !!}
                                     </td>
                                     <td>
-                                      {!! Form::label('daily', 'Daily',['class'=>'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Order daily']) !!}
+                                      {!! Form::label('daily', 'Occasionally',['class'=>'radio-inline control-label','data-toggle'=>'tooltip','title'=>'Order daily']) !!}
                                     </td>
                                     <td>
                                       {{ Form::radio('billing_cycle', 'daily',$userInfo->billing_cycle=='daily',['id'=>'daily','class'=>'radio-btn','data-toggle'=>'tooltip','title'=>'Order daily']) }}

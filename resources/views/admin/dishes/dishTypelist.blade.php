@@ -21,7 +21,7 @@
             <a href="{{ route('admin-dish-type-add')}}" class=" btn btn-big btn-success">Add DishType</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="overflow-x:auto;">
               <table id="dishTypeTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>

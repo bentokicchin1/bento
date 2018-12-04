@@ -21,7 +21,7 @@
             <a href="{{ route('admin-order-type-add')}}" class=" btn btn-big btn-success">Add New</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="overflow-x:auto;">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

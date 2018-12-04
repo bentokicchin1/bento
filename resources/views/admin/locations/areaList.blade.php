@@ -20,7 +20,7 @@
             <a href="{{ route('admin-area-add')}}" class=" btn btn-big btn-success">Add Area</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="overflow-x:auto;">
               <table id="areaTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>

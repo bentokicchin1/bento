@@ -19,7 +19,7 @@
               <a href="{{ route('admin-billpayment-add')}}" class=" btn btn-big btn-success">Add Payments</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="overflow-x:auto;">
               <table id="billpaymentTable" class="table table-bordered table-striped">
                 <tr>
                     <th>ID</th>
