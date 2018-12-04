@@ -8,7 +8,7 @@
 		<h1>Todays Orders</h1>
 				@if(!empty($orderList))
 					<div class="box-body">
-						<table id="userTable" border="2" cellspacing="5" cellpadding="5">
+						<table id="userTable" border="1" cellspacing="2" cellpadding="2">
 							<thead>
 								<tr>
 										<th>No</th>
