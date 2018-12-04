@@ -130,7 +130,8 @@ class OrderController extends Controller
         $response = $this->orderService->processData($addressId);
         if ($response == 'success') {
             $orderData = session('orderData');
-            Mail::send('emails.orderPlaced', array(), function($message)
+            $data = array('userId'=>$orderData['user_id']);
+            Mail::send('emails.orderPlaced', $data, function($message)
             {
                 $message->to('bentokicchin@gmail.com', 'Bento')->subject('Order Placed!');
             });
