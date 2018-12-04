@@ -6,7 +6,7 @@
         <div class="container">
           <!-- <div class="row"> -->
           <div class="brand">
-              <img src="images/logo/bento-logo.png" style="width:auto;height:80px;"/>
+              <img src="/images/logo/bento-logo.png" style="width:auto;height:80px;"/>
               <!-- <a  href="/">Bento</a> -->
           </div>
           <div class="navicon">
