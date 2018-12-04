@@ -40,7 +40,7 @@ class DashboardController extends Controller
                         LEFT JOIN areas a  ON al.area_id = a.id
                         LEFT JOIN orders o  ON o.user_id = u.id
                         LEFT JOIN order_items oi  ON oi.order_id = o.id
-                        INNER JOIN dishes d  ON oi.dish_id = d.id
+                        LEFT JOIN dishes d  ON oi.dish_id = d.id
                         WHERE o.order_date = :orderDate
                         AND o.order_type_id = :orderType
                         AND c.order_type_id = :orderTypeId
@@ -82,7 +82,7 @@ class DashboardController extends Controller
                       LEFT JOIN areas a  ON al.area_id = a.id
                       LEFT JOIN orders o  ON o.user_id = u.id
                       LEFT JOIN order_items oi  ON oi.order_id = o.id
-                      INNER JOIN dishes d  ON oi.dish_id = d.id
+                      LEFT JOIN dishes d  ON oi.dish_id = d.id
                       WHERE o.order_date = :orderDate
                       AND o.order_type_id = :orderType
                       AND c.order_type_id = :orderTypeId
