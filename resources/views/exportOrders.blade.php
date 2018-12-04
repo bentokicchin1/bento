@@ -14,8 +14,8 @@
 										<th>No</th>
 										<th>Name</th>
 										<th>Mobile</th>
-										<th>Tiffin</th>
-										<th>Office/Building</th>
+	                  <th style="width:30%;">Tiffin</th>
+	                  <th style="width:20%;">Office/Building</th>
 										<th>Sector</th>
 										<th>City</th>
 								</tr>
@@ -35,7 +35,7 @@
 	                      <li>{{ $val['quantity'].' '.$val['dish'] }}</li>
 	                    @endforeach
 	                 </ul>
-								  </td> 
+								  </td>
 									<td>{{ ucfirst($list['address']) }}</td>
 									<td>{{ ucfirst($list['area']) }}</td>
 									<td>{{ ucfirst($list['city']) }}</td>
