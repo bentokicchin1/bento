@@ -44,7 +44,7 @@ class DashboardController extends Controller
                         WHERE o.order_date = :orderDate
                         AND o.order_type_id = :orderType
                         AND c.order_type_id = :orderTypeId
-                        AND o.status = 'ordered'
+                        AND o.status = 'ordered' AND o.deleted_at IS NULL
                         ORDER BY sector,city"),
                         array(
                           'orderDate' => $date,
@@ -86,7 +86,7 @@ class DashboardController extends Controller
                       WHERE o.order_date = :orderDate
                       AND o.order_type_id = :orderType
                       AND c.order_type_id = :orderTypeId
-                      AND o.status = 'ordered'
+                      AND o.status = 'ordered' AND o.deleted_at IS NULL
                       ORDER BY sector,city"),
                       array(
                         'orderDate' => $date,
