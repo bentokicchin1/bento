@@ -1402,9 +1402,9 @@ footer p {
 
 @media (max-width: 768px) {
 
-  /* .brand {
-    padding-left: 24px;
-  } */
+  .brand {
+    padding-left: 15px;
+  }
 
   .header-one, .header-two,
   .header-three, .header-four,
