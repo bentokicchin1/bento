@@ -86,7 +86,8 @@
                           <tr>
                             <td>
                               @if(array_key_exists($dish['dishTypeId'],$orderItems['orderDishes']))
-                                @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList'])) {{Form::text('',$orderItem['order_dish']['name'],['class' => '','readonly'=>true ])}} @endif
+                                @if(!array_key_exists($orderItems['orderDishes'][$dish['dishTypeId']]['dishId'],$dish['dishList']))
+                                {{Form::text('',$orderItems['order_dish']['name'],['class' => '','readonly'=>true ])}} @endif
                                 {{ Form::select($dish['dishTypeName'], $dish['dishList'],$orderItems['orderDishes'][$dish['dishTypeId']]['dishId'], ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}
                               @else
                                 {{ Form::select($dish['dishTypeName'], $dish['dishList'], '', ['class' => 'ordersSelect dishLists','placeholder' => 'Please select '.$dish['dishTypeName'] ])}}

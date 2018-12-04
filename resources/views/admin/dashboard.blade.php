@@ -24,7 +24,7 @@
             @endforeach
         </div>
         @if(!empty($orderList))
-        <div class="box-body">
+        <div class="box-body" style="overflow-x:auto;">
           <a href="/admin/generate-pdf" class=" btn btn-big btn-success">Export Today's Orders</a>
           <table id="userTable" class="table table-bordered table-striped">
             <thead>
