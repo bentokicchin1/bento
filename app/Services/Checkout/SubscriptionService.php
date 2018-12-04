@@ -216,10 +216,12 @@ class SubscriptionService
         try {
             $userId = ($userId==0) ? Auth::id() : $userId;
             $orderTypeId = $orderParams['orderTypeId'];
-            $existingSub = Subscription::where(['user_id'=>$userId,'order_type_id'=>$orderTypeId])->first();
+            $existingSub = Subscription::withTrashed()->where(['user_id'=>$userId,'order_type_id'=>$orderTypeId])->first();
             if(!empty($existingSub)){
               $subscriptionId = $existingSub->id;
-              $subscription = Subscription::find($subscriptionId);
+              $subscription = Subscription::withTrashed()->where(['id'=>$subscriptionId])->first();
+              $subscription->updated_at = date('Y-m-d H:i:s');
+              $subscription->deleted_at = NULL;
             }else{
               $subscription = new Subscription;
             }

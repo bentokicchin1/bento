@@ -51,26 +51,23 @@ class PlaceDefaultSubscription extends Command
           $lastSunday = date('Y-m-d',strtotime('last sunday'));
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
+                          ->where("users.id", 19)
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
-
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
-                $notSubscribed = Subscription::where('user_id',$userDetails['id'])
-                        ->where('updated_at','>=',$lastSunday)
-                        ->where("subscriptions.deleted_at", NULL)->get()->toArray();
-                if(empty($notSubscribed)){
                   $userId = $userDetails['id'];
                   $foodPreference = $userDetails['food_preference'];
                   $foodQuantity = $userDetails['tiffin_quantity'];
                   if(!empty($userDetails['address']) && !empty($foodPreference) && !empty($foodQuantity)) {
                     foreach ($userDetails['address'] as $address) {
-                      $orderTypeId = $address['order_type_id'];
-                  // $subscribedData = Subscription::select('order_type_id')->where('user_id',$userId)->get();
-                  // if(!empty($subscribedData)){
-                  //     foreach ($subscribedData as $subscriptionDetails) {
+                        $orderTypeId = $address['order_type_id'];
+                        $notSubscribed = Subscription::where('user_id',$userDetails['id'])
+                              ->where('updated_at','>=',$lastSunday)
+                              ->where("subscriptions.deleted_at", NULL)
+                              ->where("subscriptions.order_type_id", $orderTypeId)->get()->toArray();
+                        if(empty($notSubscribed)){
                           $defaultData = array();
-                          // $orderTypeId = $subscriptionDetails->order_type_id;
                           $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
                           if(!empty($dishData)){
                             foreach ($dishData as $day => $details) {
@@ -120,8 +117,8 @@ class PlaceDefaultSubscription extends Command
                             $defaultData['shippingAddressId'] = $address->id;
                             $result = $this->subscriptionService->processDefaultSubscription($defaultData,$userId);
                           }
+                          echo $result;
                         }
-                        echo $result;
                      }
                    }
                 }

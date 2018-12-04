@@ -10,6 +10,7 @@ namespace App\Services\Customer;
 
 use App\Model\Feedback;
 use App\Model\Order;
+use App\Model\Subscription;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Psy\Exception\Exception;
@@ -42,7 +43,7 @@ class CustomerService
               $user->food_preference = $postData['food_preference'];
               $user->tiffin_quantity = $postData['tiffin_quantity'];
             }else{
-              // $this->removeSubscription($userId);
+              $this->removeSubscription($userId);
               $user->food_preference = NULL;
               $user->tiffin_quantity = NULL;
             }
@@ -76,11 +77,10 @@ class CustomerService
     public function storeFeedback($postData)
     {
         try {
-            $feedbackObj = new Feedback;
-            $feedbackObj->user_id = Auth::id();
-            $feedbackObj->value = $postData->value;
-            $feedbackObj->save();
-            return 'success';
+          $monthlyUsers = User::with('address')
+                          ->where('billing_cycle','monthly')
+                          ->where("users.deleted_at", NULL)
+                          ->get()->toArray();
         } catch (Exception $e) {
             return $e->getRawMessage();
         }
@@ -88,15 +88,7 @@ class CustomerService
 
     public function removeSubscription($userId)
     {
-      try {
-          $feedbackObj = new Feedback;
-          $feedbackObj->user_id = Auth::id();
-          $feedbackObj->value = $postData->value;
-          $feedbackObj->save();
-          return 'success';
-      } catch (Exception $e) {
-          return $e->getRawMessage();
-      }
+        Subscription::where("user_id",$userId)->firstOrFail()->delete();
     }
 
 
