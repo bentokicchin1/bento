@@ -51,7 +51,6 @@ class PlaceDefaultSubscription extends Command
           $lastSunday = date('Y-m-d',strtotime('last sunday'));
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
-                          ->where("users.id", 19)
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
           if(!empty($monthlyUsers)){
