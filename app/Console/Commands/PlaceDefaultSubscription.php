@@ -78,10 +78,15 @@ class PlaceDefaultSubscription extends Command
                                     case 'veg':
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
-                                            echo "<pre/>";
-                                            print_r($dishData[$day]['items'][$dishType]);
-                                            $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
-                                            unset($dishData[$day]['items'][$dishType]);
+                                            if($dishType=='others'){
+                                                foreach ($dishData[$day]['items'][$dishType] as $k => $other) {
+                                                    $orderTotalAmount -= $other['total_price'];
+                                                    unset($dishData[$day]['items'][$dishType][$k]);
+                                                }
+                                            }else{
+                                              $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
+                                              unset($dishData[$day]['items'][$dishType]);
+                                            }
                                           }else if(isset($dishDetails['food_type']) && $dishDetails['food_type']=='nonveg'){
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
@@ -91,8 +96,15 @@ class PlaceDefaultSubscription extends Command
                                           $nonVegHalfDefault = config('constants.DEFAULT_HALF_NONVEG_TIFFIN');
                                           if(date('l',strtotime($day))=='Wednesday' || date('l',strtotime($day))=='Friday'){
                                             if(!in_array($dishType,$nonVegHalfDefault) && $foodQuantity=='half'){
-                                              $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
-                                              unset($dishData[$day]['items'][$dishType]);
+                                              if($dishType=='others'){
+                                                  foreach ($dishData[$day]['items'][$dishType] as $k => $other) {
+                                                      $orderTotalAmount -= $other['total_price'];
+                                                      unset($dishData[$day]['items'][$dishType][$k]);
+                                                  }
+                                              }else{
+                                                $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
+                                                unset($dishData[$day]['items'][$dishType]);
+                                              }
                                             }else if(isset($dishDetails['food_type']) && ($dishDetails['food_type']=='veg')) {
                                               $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                               unset($dishData[$day]['items'][$dishType]);
@@ -100,8 +112,15 @@ class PlaceDefaultSubscription extends Command
                                           }else{
                                             $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                             if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
-                                              $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
-                                              unset($dishData[$day]['items'][$dishType]);
+                                              if($dishType=='others'){
+                                                  foreach ($dishData[$day]['items'][$dishType] as $k => $other) {
+                                                      $orderTotalAmount -= $other['total_price'];
+                                                      unset($dishData[$day]['items'][$dishType][$k]);
+                                                  }
+                                              }else{
+                                                $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
+                                                unset($dishData[$day]['items'][$dishType]);
+                                              }
                                             }else if(isset($dishDetails['food_type']) && $dishDetails['food_type']=='nonveg'){
                                               $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                               unset($dishData[$day]['items'][$dishType]);
