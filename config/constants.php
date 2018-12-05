@@ -24,7 +24,7 @@ return [
     'ADDRESS_TYPE' => ['Home'=>'Home','Office'=>'Office'],
     'DEFAULT_HALF_VEG_TIFFIN' => ['veg_sabaji','chapati'],
     'DEFAULT_HALF_NONVEG_TIFFIN' => ['non_veg_sabaji','chapati'],
-    'LUNCH_ORDER_MAX_TIME' => '11:55 am',
+    'LUNCH_ORDER_MAX_TIME' => '11:55 pm',
     'DINNER_ORDER_MAX_TIME' => '10:30 pm',
     'DASHBOARD_ORDER_MAX_TIME' => '03:00 pm',
     'ORDER_TYPE_LUNCH' => 2,
