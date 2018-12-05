@@ -74,6 +74,9 @@ class UserController extends Controller
             if (!empty($id)) {
                 $userObj = user::find($id);
                 $addressObj = CustomerAddresse::where('user_id',$id)->first();
+                if(empty($addressObj)){
+                  $addressObj = new CustomerAddresse;
+                }
             } else {
                 $userObj = new user;
                 $addressObj = new CustomerAddresse;
