@@ -69,9 +69,6 @@ class PlaceDefaultSubscription extends Command
                         if(empty($notSubscribed)){
                           $defaultData = array();
                           $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
-                          echo "<pre/>";
-                          print_r($dishData);
-                          exit;
                           if(!empty($dishData)){
                             foreach ($dishData as $day => $details) {
                               $orderTotalAmount = $details['orderTotalAmount'];
@@ -81,6 +78,9 @@ class PlaceDefaultSubscription extends Command
                                     case 'veg':
                                           $vegHalfDefault = config('constants.DEFAULT_HALF_VEG_TIFFIN');
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
+                                            echo "<pre/>";
+                                            print_r($dishData[$day]['items'][$dishType]);
+                                            exit;
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }else if(isset($dishDetails['food_type']) && $dishDetails['food_type']=='nonveg'){
@@ -114,6 +114,7 @@ class PlaceDefaultSubscription extends Command
                               }
                               $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                             }
+                            exit;
                             $defaultData['subscriptionItems'] = json_encode($dishData);
                             $defaultData['orderTypeId'] = $orderTypeId;
                             $address = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
