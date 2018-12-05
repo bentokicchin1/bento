@@ -99,7 +99,7 @@
                                         <label style="font-size: 1.5em;width:100%;">
                                            {{ Form::checkbox('days[]', strtolower($day), true) }}
                                            <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                                           <span>Want to Opt out for {{ $day }} ?</span>
+                                           <span>Want tiffin on {{ $day }} ?</span>
                                         <!-- </label> -->
                                     </div>
                                 <div style="overflow-x:auto;">
