@@ -53,6 +53,9 @@ class PlaceDefaultSubscription extends Command
                           ->where('billing_cycle','monthly')
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
+                          echo "<pre/>";
+                          print_r($monthlyUsers);
+                          exit;
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                   $userId = $userDetails['id'];
