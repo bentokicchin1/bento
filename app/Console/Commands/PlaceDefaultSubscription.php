@@ -66,9 +66,6 @@ class PlaceDefaultSubscription extends Command
                               ->where('updated_at','>=',$lastSunday)
                               ->where("subscriptions.deleted_at", NULL)
                               ->where("subscriptions.order_type_id", $orderTypeId)->get()->toArray();
-                              echo "<pre/>";
-                              print_r($notSubscribed);
-                              exit;
                         if(empty($notSubscribed)){
                           $defaultData = array();
                           $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
