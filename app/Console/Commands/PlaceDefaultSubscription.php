@@ -51,7 +51,6 @@ class PlaceDefaultSubscription extends Command
           $lastSunday = date('Y-m-d',strtotime('last sunday'));
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
-                          ->where("users.id", 20)
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
           if(!empty($monthlyUsers)){
@@ -135,9 +134,6 @@ class PlaceDefaultSubscription extends Command
                               }
                               $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                             }
-                            echo "<pre/>";
-                            print_r($dishData);
-                            exit;
                             $defaultData['subscriptionItems'] = json_encode($dishData);
                             $defaultData['orderTypeId'] = $orderTypeId;
                             $address = $this->addressService->getAddressByUserOrder($userId,$orderTypeId);
