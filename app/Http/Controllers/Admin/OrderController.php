@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $dishData = array();
         $ordersData = $dishList = $orderItems = $orderItems['orderTypeIds'] = [];
-        $userData = User::offset(0)->limit(10)->pluck('name','id');
+        $userData = User::pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
           $ordersData = Order::with('users')

@@ -7,6 +7,12 @@ $(document).ready(function($){
     },
   });
 
+  $('#user').select2({
+    minimumResultsForSearch: Infinity,
+    width : '100%',
+    height: '50px'
+  });
+
   $('[data-toggle="tooltip"]').tooltip();
 
   $("#orderDate").datepicker({

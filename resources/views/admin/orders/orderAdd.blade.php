@@ -140,6 +140,7 @@
     </section>
     <script>
       var dishes = '<?php echo json_encode($dishes); ?>';
+      
     </script>
     <!-- /.content -->
 @endsection
