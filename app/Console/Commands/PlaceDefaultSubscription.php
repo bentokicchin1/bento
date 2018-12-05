@@ -132,6 +132,8 @@ class PlaceDefaultSubscription extends Command
                               }
                               $dishData[$day]['orderTotalAmount'] = $orderTotalAmount;
                             }
+                            echo "<pre/>";
+                            print_r($dishData);
                             exit;
                             $defaultData['subscriptionItems'] = json_encode($dishData);
                             $defaultData['orderTypeId'] = $orderTypeId;
