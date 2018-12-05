@@ -80,7 +80,6 @@ class PlaceDefaultSubscription extends Command
                                           if(!in_array($dishType,$vegHalfDefault)  && $foodQuantity=='half'){
                                             echo "<pre/>";
                                             print_r($dishData[$day]['items'][$dishType]);
-                                            exit;
                                             $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                             unset($dishData[$day]['items'][$dishType]);
                                           }else if(isset($dishDetails['food_type']) && $dishDetails['food_type']=='nonveg'){
