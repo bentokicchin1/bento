@@ -51,11 +51,9 @@ class PlaceDefaultSubscription extends Command
           $lastSunday = date('Y-m-d',strtotime('last sunday'));
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
+                          ->where("users.id", 20)
                           ->where("users.deleted_at", NULL)
                           ->get()->toArray();
-                          echo "<pre/>";
-                          print_r($monthlyUsers);
-                          exit;
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
                   $userId = $userDetails['id'];
@@ -68,6 +66,9 @@ class PlaceDefaultSubscription extends Command
                               ->where('updated_at','>=',$lastSunday)
                               ->where("subscriptions.deleted_at", NULL)
                               ->where("subscriptions.order_type_id", $orderTypeId)->get()->toArray();
+                              echo "<pre/>";
+                              print_r($notSubscribed);
+                              exit;
                         if(empty($notSubscribed)){
                           $defaultData = array();
                           $dishData = $this->subscriptionService->getDefaultDishList($orderTypeId);
