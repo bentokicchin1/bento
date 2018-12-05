@@ -83,6 +83,7 @@ class PlaceDefaultSubscription extends Command
                                                     $orderTotalAmount -= $other['total_price'];
                                                     unset($dishData[$day]['items'][$dishType][$k]);
                                                 }
+                                                unset($dishData[$day]['items'][$dishType]);
                                             }else{
                                               $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                               unset($dishData[$day]['items'][$dishType]);
@@ -101,6 +102,7 @@ class PlaceDefaultSubscription extends Command
                                                       $orderTotalAmount -= $other['total_price'];
                                                       unset($dishData[$day]['items'][$dishType][$k]);
                                                   }
+                                                  unset($dishData[$day]['items'][$dishType]);
                                               }else{
                                                 $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                                 unset($dishData[$day]['items'][$dishType]);
@@ -117,6 +119,7 @@ class PlaceDefaultSubscription extends Command
                                                       $orderTotalAmount -= $other['total_price'];
                                                       unset($dishData[$day]['items'][$dishType][$k]);
                                                   }
+                                                  unset($dishData[$day]['items'][$dishType]);
                                               }else{
                                                 $orderTotalAmount -= $dishData[$day]['items'][$dishType]['total_price'];
                                                 unset($dishData[$day]['items'][$dishType]);
