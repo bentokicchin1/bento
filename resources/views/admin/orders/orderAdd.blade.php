@@ -48,7 +48,7 @@
                     @if(!empty($ordersData))
                         {{ Form::text('orderDate',date('l,d F,Y',strtotime($ordersData['order_date'])),array('class' => 'form-control','readonly'=>true)) }}
                     @else
-                      {{ Form::text('orderDate',null,['id'=>'orderDate','required'=>true,'class'=>'form-control','placeholder'=>'Date (required)']) }}
+                      {{ Form::text('orderDate',null,['id'=>'orderDate','autocomplete'=>'off','required'=>true,'class'=>'form-control','placeholder'=>'Date (required)']) }}
                     @endif
                   </div>
               </div>
@@ -140,7 +140,7 @@
     </section>
     <script>
       var dishes = '<?php echo json_encode($dishes); ?>';
-      
+
     </script>
     <!-- /.content -->
 @endsection
