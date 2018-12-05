@@ -71,6 +71,10 @@
                 <div class="order-form">
                   {{ Form::open(['route' => 'addressSelect', 'method' => 'post']) }}
                   {{ Form::hidden('orderTypeId', $dishes['orderTypeId']) }}
+                  @if(!empty($ordersData))
+                    {{ Form::model($ordersData, ['route' => ['addressSelect', $ordersData['id']]]) }}
+                    {{ Form::hidden('id',  $ordersData['id']) }}
+                  @endif
                   <div style="overflow-x:auto;">
                     <table class="table">
                       <thead>
