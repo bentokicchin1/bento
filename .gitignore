@@ -12,3 +12,5 @@ yarn-error.log
 .env.example
 .env
 public/uploads
+nbproject/
+index.php
