@@ -208,9 +208,9 @@
                                         <label>
                                               {{ Form::hidden(strtolower($dishName), round($dish['dishPrice'][$dishId]),['class' => 'form-control']) }}
                                               @if(in_array($dishId,$selectedOtherDish))
-                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, true,['class'=>'form-control otherDish']) }}
+                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, true,['id'=>$dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName),'class'=>'form-control otherDish']) }}
                                               @else
-                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['class'=>'form-control otherDish']) }}
+                                                {{ Form::checkbox($dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName), $dishId, false,['id'=>$dish['dishTypeName'].'_'.$dayName.'_'.strtolower($dishName),'class'=>'form-control otherDish']) }}
                                               @endif
                                             <span class="cr">
                                               <i class="cr-icon fa fa-check"></i>
