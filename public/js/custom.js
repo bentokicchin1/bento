@@ -153,25 +153,33 @@ $(document).ready(function() {
 
 $(document).ready(function(){
     "use strict";
+    
+    if( $('#area').length ){
+       areaSectorRelation();
+    }
 
-     $('#area').change(function(){
-       var areaLocations = jQuery.parseJSON(locations);
-       var area = $(this).val();
-       if(area!=''){
-          $('#sector').empty();
-          var mySelect = $('#sector');
-          mySelect.append(
-              $('<option></option>').val('').html('--- Select --- ')
-          );
-          $.each(areaLocations, function(key, val) {
-            if(val['area_id']==area){
-              mySelect.append(
-                  $('<option></option>').val(val['id']).html(val['name'])
-              );
-            }
-          });
-        }
+    $('#area').change(function(){
+        areaSectorRelation();
     });
+    
+    function areaSectorRelation(){
+        var areaLocations = jQuery.parseJSON(locations);
+        var area = $(this).val();
+        if(area!=''){
+            $('#sector').empty();
+            var mySelect = $('#sector');
+            mySelect.append(
+                $('<option></option>').val('').html('--- Select --- ')
+            );
+            $.each(areaLocations, function(key, val) {
+                if(val['area_id']==area){
+                    mySelect.append(
+                        $('<option></option>').val(val['id']).html(val['name'])
+                    );
+                }
+            });
+        }
+    };
 
     $('input:radio[name=billing_cycle]').on('change',function() {
         if($(this).val()=='monthly'){

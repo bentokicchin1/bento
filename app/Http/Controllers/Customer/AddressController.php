@@ -35,11 +35,9 @@ class AddressController extends Controller
         $data['cityData'] = city::pluck('name', 'id');
         $data['orderTypeData'] = OrderType::pluck('name', 'id');
         $data['areaData'] = Area::pluck('name', 'id');
-        // $data['areaLocationData'] = Area_location::pluck('name','id');
         $data['areaLocationData'] = Area_location::select('id','area_id','name')->get()->toArray();
         if (!empty($id)) {
             $data['addressData'] = $this->addressService->getAddressById($id);
-
         }
         /* fetch order type data based on order type */
         $data['orderTypes'] = OrderType::all('id', 'name')->pluck('name', 'id')
