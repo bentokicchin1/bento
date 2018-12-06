@@ -91,7 +91,7 @@ class CustomerController extends Controller
         /* Validate post data */
         $request->validate([
             'name' => 'required|string|max:255',
-            'mobile_number' => 'required|numeric|digits:10',
+            'mobile_number' => 'required|numeric|digits:10|unique:users,mobile_number,NULL,id,deleted_at,NULL',
             'billing_cycle' => 'required',
             'food_preference' => 'required_if:billing_cycle,monthly',
             'tiffin_quantity' => 'required_if:billing_cycle,monthly',

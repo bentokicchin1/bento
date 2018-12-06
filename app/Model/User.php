@@ -26,6 +26,9 @@ class User extends Model
             foreach ($users->subscriptions()->get() as $subscriptions) {
                $subscriptions->delete();
             }
+            foreach ($users->feedbacks()->get() as $feedbacks) {
+               $feedbacks->delete();
+            }
         });
     }
 
@@ -47,5 +50,10 @@ class User extends Model
     public function subscriptions()
     {
         return $this->hasMany('App\Model\Subscription');
+    }
+    
+    public function feedbacks()
+    {
+        return $this->hasMany('App\Model\Feedback');
     }
 }

@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Feedback extends Model
 {
-    protected $table = 'feedbacks';
-    protected $fillable = ['user_id', 'value'];
+      use SoftDeletes;
+      protected $hidden = ["deleted_at"];
+      
+      
+    public function feedback()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
