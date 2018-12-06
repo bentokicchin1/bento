@@ -328,17 +328,18 @@ $(document).ready(function(){
         $(this).each(function (){
           var dayName = $(this).val();
           if($(this).prop('checked')==false){
-            console.log($("input[name$='others_friday']"));
+            $(".otherDish").attr('disabled',true);
             $("input[name$='"+dayName+"']").attr('disabled',true);
-            $( "[name$='"+dayName+"']" ).attr('disabled',true);
-            $( ".quantity-right-plus" ).attr('disabled',true);
-            $( ".quantity-left-minus" ).attr('disabled',true);
+            $("[name$='"+dayName+"']").attr('disabled',true);
+            $(".quantity-right-plus").attr('disabled',true);
+            $(".quantity-left-minus").attr('disabled',true); 
             
           }else{
+            $(".otherDish").removeAttr('disabled');
             $("input[name$='"+dayName+"']").removeAttr('disabled');
-            $( "[name$='"+dayName+"']" ).removeAttr('disabled');
-            $( ".quantity-right-plus" ).removeAttr('disabled');
-            $( ".quantity-left-minus" ).removeAttr('disabled');
+            $("[name$='"+dayName+"']").removeAttr('disabled');
+            $(".quantity-right-plus").removeAttr('disabled');
+            $(".quantity-left-minus").removeAttr('disabled');
           }
         });
 
