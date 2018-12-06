@@ -9,4 +9,10 @@ class Subscription extends Model
 {
       use SoftDeletes;
       protected $hidden = ["deleted_at"];
+      
+      
+    public function subscription()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

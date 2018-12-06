@@ -12,18 +12,21 @@ class User extends Model
     protected $hidden = ["deleted_at"];
     protected static function boot()
     {
-       parent::boot();
-       static::deleting(function($users) {
-         foreach ($users->orders()->get() as $orders) {
-            $orders->delete();
-         }
-         foreach ($users->address()->get() as $address) {
-            $address->delete();
-         }
-         foreach ($users->verification()->get() as $verification) {
-            $verification->delete();
-         }
-       });
+        parent::boot();
+        static::deleting(function($users) {
+            foreach ($users->orders()->get() as $orders) {
+               $orders->delete();
+            }
+            foreach ($users->address()->get() as $address) {
+               $address->delete();
+            }
+            foreach ($users->verification()->get() as $verification) {
+               $verification->delete();
+            }
+            foreach ($users->subscriptions()->get() as $subscriptions) {
+               $subscriptions->delete();
+            }
+        });
     }
 
     public function orders()
@@ -31,13 +34,18 @@ class User extends Model
         return $this->hasMany('App\Model\Order');
     }
 
-   public function address()
-   {
-       return $this->hasMany('App\Model\CustomerAddresse');
-   }
+    public function address()
+    {
+        return $this->hasMany('App\Model\CustomerAddresse');
+    }
 
-   public function verification()
-   {
-        return $this->hasMany('App\Model\VerifyUser');
-   }
+    public function verification()
+    {
+         return $this->hasMany('App\Model\VerifyUser');
+    }
+    
+    public function subscriptions()
+    {
+        return $this->hasMany('App\Model\Subscription');
+    }
 }
