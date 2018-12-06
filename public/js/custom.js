@@ -328,10 +328,9 @@ $(document).ready(function(){
         $(this).each(function (){
           var dayName = $(this).val();
           if($(this).prop('checked')==false){
-            console.log($( "input:contains("+dayName+")" ));
-            $( "[name$='"+dayName+"']" ).attr('disabled',true);
+            $( "[name~='"+dayName+"']" ).attr('disabled',true);
           }else{
-            $( "[name$='"+dayName+"']" ).removeAttr('disabled');
+            $( "[name~='"+dayName+"']" ).removeAttr('disabled');
           }
         });
 
