@@ -253,3 +253,4 @@
 <script>
   var dishes = '<?php echo json_encode($dishes['dishData']); ?>';
 </script>
+@endsection
