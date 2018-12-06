@@ -170,6 +170,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('order/delete/{id}', 'Admin\OrderController@delete')->where('id', '[0-9]+')->name('admin-order-delete');
     Route::get('order/list', 'Admin\OrderController@index')->name('admin-order-list');
 
+    Route::get('feedback/list', 'Admin\FeedbackController@index')->name('admin-feedback-list');
+    
     Route::get('billpayment/add', 'Admin\BillingController@showForm')->name('admin-billpayment-add');
     Route::post('billpayment/add', 'Admin\BillingController@store')->name('admin-billpayment-add');
     Route::get('billpayment/billformat', 'Admin\BillingController@billformat')->name('admin-billformat-create');
