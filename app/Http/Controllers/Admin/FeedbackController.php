@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-use App\Model\DishType;
+use App\Model\Feedback;
 use DB;
 use Illuminate\Http\Request;
 
