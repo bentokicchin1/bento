@@ -88,7 +88,7 @@
                   </ul>
               </li>
               <li class="treeview">
-                  <a href="admin-feedback-list">
+                  <a href="{{ route('admin-feedback-list') }}">
                     <i class="fa fa-comments-o"></i> <span>Feedbacks</span>
                     <span class="pull-right-container">
                       <!-- <i class="fas fa-angle-left pull-right"></i> -->
