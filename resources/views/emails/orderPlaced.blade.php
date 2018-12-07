@@ -86,16 +86,14 @@
                                                         <p style="line-height: 1.5;font-size: 12px">
                                                             @if (is_array($order['orderDishes']))
                                                                 <p style="line-height: 1.5;font-size: 12px">Below is the summary of your order:- </p>
-                                                                <ul style="line-height: 1.5;font-size: 12px">
-                                                                    @foreach($order['orderDishes'] as $orderItems)
-                                                                        @if (is_array($orderItems))
-                                                                            @foreach($orderItems as $other)
-                                                                            @endforeach
-                                                                        @else
-                                                                            <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$other['totalPrice']}}</li>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </ul>
+                                                                @foreach($order['orderDishes'] as $orderItems)
+                                                                    @if (is_array($orderItems))
+                                                                        @foreach($orderItems as $other)
+                                                                        @endforeach
+                                                                    @else
+                                                                        <p style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$other['totalPrice']}}</p>
+                                                                    @endif
+                                                                @endforeach
                                                             @endif
                                                         </p>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
