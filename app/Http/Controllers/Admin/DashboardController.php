@@ -78,6 +78,7 @@ class DashboardController extends Controller
 //        }
         
         $orders = $this->orderService->getSingleOrderDetails(157);
+        foreach($orders['orderDishes'] as $key=>$orderItems){
         Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($orders));
         
 //        return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
