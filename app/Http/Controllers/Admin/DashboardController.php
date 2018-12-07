@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 use App\Model\Order;
 use App\Model\OrderItem;
 use App\Model\DishType;
@@ -65,11 +66,8 @@ class DashboardController extends Controller
           array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
         
-        $data = array();
-        Mail::send('emails.orderPlaced', $data, function($message)
-        {
-            $message->to('skhilari26@gmail.com', 'Bento')->subject('Order Placed!');
-        });
+        Mail::to('skhilari26@gmail.com')->send(new OrderPlaced());
+        
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
 
