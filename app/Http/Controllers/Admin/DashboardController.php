@@ -65,6 +65,7 @@ class DashboardController extends Controller
           array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
         
+        $data = array();
         Mail::send('emails.orderPlaced', $data, function($message)
         {
             $message->to('skhilari26@gmail.com', 'Bento')->subject('Order Placed!');
