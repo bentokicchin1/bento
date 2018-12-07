@@ -78,8 +78,8 @@ class DashboardController extends Controller
 //        }
         
         $orders = $this->orderService->getSingleOrderDetails(157);
-        foreach($orders['orderDishes'] as $orderItems){
-            foreach($orderItems as $dish){
+        foreach($orders['orderDishes'] as $key=>$orderItems){
+            foreach($orderItems as $k=>$dish){
                 echo "<pre/>";
                 print_R($dish);
                 exit;
