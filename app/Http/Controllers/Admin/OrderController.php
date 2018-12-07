@@ -40,13 +40,13 @@ class OrderController extends Controller
 //          $orderItems = $this->orderService->formatOrderItems($ordersData);
             $orderItems = $this->orderService->getSingleOrderDetails($id);
             $orderItems['orderTypeIds'] = [];
-            $orderTypeId = $ordersData['order_type']['order_type_id'];
-            $orderDate = $ordersData['order_date'];
+            $orderTypeId = $orderItems['order_type']['order_type_id'];
+            $orderDate = $orderItems['order_date'];
             $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
             $dishList['orderTypeId'] = $orderTypeId;
             $dishList['dishData'] = $dishData;
         }
-        return view('admin.orders.orderAdd', ['dishes'=>$dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
+        return view('admin.orders.orderAdd', ['dishes'=>$dishList,'ordersData'=>$orderItems,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }
 
     public function index()
