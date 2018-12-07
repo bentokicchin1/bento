@@ -39,9 +39,6 @@ class OrderController extends Controller
 //                    ->where('id',$id)->first()->toArray();
 //          $orderItems = $this->orderService->formatOrderItems($ordersData);
             $orderItems = $this->orderService->getSingleOrderDetails($id);
-            echo "<pre/>";
-            print_r($orderItems);
-            exit;
             $orderItems['orderTypeIds'] = [];
             $orderTypeId = $ordersData['order_type_id'];
             $orderDate = $ordersData['order_date'];

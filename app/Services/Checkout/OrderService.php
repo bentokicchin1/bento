@@ -41,6 +41,10 @@ class OrderService
                    ->with('orderItems.orderDish')
                    ->where("orders.deleted_at", NULL)
                    ->where('id',$orderId)->first()->toArray();
+        
+            echo "<pre/>";
+            print_r($ordersData);
+            exit;
         $orderItems = $this->formatOrderItems($ordersData);
         return $orderItems;
     }
