@@ -32,19 +32,22 @@ class OrderController extends Controller
         $userData = User::pluck('name','id');
         $orderTypeData = OrderType::pluck('name', 'id');
         if (!empty($id)) {
-          $ordersData = Order::with('users')
-                    ->with('orderType')
-                    ->with('orderItems.orderDish')
-                    ->where("orders.deleted_at", NULL)
-                    ->where('id',$id)->first()->toArray();
-          $orderItems = $this->orderService->formatOrderItems($ordersData);
-          $orderItems['orderTypeIds'] = [];
-          $orderTypeId = $ordersData['order_type_id'];
-          $orderDate = $ordersData['order_date'];
-          $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
-          $dishList['orderTypeId'] = $orderTypeId;
-          $dishList['dishData'] = $dishData;
-
+//          $ordersData = Order::with('users')
+//                    ->with('orderType')
+//                    ->with('orderItems.orderDish')
+//                    ->where("orders.deleted_at", NULL)
+//                    ->where('id',$id)->first()->toArray();
+//          $orderItems = $this->orderService->formatOrderItems($ordersData);
+            $orderItems = $this->orderService->getSingleOrderDetails($id);
+            echo "<pre/>";
+            print_r($orderItems);
+            exit;
+            $orderItems['orderTypeIds'] = [];
+            $orderTypeId = $ordersData['order_type_id'];
+            $orderDate = $ordersData['order_date'];
+            $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
+            $dishList['orderTypeId'] = $orderTypeId;
+            $dishList['dishData'] = $dishData;
         }
         return view('admin.orders.orderAdd', ['dishes'=>$dishList,'ordersData'=>$ordersData,'orderItems'=>$orderItems,'dishData'=>$dishData,'orderTypeData'=>$orderTypeData,'userData'=>$userData]);
     }

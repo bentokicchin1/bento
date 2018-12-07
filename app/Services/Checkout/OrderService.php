@@ -32,6 +32,19 @@ class OrderService
     {
         $this->dishes = $dishes;
     }
+    
+    public function getSingleOrderDetails($orderId)
+    {
+        $orderItems = $ordersData = array();
+        $ordersData = Order::with('users')
+                   ->with('orderType')
+                   ->with('orderItems.orderDish')
+                   ->where("orders.deleted_at", NULL)
+                   ->where('id',$orderId)->first()->toArray();
+        $orderItems = $this->formatOrderItems($ordersData);
+        return $orderItems;
+    }
+    
 
     public function getDishList($orderTypeId,$orderDate='')
     {

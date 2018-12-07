@@ -65,8 +65,10 @@ class DashboardController extends Controller
           }
           array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
-        $user = Auth::user();
-        Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($user));
+        
+//        $user_id = Auth::id();
+//        $orders = Order::getOrderDetails(Auth::id());
+//        Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($user));
         
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
