@@ -130,13 +130,12 @@ class OrderController extends Controller
         $response = $this->orderService->processData($addressId);
         if ($response == 'success') {
             $orderData = session('orderData');
-
-//            $user_id = Auth::id();
-//            $orders = Order::getOrderDetails(Auth::id());
-//            Mail::send('emails.orderPlaced', $data, function($message)
-//            {
-//                $message->to('magdumsujit@gmail.com', 'Bento')->subject('Order Placed!');
-//            });
+            $orderId = $orderData['id'];
+            $orders = $this->orderService->getSingleOrderDetails($orderId);
+            Mail::send('emails.orderPlaced', $data, function($message)
+            {
+                $message->to('magdumsujit@gmail.com', 'Bento')->subject('Order Placed!');
+            });
             $request->session()->forget('orderData');
             return redirect()->route('confirmation');
         }

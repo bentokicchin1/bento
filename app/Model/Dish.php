@@ -37,6 +37,12 @@ class Dish extends Model
         return $this->hasMany('App\Model\OrderItem');
     }
 
+    
+    /*
+    *  Dish list for User 
+    *   This function returns all the list of items on the selected day 
+    *   Verifies time for the order. Returns blank if time for placing order is exceeded.
+    */
     public function getDishListfromDb($orderTypeId, $date)
     {
       $dishes = array();
@@ -69,7 +75,11 @@ class Dish extends Model
         }
         return $dishes;
     }
-
+    
+    /*
+    *  Dish list for admin 
+    *   This function returns all the list of items on the selecetd day without checking time rules
+    */
     public function getDishListfromDbForAdmin($orderTypeId,$orderDate)
     {
       $dishes = DB::table('dishes')
@@ -84,7 +94,10 @@ class Dish extends Model
         return $dishes;
     }
 
-
+    /*
+    *  Dish list for placing default orders 
+    *   This function returns all the list of default items for selected order type i.e (lunch/dinner)
+    */
     public function getDefaultDishListfromDb($orderTypeId)
     {
         $dishes = array();
