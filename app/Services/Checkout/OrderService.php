@@ -42,10 +42,14 @@ class OrderService
                    ->where("orders.deleted_at", NULL)
                    ->where('id',$orderId)->first()->toArray();
         
-            echo "<pre/>";
-            print_r($ordersData);
-            exit;
         $orderItems = $this->formatOrderItems($ordersData);
+        if(!empty($ordersData)){
+            $orderItems['users'] = $ordersData['users'];
+            $orderItems['order_date'] = $ordersData['order_date'];
+            $orderItems['order_type'] = $ordersData['order_type'];
+            $orderItems['status'] = $ordersData['status'];
+            $orderItems['total_amount'] = $ordersData['total_amount'];
+        }
         return $orderItems;
     }
     
