@@ -80,17 +80,17 @@
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$order['users']['name']}},</b></p>
-                                                        <p style="line-height: 1.5;font-size: 12px">Your {{$order['order_type']['name']}} order dated {{date('jS M Y',strtotime($order['order_date']))}} is successfully placed.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Your {{$order['order_type']['name']}} order dated {{date('jS M Y',strtotime($order['order_date']))}} is successfully placed.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px">Order Total Amount -  {{$order['total_amount']}}</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Order Total Amount -  {{$order['total_amount']}}Rs.</p>
                                                         <p style="line-height: 1.5;font-size: 12px">Below is the summary of your order:- </p>
                                                         @if (is_array($order['orderDishes']))
                                                             <ul>
                                                                 @foreach($order['orderDishes'] as $orderItems)
-                                                                    <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}</li>
+                                                                    <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}Rs.</li>
                                                                     @if (!isset($orderItems['quantity']) && is_array($orderItems))
                                                                         @foreach($orderItems as $other)
-                                                                            <li style="line-height: 1.5;font-size: 12px">{{$other['quantity']}} {{$other['dishName']}} - {{$other['totalPrice']}}</li>
+                                                                            <li style="line-height: 1.5;font-size: 12px">{{$other['quantity']}} {{$other['dishName']}} - {{$other['totalPrice']}}Rs.</li>
                                                                         @endforeach
                                                                     @endif
                                                                 @endforeach

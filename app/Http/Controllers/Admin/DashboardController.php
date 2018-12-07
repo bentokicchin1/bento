@@ -77,7 +77,7 @@ class DashboardController extends Controller
 //          array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
 //        }
         
-        $orders = $this->orderService->getSingleOrderDetails(93);
+        $orders = $this->orderService->getSingleOrderDetails(157);
         Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($orders));
         
 //        return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
