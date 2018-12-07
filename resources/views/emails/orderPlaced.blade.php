@@ -66,7 +66,7 @@
                     <td width="100%" style="padding-top:30px;padding-right:0;padding-bottom:20px;padding-left:0;margin:0;">
                         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" >
                             <tr>
-                                <td align="left" valign="middle"><a href="" style="text-decoration:none;"><img src="http://bentokitchen.in/images/logo/bento-logo.png" style="width: auto;height: 80px;"/></a></td>
+                                <td align="left" valign="middle"><a href="" style="text-decoration:none;"><img src="http://bentokitchen.in/images/logo/2/2.png" style="width: auto;height: 80px;"/></a></td>
                             </tr>
                         </table>
                         <table cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.1);" >
