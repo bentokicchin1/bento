@@ -87,14 +87,16 @@
                                                         @if (is_array($order['orderDishes']))
                                                             <ul>
                                                                 @foreach($order['orderDishes'] as $orderItems)
-                                                                    @foreach($orderItems as $dishes)
-                                                                        <li style="line-height: 1.5;font-size: 12px">{{$dishes['quantity']}} {{$dishes['dishName']}} - {{$dishes['totalPrice']}}Rs.</li>
-                                                                        @if (!isset($dishes['quantity']) && is_array($dishes))
-                                                                            @foreach($dishes as $otherDishes)
-                                                                                <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - {{$otherDishes['totalPrice']}}Rs.</li>
-                                                                            @endforeach
-                                                                        @endif
-                                                                    @endforeach
+                                                                    @if (!isset($orderItems['quantity']) && is_array($orderItems))
+                                                                        @foreach($orderItems as $dishes)
+                                                                            <li style="line-height: 1.5;font-size: 12px">{{$dishes['quantity']}} {{$dishes['dishName']}} - {{$dishes['totalPrice']}}Rs.</li>
+                                                                            @if (!isset($dishes['quantity']) && is_array($dishes))
+                                                                                @foreach($dishes as $otherDishes)
+                                                                                    <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - {{$otherDishes['totalPrice']}}Rs.</li>
+                                                                                @endforeach
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
                                                                 @endforeach
                                                             </ul>
                                                         @endif
