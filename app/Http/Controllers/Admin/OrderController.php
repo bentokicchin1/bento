@@ -40,7 +40,7 @@ class OrderController extends Controller
 //          $orderItems = $this->orderService->formatOrderItems($ordersData);
             $orderItems = $this->orderService->getSingleOrderDetails($id);
             $orderItems['orderTypeIds'] = [];
-            $orderTypeId = $orderItems['order_type']['order_type_id'];
+            $orderTypeId = $orderItems['order_type_id'];
             $orderDate = $orderItems['order_date'];
             $dishData = $this->orderService->getDishListForAdmin($orderTypeId,$orderDate);
             $dishList['orderTypeId'] = $orderTypeId;
