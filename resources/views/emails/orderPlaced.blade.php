@@ -89,7 +89,6 @@
                                                                 @foreach($order['orderDishes'] as $orderItems)
                                                                     @if (is_array($orderItems))
                                                                         @foreach($orderItems as $other)
-                                                                            <!--<li>{{$other['quantity']}} {{$other['dishName']}} - {{$other['totalPrice']}}</li>-->
                                                                         @endforeach
                                                                     @else
                                                                         <li>{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$other['totalPrice']}}</li>
