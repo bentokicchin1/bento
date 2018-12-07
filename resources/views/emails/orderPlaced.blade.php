@@ -79,9 +79,25 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello ${{$order['users']['name']}},</b></p>
-                                                        <p style="line-height: 1.5;font-size: 12px">Order Placed Successfully for User id</p>
+                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$order['users']['name']}},</b></p>
+                                                        <p style="line-height: 1.5;font-size: 12px">Your {{$order['order_type']['name']}} order dated {{date('jS M Y',strtotime($order['order_type']))}} is successfully placed.</p>
                                                         <br/>
+                                                        <p style="line-height: 1.5;font-size: 12px">Order Total Amount -  {{$order['total_amount']}}</p>
+                                                        <p style="line-height: 1.5;font-size: 12px">Below is the summary of your order:- </p>
+                                                        @if (is_array($order['orderDishes']))
+                                                            <ul>
+                                                                @foreach($order['orderDishes'] as $orderItems)
+                                                                    @if (is_array($orderItems))
+                                                                        @foreach($orderItems as $other)
+                                                                            <li>{{$other['quantity']}} {{$other['dishName']}} - {{$other['totalPrice']}}</li>
+                                                                        @endforeach
+                                                                    @else
+                                                                        <li>{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$other['totalPrice']}}</li>
+                                                                    @endif
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                        
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
                                                         <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>              
                                                     </td>
