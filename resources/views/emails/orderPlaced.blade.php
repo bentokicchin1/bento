@@ -91,7 +91,7 @@
                                                                         @foreach($orderItems as $other)
                                                                         @endforeach
                                                                     @else
-                                                                        <p style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$other['totalPrice']}}</p>
+                                                                        <p style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}</p>
                                                                     @endif
                                                                 @endforeach
                                                             @endif
