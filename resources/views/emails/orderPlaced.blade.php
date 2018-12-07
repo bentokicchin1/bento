@@ -87,9 +87,9 @@
                                                         @if (is_array($order['orderDishes']))
                                                             <ul>
                                                                 @foreach($order['orderDishes'] as $orderItems)
+                                                                    <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}Rs.</li>
                                                                     @if (!isset($orderItems['quantity']) && is_array($orderItems))
                                                                         @foreach($orderItems as $dishes)
-                                                                            <li style="line-height: 1.5;font-size: 12px">{{$dishes['quantity']}} {{$dishes['dishName']}} - {{$dishes['totalPrice']}}Rs.</li>
                                                                             @if (!isset($dishes['quantity']) && is_array($dishes))
                                                                                 @foreach($dishes as $otherDishes)
                                                                                     <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - {{$otherDishes['totalPrice']}}Rs.</li>
