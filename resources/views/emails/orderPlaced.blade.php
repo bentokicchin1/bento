@@ -79,7 +79,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello ${{$order['sers']['name']}},</b></p>
+                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello ${{$order['users']['name']}},</b></p>
                                                         <p style="line-height: 1.5;font-size: 12px">Order Placed Successfully for User id</p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
