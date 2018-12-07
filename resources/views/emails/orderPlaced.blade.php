@@ -87,10 +87,10 @@
                                                             <p style="line-height: 0.5;font-size: 12px">Below is the summary of your order:- </p>
                                                             <ul>
                                                                 @foreach($order['orderDishes'] as $orderItems)
-                                                                    <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['total_price']}}Rs.</li>
+                                                                    <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}Rs.</li>
                                                                     @foreach($orderItems as $otherDishes)
                                                                         @if(is_array($otherDishes))
-                                                                            <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - {{$otherDishes['total_price']}}Rs.</li>
+                                                                            <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - {{$otherDishes['totalPrice']}}Rs.</li>
                                                                         @endif
                                                                     @endforeach
                                                                 @endforeach
