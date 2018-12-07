@@ -82,8 +82,8 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello,</b></p>
                                                         <p style="line-height: 1.5;font-size: 12px">Order Placed Successfully for User id</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px"><b>Thank You.</b></p>   
-                                                        <p style="line-height: 1.5;font-size: 12px"><b>Team Bento</b></p>              
+                                                        <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
+                                                        <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>              
                                                     </td>
                                                 </tr>
                                             </tbody>
