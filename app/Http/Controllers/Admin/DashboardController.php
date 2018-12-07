@@ -78,7 +78,7 @@ class DashboardController extends Controller
 //        }
         
         $orders = $this->orderService->getSingleOrderDetails(157);
-        Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($orders));
+        Mail::to('magdumsujit@gmail.com')->send(new OrderPlaced($orders));
         
 //        return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
