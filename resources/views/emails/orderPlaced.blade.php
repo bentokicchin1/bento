@@ -86,9 +86,16 @@
                                                         <p style="line-height: 1.5;font-size: 12px">
                                                             @if (is_array($order['orderDishes']))
                                                                 <p style="line-height: 1.5;font-size: 12px">Below is the summary of your order:- </p>
-                                                                @foreach($order['orderDishes'] as $orderItems)
-                                                                    <p style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}</p>
-                                                                @endforeach
+                                                                <ul>
+                                                                    @foreach($order['orderDishes'] as $orderItems)
+                                                                        <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - {{$orderItems['totalPrice']}}</li>
+                                                                        @if (!isset($orderItems['quantity']) && is_array($orderItems))
+                                                                            @foreach($orderItems as $other)
+                                                                                <li style="line-height: 1.5;font-size: 12px">{{$other['quantity']}} {{$other['dishName']}} - {{$other['totalPrice']}}</li>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    @endforeach
+                                                                </ul>
                                                             @endif
                                                         </p>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
