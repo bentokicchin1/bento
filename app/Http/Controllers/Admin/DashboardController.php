@@ -68,7 +68,7 @@ class DashboardController extends Controller
         $data = array();
         Mail::send('emails.orderPlaced', $data, function($message)
         {
-            $message->to('magdumsujit@gmail.com', 'Bento')->subject('Order Placed!');
+            $message->to('skhilari26@gmail.com', 'Bento')->subject('Order Placed!');
         });
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
