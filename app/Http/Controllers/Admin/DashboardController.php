@@ -81,13 +81,12 @@ class DashboardController extends Controller
         foreach($orders['orderDishes'] as $key=>$orderItems){
                 echo "<pre/>";
                 print_R($orderItems);
-                exit;
             foreach($orderItems as $k=>$dish){
                 echo "<pre/>";
                 print_R($dish);
-                exit;
             }
         }
+                exit;
         Mail::to('skhilari26@gmail.com')->send(new OrderPlaced($orders));
         
 //        return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
