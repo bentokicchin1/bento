@@ -82,7 +82,7 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello,</b></p>
                                                         <p style="line-height: 1.5;font-size: 12px">Order Placed Successfully for User id</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px"><b>Food With Difference</b></p>                
+                                                        <p style="line-height: 1.5;font-size: 12px"><b>Thank You.</b></p>                
                                                     </td>
                                                 </tr>
                                             </tbody>
