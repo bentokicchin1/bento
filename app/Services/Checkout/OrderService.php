@@ -45,6 +45,7 @@ class OrderService
         $orderItems = $this->formatOrderItems($ordersData);
         if(!empty($ordersData)){
             $orderItems['users'] = $ordersData['users'];
+            $orderItems['id'] = $ordersData['id'];
             $orderItems['order_type_id'] = $ordersData['order_type_id'];
             $orderItems['order_date'] = $ordersData['order_date'];
             $orderItems['order_type'] = $ordersData['order_type'];
