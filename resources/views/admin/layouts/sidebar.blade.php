@@ -87,7 +87,7 @@
                     <li><a href="{{ route('admin-location-list') }}"><i class="fa fa-hand-o-right"></i> Location</a></li>
                   </ul>
               </li>
-              <li class="treeview">
+              <li class="">
                   <a href="{{ route('admin-feedback-list') }}">
                     <i class="fa fa-comments-o"></i> <span>Feedbacks</span>
                     <span class="pull-right-container">

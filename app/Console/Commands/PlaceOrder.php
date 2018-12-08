@@ -54,8 +54,7 @@ class PlaceOrder extends Command
                 $ordered = Order::where('user_id',$subscribedData['user_id'])
                           ->where('order_type_id',$subscribedData['order_type_id'])
                           ->where('order_date',$todayDate)->get()
-                          ->where("orders.deleted_at", NULL)
-                          ->where("orders.status", "cancelled")->toArray();
+                          ->where("orders.deleted_at", NULL)->toArray();
                 if(empty($ordered)){
                   $subscribedDishes = json_decode($subscribedData['subscription_items'],true);
                   if(!empty($subscribedDishes) && array_key_exists($today,$subscribedDishes)){

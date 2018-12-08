@@ -23,9 +23,8 @@ class FeedbackController extends Controller
     {
         $feedbacks = Feedback::with('users')
                   ->where("users.deleted_at", NULL)
-                  ->where("feedbacks.deleted_at", NULL)
                   ->get()->toArray();
-        
+
         return view('admin.feedbacks.list', ['feedbacks' => $feedbacks]);
     }
 
