@@ -10,6 +10,8 @@ use App\Model\OrderItem;
 use App\Model\DishType;
 use App\Model\Dish;
 use App\Model\OrderType;
+use App\Services\Customer\AddressService;
+use App\Services\Checkout\OrderService;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,15 @@ use PDF;
 
 class DashboardController extends Controller
 {
+
+    private $orderService;
+    private $addressService;
+
+    public function __construct(OrderService $orderService, AddressService $addressService)
+    {
+        $this->orderService = $orderService;
+        $this->addressService = $addressService;
+    }
     public function index(){
         $user = User::find(1);
         $userEmail = $user->email;
