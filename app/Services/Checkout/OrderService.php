@@ -17,6 +17,8 @@ use App\Model\OrderItem;
 use App\Model\WeeklyDishList;
 use Illuminate\Support\Facades\Auth;
 use Psy\Exception\Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 
 class OrderService
 {

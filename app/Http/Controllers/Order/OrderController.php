@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 use App\Model\User;
 use App\Model\Order;
 use App\Model\OrderType;
@@ -10,7 +12,6 @@ use App\Services\Customer\AddressService;
 use App\Services\Checkout\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
