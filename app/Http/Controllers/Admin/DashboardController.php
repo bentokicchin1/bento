@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderPlaced;
-use App\Model\User;
 use App\Model\Order;
 use App\Model\OrderItem;
 use App\Model\DishType;
 use App\Model\Dish;
 use App\Model\OrderType;
-use App\Services\Customer\AddressService;
-use App\Services\Checkout\OrderService;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,22 +16,7 @@ use PDF;
 
 class DashboardController extends Controller
 {
-
-    private $orderService;
-    private $addressService;
-
-    public function __construct(OrderService $orderService, AddressService $addressService)
-    {
-        $this->orderService = $orderService;
-        $this->addressService = $addressService;
-    }
     public function index(){
-        $user = User::find(1);
-        $userEmail = $user->email;
-        $orders = $this->orderService->getSingleOrderDetails(73);
-        Mail::to($userEmail)->send(new OrderPlaced($orders));
-        exit;
-
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
