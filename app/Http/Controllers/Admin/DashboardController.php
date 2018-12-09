@@ -17,6 +17,12 @@ use PDF;
 class DashboardController extends Controller
 {
     public function index(){
+        $user = User::find(1);
+        $userEmail = $user->email;
+        $orders = $this->orderService->getSingleOrderDetails(73);
+        Mail::to($userEmail)->send(new OrderPlaced($orders));
+        exit;
+
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');
