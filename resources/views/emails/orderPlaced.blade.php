@@ -36,7 +36,7 @@
                 }
                 table {max-width:95%!important;}
                 body{font-size:50%!important}
-                .img-responsive{ 
+                .img-responsive{
                     height: auto !important; max-width:45% !important
                 }
             }
@@ -89,7 +89,7 @@
                                                                 @foreach($order['orderDishes'] as $orderItems)
                                                                     @if(isset($orderItems['quantity']))
                                                                         <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - Rs. {{$orderItems['totalPrice']}}</li>
-                                                                    @else    
+                                                                    @else
                                                                         @foreach($orderItems as $otherDishes)
                                                                             @if(is_array($otherDishes))
                                                                                 <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - Rs. {{$otherDishes['totalPrice']}}</li>
@@ -99,13 +99,15 @@
                                                                 @endforeach
                                                             </ul>
                                                         @endif
+                                                        <p style="line-height: 1.0;font-size: 12px">Visit <a href="//bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel todays order.</p>
+
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>   
-                                                        <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>              
+                                                        <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
+                                                        <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table>                              
+                                        </table>
                                     </td>
                                 </tr>
                             </tbody>

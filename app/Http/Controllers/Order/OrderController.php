@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Model\User;
 use App\Model\Order;
 use App\Model\OrderType;
 use App\Services\Customer\AddressService;
@@ -131,10 +132,12 @@ class OrderController extends Controller
         if ($response == 'success') {
             $orderData = session('orderData');
             $orderId = $orderData['id'];
-            
-//            $orders = $this->orderService->getSingleOrderDetails($orderId);
-//            Mail::to('magdumsujit@gmail.com')->send(new OrderPlaced($orders));
-            
+
+            $user = User::find(Auth::id());
+            $userEmail = $user->email;
+            $orders = $this->orderService->getSingleOrderDetails($orderId);
+            Mail::to($userEmail)->send(new OrderPlaced($orders));
+
             $request->session()->forget('orderData');
             return redirect()->route('confirmation');
         }

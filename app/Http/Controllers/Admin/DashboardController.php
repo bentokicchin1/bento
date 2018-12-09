@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class DashboardController extends Controller
-{    
+{
     public function index(){
         $list = array();
         $date = date('Y-m-d');
@@ -65,8 +65,8 @@ class DashboardController extends Controller
             }
             array_push($list[$value->userId]['menu'],array('quantity'=>$value->quantity,'dish'=>$value->dish));
         }
-        
-        
+
+
         return view('admin.dashboard', ['orders' => $orders,'orderList'=>$list]);
     }
 

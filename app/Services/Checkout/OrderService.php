@@ -32,7 +32,7 @@ class OrderService
     {
         $this->dishes = $dishes;
     }
-    
+
     public function getSingleOrderDetails($orderId)
     {
         $orderItems = $ordersData = array();
@@ -41,7 +41,7 @@ class OrderService
                    ->with('orderItems.orderDish')
                    ->where("orders.deleted_at", NULL)
                    ->where('id',$orderId)->first()->toArray();
-        
+
         $orderItems = $this->formatOrderItems($ordersData);
         if(!empty($ordersData)){
             $orderItems['users'] = $ordersData['users'];
@@ -54,7 +54,7 @@ class OrderService
         }
         return $orderItems;
     }
-    
+
 
     public function getDishList($orderTypeId,$orderDate='')
     {
@@ -214,6 +214,11 @@ class OrderService
 
             $orderId = $order->id;
             $this->insertOrderItems($orderId, $orderParams['items']);
+
+            $user = User::find($order->user_id);
+            $userEmail = $user->email;
+            $orders = $this->orderService->getSingleOrderDetails($orderId);
+            Mail::to($userEmail)->send(new OrderPlaced($orders));
             DB::commit();
             return 'success';
         } catch (Exception $e) {
