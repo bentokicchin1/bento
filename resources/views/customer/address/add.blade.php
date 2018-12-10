@@ -2,9 +2,6 @@
 @section('content')
 
 <section id="web">
-    <script>
-    var  locations = '<?php echo json_encode($areaLocationData); ?>';
-    </script>
     <div class="container">
         <div class="row">
             <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8">
@@ -40,5 +37,8 @@
             </div>
         </div>
     </div>
+    <script>
+        locations = '<?php echo json_encode($areaLocationData); ?>';
+    </script>
 </section>
 @endsection
