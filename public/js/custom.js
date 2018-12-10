@@ -172,8 +172,8 @@ $(document).ready(function(){
                 $('<option></option>').val('').html('--- Select --- ')
             );
         
-        console.log(areaLocations);
             $.each(areaLocations, function(key, val) {
+                console.log(val['area_id']+"   "+area);
                 if(val['area_id']==area){
                     mySelect.append(
                         $('<option></option>').val(val['id']).html(val['name'])
