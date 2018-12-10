@@ -80,7 +80,7 @@
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$subscription['name']}},</b></p>
-                                                        <p style="line-height: 1.0;font-size: 12px">Your {{$subscription['orderType']}} subscription is successfully updated for current week.</p>
+                                                        <p style="line-height: 1.5;font-size: 12px">Your {{$subscription['orderType']}} subscription is successfully updated for current week.</p>
                                                         <br/>
                                                         @if (is_array($subscription['items']))
                                                             <p style="line-height: 0.5;font-size: 12px">Below is the summary of your subscription:- </p>
@@ -103,7 +103,7 @@
                                                                 @endforeach
                                                             </ul>
                                                         @endif
-                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/subscription/{{$subscription['orderType']}}">{{$subscription['orderType']}} Subscription</a> to change and update your subscribed menu.</p>
 
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
