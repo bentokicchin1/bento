@@ -154,6 +154,7 @@ $(document).ready(function() {
 $(document).ready(function(){
     "use strict";
     
+    console.log($('#area').val());
     if($('#area').val()  != ''){
        areaSectorRelation();
     }
