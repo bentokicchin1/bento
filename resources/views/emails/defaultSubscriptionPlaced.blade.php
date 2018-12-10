@@ -103,7 +103,7 @@
                                                                 @endforeach
                                                             </ul>
                                                         @endif
-                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/subscription/{{$subscription['orderType']}}">{{$subscription['orderType']}} Subscription</a> page to change and update your subscribed menu for current week.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Please visit {{$subscription['orderType']}} <a href="http://bentokitchen.in/subscription/{{$subscription['orderType']}}">Subscription</a> page to change and update your subscribed menu for current week.</p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>
