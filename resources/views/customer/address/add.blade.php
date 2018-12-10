@@ -38,8 +38,8 @@
 
         </div>
     </div>
-</section>
-@endsection
 <script>
   locations = '<?php echo json_encode($areaLocationData); ?>';
 </script>
+</section>
+@endsection
