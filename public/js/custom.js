@@ -337,9 +337,9 @@ $(document).ready(function(){
         calculateTotal();
         $(this).each(function (){
             var dayName = $(this).val();
-            console.log($(this).parent().children('.quantity-right-plus'));
-            console.log($(this).parent().children('.otherDish'));
-            console.log($(this).parent().children('.quantity-left-minus'));
+            console.log($(this).parent());
+            console.log($(this).parent());
+            console.log($(this).parent());
             if($(this).prop('checked')==false){
                 
                 $(".otherDish").attr('disabled',true);
