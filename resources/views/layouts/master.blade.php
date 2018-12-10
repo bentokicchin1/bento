@@ -42,6 +42,9 @@
 {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') !!}
 </head>
 <body>
+    <script>
+        var locations = {};
+    </script>
     @include('layouts.header')
     <div class="content-section">
       @yield('content')
