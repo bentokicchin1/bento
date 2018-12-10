@@ -20,9 +20,6 @@ class DefaultSubscriptionPlaced extends Mailable
     public function __construct($subscription)
     {
         $this->subscription = $subscription;
-        echo "<pre/>";
-        print_R($this);
-        exit;
     }
 
     /**
@@ -32,6 +29,7 @@ class DefaultSubscriptionPlaced extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.defaultSubscriptionPlaced');
+        
+        print_r($this->view('emails.defaultSubscriptionPlaced'));
     }
 }

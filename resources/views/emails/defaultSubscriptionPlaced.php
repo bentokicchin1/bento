@@ -57,7 +57,7 @@
             h5{font-size: 18px}
             h6{font-size: 14px}
         </style>
-        <title>Order Placed Successfully</title>
+        <title>Subscription Saved Successfully</title>
     </head>
     <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="margin:0; padding:0;">
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="border-collapse: separate;background-color:#efefef;color:#555555;" >
