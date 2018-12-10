@@ -43,7 +43,7 @@
 </head>
 <body>
     <script>
-        var locations = {};
+        var locations = '';
     </script>
     @include('layouts.header')
     <div class="content-section">
