@@ -29,6 +29,6 @@ class DefaultSubscriptionPlaced extends Mailable
      */
     public function build()
     {
-       return $this->view('emails.defaultSubscriptionPlaced');
+       return $this->subject('Subscription Menu Updated')->view('emails.defaultSubscriptionPlaced');
     }
 }
