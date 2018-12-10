@@ -154,7 +154,6 @@ $(document).ready(function() {
 $(document).ready(function(){
     "use strict";
     
-    console.log($('#area').val());
     if($('#area').val()  != ''){
        areaSectorRelation();
     }
@@ -172,6 +171,8 @@ $(document).ready(function(){
             mySelect.append(
                 $('<option></option>').val('').html('--- Select --- ')
             );
+        
+        console.log(areaLocations);
             $.each(areaLocations, function(key, val) {
                 if(val['area_id']==area){
                     mySelect.append(
