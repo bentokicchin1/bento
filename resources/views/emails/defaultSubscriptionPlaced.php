@@ -79,23 +79,24 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$order['users']['name']}},</b></p>
-                                                        <p style="line-height: 1.0;font-size: 12px">Your {{$order['order_type']['name']}} order dated {{date('jS M Y',strtotime($order['order_date']))}} is successfully placed.</p>
+                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$subscription['name']}},</b></p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Your {{$subscription['orderType']}} subscription is successfully updated for current week.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.0;font-size: 12px">Order Total Amount - Rs. {{$order['total_amount']}}</p>
-                                                        @if (is_array($order['orderDishes']))
-                                                            <p style="line-height: 0.5;font-size: 12px">Below is the summary of your order:- </p>
+                                                        <!--<p style="line-height: 1.0;font-size: 12px">Order Total Amount - Rs. {{$order['total_amount']}}</p>-->
+                                                        @if (is_array($subscription['items']))
+                                                            <p style="line-height: 0.5;font-size: 12px">Below is the summary of your subscription:- </p>
                                                             <ul>
-                                                                @foreach($order['orderDishes'] as $orderItems)
-                                                                    @if(isset($orderItems['quantity']))
-                                                                        <li style="line-height: 1.5;font-size: 12px">{{$orderItems['quantity']}} {{$orderItems['dishName']}} - Rs. {{$orderItems['totalPrice']}}</li>
-                                                                    @else
-                                                                        @foreach($orderItems as $otherDishes)
-                                                                            @if(is_array($otherDishes))
-                                                                                <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['quantity']}} {{$otherDishes['dishName']}} - Rs. {{$otherDishes['totalPrice']}}</li>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    @endif
+                                                                @foreach($subscription['items'] as $day=>$items)
+                                                                    <h3>{{$day}}</h3>
+                                                                    @foreach($items as $dishType=>$dishes)
+                                                                        @if($dishType!='others')
+                                                                            <li style="line-height: 1.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
+                                                                        @else
+                                                                            @foreach($dishes as $otherDishes)
+                                                                                <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
+                                                                            @endforeach    
+                                                                        @endif
+                                                                    @endforeach
                                                                 @endforeach
                                                             </ul>
                                                         @endif
