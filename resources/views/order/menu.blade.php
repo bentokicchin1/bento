@@ -79,10 +79,10 @@
                     <table class="table">
                       <thead>
                         <th scope="col">Item</th>
+                        <th scope="col"></th>
                         <th scope="col">Unit</th>
                         <th scope="col"></th>
                         <th scope="col">Price</th>
-                        <th scope="col"></th>
                       </thead>
                       <tbody>
                         @foreach ($dishes['dishData'] as $dish)
