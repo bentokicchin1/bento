@@ -82,7 +82,6 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$subscription['name']}},</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px">Your {{$subscription['orderType']}} subscription is successfully updated for current week.</p>
                                                         <br/>
-                                                        <!--<p style="line-height: 1.0;font-size: 12px">Order Total Amount - Rs. {{$order['total_amount']}}</p>-->
                                                         @if (is_array($subscription['items']))
                                                             <p style="line-height: 0.5;font-size: 12px">Below is the summary of your subscription:- </p>
                                                             <ul>
