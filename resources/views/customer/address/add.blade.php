@@ -41,5 +41,5 @@
 </section>
 @endsection
 <script>
-  var locations = '<?php echo json_encode($areaLocationData); ?>';
+  locations = '<?php echo json_encode($areaLocationData); ?>';
 </script>

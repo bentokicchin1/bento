@@ -7,6 +7,9 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="shortcut icon" href="/favicon.ico"  type="image/x-icon">
+<script>
+    var locations = '';
+</script>
 <!-- Site title
 ================================================== -->
 <title>Bento - Food with Diffrence</title>
@@ -42,9 +45,6 @@
 {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js') !!}
 </head>
 <body>
-    <script>
-        var locations = '';
-    </script>
     @include('layouts.header')
     <div class="content-section">
       @yield('content')
