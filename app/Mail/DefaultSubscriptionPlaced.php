@@ -19,9 +19,6 @@ class DefaultSubscriptionPlaced extends Mailable
      */
     public function __construct($subscription)
     {
-        echo "<pre/>";
-        print_R($subscription);
-        exit;
         $this->subscription = $subscription;
     }
 
