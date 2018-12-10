@@ -164,7 +164,7 @@ $(document).ready(function(){
     
     function areaSectorRelation(){
         var areaLocations = jQuery.parseJSON(locations);
-        var area = $(this).val();
+        var area = $('#area').val();
         if(area!=''){
             $('#sector').empty();
             var mySelect = $('#sector');
