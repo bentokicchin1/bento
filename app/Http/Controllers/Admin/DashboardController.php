@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\OrderPlaced;
+use App\Mail\DefaultSubscriptionPlaced;
 use App\Model\User;
 use App\Model\Order;
 use App\Model\OrderItem;
