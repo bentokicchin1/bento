@@ -219,7 +219,7 @@ class OrderService
 
             $user = User::find($order->user_id);
             $userEmail = $user->email;
-            $orders = $this->orderService->getSingleOrderDetails($orderId);
+            $orders = $this->getSingleOrderDetails($orderId);
             Mail::to($userEmail)->send(new OrderPlaced($orders));
             DB::commit();
             return 'success';
