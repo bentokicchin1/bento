@@ -131,14 +131,6 @@ class OrderController extends Controller
         $addressId = $postData['addressId'];
         $response = $this->orderService->processData($addressId);
         if ($response == 'success') {
-//            $orderData = session('orderData');
-//            $orderId = $orderData['id'];
-
-//            $user = User::find(Auth::id());
-//            $userEmail = $user->email;
-//            $orders = $this->orderService->getSingleOrderDetails($orderId);
-//            Mail::to($userEmail)->send(new OrderPlaced($orders));
-
             $request->session()->forget('orderData');
             return redirect()->route('confirmation');
         }
