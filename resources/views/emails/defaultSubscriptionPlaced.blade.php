@@ -86,17 +86,21 @@
                                                             <p style="line-height: 0.5;font-size: 12px">Below is the summary of your subscription:- </p>
                                                             <ul>
                                                                 @foreach($subscription['items'] as $day=>$items)
-                                                                    <h3>{{$day}}</h3>
-                                                                    <h2>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h2>
-                                                                    @foreach($items['items'] as $dishType=>$dishes)
-                                                                        @if($dishType!='others')
-                                                                            <li style="line-height: 1.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
-                                                                        @else
-                                                                            @foreach($dishes as $otherDishes)
-                                                                                <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
-                                                                            @endforeach    
-                                                                        @endif
-                                                                    @endforeach
+                                                                <li>
+                                                                    <h3>{{ ucfirst($day) }}</h3>
+                                                                    <h4>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h4>
+                                                                    <ul>
+                                                                        @foreach($items['items'] as $dishType=>$dishes)
+                                                                            @if($dishType!='others')
+                                                                                <li style="line-height: 1.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
+                                                                            @else
+                                                                                @foreach($dishes as $otherDishes)
+                                                                                    <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
+                                                                                @endforeach    
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </ul>    
+                                                                </li>
                                                                 @endforeach
                                                             </ul>
                                                         @endif
