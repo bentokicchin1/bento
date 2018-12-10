@@ -87,15 +87,15 @@
                                                             <ul>
                                                                 @foreach($subscription['items'] as $day=>$items)
                                                                 <li>
-                                                                    <h4>{{ ucfirst($day) }}</h4>
-                                                                    <h5>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h5>
+                                                                    <h4 style="line-height: 1.5;font-size: 16px;">{{ ucfirst($day) }}</h4>
+                                                                    <h5 style="line-height: 0.5;font-size: 14px;">Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h5>
                                                                     <ul>
                                                                         @foreach($items['items'] as $dishType=>$dishes)
                                                                             @if($dishType!='others')
-                                                                                <li style="line-height: 1.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
+                                                                                <li style="line-height: 0.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
                                                                             @else
                                                                                 @foreach($dishes as $otherDishes)
-                                                                                    <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
+                                                                                    <li style="line-height: 0.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
                                                                                 @endforeach    
                                                                             @endif
                                                                         @endforeach
