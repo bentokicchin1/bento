@@ -87,8 +87,8 @@
                                                             <ul>
                                                                 @foreach($subscription['items'] as $day=>$items)
                                                                 <li>
-                                                                    <h3>{{ ucfirst($day) }}</h3>
-                                                                    <h4>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h4>
+                                                                    <h4>{{ ucfirst($day) }}</h4>
+                                                                    <h5>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h5>
                                                                     <ul>
                                                                         @foreach($items['items'] as $dishType=>$dishes)
                                                                             @if($dishType!='others')
