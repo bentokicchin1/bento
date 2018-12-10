@@ -99,7 +99,7 @@
                                                                 @endforeach
                                                             </ul>
                                                         @endif
-                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="//bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
 
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
