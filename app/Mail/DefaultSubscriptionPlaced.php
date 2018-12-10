@@ -11,7 +11,7 @@ class DefaultSubscriptionPlaced extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
+    public $subscription;
     /**
      * Create a new message instance.
      *
