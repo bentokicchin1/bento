@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\DefaultSubscriptionPlaced;
-use App\Model\User;
+use App\Mail\OrderPlaced;
 use App\Model\Order;
 use App\Model\OrderItem;
 use App\Model\DishType;
@@ -18,17 +16,6 @@ use PDF;
 class DashboardController extends Controller
 {
     public function index(){
-        User::withTrashed()->find(1)->restore();
-        $user = User::find(1);
-        $userEmail = $user->email;
-        $sub['name'] = $user->name;
-        $orderType = OrderType::find(2);
-        $sub['orderType'] = $orderType->name;
-        $sub['items'] = json_decode('{"friday":{"orderTotalAmount":49,"orderTypeId":2,"items":{"chapati":{"dish_id":1,"qty":3,"name":"Chapati","food_type":"both","base_price":"8.00","total_price":24},"veg_sabaji":{"dish_id":20,"qty":1,"name":"Paneer masala","food_type":"veg","base_price":"25.00","total_price":25}}},"thursday":{"orderTotalAmount":45,"orderTypeId":2,"items":{"chapati":{"dish_id":1,"qty":3,"name":"Chapati","food_type":"both","base_price":"8.00","total_price":24},"veg_sabaji":{"dish_id":18,"qty":1,"name":"aalu-mutter","food_type":"veg","base_price":"21.00","total_price":21}}},"saturday":{"orderTotalAmount":49,"orderTypeId":2,"items":{"chapati":{"dish_id":1,"qty":3,"name":"Chapati","food_type":"both","base_price":"8.00","total_price":24},"veg_sabaji":{"dish_id":21,"qty":1,"name":"Mix vegetable curry","food_type":"veg","base_price":"25.00","total_price":25}}}}', true);
-        Mail::to($userEmail)->send(new DefaultSubscriptionPlaced($sub));
-        exit;
-        
-        
         $list = array();
         $date = date('Y-m-d');
         $currentTime= date('h:i a');

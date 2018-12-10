@@ -18,6 +18,8 @@ use App\Model\OrderType;
 use App\Model\Subscription;
 use App\Services\Checkout\OrderService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DefaultSubscriptionPlaced;
 
 class SubscriptionService
 {
@@ -237,9 +239,9 @@ class SubscriptionService
             $user = User::find($userId);
             $userEmail = $user->email;
             $sub['name'] = $user->name;
-            $orderType = OrderType::find($subscription->order_type_id);
+            $orderType = OrderType::find($orderParams['orderTypeId']);
             $sub['orderType'] = $orderType->name;
-            $sub['items'] = json_decode($orderParams['subscriptionItems']);
+            $sub['items'] = json_decode($orderParams['subscriptionItems'], true);
             Mail::to($userEmail)->send(new DefaultSubscriptionPlaced($sub));
             DB::commit();
             return 'success';
