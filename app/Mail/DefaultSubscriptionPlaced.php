@@ -29,7 +29,6 @@ class DefaultSubscriptionPlaced extends Mailable
      */
     public function build()
     {
-        
-        print_r($this->view('emails.defaultSubscriptionPlaced'));
+       return $this->view('emails.defaultSubscriptionPlaced');
     }
 }

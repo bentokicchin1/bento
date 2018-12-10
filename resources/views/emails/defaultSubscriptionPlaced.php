@@ -77,6 +77,7 @@
                                         <div style="padding:15px;color:#555555;font-weight:normal;font-size:12px;font-family:Helvetica,Arial,sans-serif;line-height:20px;padding-bottom: 20px;">
                                         <table cellspacing="0" cellpadding="15" border="0" width="100%">
                                             <tbody>
+                                                {{$subscription}}
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$subscription['name']}},</b></p>
