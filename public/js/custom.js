@@ -2,6 +2,7 @@
  /* jQuery Pre loader
   -----------------------------------------------*/
 $(window).on('load',function(){
+    var locations = {};
     $('.preloader').fadeOut(0); // set duration in brackets
 });
 
