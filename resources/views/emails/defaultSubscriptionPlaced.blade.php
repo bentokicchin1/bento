@@ -87,7 +87,7 @@
                                                             <ul>
                                                                 @foreach($subscription['items'] as $day=>$items)
                                                                     <h3>{{$day}}</h3>
-                                                                    <h2>Order Total Amount - Rs. {{$orderTotalAmount}}</h2>
+                                                                    <h2>Order Total Amount - Rs. {{$items['orderTotalAmount']}}</h2>
                                                                     @foreach($items['items'] as $dishType=>$dishes)
                                                                         @if($dishType!='others')
                                                                             <li style="line-height: 1.5;font-size: 12px">{{$dishes['qty']}} {{$dishes['name']}} - Rs. {{$dishes['total_price']}}</li>
