@@ -89,7 +89,7 @@
                                                                     <h3>{{$day}}</h3>
                                                                     @foreach($items as $dishType=>$dishes)
                                                                         @if($dishType!='others')
-                                                                            <li style="line-height: 1.5;font-size: 12px">$dishType</li>
+                                                                            <li style="line-height: 1.5;font-size: 12px">{{$dishType}}</li>
                                                                         @else
                                                                             @foreach($dishes as $otherDishes)
                                                                                 <li style="line-height: 1.5;font-size: 12px">{{$otherDishes['qty']}} {{$otherDishes['name']}} - Rs. {{$otherDishes['total_price']}}</li>
