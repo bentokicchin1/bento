@@ -163,7 +163,7 @@ $(document).ready(function(){
     });
     
     function areaSectorRelation(){
-        if(locations!==undefined){
+        if(locations!=''){
             var areaLocations = jQuery.parseJSON(locations);
             var area = $('#area').val();
             if(area!=''){
