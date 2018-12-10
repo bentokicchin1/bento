@@ -163,21 +163,23 @@ $(document).ready(function(){
     });
     
     function areaSectorRelation(){
-        var areaLocations = jQuery.parseJSON(locations);
-        var area = $('#area').val();
-        if(area!=''){
-            $('#sector').empty();
-            var mySelect = $('#sector');
-            mySelect.append(
-                $('<option></option>').val('').html('--- Select --- ')
-            );
-            $.each(areaLocations, function(key, val) {
-                if(val['area_id']==area){
-                    mySelect.append(
-                        $('<option></option>').val(val['id']).html(val['name'])
-                    );
-                }
-            });
+        if(locations!==undefined){
+            var areaLocations = jQuery.parseJSON(locations);
+            var area = $('#area').val();
+            if(area!=''){
+                $('#sector').empty();
+                var mySelect = $('#sector');
+                mySelect.append(
+                    $('<option></option>').val('').html('--- Select --- ')
+                );
+                $.each(areaLocations, function(key, val) {
+                    if(val['area_id']==area){
+                        mySelect.append(
+                            $('<option></option>').val(val['id']).html(val['name'])
+                        );
+                    }
+                });
+            }
         }
     };
 
