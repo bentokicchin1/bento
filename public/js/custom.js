@@ -337,22 +337,22 @@ $(document).ready(function(){
         calculateTotal();
         $(this).each(function (){
             var dayName = $(this).val();
-            console.log($(this).parent());
-            console.log($(this).parent());
-            console.log($(this).parent());
+//            console.log($(this).parent('.tab-pane'));
+//            console.log($(this).parent('.tab-pane'));
+//            console.log($(this).parent('.tab-pane'));
             if($(this).prop('checked')==false){
                 
-                $(".otherDish").attr('disabled',true);
-                $("input[name$='"+dayName+"']").attr('disabled',true);
+//                $(".otherDish").attr('disabled',true);
+//                $("input[name$='"+dayName+"']").attr('disabled',true);
                 $("[name$='"+dayName+"']").attr('disabled',true);
-                $(".quantity-right-plus").attr('disabled',true);
-                $(".quantity-left-minus").attr('disabled',true); 
+//                $(".quantity-right-plus").attr('disabled',true);
+//                $(".quantity-left-minus").attr('disabled',true); 
             }else{
-                $(".otherDish").removeAttr('disabled');
-                $("input[name$='"+dayName+"']").removeAttr('disabled');
+//                $(".otherDish").removeAttr('disabled');
+//                $("input[name$='"+dayName+"']").removeAttr('disabled');
                 $("[name$='"+dayName+"']").removeAttr('disabled');
-                $(".quantity-right-plus").removeAttr('disabled');
-                $(".quantity-left-minus").removeAttr('disabled');
+//                $(".quantity-right-plus").removeAttr('disabled');
+//                $(".quantity-left-minus").removeAttr('disabled');
             }
         });
 
