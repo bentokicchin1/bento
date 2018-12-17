@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
+use App\Model\User;
 use App\Model\Feedback;
 use DB;
 use Illuminate\Http\Request;
@@ -23,7 +25,7 @@ class FeedbackController extends Controller
     {
         $feedbacks = Feedback::with('users')
                   ->where("users.deleted_at", NULL)
-                  ->get()->toArray();
+                  ->get();
 
         return view('admin.feedbacks.list', ['feedbacks' => $feedbacks]);
     }

@@ -11,7 +11,7 @@ class Feedback extends Model
       protected $hidden = ["deleted_at"];
       
       
-    public function feedback()
+    public function users()
     {
         return $this->belongsTo('App\User');
     }
