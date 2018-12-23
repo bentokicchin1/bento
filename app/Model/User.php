@@ -46,14 +46,14 @@ class User extends Model
     {
          return $this->hasMany('App\Model\VerifyUser');
     }
-    
+
     public function subscriptions()
     {
         return $this->hasMany('App\Model\Subscription');
     }
-    
+
     public function feedbacks()
     {
-        return $this->hasMany('App\Model\Feedback');
+        return $this->hasMany('App\Model\Feedback','user_id');
     }
 }

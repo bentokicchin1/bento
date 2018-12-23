@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 $(document).ready(function(){
     "use strict";
-    
+
     if( $('#area').length ){
        areaSectorRelation();
     }
@@ -161,7 +161,7 @@ $(document).ready(function(){
     $('#area').change(function(){
         areaSectorRelation();
     });
-    
+
     function areaSectorRelation(){
         var areaLocations = jQuery.parseJSON(locations);
         var area = $(this).val();
@@ -340,7 +340,7 @@ $(document).ready(function(){
                 $("input[name$='"+dayName+"']").attr('disabled',true);
                 $("[name$='"+dayName+"']").attr('disabled',true);
                 $(".quantity-right-plus").attr('disabled',true);
-                $(".quantity-left-minus").attr('disabled',true); 
+                $(".quantity-left-minus").attr('disabled',true);
             }else{
                 $(".otherDish").removeAttr('disabled');
                 $("input[name$='"+dayName+"']").removeAttr('disabled');
