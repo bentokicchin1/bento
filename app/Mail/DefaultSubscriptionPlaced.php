@@ -7,19 +7,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderPlaced extends Mailable
+class DefaultSubscriptionPlaced extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
+    public $subscription;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($subscription)
     {
-        $this->order = $order;
+        $this->subscription = $subscription;
     }
 
     /**
@@ -29,6 +29,6 @@ class OrderPlaced extends Mailable
      */
     public function build()
     {
-        return $this->subject('Order Received')->view('emails.orderPlaced');
+       return $this->subject('Subscription Menu Updated')->view('emails.defaultSubscriptionPlaced');
     }
 }

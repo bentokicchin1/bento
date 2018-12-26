@@ -9,13 +9,17 @@
 namespace App\Services\Checkout;
 
 use DB;
+use App\Model\User;
 use App\Model\Dish;
 use App\Model\DishType;
 use App\Model\WeeklyDishList;
 use App\Model\Order;
+use App\Model\OrderType;
 use App\Model\Subscription;
 use App\Services\Checkout\OrderService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DefaultSubscriptionPlaced;
 
 class SubscriptionService
 {
@@ -214,6 +218,7 @@ class SubscriptionService
     {
         DB::beginTransaction();
         try {
+            $sub = array();
             $userId = ($userId==0) ? Auth::id() : $userId;
             $orderTypeId = $orderParams['orderTypeId'];
             $existingSub = Subscription::withTrashed()->where(['user_id'=>$userId,'order_type_id'=>$orderTypeId])->first();
@@ -230,7 +235,14 @@ class SubscriptionService
             $subscription->shipping_address_id = $orderParams['shippingAddressId'];
             $subscription->subscription_items = $orderParams['subscriptionItems'];
             $subscription->save();
-
+            
+            $user = User::find($userId);
+            $userEmail = $user->email;
+            $sub['name'] = $user->name;
+            $orderType = OrderType::find($orderParams['orderTypeId']);
+            $sub['orderType'] = $orderType->name;
+            $sub['items'] = json_decode($orderParams['subscriptionItems'], true);
+            Mail::to($userEmail)->send(new DefaultSubscriptionPlaced($sub));
             DB::commit();
             return 'success';
         } catch (Exception $e) {
