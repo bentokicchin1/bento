@@ -10,7 +10,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class MonthlyBillGenerated extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $lastMonth;
+    public $user;
+    public $orders;
     /**
      * Create a new message instance.
      *

@@ -57,7 +57,7 @@
             h5{font-size: 18px}
             h6{font-size: 14px}
         </style>
-        <title>Bill For the month of </title>
+        <title>Bill For the month of {{$lastMonth}}</title>
     </head>
     <body marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" style="margin:0; padding:0;">
         <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="border-collapse: separate;background-color:#efefef;color:#555555;" >
@@ -80,7 +80,7 @@
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$user['name']}},</b></p>
-                                                        <p style="line-height: 1.0;font-size: 12px">Your bill for the month of .</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
                                                         <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
 
