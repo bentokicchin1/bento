@@ -50,10 +50,10 @@ class GenerateMonthlyBills extends Command
               print_R($user);
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
-                    // Mail::to($user['email'])->send(new MonthlyBillGenerated($lastMonth,$user,$orders));
+                    Mail::to($user['email'])->send(new MonthlyBillGenerated($lastMonth,$user,$orders));
                 }
+                exit;
             }
-            exit;
         } catch (Exception $e) {
             return $e->getRawMessage();
         }
