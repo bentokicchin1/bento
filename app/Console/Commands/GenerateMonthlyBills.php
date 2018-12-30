@@ -46,10 +46,9 @@ class GenerateMonthlyBills extends Command
             $lastMonth = date('m',strtotime('this month'));
             $allUsers = User::where("id", 1)->where("users.deleted_at", NULL)->get()->toArray();
             foreach ($allUsers as $key => $user) {
-                echo "<pre/>";
-                print_r($user);
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
+                  unset($orders['total']);
                     Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
                 }
                 exit;

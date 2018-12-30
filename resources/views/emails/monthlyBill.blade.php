@@ -83,12 +83,12 @@
                                                         <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is 100Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.,</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.</b></p>
                                                         <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.,</b></p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
 
-                                                        <table cellspacing="5" cellpadding="5" border="2" width="100%">
+                                                        <table cellspacing="5" cellpadding="5" border="1" width="100%" align="center">
                                                           <thead>
                                                             <th>Date</th>
                                                             <th>Order Details</th>
