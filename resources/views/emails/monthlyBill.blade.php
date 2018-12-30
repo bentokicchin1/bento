@@ -99,11 +99,12 @@
                                                                 <tr>
                                                                   <td>{{date('d D Y',strtotime($order_detail['order_date']))}}</td>
                                                                   <td>
-                                                                    @if(array_key_exists('dishList',$order_detail))
+                                                                    {{$order_detail}}
+                                                                    <!-- @if(array_key_exists('dishList',$order_detail))
                                                                       @foreach($order_detail['dishList'] as $k=>$dish)
                                                                         {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
                                                                       @endforeach
-                                                                    @else
+                                                                    @else -->
                                                                       <span>-</span>
                                                                     @endif
                                                                   </td>
