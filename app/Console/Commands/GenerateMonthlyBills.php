@@ -41,7 +41,7 @@ class GenerateMonthlyBills extends Command
     {
         try {
                 DB::enableQueryLog();
-                $lastMonth = date('m',strtotime('last month'));
+                $lastMonth = date('m',strtotime('this month'));
                 $allUsers = User::where("users.deleted_at", NULL)->get()->toArray();
                 foreach ($allUsers as $key => $user) {
                   echo $user['id'];
