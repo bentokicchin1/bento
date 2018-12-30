@@ -88,7 +88,7 @@
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
 
-                                                        <table cellspacing="0" cellpadding="15" border="0" width="100%">
+                                                        <table cellspacing="5" cellpadding="5" border="2" width="100%">
                                                           <thead>
                                                             <th>Date</th>
                                                             <th>Order Details</th>
