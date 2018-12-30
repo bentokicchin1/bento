@@ -22,23 +22,23 @@
             <div class="box-body" style="overflow-x:auto;">
               <table id="billpaymentTable" class="table table-bordered table-striped">
                 <tr>
-                    <th>ID</th>
-                    <th>Payments Name</th>
-                    <th>Payments Email</th>
-                    <th>Payments Mobile</th>
-                    <!-- <th>Payments Cycle</th> -->
-                    <th>Operation</th>
+                    <th>Payments Date</th>
+                    <th>Billing Cycle</th>
+                    <th>Payments Received</th>
+                    <th>Payments Mode</th>
+                    <th>Amount Pending</th>
+                    <th>Action</th>
                 </tr>
-                  @foreach($billpayment as $type)
+                  @foreach($payments as $type)
                   <tr>
-                    <td>{{$type->id}}</td>
-                    <td>{{ ucfirst($type->name) }}</td>
-                    <td>{{ $type->email }}</td>
-                    <td>{{ $type->mobile_number }}</td>
-                    <!-- <td>{{ $type->description }}</td> -->
+                    <td>{{ date('d M Y',strtotime($type['payment_date'])) }}</td>
+                    <td>{{$type['users']['billing_cycle']}}</td>
+                    <td>{{ $type['payment_received'] }}</td>
+                    <td>{{$type['mode_of_payment']}}</td>
+                    <td>{{ $type['outstanding_bill'] }}</td>
                     <td>
-                      <a class="btn btn-warning" href="{{ route('admin-billpayment-edit',['id' => $type['id']]) }}">Edit</a>
-                      <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-billpayment-delete', ['id' => $type['id']]) }}">Delete</a></div>
+                      <!-- <a class="btn btn-warning" href="{{ route('admin-billpayment-edit',['id' => $type['id']]) }}">Edit</a> -->
+                      <!-- <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-billpayment-delete', ['id' => $type['id']]) }}">Delete</a></div> -->
                     </td>
                   </tr>
                   @endforeach

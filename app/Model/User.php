@@ -56,4 +56,9 @@ class User extends Model
     {
         return $this->hasMany('App\Model\Feedback','user_id');
     }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Model\BillPayment','user_id');
+    }
 }

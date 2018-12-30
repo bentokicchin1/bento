@@ -48,7 +48,7 @@
                     <td><a class="btn btn-warning" href="{{ route('admin-user-edit',['id' => $type->id]) }}">Edit</a>
                         <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-user-delete', ['id' => $type->id]) }}">Delete</a></div>
                         <a class="btn btn-default" href="{{ route('admin-user-order', ['id' => $type->id]) }}">View Orders</a></div>
-                        <a class="btn btn-default" href="{{ route('admin-billpayment-add', ['id' => $type->id]) }}">Bills</a></div>
+                        <a class="btn btn-default" href="{{ route('admin-billpayment-list') }}">Bills</a></div>
                     </td>
                   </tr>
                   @endforeach
