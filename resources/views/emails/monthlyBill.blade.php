@@ -99,7 +99,7 @@
                                                                 <tr>
                                                                   <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
                                                                   <td>
-                                                                    @foreach($order_detail['dishList'] as $dishId=>$dish)
+                                                                    @foreach($order_detail->dishList as $dishId=>$dish)
                                                                       {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
                                                                     @endforeach
                                                                   </td>
