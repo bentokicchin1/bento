@@ -44,10 +44,7 @@ class GenerateMonthlyBills extends Command
                 $lastMonth = date('m',strtotime('this month'));
                 $allUsers = User::where("users.deleted_at", NULL)->get()->toArray();
                 foreach ($allUsers as $key => $user) {
-                  echo $user['id'];
-                    $orders = Order::where('user_id',$user['id'])
-                            ->whereRaw('MONTH(order_date)='.$lastMonth)
-                            ->where("orders.deleted_at", NULL)->get()->toArray();
+                    $orders = Order::getOrderDetails($user['id']);
                     echo "<pre/>";
                     print_r($orders);
                 }
