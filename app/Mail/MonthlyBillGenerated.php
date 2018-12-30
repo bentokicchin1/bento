@@ -20,9 +20,9 @@ class MonthlyBillGenerated extends Mailable
      */
     public function __construct($user,$orders)
     {
-        $this->lastMonth = date('J',strtotime('this month'));
         $this->user = $user;
         $this->orders = $orders;
+        $this->lastMonth = date('J',strtotime('this month'));
     }
 
     /**
