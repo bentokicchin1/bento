@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Model\User;
 use App\Model\Order;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MonthlyBillGenerated;
 use DB;
 
 class GenerateMonthlyBills extends Command
@@ -40,15 +42,19 @@ class GenerateMonthlyBills extends Command
     public function handle()
     {
         try {
-                DB::enableQueryLog();
-                $lastMonth = date('m',strtotime('this month'));
-                $allUsers = User::where("users.deleted_at", NULL)->get()->toArray();
-                foreach ($allUsers as $key => $user) {
-                    $orders = Order::getOrderDetails($user['id']);
-                    echo "<pre/>";
-                    print_r($orders);
+            DB::enableQueryLog();
+            $lastMonth = date('m',strtotime('this month'));
+            $allUsers = User::where("id", 1)->where("users.deleted_at", NULL)->get()->toArray();
+            foreach ($allUsers as $key => $user) {
+              echo "<pre/>";
+              print_R($user);
+              exit;
+                $orders = Order::getOrderDetails($user['id']);
+                if(!empty($orders)){
+                    // Mail::to($user['email'])->send(new MonthlyBillGenerated($lastMonth,$user,$orders));
                 }
                 exit;
+            }
         } catch (Exception $e) {
             return $e->getRawMessage();
         }

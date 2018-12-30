@@ -14,4 +14,12 @@ class BillPayment extends Model
     {
         return $this->belongsTo('App\User','user_id');
     }
+    /*
+    * function sendGeneratedBills
+    * param $orders - Array of order details and cost of every order in previous month
+    */
+    // public static function sendGeneratedBills($user,$orders)
+    // {
+    //     foreach()
+    // }
 }
