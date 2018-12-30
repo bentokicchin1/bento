@@ -49,9 +49,10 @@ class GenerateMonthlyBills extends Command
                             ->whereRaw('MONTH(order_date)='.$lastMonth)
                             ->where("orders.deleted_at", NULL)->get()->toArray();
                     echo "<pre/>";
+                    print_r(DB::getQueryLog());
                     print_r($orders);
+                    exit;
                 }
-                exit;
         } catch (Exception $e) {
             return $e->getRawMessage();
         }
