@@ -84,7 +84,7 @@
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is 100Rs.</b></p>
                                                         <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.,</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.</b></p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
 
@@ -110,9 +110,6 @@
                                                               @endforeach
                                                             </tbody>
                                                         </table>
-
-                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
-
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>

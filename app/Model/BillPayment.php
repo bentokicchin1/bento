@@ -18,8 +18,22 @@ class BillPayment extends Model
     * function sendGeneratedBills
     * param $orders - Array of order details and cost of every order in previous month
     */
-    // public static function sendGeneratedBills($user,$orders)
-    // {
-    //     foreach()
-    // }
+    public static function sendGeneratedBills($user,$orders)
+    {
+        DB::beginTransaction();
+        $billAmount = 0;
+        foreach($orders as $key=>$order){
+          if($order['status']=='ordered'){
+            $billAmount += $order['total_amount'];
+          }
+        }
+        $billObj = new BillPayment;
+        $billObj->user_id = $user['id'];
+        $billObj->month = date('m'.strtotime('this month'));
+        $billObj->outstanding_bill = $billAmount;
+        $billObj->total_bill = $billAmount;
+        $billObj->mode_of_payment = 'generated';
+        $billObj->save();
+        DB::commit();
+    }
 }

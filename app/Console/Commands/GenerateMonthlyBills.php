@@ -49,7 +49,7 @@ class GenerateMonthlyBills extends Command
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
                   unset($orders['total']);
-                    Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
+                    // Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
                 }
                 exit;
             }
