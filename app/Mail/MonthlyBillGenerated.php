@@ -22,6 +22,9 @@ class MonthlyBillGenerated extends Mailable
     {
         $this->user = $user;
         $this->orders = $orders;
+        echo "<pre/>";
+        print_r($orders);
+        exit;
         $this->lastMonth = date('F',strtotime('this month'));
     }
 
