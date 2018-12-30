@@ -79,7 +79,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello {{$user['name']}},</b></p>
+                                                        <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
                                                         <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
