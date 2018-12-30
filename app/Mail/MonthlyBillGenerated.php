@@ -22,7 +22,7 @@ class MonthlyBillGenerated extends Mailable
     {
         $this->user = $user;
         $this->orders = $orders;
-        $this->lastMonth = date('J',strtotime('this month'));
+        $this->lastMonth = date('F',strtotime('this month'));
     }
 
     /**
@@ -32,7 +32,7 @@ class MonthlyBillGenerated extends Mailable
      */
     public function build()
     {
-        $lastMonth = date('J',strtotime('this month'));
+        $lastMonth = date('F',strtotime('this month'));
         return $this->subject('Bill For The Month Of '.$lastMonth)->view('emails.monthlyBill');
     }
 }

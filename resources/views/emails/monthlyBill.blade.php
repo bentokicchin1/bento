@@ -82,6 +82,33 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is 100Rs.</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.,</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.,</b></p>
+                                                        <br/>
+                                                        <p style="line-height: 1.5;font-size: 12px"><b>Below is the Summary for month {{$lastMonth}},</b></p>
+
+                                                        <table>
+                                                          <thead>
+                                                            <th>Date</th>
+                                                            <th>Order Details</th>
+                                                            <th>Price</th>
+                                                          <thead>
+                                                            <tbody>
+                                                              @foreach($orders as $key=>$order_detail)
+                                                                <tr>
+                                                                  <td>{{date('d D Y',strtotime($order_detail['order_date']))}}</td>
+                                                                  <td>
+                                                                    @foreach($order_detail['dishList'] as $k=>$dish)
+                                                                      {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
+                                                                    @endforeach
+                                                                  </td>
+                                                                  <td>{{$order_detail['total_amount']}}</td>
+                                                                </tr>
+                                                              @endforeach
+                                                            </tbody>
+                                                        </table>
+
                                                         <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to Edit or Cancel order.</p>
 
                                                         <br/>
