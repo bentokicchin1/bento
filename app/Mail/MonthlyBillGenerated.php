@@ -32,6 +32,7 @@ class MonthlyBillGenerated extends Mailable
      */
     public function build()
     {
+        $this->lastMonth = date('J',strtotime('this month'));
         return $this->subject('Bill For The Month Of '.$lastMonth)->view('emails.monthlyBill');
     }
 }
