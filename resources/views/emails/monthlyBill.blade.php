@@ -100,13 +100,7 @@
                                                                   <td>{{date('d D Y',strtotime($order_detail['order_date']))}}</td>
                                                                   <td>
                                                                     {{$order_detail['total_amount']}}
-                                                                    <!-- @if(array_key_exists('dishList',$order_detail))
-                                                                      @foreach($order_detail['dishList'] as $k=>$dish)
-                                                                        {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
-                                                                      @endforeach
-                                                                    @else -->
-                                                                      <!-- <span>-</span>
-                                                                    @endif -->
+                                                          
                                                                   </td>
                                                                   <td>{{$order_detail['total_amount']}}</td>
                                                                 </tr>
