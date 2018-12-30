@@ -48,13 +48,12 @@ class GenerateMonthlyBills extends Command
             foreach ($allUsers as $key => $user) {
               echo "<pre/>";
               print_R($user);
-              exit;
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
                     // Mail::to($user['email'])->send(new MonthlyBillGenerated($lastMonth,$user,$orders));
                 }
-                exit;
             }
+            exit;
         } catch (Exception $e) {
             return $e->getRawMessage();
         }
