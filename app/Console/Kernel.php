@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         '\App\Console\Commands\PlaceOrder',
         '\App\Console\Commands\PlaceDefaultSubscription',
+        '\App\Console\Commands\GenerateMonthlyBills',
     ];
 
     /**
@@ -34,6 +35,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('PlaceDefaultSubscription:placeDefaultSubscription')->between('15:55','18:25')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
         $schedule->command('PlaceOrder:placeOrder')->between('15:30','18:30')->everyFiveMinutes()->emailOutputTo('bentokicchin@gmail.com');
+
+        // $schedule->command('generateMonthlyBills:generateMonthlyBills')>daily()->emailOutputTo('bentokicchin@gmail.com');
     }
 
     /**

@@ -3,11 +3,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Order Types
+        Feedbacks
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('admin-dashboard')}}"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="#" class="active">Order Type</a></li>
+        <li><a href="#" class="active">Feedback List</a></li>
       </ol>
     </section>
 
@@ -17,27 +17,25 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              {{--  <h3 class="box-title">Data Table With Full Features</h3>  --}}
-            <a href="{{ route('admin-order-type-add')}}" class=" btn btn-big btn-success">Add New</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="overflow-x:auto;">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Name</th>
-                  <th>Operation</th>
+                  <th>Mobile</th>
+                  <th>Comment</th>
+                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($orderType as $type)
+                @foreach($feedbacks as $comment)
                 <tr>
-                <td>{{$type->id}}</td>
-                <td>{{ ucfirst($type->name) }}</td>
-                <td><a class="btn btn-warning" href="{{ route('admin-order-type-edit',['id' => $type['id']]) }}">Edit</a>
-                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" href="{{ route('admin-order-type-delete', ['id' => $type['id']]) }}">Delete</a></div>
-                </td>
+                  <td>{{ ucfirst($comment['users']['name']) }}</td>
+                  <td>{{$comment['users']['mobile_number']}}</td>
+                  <td>{{$comment['value']}}</td>
+                  <td>{{ date('Y-m-d h:i a',strtotime($comment['created_at']))}}</td>
                 </tr>
                 @endforeach
                 </tbody>

@@ -11,7 +11,6 @@
         <li class="active">Add Payments</li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -61,52 +60,7 @@
                           {{ Form::radio('billing_cycle', 'monthly',old('billing_cycle'),['class'=>'radio-inline']) }}
                     </div>
                 </div>
-                <div class="col-md-8 col-sm-10 box">
-                  <h4 class="m-b-20">Address</h4>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Order Type :</label>
-                      <div class="col-sm-6">
-                            {{ Form::select('order_type_id',$orderTypeData,old('order_type_id'),['class' => 'form-control dropdown','placeholder' => 'Please Select Order Type' ]) }}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select City :</label>
-                      <div class="col-sm-6">
-                        {{ Form::select('city', $cityData,old('city'), ['class' => 'form-control dropdown','placeholder' => 'Please Select Your City'])}}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Area :</label>
-                      <div class="col-sm-6">
-                        {{ Form::select('area',$areaData,old('area'), ['class' => 'form-control dropdown','placeholder' => 'Please Select Your Area' ])}}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select Sector :</label>
-                      <div class="col-sm-6">
-                        {{ Form::select('sector',$areaLocationData, old('sector'), ['class' => 'form-control dropdown','placeholder' => 'Please Select Your Sector' ])}}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Enter Detailed Address :</label>
-                      <div class="col-sm-6">
-                        {{ Form::text('location',old('location') , ['class' => 'form-control', 'placeholder' => 'Address (required)']) }}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Select State :</label>
-                      <div class="col-sm-6">
-                        {{ Form::text('state','Maharashtra' , ['class' => 'form-control', 'placeholder' => 'State (required)', 'readonly']) }}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Enter Pincode :</label>
-                      <div class="col-sm-6">
-                        {{ Form::text('pincode',old('pincode'), ['class' => 'form-control', 'placeholder' => 'Pincode (required)']) }}
-                      </div>
-                  </div>
-                </div>
-
+              </div>
             </div>
             <div class="box-footer">
                 {{ Form::submit('Submit', ['class' => 'btn btn-success pull-right']) }}

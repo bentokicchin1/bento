@@ -153,7 +153,7 @@ $(document).ready(function() {
 
 $(document).ready(function(){
     "use strict";
-    
+
     if($('#area').val()  != ''){
        areaSectorRelation();
     }
@@ -161,7 +161,7 @@ $(document).ready(function(){
     $('#area').change(function(){
         areaSectorRelation();
     });
-    
+
     function areaSectorRelation(){
         if(locations!=''){
             var areaLocations = jQuery.parseJSON(locations);
@@ -341,12 +341,17 @@ $(document).ready(function(){
 //            console.log($(this).parent('.tab-pane'));
 //            console.log($(this).parent('.tab-pane'));
             if($(this).prop('checked')==false){
-                
+
 //                $(".otherDish").attr('disabled',true);
 //                $("input[name$='"+dayName+"']").attr('disabled',true);
                 $("[name$='"+dayName+"']").attr('disabled',true);
+<<<<<<< HEAD
+                $(".quantity-right-plus").attr('disabled',true);
+                $(".quantity-left-minus").attr('disabled',true);
+=======
 //                $(".quantity-right-plus").attr('disabled',true);
-//                $(".quantity-left-minus").attr('disabled',true); 
+//                $(".quantity-left-minus").attr('disabled',true);
+>>>>>>> d0bafbc4c3343cc7f5a2706a967474f81d37601b
             }else{
 //                $(".otherDish").removeAttr('disabled');
 //                $("input[name$='"+dayName+"']").removeAttr('disabled');
