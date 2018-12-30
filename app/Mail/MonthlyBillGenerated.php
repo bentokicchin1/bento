@@ -21,9 +21,6 @@ class MonthlyBillGenerated extends Mailable
         $this->lastMonth = $lastMonth;
         $this->user = $user;
         $this->orders = $orders;
-        echo "<pre/>";
-        print_r($this);
-        exit;
     }
 
     /**
