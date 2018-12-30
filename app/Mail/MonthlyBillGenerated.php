@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class MonthlyBillGenerated extends Mailable
 {
     use Queueable, SerializesModels;
-    public $lastMonth;
+    public $lastMonth = date('J',strtotime('this month'));
     public $user;
     public $orders;
     /**
@@ -18,7 +18,7 @@ class MonthlyBillGenerated extends Mailable
      *
      * @return void
      */
-    public function __construct($lastMonth,$user,$orders)
+    public function __construct($user,$orders)
     {
         $this->lastMonth = $lastMonth;
         $this->user = $user;
@@ -32,7 +32,6 @@ class MonthlyBillGenerated extends Mailable
      */
     public function build()
     {
-        $lastMonth = date('M',strtotime('this month'));
         return $this->subject('Bill For The Month Of '.$lastMonth)->view('emails.monthlyBill');
     }
 }
