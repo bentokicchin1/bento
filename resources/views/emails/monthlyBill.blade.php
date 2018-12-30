@@ -97,10 +97,11 @@
                                                             <tbody>
                                                               @foreach($orders as $key=>$order_detail)
                                                                 <tr>
-                                                                  <td>{{date('d D Y',strtotime($order_detail['order_date']))}}</td>
+                                                                  <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
                                                                   <td>
-                                                                    {{$order_detail['total_amount']}}
-                                                          
+                                                                    @foreach($order_detail['dishList'] as $k=>$dish)
+                                                                      {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
+                                                                    @endforeach
                                                                   </td>
                                                                   <td>{{$order_detail['total_amount']}}</td>
                                                                 </tr>
