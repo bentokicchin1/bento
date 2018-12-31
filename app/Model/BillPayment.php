@@ -28,7 +28,7 @@ class BillPayment extends Model
             $billAmount += $order['total_amount'];
           }
         }
-        $previousRec = DB::table('bill_payments')->orderBy('payment_date', 'desc')->first();
+        $previousRec = DB::table('bill_payments')->where('user_id', '1')->orderBy('payment_date', 'desc')->first();
         if(!empty($previousRec)){
             echo "<pre/>";
             print_r($previousRec);
