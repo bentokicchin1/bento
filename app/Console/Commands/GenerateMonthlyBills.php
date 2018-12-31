@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Model\User;
 use App\Model\Order;
+use App\Model\BillPayment;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MonthlyBillGenerated;
 use DB;
@@ -48,7 +49,8 @@ class GenerateMonthlyBills extends Command
             foreach ($allUsers as $key => $user) {
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
-                  unset($orders['total']);
+                    unset($orders['total']);
+                    BillPayment::sendGeneratedBills($user,$orders);
                     // Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
                 }
                 exit;
