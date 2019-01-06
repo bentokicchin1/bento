@@ -34,6 +34,7 @@ class BillPayment extends Model
         }
 
         if(!empty($billAmount)){
+          echo "if";
           $monthlyBillObj = new MonthlyBills;
           $monthlyBillObj->user_id = $user['id'];
           $monthlyBillObj->bill_for_month = date('m'.strtotime('last month'));
@@ -46,6 +47,7 @@ class BillPayment extends Model
         $billObj->payment_received = 0;
         $billObj->outstanding_bill = $billAmount + $pendingBill;
         $billObj->mode_of_payment = 'generated';
+        $billObj->payment_date = date('Y-m-d');
         $billObj->save();
         DB::commit();
     }
