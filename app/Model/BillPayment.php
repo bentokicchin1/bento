@@ -30,7 +30,7 @@ class BillPayment extends Model
         }
         $previousRec = DB::table('bill_payments')->where('user_id', '1')->orderBy('payment_date', 'desc')->first();
         if(!empty($previousRec)){
-          $pendingBill = $previousRec['outstanding_bill'];
+          $pendingBill = $previousRec->outstanding_bill;
         }
 
         if(!empty($billAmount)){
