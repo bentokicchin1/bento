@@ -34,13 +34,13 @@ class BillPayment extends Model
         }
 
         if(!empty($billAmount)){
-          echo "if";
           $monthlyBillObj = new MonthlyBills;
           $monthlyBillObj->user_id = $user['id'];
           $monthlyBillObj->bill_for_month = date('m'.strtotime('last month'));
           $monthlyBillObj->bill_for_year = date('Y');
           $monthlyBillObj->bill_date = date('Y-m-d');
           $monthlyBillObj->bill_amount = $billAmount;
+          $monthlyBillObj->save();
         }
         $billObj = new BillPayment;
         $billObj->user_id = $user['id'];
