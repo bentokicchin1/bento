@@ -32,7 +32,8 @@ class BillPayment extends Model
         if(!empty($previousRec)){
           $pendingBill = $previousRec->outstanding_bill;
         }
-
+echo date('m'.strtotime('last month'));
+exit;
         if(!empty($billAmount)){
           $monthlyBillObj = new MonthlyBills;
           $monthlyBillObj->user_id = $user['id'];
