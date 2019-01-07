@@ -82,11 +82,7 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is {{$billAmount}}Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is {{$pendingBill}}Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is {{$outstanding_bill}}Rs.</b></p>
-                                                        <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
+                                                        <p style="line-height: 1.5;font-size: 12px">Below is the Summary,</p>
 
                                                         <table cellspacing="5" cellpadding="5" border="1" width="100%" align="center">
                                                           <thead>
@@ -95,19 +91,31 @@
                                                             <th>Price</th>
                                                           <thead>
                                                             <tbody>
-                                                              @foreach($orders as $key=>$order_detail)
-                                                                <tr>
-                                                                  <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
-                                                                  <td>
-                                                                    @if(!empty($order_detail['dishList']))
-                                                                      @foreach($order_detail['dishList'] as $dishId=>$dish)
-                                                                        {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
-                                                                      @endforeach
-                                                                    @endif
-                                                                  </td>
-                                                                  <td>{{$order_detail['total_amount']}}</td>
+                                                                @foreach($orders as $key=>$order_detail)
+                                                                    <tr>
+                                                                        <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
+                                                                        <td>
+                                                                            @if(!empty($order_detail['dishList']))
+                                                                                @foreach($order_detail['dishList'] as $dishId=>$dish)
+                                                                                    {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>{{$order_detail['total_amount']}}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                                <tr><td></td><td></td>
+                                                                    <td>
+                                                                        <table>
+                                                                            <thead></thead>
+                                                                            <tbody>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>{{$lastMonth}} Bill Amount:-</b></td><td>{{$billAmount}}Rs.</td><tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Pending Bill Amount:-</b></td><td>{{$pendingBill}}Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Total Bill Amount:-</b></td><td>{{$outstanding_bill}}Rs.</td></tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
                                                                 </tr>
-                                                              @endforeach
                                                             </tbody>
                                                         </table>
                                                         <br/>
