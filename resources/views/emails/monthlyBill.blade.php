@@ -109,9 +109,9 @@
                                                         <br/>
                                                         <table cellspacing="20" cellpadding="25" border="0" width="100%" >
                                                             <tbody>
-                                                                <tr><td style="width:30%;"></td><td style="width:30%;"></td>
-                                                                    <td style="width:40%;">
-                                                                        <table cellspacing="20" cellpadding="10" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
+                                                                <tr><td style="width:25%;"></td><td style="width:30%;"></td>
+                                                                    <td align="right" style="text-align: right;">
+                                                                        <table align="right" cellspacing="10" cellpadding="10" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
                                                                             <thead></thead>
                                                                             <tbody>
                                                                                 <tr style="line-height: 1.5;font-size: 13px"><td><b>{{$lastMonth}} Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}}Rs.</td><tr>
