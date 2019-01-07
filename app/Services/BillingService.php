@@ -14,7 +14,7 @@ use App\Services\BulkSmsService;
 class BillingService extends App
 {
     private $bulkSmsService;
-    public function __construct()
+    public function __construct(BulkSmsService $bulkSmsService)
     {
         $this->bulkSmsService = $bulkSmsService;
     }
