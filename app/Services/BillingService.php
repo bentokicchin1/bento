@@ -58,7 +58,7 @@ class BillingService extends App
         $notifyArray['pendingBill'] = $pendingBill;
         $notifyArray['outstanding_bill'] = $billAmount + $pendingBill;
         
-        Mail::to($user['email'])->send(new MonthlyBillGenerated($notifyArray));        
+        Mail::to($user['email'])->cc('skhilari26@gmail.com')->send(new MonthlyBillGenerated($notifyArray));        
         DB::commit();
     }
 

@@ -28,7 +28,7 @@ class MonthlyBillGenerated extends Mailable
         $this->billAmount = $notifyArray['billAmount'];
         $this->pendingBill = $notifyArray['pendingBill'];
         $this->outstanding_bill = $notifyArray['outstanding_bill'];
-        $this->lastMonth = date('F',strtotime('this month'));
+        $this->lastMonth = date('F',strtotime('first day of last month'));
     }
 
     /**
@@ -38,7 +38,7 @@ class MonthlyBillGenerated extends Mailable
      */
     public function build()
     {
-        $lastMonth = date('F',strtotime('this month'));
+        $lastMonth = date('F',strtotime('first day of last month'));
         return $this->subject('Bill For The Month Of '.$lastMonth)->view('emails.monthlyBill');
     }
 }
