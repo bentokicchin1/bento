@@ -9,12 +9,14 @@ use App\Model\MonthlyBills;
 use App\Model\BillPayment;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MonthlyBillGenerated;
+use App\Services\BulkSmsService;
 
 class BillingService extends App
 {
+    private $bulkSmsService;
     public function __construct()
     {
-        
+        $this->bulkSmsService = $bulkSmsService;
     }
     /*
     * function sendGeneratedBills
@@ -23,18 +25,24 @@ class BillingService extends App
     public function sendGeneratedBills($user,$orders)
     {
         DB::beginTransaction();
-        $notifyArray = array();
+        $notifyArray = $billDates = array();
         $billAmount = $pendingBill = 0;
+        
+        //Calculate total bill for last month
         foreach($orders as $key=>$order){
             if($order['status']=='ordered'){
                 $billAmount += $order['total_amount'];
+                array_push($billDates,date('d', strtotime($order['order_date'])));
             }
         }
+        
+        //Get latest pending bill for that User
         $previousRec = DB::table('bill_payments')->where('user_id', '1')->orderBy('payment_date', 'desc')->first();
         if(!empty($previousRec)){
-          $pendingBill = $previousRec->outstanding_bill;
+            $pendingBill = $previousRec->outstanding_bill;
         }
         if(!empty($billAmount)){
+            //Save data as monthly bill
             $monthlyBillObj = new MonthlyBills;
             $monthlyBillObj->user_id = $user['id'];
             $monthlyBillObj->invoice_id = $this->generateNewInvoiceId();
@@ -44,6 +52,7 @@ class BillingService extends App
             $monthlyBillObj->bill_amount = $billAmount;
             $monthlyBillObj->save();
         }
+        //Save data as last pending bill 
         $billObj = new BillPayment;
         $billObj->user_id = $user['id'];
         $billObj->payment_received = 0;
@@ -57,8 +66,13 @@ class BillingService extends App
         $notifyArray['billAmount'] = $billAmount;
         $notifyArray['pendingBill'] = $pendingBill;
         $notifyArray['outstanding_bill'] = $billAmount + $pendingBill;
+        $notifyArray['billDates'] = $billDates;
         
-        Mail::to($user['email'])->cc('skhilari26@gmail.com')->send(new MonthlyBillGenerated($notifyArray));        
+        /// Send Invoice For Bills on Email
+        Mail::to($user['email'])->cc('skhilari26@gmail.com')->send(new MonthlyBillGenerated($notifyArray));    
+        
+        /// Send short bill generated message on SMS
+        $this->bulkSmsService->sendBillingSms($notifyArray);        
         DB::commit();
     }
 
