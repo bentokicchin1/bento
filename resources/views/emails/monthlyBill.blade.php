@@ -112,9 +112,9 @@
                                                                         <table align="right" cellspacing="10" cellpadding="10" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
                                                                             <thead></thead>
                                                                             <tbody>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>{{$lastMonth}} Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}} Rs.</td><tr>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Pending Bill Amount:-</b></td><td style="width:30%;">{{$pendingBill}} Rs.</td></tr>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Total Bill Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}} Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Current Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}} Rs.</td><tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Previous Unbilled Amount:-</b></td><td style="width:30%;">{{$pendingBill}} Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Total Unbilled Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}} Rs.</td></tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </td>
