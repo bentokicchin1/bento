@@ -47,15 +47,16 @@ class BulkSmsService extends App
     {
         $this->mobileNumber = $notifyArray['user']['mobile_number'];
         $month = date('F Y',strtotime('first day of last month'));
-        $this->message = "Hi,
-                Total tiffins count of $month = ".count($notifyArray['billDates'])."
-                Tiffins On Dates ".implode(",",$notifyArray['billDates'])."
-                Previous unbilled amount = ".$notifyArray['pendingBill']."
-                Current unbilled amount = ".$notifyArray['billAmount']."
-                Total unbilled amount = ".$notifyArray['outstanding_bill']."
+        $this->message = "Hi ".$notifyArray['user']['name'].",
+            
+Total tiffins count of $month = ".count($notifyArray['billDates'])."
+Tiffins On Dates ".implode(",",$notifyArray['billDates'])."
+Previous unbilled amount = ".$notifyArray['pendingBill']."
+Current unbilled amount = ".$notifyArray['billAmount']."
+Total unbilled amount = ".$notifyArray['outstanding_bill']."
 
-                Thanks,
-                Bento";
+Thanks,
+Bento";
         $this->sendSms();
     }
     
