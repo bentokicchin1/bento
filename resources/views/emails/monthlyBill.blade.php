@@ -107,16 +107,16 @@
                                                             </tbody>
                                                         </table>
                                                         <br/>
-                                                        <table cellspacing="0" cellpadding="15" border="0" width="100%">
+                                                        <table cellspacing="20" cellpadding="25" border="0" width="100%" >
                                                             <tbody>
                                                                 <tr><td></td><td></td>
                                                                     <td>
-                                                                        <table>
+                                                                        <table cellspacing="20" cellpadding="25" width="100%" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
                                                                             <thead></thead>
                                                                             <tbody>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>{{$lastMonth}} Bill Amount:-</b></td><td>{{$billAmount}}Rs.</td><tr>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Pending Bill Amount:-</b></td><td>{{$pendingBill}}Rs.</td></tr>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Total Bill Amount:-</b></td><td>{{$outstanding_bill}}Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>{{$lastMonth}} Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}}Rs.</td><tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>Pending Bill Amount:-</b></td><td style="width:30%;">{{$pendingBill}}Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>Total Bill Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}}Rs.</td></tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </td>
