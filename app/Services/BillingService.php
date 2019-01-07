@@ -11,6 +11,7 @@ class BillingService extends App
 {
     public function __construct()
     {
+        
     }
     /*
     * function sendGeneratedBills
@@ -19,6 +20,10 @@ class BillingService extends App
     public static function sendGeneratedBills($user,$orders)
     {
         DB::beginTransaction();
+        $invoiceId = $this->generateNewInvoiceId();
+        echo "<pre/>";
+        print_R($invoiceId);
+        exit;
         $billAmount = $pendingBill = 0;
         foreach($orders as $key=>$order){
             if($order['status']=='ordered'){
@@ -30,14 +35,14 @@ class BillingService extends App
           $pendingBill = $previousRec->outstanding_bill;
         }
         if(!empty($billAmount)){
-          $monthlyBillObj = new MonthlyBills;
-          $monthlyBillObj->user_id = $user['id'];
-          $monthlyBillObj->invoice_id = $this->generateNewInvoiceId();
-          $monthlyBillObj->bill_for_month = date('m',strtotime('first day of last month'));
-          $monthlyBillObj->bill_for_year = date('Y');
-          $monthlyBillObj->bill_date = date('Y-m-d');
-          $monthlyBillObj->bill_amount = $billAmount;
-          $monthlyBillObj->save();
+            $monthlyBillObj = new MonthlyBills;
+            $monthlyBillObj->user_id = $user['id'];
+            $monthlyBillObj->invoice_id = $invoiceId;
+            $monthlyBillObj->bill_for_month = date('m',strtotime('first day of last month'));
+            $monthlyBillObj->bill_for_year = date('Y');
+            $monthlyBillObj->bill_date = date('Y-m-d');
+            $monthlyBillObj->bill_amount = $billAmount;
+            $monthlyBillObj->save();
         }
         $billObj = new BillPayment;
         $billObj->user_id = $user['id'];
