@@ -13,15 +13,21 @@ class MonthlyBillGenerated extends Mailable
     public $lastMonth;
     public $user;
     public $orders;
+    public $billAmount;
+    public $pendingBill;
+    public $outstanding_bill;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user,$orders)
+    public function __construct($notifyArray)
     {
-        $this->user = $user;
-        $this->orders = $orders;
+        $this->user = $notifyArray['user'];
+        $this->orders = $notifyArray['orders'];
+        $this->billAmount = $notifyArray['billAmount'];
+        $this->pendingBill = $notifyArray['pendingBill'];
+        $this->outstanding_bill = $notifyArray['outstanding_bill'];
         $this->lastMonth = date('F',strtotime('this month'));
     }
 

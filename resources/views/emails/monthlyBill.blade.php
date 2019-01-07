@@ -82,9 +82,9 @@
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is 100Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is {{$billAmount}}Rs.</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is {{$pendingBill}}Rs.</b></p>
+                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is {{$outstanding_bill}}Rs.</b></p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
 

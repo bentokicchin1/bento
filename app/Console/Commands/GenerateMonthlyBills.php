@@ -54,7 +54,6 @@ class GenerateMonthlyBills extends Command
                 if(!empty($orders)){
                     unset($orders['total']);
                     $this->billingService->sendGeneratedBills($user,$orders);
-                    // Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
                 }
                 exit;
             }

@@ -20,10 +20,7 @@ class BillingService extends App
     public function sendGeneratedBills($user,$orders)
     {
         DB::beginTransaction();
-        $invoiceId = $this->generateNewInvoiceId();
-        echo "<pre/>";
-        print_R($invoiceId);
-        exit;
+        $notifyArray = array();
         $billAmount = $pendingBill = 0;
         foreach($orders as $key=>$order){
             if($order['status']=='ordered'){
@@ -37,7 +34,7 @@ class BillingService extends App
         if(!empty($billAmount)){
             $monthlyBillObj = new MonthlyBills;
             $monthlyBillObj->user_id = $user['id'];
-            $monthlyBillObj->invoice_id = $invoiceId;
+            $monthlyBillObj->invoice_id = $this->generateNewInvoiceId();
             $monthlyBillObj->bill_for_month = date('m',strtotime('first day of last month'));
             $monthlyBillObj->bill_for_year = date('Y');
             $monthlyBillObj->bill_date = date('Y-m-d');
@@ -51,6 +48,14 @@ class BillingService extends App
         $billObj->mode_of_payment = 'generated';
         $billObj->payment_date = date('Y-m-d');
         $billObj->save();
+        
+        $notifyArray['user'] = $user;
+        $notifyArray['orders'] = $orders;
+        $notifyArray['billAmount'] = $billAmount;
+        $notifyArray['pendingBill'] = $pendingBill;
+        $notifyArray['outstanding_bill'] = $billAmount + $pendingBill;
+        
+        Mail::to($user['email'])->send(new MonthlyBillGenerated($notifyArray));        
         DB::commit();
     }
 
