@@ -123,7 +123,7 @@
                                                         </table>
                                                         <br/>
                                                         <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to check your order history.</p>
-                                                        <p style="line-height: 1.0;font-size: 12px">We accept payments through mobile wallets, account transfers and cash.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">We accept payments through mobile wallets(Paytm/PhonePe/Google Pay), account transfers and cash.</p>
                                                         <p style="line-height: 1.0;font-size: 12px">Contact on 9130002835 for getting transfer details.</p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
