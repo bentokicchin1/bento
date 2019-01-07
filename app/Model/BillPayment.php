@@ -57,7 +57,7 @@ class BillPayment extends Model
     * function sendGeneratedBills
     * param $orders - Array of order details and cost of every order in previous month
     */
-    public static function generateNewInvoiceId()
+    public function generateNewInvoiceId()
     {
         $record = MonthlyBills::latest()->first();
         $expNum = explode('-', $record->invoice_id);
