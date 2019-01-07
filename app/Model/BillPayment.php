@@ -4,11 +4,13 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Services\Checkout\OrderService;
 use DB;
 
 class BillPayment extends Model
 {
     use SoftDeletes;
+    private $orderService;
     protected $table = 'bill_payments';
     protected $hidden = ["deleted_at"];
 
@@ -36,7 +38,7 @@ class BillPayment extends Model
         if(!empty($billAmount)){
           $monthlyBillObj = new MonthlyBills;
           $monthlyBillObj->user_id = $user['id'];
-          $monthlyBillObj->invoice_id = $this->generateNewInvoiceId();
+          $monthlyBillObj->invoice_id = $this->$orderService->generateNewInvoiceId();
           $monthlyBillObj->bill_for_month = date('m',strtotime('first day of last month'));
           $monthlyBillObj->bill_for_year = date('Y');
           $monthlyBillObj->bill_date = date('Y-m-d');
@@ -51,23 +53,5 @@ class BillPayment extends Model
         $billObj->payment_date = date('Y-m-d');
         $billObj->save();
         DB::commit();
-    }
-    
-    
-    /*
-    * function sendGeneratedBills
-    * param $orders - Array of order details and cost of every order in previous month
-    */
-    public static function generateNewInvoiceId()
-    {
-        $record = MonthlyBills::latest()->first();
-        $expNum = explode('-', $record->invoice_id);
-        //check first day in a year
-        if ( date('l',strtotime(date('Y-01-01'))) ){
-            $nextInvoiceNumber = 'BTS'.date('Y').'-0001';
-        } else {
-            //increase 1 with last invoice number
-            $nextInvoiceNumber = 'BTS'.$expNum[0].'-'. $expNum[1]+1;
-        }
     }
 }
