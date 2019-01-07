@@ -9,6 +9,7 @@ use DB;
 class BillPayment extends Model
 {
     use SoftDeletes;
+    protected $table = 'bill_payments';
     protected $hidden = ["deleted_at"];
 
     public function users()
