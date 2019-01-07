@@ -111,12 +111,12 @@
                                                             <tbody>
                                                                 <tr><td></td><td></td>
                                                                     <td>
-                                                                        <table cellspacing="20" cellpadding="25" width="100%" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
+                                                                        <table cellspacing="20" cellpadding="10" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
                                                                             <thead></thead>
                                                                             <tbody>
                                                                                 <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>{{$lastMonth}} Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}}Rs.</td><tr>
                                                                                 <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>Pending Bill Amount:-</b></td><td style="width:30%;">{{$pendingBill}}Rs.</td></tr>
-                                                                                <tr style="line-height: 1.5;font-size: 13px"><td style="width:30%;"><b>Total Bill Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}}Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td style="width:50%;"><b>Total Bill Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}}Rs.</td></tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </td>
