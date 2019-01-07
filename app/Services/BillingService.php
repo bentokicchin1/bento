@@ -40,6 +40,9 @@ class BillingService extends App
             $monthlyBillObj->bill_for_year = date('Y');
             $monthlyBillObj->bill_date = date('Y-m-d');
             $monthlyBillObj->bill_amount = $billAmount;
+            echo "<pre/>";
+            print_r($monthlyBillObj);
+            exit;
             $monthlyBillObj->save();
         }
 //        $billObj = new BillPayment;
