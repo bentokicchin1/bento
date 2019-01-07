@@ -80,10 +80,8 @@
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
-                                                        <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px">Below is the Summary,</p>
-
+                                                        <p style="line-height: 1.5;font-size: 13px">Below is the summary of orders for the month of {{$lastMonth}}.</p>
                                                         <table cellspacing="5" cellpadding="5" border="1" width="100%" align="center">
                                                           <thead>
                                                             <th>Date</th>
