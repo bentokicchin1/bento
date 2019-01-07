@@ -107,7 +107,7 @@
                                                             </tbody>
                                                         </table>
                                                         <br/>
-                                                        <table>
+                                                        <table cellspacing="0" cellpadding="15" border="0" width="100%">
                                                             <tbody>
                                                                 <tr><td></td><td></td>
                                                                     <td>
