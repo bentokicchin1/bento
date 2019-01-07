@@ -40,18 +40,15 @@ class BillingService extends App
             $monthlyBillObj->bill_for_year = date('Y');
             $monthlyBillObj->bill_date = date('Y-m-d');
             $monthlyBillObj->bill_amount = $billAmount;
-            echo "<pre/>";
-            print_r($monthlyBillObj);
-            exit;
             $monthlyBillObj->save();
         }
-//        $billObj = new BillPayment;
-//        $billObj->user_id = $user['id'];
-//        $billObj->payment_received = 0;
-//        $billObj->outstanding_bill = $billAmount + $pendingBill;
-//        $billObj->mode_of_payment = 'generated';
-//        $billObj->payment_date = date('Y-m-d');
-//        $billObj->save();
+        $billObj = new BillPayment;
+        $billObj->user_id = $user['id'];
+        $billObj->payment_received = 0;
+        $billObj->outstanding_bill = $billAmount + $pendingBill;
+        $billObj->mode_of_payment = 'generated';
+        $billObj->payment_date = date('Y-m-d');
+        $billObj->save();
         
         $notifyArray['user'] = $user;
         $notifyArray['orders'] = $orders;
@@ -59,7 +56,7 @@ class BillingService extends App
         $notifyArray['pendingBill'] = $pendingBill;
         $notifyArray['outstanding_bill'] = $billAmount + $pendingBill;
         
-//        Mail::to($user['email'])->send(new MonthlyBillGenerated($notifyArray));        
+        Mail::to($user['email'])->send(new MonthlyBillGenerated($notifyArray));        
         DB::commit();
     }
 

@@ -9,5 +9,5 @@ use DB;
 class MonthlyBills extends Model
 {
     use SoftDeletes;
-    protected $table = 'bill_payments';
+    protected $table = 'monthly_bills';
 }
