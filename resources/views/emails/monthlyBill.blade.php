@@ -104,6 +104,11 @@
                                                                         <td>{{$order_detail['total_amount']}}</td>
                                                                     </tr>
                                                                 @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                        <br/>
+                                                        <table>
+                                                            <tbody>
                                                                 <tr><td></td><td></td>
                                                                     <td>
                                                                         <table>
