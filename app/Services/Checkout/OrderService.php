@@ -298,19 +298,4 @@ class OrderService
         $rawDishList = $this->dishes->getDishListfromDbForAdmin($orderTypeId,$orderDate);
         return $this->formatDishList($rawDishList);
     }
-    
-    public function generateNewInvoiceId()
-    {   
-        $nextInvoiceNumber = '';
-        $record = MonthlyBills::latest()->first();
-        $expNum = explode('-', $record->invoice_id);
-        //check first day in a year
-        if ( date('l',strtotime(date('Y-01-01'))) ){
-            $nextInvoiceNumber = 'BTS'.date('Y').'-0001';
-        } else {
-            //increase 1 with last invoice number
-            $nextInvoiceNumber = 'BTS'.$expNum[0].'-'. $expNum[1]+1;
-        }
-        return $nextInvoiceNumber;
-    }
 }

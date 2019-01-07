@@ -1,57 +1,18 @@
 <?php
 
 namespace App\Model;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Services\Checkout\OrderService;
 use DB;
 
 class BillPayment extends Model
 {
     use SoftDeletes;
-    private $orderService;
     protected $table = 'bill_payments';
     protected $hidden = ["deleted_at"];
 
     public function users()
     {
         return $this->belongsTo('App\User','user_id');
-    }
-    /*
-    * function sendGeneratedBills
-    * param $orders - Array of order details and cost of every order in previous month
-    */
-    public static function sendGeneratedBills($user,$orders)
-    {
-        DB::beginTransaction();
-        $billAmount = $pendingBill = 0;
-        foreach($orders as $key=>$order){
-          if($order['status']=='ordered'){
-            $billAmount += $order['total_amount'];
-          }
-        }
-        $previousRec = DB::table('bill_payments')->where('user_id', '1')->orderBy('payment_date', 'desc')->first();
-        if(!empty($previousRec)){
-          $pendingBill = $previousRec->outstanding_bill;
-        }
-        if(!empty($billAmount)){
-          $monthlyBillObj = new MonthlyBills;
-          $monthlyBillObj->user_id = $user['id'];
-          $monthlyBillObj->invoice_id = $this->$orderService->generateNewInvoiceId();
-          $monthlyBillObj->bill_for_month = date('m',strtotime('first day of last month'));
-          $monthlyBillObj->bill_for_year = date('Y');
-          $monthlyBillObj->bill_date = date('Y-m-d');
-          $monthlyBillObj->bill_amount = $billAmount;
-          $monthlyBillObj->save();
-        }
-        $billObj = new BillPayment;
-        $billObj->user_id = $user['id'];
-        $billObj->payment_received = 0;
-        $billObj->outstanding_bill = $billAmount + $pendingBill;
-        $billObj->mode_of_payment = 'generated';
-        $billObj->payment_date = date('Y-m-d');
-        $billObj->save();
-        DB::commit();
     }
 }
