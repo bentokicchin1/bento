@@ -17,7 +17,7 @@ class BillingService extends App
     * function sendGeneratedBills
     * param $orders - Array of order details and cost of every order in previous month
     */
-    public static function sendGeneratedBills($user,$orders)
+    public function sendGeneratedBills($user,$orders)
     {
         DB::beginTransaction();
         $invoiceId = $this->generateNewInvoiceId();
