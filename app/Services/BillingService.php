@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use DB;
 use App\Model\MonthlyBills;
+use App\Model\BillPayment;
 
 class BillingService extends App
 {
