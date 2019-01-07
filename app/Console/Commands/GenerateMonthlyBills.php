@@ -5,8 +5,6 @@ use Illuminate\Console\Command;
 use App\Model\User;
 use App\Model\Order;
 use App\Model\BillPayment;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MonthlyBillGenerated;
 use App\Services\BillingService;
 use DB;
 

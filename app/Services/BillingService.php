@@ -7,6 +7,8 @@ use GuzzleHttp\Client;
 use DB;
 use App\Model\MonthlyBills;
 use App\Model\BillPayment;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MonthlyBillGenerated;
 
 class BillingService extends App
 {
