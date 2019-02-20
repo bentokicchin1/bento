@@ -51,7 +51,15 @@
                           {{ Form::radio('billing_cycle', 'monthly',old('billing_cycle'),['class'=>'radio-inline']) }}
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label" style="padding-top:7px">Suspend User :</label>
+                    <div class="col-sm-6">
+                          {!! Form::label('yes', 'Yes') !!}
+                          {{ Form::radio('suspended', 'yes',old('suspended'),['class'=>'radio-inline']) }}
+                          {!! Form::label('no', 'No') !!}
+                          {{ Form::radio('suspended', 'no',old('suspended'),['class'=>'radio-inline']) }}
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label" style="padding-top:7px">User Food Preference :</label>
                     <div class="col-sm-6">

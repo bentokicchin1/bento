@@ -56,6 +56,11 @@
                     </div>
                 </div>
             </div>
+            <div class='pm-button'>
+              <a href='https://www.payumoney.com/paybypayumoney/#/1886FCC9825F4080ED938A4ACB879059'>
+                <img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/23.png' />
+              </a>
+            </div>
         </div>
     </div>
 </section>

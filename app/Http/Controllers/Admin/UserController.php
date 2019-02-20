@@ -36,7 +36,7 @@ class UserController extends Controller
         $areaLocationData = Area_location::pluck('name', 'id');
         if (!empty($id)) {
             $usersData = DB::table('users')
-                  ->select("users.id as id","users.name as name", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
+                  ->select("users.id as id","users.name as name", "suspended", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","customer_addresses.sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
                   ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
                   ->where('users.id',$id)
                   ->where('users.deleted_at',null)
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function index()
     {
         $users = DB::table('users')
-              ->select("users.id as id","users.name as name", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","area_locations.name as sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
+              ->select("users.id as id","users.name as name", "suspended", "email","mobile_number","billing_cycle","food_preference","tiffin_quantity","mobile_verified","customer_addresses.order_type_id","customer_addresses.location","area_locations.name as sector","customer_addresses.area","customer_addresses.city","customer_addresses.state","customer_addresses.pincode")
               ->leftJoin("customer_addresses","customer_addresses.user_id","=","users.id")
               ->leftJoin("area_locations","customer_addresses.sector","=","area_locations.id")
               ->where('users.deleted_at',null)->get();
@@ -86,6 +86,7 @@ class UserController extends Controller
             $userObj->mobile_number = $request->input('mobile_number');
             $userObj->mobile_verified = ($request->input('mobile_verified')!=null) ? $request->input('mobile_verified') : false;
             $userObj->billing_cycle = $request->input('billing_cycle');
+            $userObj->suspended = $request->input('suspended');
             $userObj->food_preference = $request->input('food_preference');
             $userObj->tiffin_quantity = $request->input('tiffin_quantity');
             $userObj->save();

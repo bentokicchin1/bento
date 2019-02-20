@@ -45,7 +45,7 @@ class GenerateMonthlyBills extends Command
         try {
             DB::enableQueryLog();
             $lastMonth = date('m',strtotime('this month'));
-            $allUsers = User::where("id", 1)->where("users.deleted_at", NULL)->get()->toArray();
+            $allUsers = User::where("id", 1)->where("users.deleted_at", NULL)->where("users.suspended",'no')->get()->toArray();
             foreach ($allUsers as $key => $user) {
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){

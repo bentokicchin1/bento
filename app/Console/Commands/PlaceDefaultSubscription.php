@@ -52,6 +52,7 @@ class PlaceDefaultSubscription extends Command
           $monthlyUsers = User::with('address')
                           ->where('billing_cycle','monthly')
                           ->where("users.deleted_at", NULL)
+                          ->where("users.suspended", 'no')
                           ->get()->toArray();
           if(!empty($monthlyUsers)){
             foreach($monthlyUsers as $userDetails){
