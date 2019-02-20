@@ -13,16 +13,22 @@ class MonthlyBillGenerated extends Mailable
     public $lastMonth;
     public $user;
     public $orders;
+    public $billAmount;
+    public $pendingBill;
+    public $outstanding_bill;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user,$orders)
+    public function __construct($notifyArray)
     {
-        $this->user = $user;
-        $this->orders = $orders;
-        $this->lastMonth = date('F',strtotime('this month'));
+        $this->user = $notifyArray['user'];
+        $this->orders = $notifyArray['orders'];
+        $this->billAmount = $notifyArray['billAmount'];
+        $this->pendingBill = $notifyArray['pendingBill'];
+        $this->outstanding_bill = $notifyArray['outstanding_bill'];
+        $this->lastMonth = date('F',strtotime('first day of last month'));
     }
 
     /**
@@ -32,7 +38,7 @@ class MonthlyBillGenerated extends Mailable
      */
     public function build()
     {
-        $lastMonth = date('F',strtotime('this month'));
+        $lastMonth = date('F',strtotime('first day of last month'));
         return $this->subject('Bill For The Month Of '.$lastMonth)->view('emails.monthlyBill');
     }
 }

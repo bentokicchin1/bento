@@ -80,14 +80,8 @@
                                                 <tr>
                                                     <td>
                                                         <p style="line-height:1.5;font-size: 14px" ><b>Hello {{ $user['name'] }},</b></p>
-                                                        <p style="line-height: 1.0;font-size: 12px">Your bill for the month of {{$lastMonth}}.</p>
                                                         <br/>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Bill Amount for the month {{$lastMonth}} is 100Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Outstanding Amount from previous bills is 50Rs.</b></p>
-                                                        <p style="line-height: 1.5;font-size: 13px"><b>Total bill is 150Rs.</b></p>
-                                                        <br/>
-                                                        <p style="line-height: 1.5;font-size: 12px">Below is the Summary for month {{$lastMonth}},</p>
-
+                                                        <p style="line-height: 1.5;font-size: 13px">Below is the summary of orders for the month of {{$lastMonth}}.</p>
                                                         <table cellspacing="5" cellpadding="5" border="1" width="100%" align="center">
                                                           <thead>
                                                             <th>Date</th>
@@ -95,21 +89,42 @@
                                                             <th>Price</th>
                                                           <thead>
                                                             <tbody>
-                                                              @foreach($orders as $key=>$order_detail)
-                                                                <tr>
-                                                                  <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
-                                                                  <td>
-                                                                    @if(!empty($order_detail['dishList']))
-                                                                      @foreach($order_detail['dishList'] as $dishId=>$dish)
-                                                                        {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
-                                                                      @endforeach
-                                                                    @endif
-                                                                  </td>
-                                                                  <td>{{$order_detail['total_amount']}}</td>
-                                                                </tr>
-                                                              @endforeach
+                                                                @foreach($orders as $key=>$order_detail)
+                                                                    <tr>
+                                                                        <td>{{date('D,d F Y',strtotime($order_detail['order_date']))}}</td>
+                                                                        <td>
+                                                                            @if(!empty($order_detail['dishList']))
+                                                                                @foreach($order_detail['dishList'] as $dishId=>$dish)
+                                                                                    {{ $dish['quantity'].' '.$dish['dishName']. ' ' }}
+                                                                                @endforeach
+                                                                            @endif
+                                                                        </td>
+                                                                        <td>{{$order_detail['total_amount']}}</td>
+                                                                    </tr>
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
+                                                        <br/>
+                                                        <table cellspacing="20" cellpadding="25" border="0" width="100%" >
+                                                            <tbody>
+                                                                <tr><td style="width:20%;"></td><td style="width:20%;"></td>
+                                                                    <td align="right" style="text-align: right;">
+                                                                        <table align="right" cellspacing="10" cellpadding="10" style="background-color:#f7f7f7;border:solid 1px #e4e6eb;">
+                                                                            <thead></thead>
+                                                                            <tbody>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Current Bill Amount:-</b></td><td style="width:30%;">{{$billAmount}} Rs.</td><tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Previous Unbilled Amount:-</b></td><td style="width:30%;">{{$pendingBill}} Rs.</td></tr>
+                                                                                <tr style="line-height: 1.5;font-size: 13px"><td><b>Total Unbilled Amount:-</b></td><td style="width:30%;">{{$outstanding_bill}} Rs.</td></tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <br/>
+                                                        <p style="line-height: 1.0;font-size: 12px">Please visit <a href="http://bentokitchen.in/customer/orders">My Orders</a> page to check your order history.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">We accept payments through mobile wallets(Paytm/PhonePe/Google Pay), account transfers and cash.</p>
+                                                        <p style="line-height: 1.0;font-size: 12px">Contact on 9130002835 for getting transfer details.</p>
                                                         <br/>
                                                         <p style="line-height: 1.5;font-size: 12px"><b>Thank You,</b></p>
                                                         <p style="line-height: 1.0;font-size: 12px"><b>Team Bento</b></p>

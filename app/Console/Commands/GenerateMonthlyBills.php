@@ -5,12 +5,12 @@ use Illuminate\Console\Command;
 use App\Model\User;
 use App\Model\Order;
 use App\Model\BillPayment;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MonthlyBillGenerated;
+use App\Services\BillingService;
 use DB;
 
 class GenerateMonthlyBills extends Command
 {
+    private $billingService;
     /**
      * The name and signature of the console command.
      *
@@ -30,9 +30,10 @@ class GenerateMonthlyBills extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BillingService $billingService)
     {
         parent::__construct();
+        $this->billingService = $billingService;
     }
 
     /**
@@ -50,8 +51,7 @@ class GenerateMonthlyBills extends Command
                 $orders = Order::getOrderDetails($user['id']);
                 if(!empty($orders)){
                     unset($orders['total']);
-                    BillPayment::sendGeneratedBills($user,$orders);
-                    // Mail::to($user['email'])->send(new MonthlyBillGenerated($user,$orders));
+                    $this->billingService->sendGeneratedBills($user,$orders);
                 }
                 exit;
             }
