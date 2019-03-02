@@ -28,7 +28,7 @@ class PayuController extends Controller
         exit;
       }
 
-      public function showMakePaymentForm($amount)
+      public function showMakePaymentForm($amount=1)
       {
         $payuDetails = $this->payuService->getPayuFormDetailsForUser($amount);
         return view('transactions.makePayment', ['payuDetails'=>$payuDetails]);
