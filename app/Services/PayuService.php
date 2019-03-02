@@ -44,6 +44,7 @@ class PayuService extends App
             if(!empty($userDetails)) {
               if(empty($userDetails['key']) || empty($userDetails['txnid']) || empty($userDetails['amount']) || empty($userDetails['firstname']) || empty($userDetails['email']) || empty($userDetails['phone']) || empty($userDetails['productinfo']) || empty($userDetails['surl']) || empty($userDetails['furl']) || empty($userDetails['service_provider'])) {
                  $userDetails['formError'] = 1;
+                 $userDetails['action'] = $this->payubaseurl . '/_payment';
               } else {
             	    foreach($hashVarsSeq as $hash_var) {
                     $hash_string .= isset($userDetails[$hash_var]) ? $userDetails[$hash_var] : '';
