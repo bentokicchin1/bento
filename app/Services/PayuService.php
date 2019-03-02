@@ -41,9 +41,7 @@ class PayuService extends App
             $userDetails['furl'] = route('failure');
             $userDetails['action'] = $this->payubaseurl . '/_payment';
             $userDetails['hash'] = '';
-echo "<pre/>";
-print_r($userDetails);
-exit;
+            
             if(!empty($userDetails)) {
               if(empty($userDetails['key']) || empty($userDetails['txnid']) || empty($userDetails['amount']) || empty($userDetails['firstname']) || empty($userDetails['email']) || empty($userDetails['phone']) || empty($userDetails['productinfo']) || empty($userDetails['surl']) || empty($userDetails['furl']) || empty($userDetails['service_provider'])) {
                  $userDetails['formError'] = 1;
