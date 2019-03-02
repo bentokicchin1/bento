@@ -27,7 +27,7 @@ class BillingService extends App
         DB::beginTransaction();
         $notifyArray = $billDates = array();
         $billAmount = $pendingBill = 0;
-        
+
         //Calculate total bill for last month
         foreach($orders as $key=>$order){
             if($order['status']=='ordered'){
@@ -35,7 +35,7 @@ class BillingService extends App
                 array_push($billDates,date('d', strtotime($order['order_date'])));
             }
         }
-        
+
         //Get latest pending bill for that User
         $previousRec = DB::table('bill_payments')->where('user_id', '1')->orderBy('payment_date', 'desc')->first();
         if(!empty($previousRec)){
@@ -52,7 +52,7 @@ class BillingService extends App
             $monthlyBillObj->bill_amount = $billAmount;
             $monthlyBillObj->save();
         }
-        //Save data as last pending bill 
+        //Save data as last pending bill
         $billObj = new BillPayment;
         $billObj->user_id = $user['id'];
         $billObj->payment_received = 0;
@@ -60,24 +60,24 @@ class BillingService extends App
         $billObj->mode_of_payment = 'generated';
         $billObj->payment_date = date('Y-m-d');
         $billObj->save();
-        
+
         $notifyArray['user'] = $user;
         $notifyArray['orders'] = $orders;
         $notifyArray['billAmount'] = $billAmount;
         $notifyArray['pendingBill'] = $pendingBill;
         $notifyArray['outstanding_bill'] = $billAmount + $pendingBill;
         $notifyArray['billDates'] = $billDates;
-        
+
         /// Send Invoice For Bills on Email
-        Mail::to($user['email'])->cc('skhilari26@gmail.com')->send(new MonthlyBillGenerated($notifyArray));    
-        
+        Mail::to($user['email'])->cc('skhilari26@gmail.com')->send(new MonthlyBillGenerated($notifyArray));
+
         /// Send short bill generated message on SMS
-        $this->bulkSmsService->sendBillingSms($notifyArray);        
+        $this->bulkSmsService->sendBillingSms($notifyArray);
         DB::commit();
     }
 
     public function generateNewInvoiceId()
-    {   
+    {
         $nextInvoiceNumber = '';
         $record = MonthlyBills::latest()->first();
         //check first day in a year

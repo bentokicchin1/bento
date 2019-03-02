@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="web-submit">
-                            {{ Form::submit('Confirm Order', ['class' => 'form-control submit']) }}
+                            {{ Form::submit('Pay Now', ['class' => 'form-control submit']) }}
                         </div>
                         {{ Form::close() }}
                     </div>

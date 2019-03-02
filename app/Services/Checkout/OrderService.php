@@ -122,6 +122,7 @@ class OrderService
         $orderParams['items'] = $orderData['items'];
 
         return $this->insertOrder($orderParams);
+
     }
 
     public function rearrangeOrderPostData($postData)

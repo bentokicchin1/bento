@@ -129,7 +129,10 @@ class OrderController extends Controller
             return redirect()->back()->withErrors('Please select address.');
         }
         $addressId = $postData['addressId'];
-        $response = $this->orderService->processData($addressId);
+        
+
+
+        $this->orderService->processData($addressId);
         if ($response == 'success') {
             $request->session()->forget('orderData');
             return redirect()->route('confirmation');

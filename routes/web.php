@@ -107,6 +107,10 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
 
     Route::post('profile/change-password', 'Customer\CustomerController@changePassword')->name('change-password');
 
+    // Route::get('payumoney','Transactions\PayuController@showMakePaymentForm')->name('profile');
+    Route::get('payumoney','Transactions\PayuController@showMakePaymentForm')->name('pay-bill');
+    Route::post('handleSuccess','Transactions\PayuController@handleSuccess')->name('success');
+    Route::post('handleFailure','Transactions\PayuController@handleFailure')->name('failure');
 });
 
 
@@ -171,7 +175,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function(){
     Route::get('order/list', 'Admin\OrderController@index')->name('admin-order-list');
 
     Route::get('feedback/list', 'Admin\FeedbackController@index')->name('admin-feedback-list');
-    
+
     Route::get('billpayment/add', 'Admin\BillingController@showForm')->name('admin-billpayment-add');
     Route::post('billpayment/add', 'Admin\BillingController@store')->name('admin-billpayment-add');
     Route::get('billpayment/billformat', 'Admin\BillingController@billformat')->name('admin-billformat-create');
