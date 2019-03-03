@@ -14,7 +14,6 @@
             <br/>
           @endif
           <form method="post" action="<?php echo $payuDetails['action']; ?>" name="payuForm">
-            {{ csrf_field() }}
             {{ Form::hidden('key',$payuDetails['key']) }}
             {{ Form::hidden('hash',$payuDetails['hash']) }}
             {{ Form::hidden('txnid',$payuDetails['txnid']) }}
@@ -47,9 +46,14 @@
                 <td>Failure URL: </td>
                 <td colspan="3">{{ Form::text('furl',$payuDetails['furl'] , ['class' => '', 'placeholder' => 'Failure URL']) }}</td>
               </tr>
-
               <tr>
                 <td colspan="3">{{ Form::hidden('service_provider',$payuDetails['service_provider'] , ['class' => '', 'placeholder' => 'Service Provider']) }}</td>
+              </tr>
+              <tr>
+                <td colspan="3">{{ Form::hidden('udf1',$payuDetails['orderId'] , ['class' => '', 'placeholder' => 'Order Id']) }}</td>
+              </tr>
+              <tr>
+                <td colspan="3">{{ Form::hidden('udf2',$payuDetails['csrf_token'] , ['class' => '', 'placeholder' => 'CSRF Token']) }}</td>
               </tr>
               <tr>
                 @if (!empty($payuDetails['hash']))

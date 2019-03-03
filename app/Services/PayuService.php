@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class PayuService extends App
 {
@@ -22,7 +23,7 @@ class PayuService extends App
     * function getPayuFormDetails
     * param $orders - Array of order details and cost of every order in previous month
     */
-    public function getPayuFormDetailsForUser($amount)
+    public function getPayuFormDetailsForUser($orderId,$amount)
     {
         $hash_string = '';
         $hashVarsSeq = explode('|', $this->payusequence);
@@ -40,8 +41,10 @@ class PayuService extends App
             $userDetails['surl'] = route('success');
             $userDetails['furl'] = route('failure');
             $userDetails['action'] = $this->payubaseurl . '/_payment';
+            $userDetails['udf1'] = $orderId;
+            $userDetails['udf2'] = $request->session()->token();
             $userDetails['hash'] = '';
-            
+
             if(!empty($userDetails)) {
               if(empty($userDetails['key']) || empty($userDetails['txnid']) || empty($userDetails['amount']) || empty($userDetails['firstname']) || empty($userDetails['email']) || empty($userDetails['phone']) || empty($userDetails['productinfo']) || empty($userDetails['surl']) || empty($userDetails['furl']) || empty($userDetails['service_provider'])) {
                  $userDetails['formError'] = 1;
