@@ -23,7 +23,7 @@ class PayuService extends App
     * function getPayuFormDetails
     * param $orders - Array of order details and cost of every order in previous month
     */
-    public function getPayuFormDetailsForUser($orderId,$amount)
+    public function getPayuFormDetailsForUser(Request $request,$orderId,$amount)
     {
         $hash_string = '';
         $hashVarsSeq = explode('|', $this->payusequence);
