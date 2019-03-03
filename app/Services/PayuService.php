@@ -12,18 +12,19 @@ class PayuService extends App
     private $payubaseurl;
     private $payuauthheader;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->payukey = config('constants.PAYU_MERCHANT_KEY');
         $this->payusalt = config('constants.PAYU_MERCHANT_SALT');
         $this->payubaseurl = config('constants.PAYU_SANDBOX_BASE_URL');
         $this->payusequence = config('constants.PAYU_SENDING_HASH_SEQUENCE');
+        $this->csrf = $request->session()->token();
     }
     /*
     * function getPayuFormDetails
     * param $orders - Array of order details and cost of every order in previous month
     */
-    public function getPayuFormDetailsForUser(Request $request,$orderId,$amount)
+    public function getPayuFormDetailsForUser($orderId,$amount)
     {
         $hash_string = '';
         $hashVarsSeq = explode('|', $this->payusequence);
@@ -42,7 +43,7 @@ class PayuService extends App
             $userDetails['furl'] = route('failure');
             $userDetails['action'] = $this->payubaseurl . '/_payment';
             $userDetails['udf1'] = $orderId;
-            $userDetails['udf2'] = $request->session()->token();
+            $userDetails['udf2'] = $this->csrf;
             $userDetails['hash'] = '';
 
             if(!empty($userDetails)) {
