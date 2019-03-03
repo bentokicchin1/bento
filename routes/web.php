@@ -111,9 +111,8 @@ Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
     Route::get('payumoney','Transactions\PayuController@showMakePaymentForm')->name('pay-bill');
 });
 
-
-Route::post('handleSuccess','Transactions\PayuController@handleSuccess')->name('success');
-Route::post('handleFailure','Transactions\PayuController@handleFailure')->name('failure');
+Route::post('handleSuccess','Transactions\PayuController@handleSuccess')->name('success')->middleware('auth');
+Route::post('handleFailure','Transactions\PayuController@handleFailure')->name('failure')->middleware('auth');
 
 
 Route::get('admin/login','Admin\LoginController@showLoginForm')->name('admin-login');
