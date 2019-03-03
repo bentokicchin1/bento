@@ -30,7 +30,7 @@ class PayuController extends Controller
 
       public function showMakePaymentForm($amount=1)
       {
-        $payuDetails = $this->payuService->getPayuFormDetailsForUser($amount);
+        $payuDetails = $this->payuService->getPayuFormDetailsForUser(1393,$amount);
         return view('transactions.makePayment', ['payuDetails'=>$payuDetails]);
       }
 
