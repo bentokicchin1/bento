@@ -51,7 +51,7 @@
                 <td colspan="3">{{ Form::hidden('service_provider',$payuDetails['service_provider'] , ['class' => '', 'placeholder' => 'Service Provider']) }}</td>
               </tr>
               <tr>
-                <td colspan="3">{{ Form::hidden('udf1',$payuDetails['orderId'] , ['class' => '', 'placeholder' => 'Order Id']) }}</td>
+                <td colspan="3">{{ Form::hidden('udf1',$payuDetails['udf1'] , ['class' => '', 'placeholder' => 'Order Id']) }}</td>
               </tr>
               <tr>
                 @if (!empty($payuDetails['hash']))
