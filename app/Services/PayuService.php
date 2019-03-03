@@ -3,7 +3,6 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class PayuService extends App
 {
@@ -12,13 +11,12 @@ class PayuService extends App
     private $payubaseurl;
     private $payuauthheader;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->payukey = config('constants.PAYU_MERCHANT_KEY');
         $this->payusalt = config('constants.PAYU_MERCHANT_SALT');
         $this->payubaseurl = config('constants.PAYU_SANDBOX_BASE_URL');
         $this->payusequence = config('constants.PAYU_SENDING_HASH_SEQUENCE');
-        $this->csrf = $request->session()->token();
     }
     /*
     * function getPayuFormDetails
@@ -43,7 +41,7 @@ class PayuService extends App
             $userDetails['furl'] = route('failure');
             $userDetails['action'] = $this->payubaseurl . '/_payment';
             $userDetails['udf1'] = $orderId;
-            $userDetails['udf2'] = $this->csrf;
+            // $userDetails['udf2'] = $this->csrf;
             $userDetails['hash'] = '';
 
             if(!empty($userDetails)) {

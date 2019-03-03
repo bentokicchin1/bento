@@ -14,6 +14,7 @@
             <br/>
           @endif
           <form method="post" action="<?php echo $payuDetails['action']; ?>" name="payuForm">
+            @csrf
             {{ Form::hidden('key',$payuDetails['key']) }}
             {{ Form::hidden('hash',$payuDetails['hash']) }}
             {{ Form::hidden('txnid',$payuDetails['txnid']) }}
@@ -51,9 +52,6 @@
               </tr>
               <tr>
                 <td colspan="3">{{ Form::hidden('udf1',$payuDetails['orderId'] , ['class' => '', 'placeholder' => 'Order Id']) }}</td>
-              </tr>
-              <tr>
-                <td colspan="3">{{ Form::hidden('udf2',$payuDetails['csrf_token'] , ['class' => '', 'placeholder' => 'CSRF Token']) }}</td>
               </tr>
               <tr>
                 @if (!empty($payuDetails['hash']))
