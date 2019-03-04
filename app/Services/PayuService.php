@@ -14,7 +14,7 @@ class PayuService extends App
     {
         $this->payukey = config('constants.PAYU_MERCHANT_KEY');
         $this->payusalt = config('constants.PAYU_MERCHANT_SALT');
-        $this->payubaseurl = config('constants.PAYU_SANDBOX_BASE_URL');
+        $this->payubaseurl = config('constants.PAYU_MERCHANT_BASE_URL');
         $this->payusequence = config('constants.PAYU_SENDING_HASH_SEQUENCE');
     }
     /*
