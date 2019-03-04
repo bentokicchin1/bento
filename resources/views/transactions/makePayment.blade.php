@@ -14,7 +14,6 @@
             <br/>
           @endif
           <form method="post" action="<?php echo $payuDetails['action']; ?>" name="payuForm">
-            {{ Form::hidden('_token',csrf_token()) }}
             {{ Form::hidden('key',$payuDetails['key']) }}
             {{ Form::hidden('hash',$payuDetails['hash']) }}
             {{ Form::hidden('txnid',$payuDetails['txnid']) }}
