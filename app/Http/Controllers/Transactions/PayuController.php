@@ -18,6 +18,7 @@ class PayuController extends Controller
         echo "<pre/>";
         print_r($request);
         exit;
+        return redirect()->route('home');
       }
 
       public function handleFailure(Request $request)
