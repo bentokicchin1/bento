@@ -129,7 +129,7 @@ class OrderController extends Controller
             return redirect()->back()->withErrors('Please select address.');
         }
         $addressId = $postData['addressId'];
-        
+
 
 
         $this->orderService->processData($addressId);
