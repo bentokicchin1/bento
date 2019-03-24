@@ -73,10 +73,8 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-        $credentials = $this->credentials($request);
-        $credentials['deleted_at'] = NULL;
         return $this->guard()->attempt(
-            $credentials, $request->filled('remember')
+            $this->credentials($request), $request->filled('remember')
         );
     }
 
@@ -88,7 +86,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
-        return $request->only($this->username(), 'password','deleted_at');
+        return $request->only($this->username(), 'password');
     }
 
     /**
