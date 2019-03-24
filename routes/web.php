@@ -28,8 +28,8 @@ Route::get('/', function () {
 Route::get('otp', 'Auth\RegisterController@showOtpForm')->name('showOtpForm');
 Route::post('otp', 'Auth\RegisterController@verifyOtp')->name('verifyOtp');
 
-Route::post('payment-success','Transactions\PayuController@@handleSuccess')->name('success');
-Route::post('payment-failure','Transactions\PayuController@@handleFailure')->name('failure');
+Route::post('payment-success','Transactions\PayuController@@handleSuccess')->name('success')->middleware('web');
+Route::post('payment-failure','Transactions\PayuController@@handleFailure')->name('failure')->middleware('web');
 
 
 /**

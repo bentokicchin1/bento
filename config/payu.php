@@ -23,7 +23,7 @@ return [
     | The account to be used for Payment
     |
     */
-    'default' => 'payubiz',
+    'default' => 'payumoney',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
         'payumoney' => [
             'key' => config('constants.PAYU_MERCHANT_KEY'),
             'salt' => config('constants.PAYU_MERCHANT_SALT'),
-            'money' => false,
+            'money' => true,
             'auth' => config('constants.PAYU_MERCHANT_AUTH_HEADER')
         ],
     ],
