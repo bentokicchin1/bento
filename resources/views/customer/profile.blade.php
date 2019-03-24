@@ -102,7 +102,7 @@
                               </table>
                                 {{ Form::submit('Save Info', ['class' => 'form-control web-submit']) }}
                                 {{ Form::close() }}
-                                <div class='pm-button'><a href="{{ route('pay-bill')}}"><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>
+                                <div class='pm-button col-sm-4'><a href="{{ route('pay-bill')}}"><img src='https://www.payumoney.com/media/images/payby_payumoney/new_buttons/21.png' /></a></div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 m-l-30">

@@ -23,7 +23,11 @@ return [
     | The account to be used for Payment
     |
     */
+<<<<<<< HEAD
     'default' => 'payubiz',
+=======
+    'default' => 'payumoney',
+>>>>>>> 13fca010cb47823b92e59a13047d9c05ca65e56e
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +62,11 @@ return [
         'payumoney' => [
             'key' => config('constants.PAYU_MERCHANT_KEY'),
             'salt' => config('constants.PAYU_MERCHANT_SALT'),
+<<<<<<< HEAD
             'money' => false,
+=======
+            'money' => true,
+>>>>>>> 13fca010cb47823b92e59a13047d9c05ca65e56e
             'auth' => config('constants.PAYU_MERCHANT_AUTH_HEADER')
         ],
     ],
