@@ -27,11 +27,8 @@ class PayuController extends Controller
         $userDetails['phone'] = Auth::user()->mobile_number;
         $userDetails['productinfo'] = 'Tiffin Bill';
         $billData = DB::table('bill_payments')->where('user_id', $userId)->orderBy('updated_at', 'desc')->first();
-        $userDetails['amount'] = $billData->outstanding_bill;
+        $userDetails['amount'] = 1;//$billData->outstanding_bill;
         $userDetails['udf1'] = $userId;
-        echo "<pre/>";
-        print_R($userDetails);
-        exit;
 //        $userDetails['udf1'] = $orderId;
         return Payment::make($userDetails, function ($then) {
             $then->redirectRoute('success');
