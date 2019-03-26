@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 // use App\Services\PayuService;
 use Tzsk\Payu\Facade\Payment;
 use App\Model\BillPayment;
+use DB;
 
 class PayuController extends Controller
 {
