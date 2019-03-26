@@ -26,7 +26,7 @@ class PayuController extends Controller
         $userDetails['phone'] = Auth::user()->mobile_number;
         $userDetails['productinfo'] = 'Tiffin Bill';
         $userDetails['amount'] = $amount;
-        $billData = BillPayment::all()->where('user_id', $userId)->orderBy('updated_at', 'desc')->first();
+        $billData = DB::table('bill_payments')->where('user_id', $userId)->orderBy('updated_at', 'desc')->first();
         echo "<pre/>";
         print_R($billData);
         exit;
