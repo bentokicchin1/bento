@@ -16,7 +16,7 @@ class PayuController extends Controller
 
       public function showMakePaymentForm($amount=1)
       {
-        $userDetailss = array();
+        $userDetails = array();
         $userDetails['key'] = config('constants.PAYU_MERCHANT_KEY');
         $userDetails['txnid'] = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
         $userDetails['firstname'] = Auth::user()->name;
@@ -24,22 +24,20 @@ class PayuController extends Controller
         $userDetails['phone'] = Auth::user()->mobile_number;
         $userDetails['productinfo'] = 'Tiffin Bill';
         $userDetails['amount'] = $amount;
-        // $payuDetails = $this->payuService->getPayuFormDetailsForUser(1393,$amount);
+        $Data = Dish::all()->where('id', $id)->first();
+//        $userDetails['udf1'] = $orderId;
         return Payment::make($userDetails, function ($then) {
-
-            // $then->redirectTo('payment/status');
-            # OR...
             $then->redirectRoute('success');
-            # OR...
-            // $then->redirectAction('PaymentController@status');
         });
-        // return view('transactions.makePayment', ['payuDetails'=>$payuDetails]);
       }
 
 
       public function handleSuccess()
       {
         $payment = Payment::capture();
+        echo "<pre/>";
+        print_r($payment);
+        exit;
       }
 
       public function handleFailure(Request $request)
