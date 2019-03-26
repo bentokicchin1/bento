@@ -26,10 +26,11 @@ class PayuController extends Controller
         $userDetails['email'] = Auth::user()->email;
         $userDetails['phone'] = Auth::user()->mobile_number;
         $userDetails['productinfo'] = 'Tiffin Bill';
-        $userDetails['amount'] = $amount;
         $billData = DB::table('bill_payments')->where('user_id', $userId)->orderBy('updated_at', 'desc')->first();
+        $userDetails['amount'] = $billData->outstanding_bill;
+        $userDetails['udf1'] = $userId;
         echo "<pre/>";
-        print_R($billData);
+        print_R($userDetails);
         exit;
 //        $userDetails['udf1'] = $orderId;
         return Payment::make($userDetails, function ($then) {
